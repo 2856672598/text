@@ -86,28 +86,40 @@
 //}
 
 //Á·Ï°3-5 Êä³öÈòÄê
+//#include<stdio.h>
+//int main()
+//{
+//	int input = 0, count = 0;
+//	scanf("%d", &input);
+//	if (input >= 2000 && input <= 2100)
+//	{
+//		int i = 0;
+//		for (i = 2001; i <= input; i++)
+//		{
+//			if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)
+//			{
+//				printf("%d\n", i);
+//				count++;
+//			}
+//		}
+//		if (count == 0)
+//			printf("None\n");
+//	}
+//	else
+//	{
+//		printf("Invalid year!\n");
+//	}
+//	return 0;
+//}
 #include<stdio.h>
 int main()
 {
-	int input = 0, count = 0;
-	scanf("%d", &input);
-	if (input >= 2000 && input <= 2100)
-	{
-		int i = 0;
-		for (i = 2001; i <= input; i++)
-		{
-			if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)
-			{
-				printf("%d\n", i);
-				count++;
-			}
-		}
-		if (count == 0)
-			printf("None\n");
-	}
-	else
-	{
-		printf("Invalid year!\n");
-	}
+	char arr[] = "abcde";
+	char* cp = arr;
+	printf("%c\n", *cp);
+	printf("%s\n", cp);
+	printf("%p\n", cp);
+	printf("%p\n", &arr[1]);
+	printf("%p\n", cp + 1);
 	return 0;
 }
