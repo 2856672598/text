@@ -1,0 +1,3 @@
+﻿  text1_23.c
+d:\githup\text\text1_23\text1_23\text1_23.c(106): warning C4477: “printf”: 格式字符串“%p”需要类型“void *”的参数，但可变参数 1 拥有了类型“unsigned long”
+  text1_23.vcxproj -> D:\Githup\text\text1_23\Debug\text1_23.exe

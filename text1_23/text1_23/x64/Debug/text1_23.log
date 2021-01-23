@@ -1,0 +1,24 @@
+﻿  text1_23.c
+d:\githup\text\text1_23\text1_23\text1_23.c(68): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  d:\githup\text\text1_23\text1_23\text1_23.c(68): note: 请考虑在格式字符串中使用“%zd”
+d:\githup\text\text1_23\text1_23\text1_23.c(69): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  d:\githup\text\text1_23\text1_23\text1_23.c(69): note: 请考虑在格式字符串中使用“%zd”
+d:\githup\text\text1_23\text1_23\text1_23.c(70): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  d:\githup\text\text1_23\text1_23\text1_23.c(70): note: 请考虑在格式字符串中使用“%zd”
+d:\githup\text\text1_23\text1_23\text1_23.c(71): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  d:\githup\text\text1_23\text1_23\text1_23.c(71): note: 请考虑在格式字符串中使用“%zd”
+d:\githup\text\text1_23\text1_23\text1_23.c(72): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  d:\githup\text\text1_23\text1_23\text1_23.c(72): note: 请考虑在格式字符串中使用“%zd”
+d:\githup\text\text1_23\text1_23\text1_23.c(73): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  d:\githup\text\text1_23\text1_23\text1_23.c(73): note: 请考虑在格式字符串中使用“%zd”
+d:\githup\text\text1_23\text1_23\text1_23.c(74): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  d:\githup\text\text1_23\text1_23\text1_23.c(74): note: 请考虑在格式字符串中使用“%zd”
+d:\githup\text\text1_23\text1_23\text1_23.c(75): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  d:\githup\text\text1_23\text1_23\text1_23.c(75): note: 请考虑在格式字符串中使用“%zd”
+d:\githup\text\text1_23\text1_23\text1_23.c(76): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  d:\githup\text\text1_23\text1_23\text1_23.c(76): note: 请考虑在格式字符串中使用“%zd”
+d:\githup\text\text1_23\text1_23\text1_23.c(77): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  d:\githup\text\text1_23\text1_23\text1_23.c(77): note: 请考虑在格式字符串中使用“%zd”
+d:\githup\text\text1_23\text1_23\text1_23.c(78): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  d:\githup\text\text1_23\text1_23\text1_23.c(78): note: 请考虑在格式字符串中使用“%zd”
+  text1_23.vcxproj -> D:\Githup\text\text1_23\x64\Debug\text1_23.exe
