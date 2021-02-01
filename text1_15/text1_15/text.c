@@ -246,17 +246,72 @@
 //}
 
 //练习2 - 14 求奇数分之一序列前N项和
+//#include<stdio.h>
+//int main()
+//{
+//	int n;
+//	int i = 0;
+//	long double sum = 0;
+//	scanf("%d", &n);
+//	for (i = 1; i <= 2*n; i += 2)
+//	{
+//		sum += 1.0 / i;
+//	}
+//	printf("sum = %.6lf", sum);
+//	return 0;
+//}
+
+//练习4 - 6 猜数字游戏(15分)
 #include<stdio.h>
 int main()
 {
-	int n;
-	int i = 0;
-	long double sum = 0;
-	scanf("%d", &n);
-	for (i = 1; i <= 2*n; i += 2)
+	int n, random, guess;
+	int count = 0;
+	int num = n;
+	scanf("%d %d", &random, &n);
+	do
 	{
-		sum += 1.0 / i;
-	}
-	printf("sum = %.6lf", sum);
+		scanf("%d", &guess);
+		num--;
+		if (guess < 0)
+		{
+			printf("Game Over\n");
+			break;
+		}
+		else if (guess > random)
+		{
+			printf("Too big\n");
+			count++;
+		}
+		else if (guess < random)
+		{
+			printf("Too small\n");
+			count++;
+		}
+		else
+		{
+			count++;
+			if (count == 1)
+			{
+				printf("Bingo!\n");
+				break;
+			}
+			else if (count <= 3)
+			{
+				printf("Lucky You!\n");
+				break;
+			}
+			else if (count <= n)
+			{
+				printf("Good Guess!\n");
+				break;
+			}
+		}
+		if (n == 0)
+		{
+			printf("Game Over\n");
+			break;
+		}
+	} while (n);
 	return 0;
 }
