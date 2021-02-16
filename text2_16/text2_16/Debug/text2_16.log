@@ -1,0 +1,3 @@
+﻿  text.c
+d:\githup\text\text2_16\text2_16\text.c(45): warning C4098: “main”:“void”函数返回值
+  text2_16.vcxproj -> D:\Githup\text\text2_16\Debug\text2_16.exe
