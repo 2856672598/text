@@ -126,19 +126,84 @@
 //	return 0;
 //}
 
+//struct S
+//{
+//	int n;
+//	float a;
+//	char arr[5];
+//};
+//int main()
+//{
+//	struct S s = { 0 };
+//	FILE* pf = fopen("text.txt", "r");
+//	fscanf(pf, "%d %f %s", &(s.n), &(s.a), &(s.arr));
+//	printf("%d %f %s", s.n, s.a, s.arr);
+//
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+
+//sscanf   sprintf
+//struct S
+//{
+//	int n;
+//	float b;
+//	char arr[10];
+//};
+//int main()
+//{
+//	struct S s = { 1,3.14f,"hello" };
+//	struct S tmp = { 0 };
+//	char buf[1024];
+//	//把格式化内容输出到字符串
+//	sprintf(buf, "%d %f %s", s.n, s.b, s.arr);
+//	//从字符串读取格式化的数据
+//	sscanf(buf, "%d %f %s", &(tmp.n), &(tmp.b), &(tmp.arr));
+//	printf("%d %f %s", tmp.n, tmp.b, tmp.arr);
+//	return 0;
+//}
+
+//fread fwrite
 struct S
 {
-	int n;
-	float a;
-	char arr[5];
+	char name[20];
+	int age;
+	double score;
 };
+//int main()
+//{
+//	struct S s = { "张三",20,84 };
+//	//打开文件
+//	FILE* pf = fopen("text.txt", "wb");
+//	if (pf == NULL)
+//	{
+//		printf("%s", strerror(errno));
+//		return 0;
+//	}
+//	//以二进制的形式写入
+//	fwrite(&s, sizeof(struct S), 1, pf);
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
 int main()
 {
 	struct S s = { 0 };
-	FILE* pf = fopen("text.txt", "r");
-	fscanf(pf, "%d %f %s", &(s.n), &(s.a), &(s.arr));
-	printf("%d %f %s", s.n, s.a, s.arr);
+	//打开文件
+	FILE* pf = fopen("text.txt", "rb");
+	if (pf == NULL)
+	{
+		printf("%s", strerror(errno));
+		return 0;
+	}
+	//读文件
+	fread(&s, sizeof(struct S), 1, pf);
+	printf("%s %d %lf", s.name, s.age, s.score);
 
+	//关闭文件
 	fclose(pf);
 	pf = NULL;
 	return 0;
