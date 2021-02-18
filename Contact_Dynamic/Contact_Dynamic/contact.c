@@ -2,10 +2,10 @@
 #include<stdlib.h>
 void Contact_Init(Contact* ps)
 {
-	ps->data= malloc(SZ * sizeof(PeoInfo));
+	ps->data= malloc(INCREASE * sizeof(PeoInfo));
 	if (ps->data == NULL)
 		return;
-	ps->capacity = SZ;
+	ps->capacity = INCREASE;
 	ps->size = 0;
 }
 //ºÏ≤‚»›¡ø
