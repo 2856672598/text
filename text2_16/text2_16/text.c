@@ -166,12 +166,12 @@
 //}
 
 //fread fwrite
-struct S
-{
-	char name[20];
-	int age;
-	double score;
-};
+//struct S
+//{
+//	char name[20];
+//	int age;
+//	double score;
+//};
 //int main()
 //{
 //	struct S s = { "张三",20,84 };
@@ -189,22 +189,135 @@ struct S
 //	return 0;
 //}
 
+//int main()
+//{
+//	struct S s = { 0 };
+//	//打开文件
+//	FILE* pf = fopen("text.txt", "rb");
+//	if (pf == NULL)
+//	{
+//		printf("%s", strerror(errno));
+//		return 0;
+//	}
+//	//读文件
+//	fread(&s, sizeof(struct S), 1, pf);
+//	printf("%s %d %lf", s.name, s.age, s.score);
+//
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+
+//随机读写  fseek     ftell返回文件指针相对起始位置的偏移量
+// rewind 使文件指针的位置回到文件起始的位置
+
+//int main()
+//{
+//	FILE* pf = fopen("text.txt", "r");
+//	if (!pf)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 0;
+//	}
+//	fseek(pf, 2, SEEK_SET);
+//	int ch = fgetc(pf);
+//	printf("%c", ch);
+//	int pos = ftell(pf);
+//	printf("%d ", pos);
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+//int main()
+//{
+//	FILE* pf = fopen("text.txt", "r");
+//	if (!pf)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 0;
+//	}
+//	int ch = fgetc(pf);
+//	printf("%c\n", ch);//a
+//	rewind(pf);//让文件指针的位置回到文件的起始位置
+//	ch = fgetc(pf);
+//	printf("%c\n", ch);//a
+//
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//} 
+
+//feof
+//int main()
+//{
+//	FILE* pf = fopen("text.txt", "r");
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 0;
+//	}
+//	int ch = 0;
+//	while (~(ch = fgetc(pf)))
+//	{
+//		putchar(ch);
+//	}
+//	if (ferror(pf))
+//		printf("%s\n", strerror(errno));
+//	else if (feof(pf))//判断当文件结束时，是读取失败还是遇到文件结尾 结束
+//		printf("End of file reached successfully\n");
+//
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+//perror
+//int main()
+//{
+//	FILE*pf = fopen("text2.txt", "r");
+//	if (pf == NULL)
+//		perror("fopen text.txt");//打印错误信息
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
 int main()
 {
-	struct S s = { 0 };
 	//打开文件
-	FILE* pf = fopen("text.txt", "rb");
-	if (pf == NULL)
+	FILE* pfWrite = fopen("text.txt", "wb");
+	if (pfWrite == NULL)
 	{
-		printf("%s", strerror(errno));
+		perror("fopenWrite");
 		return 0;
 	}
-	//读文件
-	fread(&s, sizeof(struct S), 1, pf);
-	printf("%s %d %lf", s.name, s.age, s.score);
-
+	int arr[5] = { 2,3,4,5,6 };
+	int tmp = 0;
+	//写入文件
+	fwrite(arr, sizeof(int), 5, pfWrite);
 	//关闭文件
-	fclose(pf);
-	pf = NULL;
+	fclose(pfWrite);
+	//打开
+	FILE *pfRead = fopen("text.txt", "rb");
+	if (pfRead == NULL)
+	{
+		perror("fopenReda");
+		return 0;
+	}
+	//读取文件
+	while (fread(&tmp, sizeof(int), 1, pfRead) >= 1)
+	{
+		printf("%d ", tmp);
+	}
+	//判断文件结束的原因
+	if (ferror(pfRead))//遇到错误
+		perror("Error reading test.bin");
+	else if (feof(pfRead))//读取结束
+		printf("读取成功\n");
+	fclose(pfRead);
+	pfRead = NULL;
 	return 0;
 }
