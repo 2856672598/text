@@ -1,0 +1,5 @@
+file:d:\githup\text\text2_20\text2_20\text.c date: Feb 20 2021 time: 10:37:21 line: 25 i: 0
+file:d:\githup\text\text2_20\text2_20\text.c date: Feb 20 2021 time: 10:37:21 line: 25 i: 1
+file:d:\githup\text\text2_20\text2_20\text.c date: Feb 20 2021 time: 10:37:21 line: 25 i: 2
+file:d:\githup\text\text2_20\text2_20\text.c date: Feb 20 2021 time: 10:37:21 line: 25 i: 3
+file:d:\githup\text\text2_20\text2_20\text.c date: Feb 20 2021 time: 10:37:21 line: 25 i: 4
