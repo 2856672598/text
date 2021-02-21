@@ -95,11 +95,103 @@
 
 //宏的参数可以是类型
 //宏不可以调试
+//#include<stdio.h>
+//#define SIZE(type) sizeof(type)
+//int main()
+//{
+//	int ret = SIZE(int);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+
+//条件编译
+//#include<stdio.h>
+////#define DEBUG
+//int main()
+//{
+////条件编译----如果定义了 常量 DEBUG则进行编译
+////#ifdef DEBUG
+////	printf("hehe\n");
+////#endif
+//
+////判断是否被定义
+////#if defined(DUBUG)
+////	printf("haha\n");
+////#endif
+//
+////#if !defined(DEBUG)
+////	printf("嘿嘿\n");
+////#endif
+//
+////如果未定义DEBUG则进行编译
+//// ifdef-----ifndef;加上一个n
+////#ifndef DEBUG
+////	printf("嘿嘿\n");
+////#endif
+//
+////常量表达式由预处理器求值
+////多分支的条件编译
+//
+////#if  常量表达式
+////	//
+////#elif 常量表达式
+////	//
+////#else
+////	//
+////#endif
+//
+////#if 1==2
+////	printf("haha\n");
+////#elif 2==2
+////	printf("hehe\n");
+////#else
+////	printf("嘿嘿\n");
+////#endif
+//
+////嵌套指令
+//#if defined(DUBUG)
+//	#ifdef OPTION
+//		option();
+//	#endif
+//	#ifdef OPTION1
+//		option1();
+//	#endif
+//#elif defined(MAX)
+//	#ifdef OPTION2
+//		option2();
+//	#endif
+//#endif
+//	return 0;
+//}
+
+////适用于引用库函数
+////直接在标准位置查找头文件，查找不到提示编译错误
+//#include<stdio.h>
+////适用于引用自己写的头文件
+////查找策略： 会现在源文件所在的目录下查找，如果该头文件未找到，编译器就像查找库函数头文件一样
+////在标准位置下查找头文件，如果找不到则提示编译错误
+//#include"text.h"
+//int main()
+//{
+//	int len = Add(3, 4);
+//	printf("%d", len);
+//	return 0;
+//}
+
+
+//offsetof  宏实现
 #include<stdio.h>
-#define SIZE(type) sizeof(type)
+#define OFFSETOF(struct_name,member_name) (int)&(((struct_name *)0)->member_name)
+struct S
+{
+	int a;
+	char b;
+	double c;
+};
 int main()
 {
-	int ret = SIZE(int);
-	printf("%d", ret);
+	int len = OFFSETOF(struct S, b);
+	printf("%d ", len);
 	return 0;
 }
