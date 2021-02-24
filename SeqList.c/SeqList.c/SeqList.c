@@ -14,15 +14,18 @@ void SLInit(SL*ps)
 void SLAddCapacity(SL* ps)
 {
 	assert(ps);
-	ps->capacity *= 2;
-	SLDataType* tmp;
-	tmp = realloc(ps->a, sizeof(SLDataType)*ps->capacity);
-	if (tmp != NULL)
-		ps->a = tmp;
-	else
+	if (ps->capacity == ps->sz)
 	{
-		printf("扩容失败\n");
-		exit(-1);
+		ps->capacity *= 2;
+		SLDataType* tmp;
+		tmp = realloc(ps->a, sizeof(SLDataType)*ps->capacity);
+		if (tmp != NULL)
+			ps->a = tmp;
+		else
+		{
+			printf("扩容失败\n");
+			exit(-1);
+		}
 	}
 }
 void SLPrint(SL*ps)
@@ -33,91 +36,72 @@ void SLPrint(SL*ps)
 	}
 	printf("\n");
 }
-void SLPushBack(SL* ps, SLDataType x)
-{
-	assert(ps);
-	//检测容量
-	if (ps->sz >= ps->capacity)
-	{
-		//增容
-		SLAddCapacity(ps);
-	}
-	ps->a[ps->sz] = x;
-	ps->sz++;
-}
-
-void SLPopBack(SL* ps, int x)
-{
-	assert(ps);
-	for (int i = 0; i < x; i++)
-	{
-		ps->a[ps->sz  - i] = 0;
-	}
-	ps->sz -= x;
-}
-
-void SLPushFront(SL* ps, SLDataType x)
-{
-	assert(ps);
-	if (ps->sz == ps->capacity)
-		SLAddCapacity(ps);
-	memmove(ps->a + 1, ps->a, sizeof(SLDataType)*(ps->sz));
-	ps->a[0] = x;
-	ps->sz++;
-}
-
-void SLPopFront(SL* ps, int x)
-{
-	assert(ps);
-	memmove(ps->a, ps->a + x, ((ps->sz) - x) * sizeof(SLDataType));
-	ps->sz -= x;
-}
-//查找
-int SLFind(SL* ps, SLDataType x)
-{
-	assert(ps);
-	//返回值为-1表示为找到
-	int left = 0;
-	int right = ps->sz - 1;
-	while (left <= right)
-	{
-		int mid = (right-left) / 2 + left;
-		if (x == ps->a[mid])
-			return mid + 1;
-		else if (x < ps->a[mid])
-		{
-			right = mid - 1;
-		}
-		else
-			left = mid + 1;
-	}
-	return -1;
-}
-//随机插入
+//指定插入
 void SLInsert(SL* ps, int pos, SLDataType x)
 {
 	assert(ps);
-	if (ps->sz >= pos)
+	pos = pos - 1;
+	assert(pos <= ps->sz&&pos >= 0);
+	SLAddCapacity(ps);
+	int i = 0;
+	for (i = ps->sz-1; i > pos-1; i--)
 	{
-		if (ps->sz == ps->capacity)
-		{
-			SLAddCapacity(ps);
-		}
-		memmove(ps->a + pos+1, ps->a + pos, sizeof(SLDataType)*(ps->sz - pos ));
-		ps->a[pos-1] = x;
-		ps->sz++;
+		ps->a[i + 1] = ps->a[i];
 	}
-	else
-		printf("输入错误\n");
+	ps->a[pos] = x;
+	ps->sz++;
 }
-
 //指定删除
+// pos以用户角度来看从1开始
 void SLErase(SL* ps, int pos)
 {
 	assert(ps);
-	if (pos <= ps->sz&&pos > 0)
+	//pos = pos - 1;
+	assert(pos <= ps->sz&&pos >= 0);
+	int i = 0;
+	for (i = pos - 1; i <= ps->sz - 1; i++)
 	{
-		memmove(ps->a + pos-1, ps->a + pos, sizeof(SLDataType)*(ps->sz - pos));
-		ps->sz--;
+		ps->a[i] = ps->a[i + 1];
 	}
+	ps->sz--;
+}
+//尾插
+void SLPushBack(SL* ps, SLDataType x)
+{
+	SLInsert(ps, ps->sz + 1, x);
+}
+//尾删
+void SLPopBack(SL* ps)
+{
+	SLErase(ps, ps->sz);
+}
+//头插
+void SLPushFront(SL* ps, SLDataType x)
+{
+	SLInsert(ps, 1, x);
+}
+
+//头删
+void SLPopFront(SL* ps)
+{
+	SLErase(ps, 1);
+}
+//查找
+//找到了返回下标，没找到返回-1；
+int  SLFind(SL* ps, SLDataType x)
+{
+	assert(ps);
+	for (int i = 0; i < ps->sz; i++)
+	{
+		if (ps->a[i] == x)
+			return i;
+	}
+	return -1;
+}
+//释放开辟的动态内存
+void SLDestory(SL* ps)
+{
+	free(ps->a);
+	ps->a = NULL;
+	ps->capacity = ps->sz = 0;
 }

@@ -16,11 +16,11 @@ void SLInit(SL*ps);
 //尾插
 void SLPushBack(SL*ps, SLDataType x);
 //尾删
-void SLPopBack(SL* ps, int x);
+void SLPopBack(SL* ps);
 //头插
 void SLPushFront(SL* ps, SLDataType x);
 //头删
-void SLPopFront(SL* PS, int x);
+void SLPopFront(SL* PS);
 
 //随机插入
 void SLInsert(SL* ps, int pos, SLDataType x);
@@ -28,7 +28,8 @@ void SLInsert(SL* ps, int pos, SLDataType x);
 int SLFind(SL* ps, SLDataType x);
 //指定删除 pos 删除的位置
 void SLErase(SL* ps, int pos);
-
+//释放
+void SLDestory(SL* ps);
 //扩容
 void SLAddCapacity(SL* ps);
 

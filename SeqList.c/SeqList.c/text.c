@@ -2,42 +2,36 @@
 int main()
 {
 	SL s;
-	//初始化
 	SLInit(&s);
+	//指定插入
+	SLInsert(&s, 1, 0);
+	SLInsert(&s, 2, 1);
+	SLInsert(&s, 3, 1);
+	SLInsert(&s, 4, 3);
+	SLErase(&s, 3);
 	//尾插
-	SLPushBack(&s, 1);
-	SLPushBack(&s, 2);
-	SLPushBack(&s, 3);
-	SLPushBack(&s, 4);
-	SLPushBack(&s, 6);
-	SLPushBack(&s, 7);
-	SLPushBack(&s, 8);
 	SLPushBack(&s, 9);
-	SLPushBack(&s, 10);
-	//打印
+	//指定删除
 	SLPrint(&s);
-	//尾删--- 参数2为删除的个数
-	SLPopBack(&s, 2);
-	SLPrint(&s);
+	//尾删
+	SLPopBack(&s);
+	SLPopBack(&s);
 	//头插
 	SLPushFront(&s, 5);
-	SLPushFront(&s, 6);
-	SLPushFront(&s, 7);
+	SLPushFront(&s, 8);
+	SLPushFront(&s, 9);
 	SLPrint(&s);
-	//头删 2个
-	SLPopFront(&s, 2);
+	//头删
+	SLPopFront(&s);
+	SLPopFront(&s);
 	SLPrint(&s);
-	//指定查找，找到了打印下标
-	int len = SLFind(&s, 70);
-	if (len == -1)
-		printf("未找到\n");
-	else
-		printf("%d\n", len);
-	//随机插入
-	SLInsert(&s, 5, 0);
-	SLPrint(&s);
-	//指定删除
+
 	SLErase(&s, 3);
+
+	SLInsert(&s, 1, 99);
 	SLPrint(&s);
+
+	//释放内存
+	SLDestory(&s);
 	return 0;
 }
