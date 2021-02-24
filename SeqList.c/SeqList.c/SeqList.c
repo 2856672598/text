@@ -43,10 +43,16 @@ void SLInsert(SL* ps, int pos, SLDataType x)
 	pos = pos - 1;
 	assert(pos <= ps->sz&&pos >= 0);
 	SLAddCapacity(ps);
-	int i = 0;
-	for (i = ps->sz-1; i > pos-1; i--)
+	//int i = 0;
+	//for (i = ps->sz-1; i > pos-1; i--)
+	//{
+	//	ps->a[i + 1] = ps->a[i];
+	//}
+	int dom = ps->sz;
+	while (pos <= dom)
 	{
-		ps->a[i + 1] = ps->a[i];
+		ps->a[dom+1] = ps->a[dom];
+		dom--;
 	}
 	ps->a[pos] = x;
 	ps->sz++;
@@ -58,21 +64,33 @@ void SLErase(SL* ps, int pos)
 	assert(ps);
 	//pos = pos - 1;
 	assert(pos <= ps->sz&&pos >= 0);
-	int i = 0;
-	for (i = pos - 1; i <= ps->sz - 1; i++)
+
+	//int i = 0;
+	//for (i = pos - 1; i <= ps->sz - 1; i++)
+	//{
+	//	ps->a[i] = ps->a[i + 1];
+	//}
+	int dom = ps->sz;
+	while (dom >= pos)
 	{
-		ps->a[i] = ps->a[i + 1];
+		ps->a[pos - 1] = ps->a[pos];
+		pos++;
 	}
 	ps->sz--;
 }
 //Î²²å
 void SLPushBack(SL* ps, SLDataType x)
 {
+	//assert(ps);
+	//SLAddCapacity(ps);
+	//ps->a[ps->sz] = x;
+	//ps->sz++;
 	SLInsert(ps, ps->sz + 1, x);
 }
 //Î²É¾
 void SLPopBack(SL* ps)
 {
+	//ps->sz--;
 	SLErase(ps, ps->sz);
 }
 //Í·²å

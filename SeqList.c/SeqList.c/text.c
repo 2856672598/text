@@ -11,7 +11,7 @@ int main()
 	SLErase(&s, 3);
 	//尾插
 	SLPushBack(&s, 9);
-	//指定删除
+
 	SLPrint(&s);
 	//尾删
 	SLPopBack(&s);
@@ -31,6 +31,8 @@ int main()
 	SLInsert(&s, 1, 99);
 	SLPrint(&s);
 
+	SLErase(&s, 2);
+	SLPrint(&s);
 	//释放内存
 	SLDestory(&s);
 	return 0;
