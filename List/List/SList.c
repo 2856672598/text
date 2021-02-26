@@ -2,47 +2,48 @@
 
 SListNode* foundNode(SListDataType x)
 {
-	SListNode* newNode = malloc(sizeof(SListDataType));
+	SListNode* newNode = malloc(sizeof(SListNode));
 	if (newNode == NULL)
 	{
 		printf("创建失败\n");
 		exit(-1);
 	}
+	newNode->data = x;
+	newNode->next = NULL;
 	return newNode;
 }
+void Print(SListNode** pphead)
+{
+	while ((*pphead) != NULL)
+	{
+		printf("%d->", (*pphead)->data);
+		*pphead = (*pphead)->next;
+	}
+	printf("NULL");
+}
+//尾插
 void SListPushBack(SListNode** pphead, SListDataType x)
 {
 	SListNode* newNode = foundNode(x);
 	if (*pphead == NULL)
 	{
-		//SListNode* newNode = foundNode(x);
-		newNode->data = x;
-		newNode->next = NULL;
 		*pphead = newNode;
 	}
 	else
 	{
-		SListNode* tail = *pphead;
-		while (tail->next != NULL)
+		SListNode* cur = *pphead;
+		while (cur->next != NULL)
 		{
-			tail = tail->next;
+			cur = cur->next;
 		}
-		//SListNode* newNode = foundNode(x);
-		newNode->next = NULL;
-		newNode->data = x;
-		tail->next = newNode;
-		//*pphead = newNode;
+		cur->next = newNode;
 	}
 }
-
+//尾删
 void SListPopBack(SListNode** pphead)
 {
 	if (*pphead == NULL)
-	{
-		//free((*pphead)->next);
-		//(*pphead)->next = NULL;
 		return;
-	}
 	else if ((*pphead)->next == NULL)
 	{
 		*pphead = NULL;
@@ -50,23 +51,63 @@ void SListPopBack(SListNode** pphead)
 	}
 	else
 	{
-		SListNode* cur = *pphead;
 		SListNode* tail = *pphead;
-		while (tail->next != NULL)
+		SListNode * cur = *pphead;
+		while (cur->next != NULL)
 		{
-			cur = tail;
-			tail = tail->next;
+			tail = cur;
+			cur = cur->next;
 		}
-		cur->next = NULL;
+		tail->next = NULL;
+		free(cur);
 	}
 }
-void SListPrint(SListNode** pphead)
+
+//头插
+void SListPushFront(SListNode** pphead, SListDataType x)
 {
-	SListNode* cur = *pphead;
-	while (cur != NULL)
+	SListNode* newNode = foundNode(x);
+	if (*pphead == NULL)
 	{
-		printf("%d->", cur->data);
-		cur = cur->next;
+		*pphead = newNode;
 	}
-	printf("NULL\n");
+	else
+	{
+		newNode->next = *pphead;
+		*pphead = newNode;
+	}
+}
+//头删
+void SListPopFront(SListNode** pphead)
+{
+	//1.为空链表时
+	//2 有一个及以上节点时
+	if (*pphead == NULL)
+		return;
+	else
+	{
+		SListNode* cur = NULL;
+		cur = (*pphead)->next;
+		free(*pphead);
+		*pphead = cur;
+	}
+}
+//查找
+SListNode* SListFind(SListNode* phead, SListDataType x)
+{
+	while (phead)
+	{
+		if (phead->data == x)
+			return phead;
+		phead = phead->next;
+	}
+	return NULL;
+}
+
+void SListInsterAfter(SListNode* pos, SListDataType x)
+{
+	assert(pos);
+	SListNode* newNode = foundNode(x);
+	newNode->next = (pos)->next;
+	(pos)->next = newNode;
 }
