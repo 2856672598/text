@@ -257,6 +257,9 @@
 //	return 0;
 //}
 
+
+//21. 合并两个有序链表
+//https://leetcode-cn.com/problems/merge-two-sorted-lists/
 //#include<stdio.h>
 //struct ListNode
 //{
@@ -295,18 +298,11 @@
 //			cur = cur->next;
 //		}
 //	}
-//	while (l1 != NULL)
-//	{
+//
+//	if (l1)
 //		cur->next = l1;
-//		l1 = l1->next;
-//		cur = cur->next;
-//	}
-//	while (l2 != NULL)
-//	{
+//	else
 //		cur->next = l2;
-//		l2 = l2->next;
-//		cur = cur->next;
-//	}
 //	return head;
 //}
 
