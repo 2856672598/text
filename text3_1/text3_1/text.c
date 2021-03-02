@@ -160,6 +160,7 @@
 //}
 
 
+
 ////反转链表------利用双指针
 ////https://leetcode-cn.com/problems/reverse-linked-list/
 //#include<stdio.h>
@@ -184,58 +185,210 @@
 //	}
 //	return pre;
 //}
+//
+//struct ListNode* reverseList(struct ListNode* head)
+//{
+//	//利用头插法
+//	struct ListNode* newHead = NULL;
+//	while (head != NULL)
+//	{
+//		struct ListNode* next = head->next;
+//		head->next = newHead;
+//		newHead = head;
+//		head = next;
+//	}
+//	return newHead;
+//}
+
 //int main()
 //{
 //	return 0;
 //}
 
 
+////快慢指针
+//#include<stdio.h>
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode *next;
+//	
+//};
+//struct ListNode* middleNode(struct ListNode* head)
+//{
+//	struct ListNode* slow = head, *fast = head;
+//	while (fast)
+//	{
+//		if (fast->next == NULL)
+//		{
+//			return slow;
+//		}
+//		fast = fast->next->next;
+//		slow = slow->next;
+//	}
+//	return slow;
+//}
+//
+////struct ListNode* middleNode(struct ListNode* head)
+////{
+////	int count = 0;
+////	struct ListNode* tmp = head;
+////	//遍历出整个链表的大小
+////	while (tmp)
+////	{
+////		count++;
+////		tmp = tmp->next;
+////	}
+////	//当链表的大小为偶数是 中间的节点为两个  count/2 +1就是中间的第2个节点
+////
+////	//当大小为奇数时 count/2  +1得到的就是中间的节点
+////	//当找第n个节点时只需要访问n-1个节点，就可以得到第n个节点的地址
+////
+////	count = count / 2; // count = count / 2 +1 ;
+////	//找中间的节点
+////	while (count--)   //while( ( count -1 )--)
+////	{
+////		head = head->next;
+////	}
+////	return head;
+////}
+//int main()
+//{
+//	return 0;
+//}
+
+//#include<stdio.h>
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode *next;
+//};
+//struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2)
+//{
+//	if (l1 == NULL || l2 == NULL)
+//		return  l1 != NULL ? l1 : l2;
+//	struct ListNode* head;
+//	struct ListNode* cur;
+//	if ((l1->val > l2->val))
+//	{
+//		head = l2;
+//		l2 = l2->next;
+//	}
+//	else
+//	{
+//		head = l1;
+//		l1 = l1->next;
+//	}
+//	cur = head;
+//	while (l1 != NULL && l2 != NULL)
+//	{
+//		if (l1->val > l2->val)
+//		{
+//			cur->next = l2;
+//			l2 = l2->next;
+//			cur = cur->next;
+//		}
+//		else
+//		{
+//			cur->next = l1;
+//			l1 = l1->next;
+//			cur = cur->next;
+//		}
+//	}
+//	while (l1 != NULL)
+//	{
+//		cur->next = l1;
+//		l1 = l1->next;
+//		cur = cur->next;
+//	}
+//	while (l2 != NULL)
+//	{
+//		cur->next = l2;
+//		l2 = l2->next;
+//		cur = cur->next;
+//	}
+//	return head;
+//}
+
+
+////输入一个链表，输出该链表中倒数第k个结点。
+////https://www.nowcoder.com/practice/529d3ae5a407492994ad2a246518148a?tab=answerKey
 #include<stdio.h>
+#include<stdlib.h>
 struct ListNode
 {
 	int val;
 	struct ListNode *next;
-	
 };
-struct ListNode* middleNode(struct ListNode* head)
+////struct ListNode* FindKthToTail(struct ListNode* pListHead, int k)
+////{
+////	struct ListNode* slow = pListHead, *fast = pListHead;
+////	while (fast != NULL)
+////	{
+////		if (fast == pListHead)
+////		{
+////			while (k--)
+////			{
+////				if (fast)
+////				{
+////					fast = fast->next;
+////				}
+////				else
+////					return NULL;
+////			}
+////		}
+////		if (fast)
+////		{
+////			slow = slow->next;
+////			fast = fast->next;
+////		}
+////	}
+////	return slow;
+////}
+
+struct ListNode* FindKthToTail(struct ListNode* pListHead, int k)
 {
-	struct ListNode* slow = head, *fast = head;
-	while (fast->next)
+	struct ListNode* slow = pListHead, *fast = pListHead;
+	while (k--)
 	{
-		if (fast->next->next == NULL)
+		if (fast)
 		{
-			return slow;
+			fast = fast->next;
 		}
+		else
+			return NULL;
+	}
+	while (fast)
+	{
 		fast = fast->next;
 		slow = slow->next;
 	}
 	return slow;
 }
 
-//struct ListNode* middleNode(struct ListNode* head)
-//{
-//	int count = 0;
-//	struct ListNode* tmp = head;
-//	//遍历出整个链表的大小
-//	while (tmp)
-//	{
-//		count++;
-//		tmp = tmp->next;
-//	}
-//	//当链表的大小为偶数是 中间的节点为两个  count/2 +1就是中间的第2个节点
-//
-//	//当大小为奇数时 count/2  +1得到的就是中间的节点
-//	//当找第n个节点时只需要访问n-1个节点，就可以得到第n个节点的地址
-//
-//	count = count / 2; // count = count / 2 +1 ;
-//	//找中间的节点
-//	while (count--)   //while( ( count -1 )--)
-//	{
-//		head = head->next;
-//	}
-//	return head;
-//}
 int main()
 {
+	struct ListNode* p1 = malloc(sizeof(struct ListNode));
+	p1->val = 1;
+	struct ListNode* p2 = malloc(sizeof(struct ListNode));
+	p2->val = 2;
+	struct ListNode* p3 = malloc(sizeof(struct ListNode));
+	p3->val = 3;
+	struct ListNode* p4 = malloc(sizeof(struct ListNode));
+	p4->val = 4;
+	struct ListNode* p5 = malloc(sizeof(struct ListNode));
+	p5->val = 5;
+	p1->next = p2;
+	p2->next = p3;
+	p3->next = p4;
+	p4->next = p5;
+	p5->next = NULL;
+
+	struct ListNode* arr = FindKthToTail(p1, 4);
+	while (arr != NULL)
+	{
+		printf("%d ", arr->val);
+		arr = arr->next;
+	}
 	return 0;
 }
