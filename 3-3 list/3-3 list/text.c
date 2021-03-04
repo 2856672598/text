@@ -154,27 +154,170 @@
 //}
 
 
-//环形链表
-//https://leetcode-cn.com/problems/linked-list-cycle/
-//利用快慢指针，当链表为环形时，快慢指针会在特定情况下指向同一个地址
-//进入环形后，是快指针在追赶慢指针，每走一步快指针就离慢指针进一步
-#include<stdbool.h>
-struct ListNode
+////环形链表
+////https://leetcode-cn.com/problems/linked-list-cycle/
+////利用快慢指针，当链表为环形时，快慢指针会在特定情况下指向同一个地址
+////进入环形后，是快指针在追赶慢指针，每走一步快指针就离慢指针进一步
+//#include<stdbool.h>
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode *next;
+//};
+//bool hasCycle(struct ListNode *head)
+//{
+//	//slow 与 fast应差1
+//	//1-2     3-4;
+//	struct ListNode* slow = head, *fast = head;
+//	while (fast && fast->next)
+//	{
+//		fast = fast->next->next;
+//		slow = slow->next;
+//		if (slow == fast)
+//			return true;
+//	}
+//	return false;
+//}
+
+////环形链表2
+////https://leetcode-cn.com/problems/linked-list-cycle-ii/
+//#include<stdlib.h>
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode *next;
+//};
+//struct ListNode *detectCycle(struct ListNode *head)
+//{
+//	struct ListNode* fast = head, *slow = head;
+//	while (fast && fast->next)
+//	{
+//		fast = fast->next->next;
+//		slow = slow->next;
+//		if (fast == slow)
+//			break;
+//	}
+//	if (fast == NULL || fast->next == NULL)
+//		return NULL;
+//	struct ListNode* meet = slow;
+//	while (head != meet)
+//	{
+//		head = head->next;
+//		meet = meet->next;
+//	}
+//	return head;
+//}
+
+
+////138. 复制带随机指针的链表
+////https://leetcode-cn.com/problems/copy-list-with-random-pointer/
+// struct Node
+// {
+//      int val;
+//      struct Node *next;
+//      struct Node *random;
+// };
+// struct Node* copyRandomList(struct Node* head)
+// {
+//	 //判断是否是空的
+//	 if (head == NULL)
+//		 return NULL;
+//	 struct Node* cur = head, *next = NULL;
+//	 //把拷贝节点 链接到原节点的后面
+//	 while (cur)
+//	 {
+//		 struct Node* copy = malloc(sizeof(struct Node));
+//		 copy->random = NULL;
+//		 copy->next = NULL;
+//
+//		 next = cur->next;
+//		 copy->next = next;
+//		 cur->next = copy;
+//		 copy->val = cur->val;
+//		 cur = next;
+//	 }
+//	 //2 处理拷贝节点的random
+//	 cur = head;
+//	 struct Node* copy = NULL;
+//	 while (cur&&cur->next)
+//	 {
+//		 copy = cur->next;
+//		 next = copy->next;
+//		 if (cur->random)
+//			 copy->random = cur->random->next;
+//		 else
+//			 copy->random = NULL;
+//
+//		 cur = next;
+//	 }
+//
+//	 //3拆解出复制的链表
+//	 cur = head;
+//	 struct Node* copyHead = head->next;
+//	 while (cur && cur->next)
+//	 {
+//		 copy = cur->next;
+//		 next = copy->next;
+//
+//		 cur->next = next;
+//		 if (next)
+//			 copy->next = next->next;
+//		 else
+//			 copy->next = NULL;
+//		 cur = next;
+//	 }
+//	 return copyHead;
+// }
+
+
+ struct ListNode
+ {
+      int val;
+      struct ListNode *next;
+ };
+
+struct ListNode* insertionSortList(struct ListNode* head)
 {
-	int val;
-	struct ListNode *next;
-};
-bool hasCycle(struct ListNode *head)
-{
-	//slow 与 fast应差1
-	//1-2     3-4;
-	struct ListNode* slow = head, *fast = head;
-	while (fast && fast->next)
+	if (head == NULL || head->next == NULL)
+		return head;
+	struct ListNode* sortHead = head, *cur;
+	sortHead->next = NULL;
+	cur = head->next;
+	while (cur)
 	{
-		fast = fast->next->next;
-		if (slow == fast)
-			return true;
-		slow = slow->next;
+		//头插
+		struct ListNode*next = cur->next;
+		if (cur->val <= sortHead->val)
+		{
+			//next = cur->next;
+			cur->next = sortHead;
+			sortHead = cur;
+			//cur = next;
+		}
+		else
+		{
+			//中间插入
+			struct ListNode* prev = sortHead, *sortcur = sortHead->next;
+			while (sortcur)
+			{
+				if (cur->val <= sortcur->val)
+				{
+					prev->next = cur;
+					cur->next = sortcur;
+					break;
+				}
+				sortcur = sortcur->next;
+				prev = prev->next;
+			}
+			//尾插
+			if (sortcur == NULL)
+			{
+				sortcur = cur;
+				prev->next = sortcur;
+				sortcur->next = NULL;
+			}
+		}
+		cur = next;
 	}
-	return false;
+	return sortHead;
 }
