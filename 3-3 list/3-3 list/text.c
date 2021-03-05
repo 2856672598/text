@@ -270,54 +270,105 @@
 // }
 
 
- struct ListNode
- {
-      int val;
-      struct ListNode *next;
- };
 
-struct ListNode* insertionSortList(struct ListNode* head)
+////147. 对链表进行插入排序
+////https://leetcode-cn.com/problems/insertion-sort-list/
+// struct ListNode
+// {
+//      int val;
+//      struct ListNode *next;
+// };
+//struct ListNode* insertionSortList(struct ListNode* head)
+//{
+//	if (head == NULL || head->next == NULL)
+//		return head;
+//	struct ListNode* sortHead = head, *cur;
+//	cur = head->next;
+//	sortHead->next = NULL;
+//	while (cur)
+//	{
+//		//头插
+//		struct ListNode*next = cur->next;
+//		if (cur->val <= sortHead->val)
+//		{
+//			//next = cur->next;
+//			cur->next = sortHead;
+//			sortHead = cur;
+//			//cur = next;
+//		}
+//		else
+//		{
+//			//中间插入
+//			struct ListNode* prev = sortHead, *sortcur = sortHead->next;
+//			while (sortcur)
+//			{
+//				if (cur->val <= sortcur->val)
+//				{
+//					prev->next = cur;
+//					cur->next = sortcur;
+//					break;
+//				}
+//				sortcur = sortcur->next;
+//				prev = prev->next;
+//			}
+//			//尾插
+//			if (sortcur == NULL)
+//			{
+//				sortcur = cur;
+//				prev->next = sortcur;
+//				sortcur->next = NULL;
+//			}
+//		}
+//		cur = next;
+//	}
+//	return sortHead;
+//}
+
+//删除链表中的重复节点
+//https://www.nowcoder.com/practice/fc533c45b73a41b0b44ccba763f866ef?tpId=13&tqId=11209&rp=1&ru=%2Factivity%2Foj&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
+struct ListNode
 {
-	if (head == NULL || head->next == NULL)
-		return head;
-	struct ListNode* sortHead = head, *cur;
-	sortHead->next = NULL;
-	cur = head->next;
-	while (cur)
+	int val;
+	struct ListNode *next;
+};
+struct ListNode* deleteDuplication(struct ListNode* pHead)
+{
+	if (pHead == NULL || pHead->next == NULL)
+		return pHead;
+	struct ListNode* cur = pHead;
+	struct ListNode* next = cur->next;
+	struct ListNode* prev = NULL;
+	while (next)
 	{
-		//头插
-		struct ListNode*next = cur->next;
-		if (cur->val <= sortHead->val)
+		if (cur->val != next->val)
 		{
-			//next = cur->next;
-			cur->next = sortHead;
-			sortHead = cur;
-			//cur = next;
+			prev = cur;
+			cur = next;
+			next = next->next;
 		}
 		else
 		{
-			//中间插入
-			struct ListNode* prev = sortHead, *sortcur = sortHead->next;
-			while (sortcur)
+			while (next&&cur->val == next->val)
 			{
-				if (cur->val <= sortcur->val)
-				{
-					prev->next = cur;
-					cur->next = sortcur;
-					break;
-				}
-				sortcur = sortcur->next;
-				prev = prev->next;
+				next = next->next;
 			}
-			//尾插
-			if (sortcur == NULL)
+			//当头结点出现重复时
+			if (prev)
+				prev->next = next;
+			else
 			{
-				sortcur = cur;
-				prev->next = sortcur;
-				sortcur->next = NULL;
+				pHead = next;
 			}
+			//释放
+			//struct ListNode* del = cur;
+			while (cur != next)
+			{
+				free(cur);
+				cur = cur->next;
+			}
+			if (next)
+				next = cur->next;
 		}
-		cur = next;
 	}
-	return sortHead;
+	return pHead;
 }
