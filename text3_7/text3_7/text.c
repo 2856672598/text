@@ -207,3 +207,119 @@
 //	return 0;
 //}
 
+//判断链表中是否有环
+//#include<stdio.h>
+//#include<stdbool.h>
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode *next;
+//};
+//bool hasCycle(struct ListNode* head)
+//{
+//	struct ListNode* cur = head, *next = head;
+//	while (next&&next->next)
+//	{
+//		next = next->next->next;
+//		if (next == cur)
+//			return true;
+//		cur = cur->next;
+//	}
+//	return false;
+//}
+
+//#include<stdio.h>
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode *next;
+//};
+//struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2)
+//{
+//	struct ListNode*cur1 = l1, *cur2 = l2, *cur = NULL;
+//	struct ListNode* head = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	head->next = NULL;
+//	head->val = 0;
+//	cur = head;
+//	while (cur1 && cur2)
+//	{
+//		if (cur1->val < cur2->val)
+//		{
+//			cur->next = cur1;
+//			cur1 = cur1->next;
+//			cur = cur->next;
+//			cur->next = NULL;
+//		}
+//		else
+//		{
+//			cur->next = cur2;
+//			cur2 = cur2->next;
+//			cur = cur->next;
+//			cur->next = NULL;
+//		}
+//	}
+//	if (cur1)
+//	{
+//		cur->next = cur1;
+//	}
+//	if (cur2)
+//		cur->next = cur2;
+//	return head->next;
+//}
+
+//#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr[5][80] = { 0 };
+//	char tmp[80] = { 0 };
+//	for (int i = 0; i < 5; i++)
+//	{
+//		scanf("%s", arr[i]);
+//	}
+//	int i = 0;
+//	for (i = 0; i < 5; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < 5 - 1 - i; j++)
+//		{
+//			if (strcmp(arr[j], arr[j+1]) > 0)
+//			{
+//				strcpy(tmp, arr[j]);
+//				strcpy(arr[j], arr[j+1]);
+//				strcpy(arr[j+1], tmp);
+//			}
+//		}
+//	}
+//	printf("After sorted:\n");
+//	for (i = 0; i < 5; i++)
+//	{
+//		printf("%s\n", arr[i]);
+//	}
+//	return 0;
+//}
+
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	int n = 0;
+	scanf("%d", &n);
+	int* gread = malloc(sizeof(int)*n);
+	double max = 0, min = 100, sum = 0;
+	int i = 0;
+	for (i = 0; i < n; i++)
+	{
+		scanf("%d", &gread[i]);
+		sum += gread[i];
+		if (gread[i] > max)
+			max = gread[i];
+		if (gread[i] < min)
+			min = gread[i];
+	}
+	double average = sum / n;
+	printf("average = %.2f\nmax = %.2f\nmin = %.2f", average, max, min);
+	return 0;
+}
