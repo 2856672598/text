@@ -1,2 +1,3 @@
 ﻿  text.c
-  text3_7.vcxproj -> D:\Githup\text\text3_7\Debug\text3_7.exe
+d:\githup\text\text3_7\text3_7\text.c(400): warning C4013: “gets”未定义；假设外部返回 int
+d:\githup\text\text3_7\text3_7\text.c(399): warning C4101: “input”: 未引用的局部变量

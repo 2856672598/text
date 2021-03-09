@@ -300,26 +300,110 @@
 //	return 0;
 //}
 
-#define _CRT_SECURE_NO_WARNINGS
-#include<stdio.h>
-#include<stdlib.h>
-int main()
-{
-	int n = 0;
-	scanf("%d", &n);
-	int* gread = malloc(sizeof(int)*n);
-	double max = 0, min = 100, sum = 0;
-	int i = 0;
-	for (i = 0; i < n; i++)
-	{
-		scanf("%d", &gread[i]);
-		sum += gread[i];
-		if (gread[i] > max)
-			max = gread[i];
-		if (gread[i] < min)
-			min = gread[i];
-	}
-	double average = sum / n;
-	printf("average = %.2f\nmax = %.2f\nmin = %.2f", average, max, min);
-	return 0;
-}
+//#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//#include<stdlib.h>
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int* gread = malloc(sizeof(int)*n);
+//	double max = 0, min = 100, sum = 0;
+//	int i = 0;
+//	for (i = 0; i < n; i++)
+//	{
+//		scanf("%d", &gread[i]);
+//		sum += gread[i];
+//		if (gread[i] > max)
+//			max = gread[i];
+//		if (gread[i] < min)
+//			min = gread[i];
+//	}
+//	double average = sum / n;
+//	printf("average = %.2f\nmax = %.2f\nmin = %.2f", average, max, min);
+//	return 0;
+//}
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[10] = { 2,8,1,98,45 };
+//	int i = 0;
+//	for (i = 0; i < 5; i++)
+//	{
+//		int j = 0;
+//		int min = i;
+//		for (j = i+1; j < 5; j++)
+//		{
+//			if (arr[j] < arr[min])
+//			{
+//				min = j;
+//			}
+//		}
+//		int tmp = arr[i];
+//		arr[i] = arr[min];
+//		arr[min] = tmp;
+//	}
+//	for (int i = 0; i < 5; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
+
+
+//#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0;
+//	int hour = 0, min = 0, second = 0;
+//	scanf("%d:%d:%d", &hour, &min, &second);
+//	scanf("%d", &n);
+//	if (second + n >= 60)
+//	{
+//		min += (second + n) / 60;
+//		second = (second + n) % 60;
+//	}
+//	else
+//		second += n;
+//	if (min >= 60)
+//	{
+//		hour += min / 60;
+//		min = min % 60;
+//	}
+//	if (hour >= 24)
+//		hour %= 24;
+//	printf("%02d:%02d:%02d", hour, min, second);
+//	return 0;
+//}
+
+//#define  _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//#include<stdlib.h>
+//struct book
+//{
+//	double price;
+//	char name[31];
+//};
+//int main()
+//{
+//	int n = 0, max = 0, min = 0;
+//	scanf("%d", &n);
+//	struct book* arr = malloc(sizeof(struct book)*n);
+//	for (int i = 0; i < n; i++)
+//	{
+//		getchar();
+//		gets(arr[i].name);
+//		scanf("%lf", &arr[i].price);
+//		if (arr[i].price > arr[max].price)
+//			max = i;
+//		if (arr[i].price < arr[min].price)
+//			min = i;
+//	}
+//	printf("%.2f, %s\n", arr[max].price, arr[max].name);
+//	printf("%.2f, %s\n", arr[min].price, arr[min].name);
+//	return 0;
+//}
