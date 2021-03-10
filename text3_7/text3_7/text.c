@@ -407,3 +407,97 @@
 //	printf("%.2f, %s\n", arr[min].price, arr[min].name);
 //	return 0;
 //}
+
+//#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[10] = { 0 };
+//	int n = 0, input = 0;
+//	scanf("%d", &n);
+//	for (int i = 0; i < n; i++)
+//	{
+//		scanf("%d", &input);
+//		while (input)
+//		{
+//			arr[input % 10]++;
+//			input /= 10;
+//		}
+//	}
+//	int max = 0;
+//	for (int i = 0; i < 10; i++)
+//	{
+//		if (max < arr[i])
+//			max = arr[i];
+//	}
+//	printf("%d:", max);
+//	for (int i = 0; i < 10; i++)
+//	{
+//		if (max == arr[i])
+//			printf("% d", i);
+//	}
+//	return 0;
+//}
+
+
+//#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//#include<math.h>
+//int main()
+//{
+//	double input = 0;
+//	scanf("%lf", &input);
+//	if (input >= 0)
+//	{
+//		printf("f(%.2f) = %.2f", input, pow(input, 0.5));
+//	}
+//	else
+//		printf("f(%.2f) = %.2f", input, (pow(input + 1, 2)) + 2 * input + 1 / input);
+//	return 0;
+//}
+
+
+//#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//int main()
+//{
+//	int lower = 0, upper = 0;
+//	scanf("%d %d", &lower, &upper);
+//	if (lower <= upper)
+//	{
+//		printf("fahr celsius\n");
+//		while (lower <= upper)
+//		{
+//			double c = 5 * (lower - 32) / 9.0;
+//			printf("%d%6.1f\n", lower, c);
+//			lower += 2;
+//		}
+//
+//	}
+//	else
+//		printf("Invalid.\n");
+//	return 0;
+//}
+
+
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+int main()
+{
+	int n = 0;
+	double sum = 0;
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++)
+	{
+		if (i % 2 == 1)
+		{
+			sum += 1.0 / ((i - 1) * 3 + 1);
+		}
+		else
+		{
+			sum -= 1.0 / ((i - 1) * 3 + 1);
+		}
+	}
+	printf("sum = %.3f", sum);
+	return 0;
+}
