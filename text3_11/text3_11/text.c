@@ -188,53 +188,221 @@
 //}
 
 
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[6][6] = { 0 };
+//	int n = 0;
+//	scanf("%d", &n);
+//	int i = 0;
+//	for (i = 0; i < n; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < n; j++)
+//		{
+//			scanf("%d", &arr[i][j]);
+//		}
+//	}
+//	int max = 0, min = 0, row = 0, col = 0, flag = 1;
+//	for (i = 0; i < n; i++)
+//	{
+//		int j = 0;
+//		max = arr[i][0];
+//		flag = 1;
+//		//找出每行最大的元素
+//		for (j = 0; j < n; j++)
+//		{
+//			if (max <= arr[i][j])
+//			{
+//				max = arr[i][j];
+//				row = i;
+//				col = j;
+//			}
+//		}
+//		//查看最大元素所在的列中是否是最小的
+//		for (int z = 0; z < n; z++)
+//		{
+//			min = max;
+//			if (arr[z][col] < min)
+//			{
+//				flag = 0;
+//				break;
+//			}
+//		}
+//		if (flag)
+//		{
+//			printf("%d %d", row, col);
+//			return 0;
+//		}
+//	}
+//	printf("NONE\n");
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#define PI 3.14
+//int main()
+//{
+//	float r;
+//	double c, s;
+//	printf("输入圆的半径\n");
+//	scanf("%f", &r);
+//	c = 2 * r * PI;
+//	s = PI * r*r;
+//	printf("c= %.2f,s = %.2f", c, s);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[6][6] = { 0 };
+//	int m, n, sum = 0;
+//	scanf("%d %d", &m, &n);
+//	int i = 0;
+//	for (i = 0; i < m; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < n; j++)
+//		{
+//			scanf("%d", &arr[i][j]);
+//		}
+//	}
+//	for (i = 0; i < m; i++)
+//	{
+//		int j = 0;
+//		sum = 0;
+//		for (j = 0; j < n; j++)
+//		{
+//			sum += arr[i][j];
+//		}
+//		printf("%d\n", sum);
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[10][10] = { 0 };
+//	int i = 0, n = 0, sum = 0;
+//	scanf("%d", &n);
+//	for (i = 0; i < n; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < n; j++)
+//		{
+//			scanf("%d", &arr[i][j]);
+//			if (i != n - 1 && j != n - 1 && j != n - i - 1)
+//			{
+//				sum += arr[i][j];
+//			}
+//		}
+//	}
+//	printf("%d", sum);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int m, n;
+//	int arr[6][6] = { 0 };
+//	scanf("%d %d", &m, &n);
+//	int i = 0, j = 0;
+//	for (i = 0; i < n; i++)
+//	{
+//		for (j = 0; j < n; j++)
+//		{
+//			scanf("%d", &arr[i][j]);
+//		}
+//		int flog = m;
+//		while (flog)
+//		{
+//			int tmp = arr[i][j - 1];
+//			int z = 0;
+//			for (z = n - 1; z > 0; z--)
+//			{
+//				arr[i][z] = arr[i][z - 1];
+//			}
+//			arr[i][z] = tmp;
+//			flog--;
+//		}
+//	}
+//
+//	for (i = 0; i < n; i++)
+//	{
+//		for (j = 0; j < n; j++)
+//		{
+//			printf("%d ", arr[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//double fact(int x)
+//{
+//	double sum = 1.0;
+//	while (x)
+//	{
+//		sum *= x;
+//		x--;
+//	}
+//	return sum;
+//}
+//int main()
+//{
+//	int m, n;
+//	scanf("%d %d", &m, &n);
+//	double result = fact(n) / (fact(m)*fact(n - m));
+//	printf("result = %.0f", result);
+//	return 0;
+//}
+
 #include<stdio.h>
 int main()
 {
-	int arr[6][6] = { 0 };
-	int n = 0;
-	scanf("%d", &n);
-	int i = 0;
-	for (i = 0; i < n; i++)
+	int n = 0, m;
+	int i = 0, arr[10][10] = { 0 };
+	scanf("%d", &m);
+	while (m)
 	{
-		int j = 0;
-		for (j = 0; j < n; j++)
+		scanf("%d", &n);
+		for (i = 0; i < n; i++)
 		{
-			scanf("%d", &arr[i][j]);
-		}
-	}
-	int max = 0, min = 0, row = 0, col = 0, flag = 1;
-	for (i = 0; i < n; i++)
-	{
-		int j = 0;
-		max = arr[i][0];
-		flag = 1;
-		//找出每行最大的元素
-		for (j = 0; j < n; j++)
-		{
-			if (max <= arr[i][j])
+			int j = 0;
+			for (j = 0; j < n; j++)
 			{
-				max = arr[i][j];
-				row = i;
-				col = j;
+				scanf("%d", &arr[i][j]);
 			}
 		}
-		//查看最大元素所在的列中是否是最小的
-		for (int z = 0; z < n; z++)
+		int flog = 1;
+		for (i = 0; i < n; i++)
 		{
-			min = max;
-			if (arr[z][col] < min)
+			int j = 0;
+			for (j = 0; j < n; j++)
 			{
-				flag = 0;
-				break;
+				if (j < i)
+				{
+					if (arr[i][j] != 0)
+					{
+						flog = 0;
+						break;
+					}
+				}
 			}
 		}
-		if (flag)
-		{
-			printf("%d %d", row, col);
-			return 0;
-		}
+		if (flog)
+			printf("YES\n");
+		else
+			printf("NO\n");
+		m--;
 	}
-	printf("NONE\n");
 	return 0;
 }
