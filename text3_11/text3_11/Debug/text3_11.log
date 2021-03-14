@@ -1,2 +1,3 @@
 ﻿  text.c
+d:\githup\text\text3_11\text3_11\text.c(492): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
   text3_11.vcxproj -> D:\Githup\text\text3_11\Debug\text3_11.exe

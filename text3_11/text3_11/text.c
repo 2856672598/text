@@ -365,44 +365,142 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0, m;
+//	int i = 0, arr[10][10] = { 0 };
+//	scanf("%d", &m);
+//	while (m)
+//	{
+//		scanf("%d", &n);
+//		for (i = 0; i < n; i++)
+//		{
+//			int j = 0;
+//			for (j = 0; j < n; j++)
+//			{
+//				scanf("%d", &arr[i][j]);
+//			}
+//		}
+//		int flog = 1;
+//		for (i = 0; i < n; i++)
+//		{
+//			int j = 0;
+//			for (j = 0; j < n; j++)
+//			{
+//				if (j < i)
+//				{
+//					if (arr[i][j] != 0)
+//					{
+//						flog = 0;
+//						break;
+//					}
+//				}
+//			}
+//		}
+//		if (flog)
+//			printf("YES\n");
+//		else
+//			printf("NO\n");
+//		m--;
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//typedef struct info
+//{
+//	char name[11];
+//	char tel[18];
+//	int bir;
+//}info;
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	struct info* head = malloc(sizeof(struct info) * n);
+//	int i = 0;
+//	for (i = 0; i < n; i++)
+//	{
+//		scanf("%s %d %s", &head[i].name, &head[i].bir, &head[i].tel);
+//	}
+//	for (i = 0; i < n; i++)
+//	{
+//		int j = 0;
+//		for (int j = 0; j < n-1-i; j++)
+//		{
+//			if (head[j].bir > head[j + 1].bir)
+//			{
+//				struct info tmp = head[j];
+//				head[j] = head[j + 1];
+//				head[j + 1] = tmp;
+//			}
+//		}
+//	}
+//	for (i = 0; i < n; i++)
+//	{
+//		printf("%s %d %s\n", head[i].name, head[i].bir, head[i].tel);
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<math.h>
+//int main()
+//{
+//	double x1, x2, y1, y2;
+//	scanf("%lf %lf %lf %lf", &x1, &y1, &x2, &y2);
+//	double x, y;
+//	x = x1 + x2;
+//	y = y1 + y2;
+//	if (fabs(x) <= 0.05)
+//		x = 0.0;
+//	if (fabs(y) <= 0.05)
+//		y = 0.0;
+//	printf("(%.1f, %.1f)", x, y);
+//	return 0;
+//}
+
 #include<stdio.h>
+double myPow(double x, double y)
+{
+	double sum = 1;
+	while (y)
+	{
+		sum *= x;
+		y--;
+	}
+	return sum;
+}
 int main()
 {
-	int n = 0, m;
-	int i = 0, arr[10][10] = { 0 };
-	scanf("%d", &m);
-	while (m)
+	int n = 0;
+	double max = 0, min = 0;
+	scanf("%d", &n);
+	int flag = n;
+	//while (flag)
+	//{
+	//	max = max * 10 + 9;
+	//	if (flag <= n - 1)
+	//		min = min * 10;
+	//	flag--;
+	//}
+	max = myPow(10, n);
+	min = myPow(10, n - 1);
+	for (int i = min; i < max; i++)
 	{
-		scanf("%d", &n);
-		for (i = 0; i < n; i++)
+		int tmp = i;
+		double sum = 0;
+		while (tmp)
 		{
-			int j = 0;
-			for (j = 0; j < n; j++)
-			{
-				scanf("%d", &arr[i][j]);
-			}
+			int digit = tmp % 10;
+			tmp /= 10;
+			sum += myPow(digit, n);
 		}
-		int flog = 1;
-		for (i = 0; i < n; i++)
-		{
-			int j = 0;
-			for (j = 0; j < n; j++)
-			{
-				if (j < i)
-				{
-					if (arr[i][j] != 0)
-					{
-						flog = 0;
-						break;
-					}
-				}
-			}
-		}
-		if (flog)
-			printf("YES\n");
-		else
-			printf("NO\n");
-		m--;
+		if (sum == i)
+			printf("%d\n", i);
 	}
 	return 0;
 }
