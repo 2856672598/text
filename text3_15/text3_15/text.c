@@ -181,12 +181,35 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-int numWays(int n)
+//#include<stdio.h>
+//int numWays(int n)
+//{
+//	if (n < 2 && n>0)
+//		return n;
+//	int next = 0, cur = 1, prev = 1;
+//	for (int i = 2; i <= n; i++)
+//	{
+//		next = (cur + prev) % 1000000007;
+//		prev = cur;
+//		cur = next;
+//	}
+//	return next;
+//}
+//int main()
+//{
+//	int n = 5;
+//	int len = numWays(n);
+//	printf("%d", len);
+//	return 0;
+//}
+
+//ì³²¨ÄÇïÆÊıÁĞ
+//https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/
+int fib(int n)
 {
-	if (n < 2 && n>0)
+	if (n < 2)
 		return n;
-	int next = 0, cur = 1, prev = 1;
+	int cur = 1, prev = 0, next = 0;
 	for (int i = 2; i <= n; i++)
 	{
 		next = (cur + prev) % 1000000007;
@@ -195,10 +218,24 @@ int numWays(int n)
 	}
 	return next;
 }
+
+#include<stdio.h>
+int minArray(int* numbers, int numbersSize)
+{
+	if (numbersSize <= 1)
+		return numbers[0];
+	int cur = numbersSize - 2, prev = numbersSize - 1;
+	while (cur >= 0 && numbers[cur] <= numbers[prev])
+	{
+		cur--;
+		prev--;
+	}
+	return numbers[prev];
+}
 int main()
 {
-	int n = 5;
-	int len = numWays(n);
+	int nums[] = { 1,2,2};
+	int len = minArray(nums, sizeof(nums) / sizeof(nums[0]));
 	printf("%d", len);
 	return 0;
 }
