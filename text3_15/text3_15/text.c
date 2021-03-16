@@ -1,4 +1,4 @@
-
+#define _CRT_SECURE_NO_WARNINGS
 
 ////https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/submissions/
 //#include<stdio.h>
@@ -60,29 +60,145 @@
 //}
 
 
-#include<stdbool.h>
+//#include<stdbool.h>
+//#include<stdio.h>
+//bool findNumberIn2DArray(int** matrix, int matrixSize, int* matrixColSize, int target)
+//{
+//	if (matrixSize == 0 || *matrixColSize == 0)
+//		return false;
+//	int i = 0, j = (*matrixColSize) - 1;
+//	while (j >= 0 && i < matrixSize)
+//	{
+//		if (matrix[i][j] < target)
+//			i++;
+//		else if (matrix[i][j] > target)
+//			j--;
+//		else
+//			return true;
+//	}
+//	return false;
+//}
+//int main()
+//{
+//	int arr = NULL;
+//	int *matrix = arr;
+//	int len = 0;
+//	findNumberIn2DArray(&matrix, 0, &len, 0);
+//	return 0;
+//}
+
+
+
+//#include<stdio.h>
+//#include<string.h>
+//#include<stdlib.h>
+//char* replaceSpace(char* s)
+//{
+//	if (s == NULL)
+//		return NULL;
+//	char* head = calloc(strlen(s)*3+1, sizeof(char));
+//	int i = 0, k = 0;
+//	for (i = 0; i < (int)strlen(s); i++)
+//	{
+//		if (s[i] == ' ')
+//		{
+//			head[k] = '%';
+//			head[k + 1] = '2';
+//			head[k + 2] = '0';
+//			k += 2;
+//		}
+//		else
+//			head[k] = s[i];
+//		k++;
+//	}
+//	//结束后在字符串的末尾添加个\0；
+//	head[k] = '\0';
+//	return head;
+//}
+//int main()
+//{
+//	char arr[] = "     ";
+//	int size = strlen(arr);
+//	char* len = replaceSpace(arr);
+//	printf("%s", len);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode *next;
+//};
+//int* reversePrint(struct ListNode* head, int* returnSize)
+//{
+//	if (head == NULL)
+//		return head;
+//	int* arr = malloc(1000 * sizeof(int));
+//	int i = 0, count = 0;
+//	while (head)
+//	{
+//		arr[i] = head->val;
+//		head = head->next;
+//		i++;
+//		count++;
+//	}
+//	*returnSize = count;
+//	int left = 0, right = count - 1;
+//	while (left < right)
+//	{
+//		int tmp = arr[left];
+//		arr[left] = arr[right];
+//		arr[right] = tmp;
+//		left++;
+//		right--;
+//	}
+//	return arr;
+//}
+//int main()
+//{
+//	struct ListNode* p1 = malloc(sizeof(struct ListNode));
+//	p1->val = 1;
+//	struct ListNode* p2 = malloc(sizeof(struct ListNode));
+//	p2->val = 2;
+//	struct ListNode* p3 = malloc(sizeof(struct ListNode));
+//	p3->val = 3;
+//	struct ListNode* p4 = malloc(sizeof(struct ListNode));
+//	p4->val = 4;
+//	p1->next = p2;
+//	p2->next = p3;
+//	p3->next = p4;
+//	p4->next = NULL;
+//
+//	int size = 0;
+//	int* arr = reversePrint(p4->next, &size);
+//	int i = 0;
+//	for (i = 0; i < size; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
+
 #include<stdio.h>
-bool findNumberIn2DArray(int** matrix, int matrixSize, int* matrixColSize, int target)
+int numWays(int n)
 {
-	if (matrixSize == 0 || *matrixColSize == 0)
-		return false;
-	int i = 0, j = (*matrixColSize) - 1;
-	while (j >= 0 && i < matrixSize)
+	if (n < 2 && n>0)
+		return n;
+	int next = 0, cur = 1, prev = 1;
+	for (int i = 2; i <= n; i++)
 	{
-		if (matrix[i][j] < target)
-			i++;
-		else if (matrix[i][j] > target)
-			j--;
-		else
-			return true;
+		next = (cur + prev) % 1000000007;
+		prev = cur;
+		cur = next;
 	}
-	return false;
+	return next;
 }
 int main()
 {
-	int arr = NULL;
-	int *matrix = arr;
-	int len = 0;
-	findNumberIn2DArray(&matrix, 0, &len, 0);
+	int n = 5;
+	int len = numWays(n);
+	printf("%d", len);
 	return 0;
 }

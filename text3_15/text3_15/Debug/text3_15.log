@@ -1,4 +1,2 @@
 ﻿  text.c
-d:\githup\text\text3_15\text3_15\text.c(83): warning C4047: “初始化”:“int”与“void *”的间接级别不同
-d:\githup\text\text3_15\text3_15\text.c(84): warning C4047: “初始化”:“int *”与“int”的间接级别不同
   text3_15.vcxproj -> D:\Githup\text\text3_15\Debug\text3_15.exe
