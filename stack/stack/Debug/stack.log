@@ -1,2 +1,2 @@
 ﻿  text.c
-d:\githup\text\stack\stack\text.c(5): error C4700: 使用了未初始化的局部变量“s”
+  stack.vcxproj -> D:\Githup\text\stack\Debug\stack.exe
