@@ -203,39 +203,121 @@
 //	return 0;
 //}
 
-//斐波那锲数列
-//https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/
-int fib(int n)
-{
-	if (n < 2)
-		return n;
-	int cur = 1, prev = 0, next = 0;
-	for (int i = 2; i <= n; i++)
-	{
-		next = (cur + prev) % 1000000007;
-		prev = cur;
-		cur = next;
-	}
-	return next;
-}
+////斐波那锲数列
+////https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/
+//int fib(int n)
+//{
+//	if (n < 2)
+//		return n;
+//	int cur = 1, prev = 0, next = 0;
+//	for (int i = 2; i <= n; i++)
+//	{
+//		next = (cur + prev) % 1000000007;
+//		prev = cur;
+//		cur = next;
+//	}
+//	return next;
+//}
+//
+//#include<stdio.h>
+//int minArray(int* numbers, int numbersSize)
+//{
+//	if (numbersSize <= 1)
+//		return numbers[0];
+//	int cur = numbersSize - 2, prev = numbersSize - 1;
+//	while (cur >= 0 && numbers[cur] <= numbers[prev])
+//	{
+//		cur--;
+//		prev--;
+//	}
+//	return numbers[prev];
+//}
+//int main()
+//{
+//	int nums[] = { 1,2,2};
+//	int len = minArray(nums, sizeof(nums) / sizeof(nums[0]));
+//	printf("%d", len);
+//	return 0;
+//}
 
+////剑指 Offer 17. 打印从1到最大的n位数
+////https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/submissions/
+//#include<stdio.h>
+//#include<math.h>
+//int* printNumbers(int n, int* returnSize)
+//{
+//	int nums = 0;
+//	//while (n--)
+//	//{
+//	//	nums = nums * 10 + 9;
+//	//}
+//	nums = pow(10, n) - 1;
+//	*returnSize = nums;
+//	int* head = malloc(sizeof(int)*(nums + 1));
+//	for (int i = 0; i < nums; i++)
+//	{
+//		head[i] = i + 1;
+//	}
+//	return head;
+//}
+//int main()
+//{
+//	int a;
+//	printNumbers(3, &a);
+//	return 0;
+//}
+
+////剑指 Offer 18. 删除链表的节点
+////https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/
+//#include<stdio.h>
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode *next;
+//};
+//struct ListNode* deleteNode(struct ListNode* head, int val)
+//{
+//	if (head == NULL && head->next == NULL)
+//		return head;
+//	struct ListNode* prev = NULL, *cur = head;
+//	while (cur != NULL)
+//	{
+//		if (cur->val == val)
+//		{
+//			//判断头节点是不是要删除的数
+//			if (prev == NULL)
+//			{
+//				head = cur->next;
+//				return head;
+//			}
+//			prev->next = cur->next;
+//			return head;
+//		}
+//		prev = cur;
+//		cur = cur->next;
+//	}
+//	return head;
+//}
+
+//剑指 Offer 24. 反转链表
+//https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/
 #include<stdio.h>
-int minArray(int* numbers, int numbersSize)
+struct ListNode
 {
-	if (numbersSize <= 1)
-		return numbers[0];
-	int cur = numbersSize - 2, prev = numbersSize - 1;
-	while (cur >= 0 && numbers[cur] <= numbers[prev])
+	int val;
+	struct ListNode *next;
+};
+struct ListNode* reverseList(struct ListNode* head)
+{
+	if (head == NULL || head->next == NULL)
+		return head;
+	struct ListNode* prev = NULL, *cur = head;
+	while (cur != NULL)
 	{
-		cur--;
-		prev--;
+		struct ListNode* tmp = cur->next;
+		cur->next = prev;
+		prev = cur;
+		cur = tmp;
 	}
-	return numbers[prev];
-}
-int main()
-{
-	int nums[] = { 1,2,2};
-	int len = minArray(nums, sizeof(nums) / sizeof(nums[0]));
-	printf("%d", len);
-	return 0;
+	return prev;
 }
