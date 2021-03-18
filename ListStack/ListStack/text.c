@@ -13,5 +13,6 @@ int main()
 
 	Pop(&s);
 	Print(&s);
+	Destory(&s);
 	return 0;
 }

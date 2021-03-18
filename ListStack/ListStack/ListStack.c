@@ -40,6 +40,11 @@ void Pop(LinkedStack* head)
 	else
 		printf("没有数据可以删除\n");
 }
+void Destory(LinkedStack* head)
+{
+	assert(head);
+	free(head->top);
+}
 void Print(LinkedStack* head)
 {
 	assert(head);

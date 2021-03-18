@@ -20,3 +20,4 @@ void Init(LinkedStack* head);
 void Push(LinkedStack* head, NodeType n);
 void Print(LinkedStack* head);
 void Pop(LinkedStack* head);
+void Destory(LinkedStack* head);
