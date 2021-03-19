@@ -49,13 +49,34 @@ void Push(Queue** head,DataType n)
 		}
 	}
 }
+void Pop(Queue** head)
+{
+	assert(*head);
+	if (*head == NULL)
+		*head = NULL;
+	else
+	{
+		Queue* tmp = (*head)->next;
+		free(*head);
+		*head = tmp;
+	}
+}
 void Print(Queue* head)
 {
-	assert(head);
+	//assert(head);
+	if (head == NULL)
+	{
+		printf("╤сапн╙©у\n");
+	}
 	Queue* cur = head;
 	while (cur)
 	{
 		printf("%d ", cur->Data);
 		cur = cur->next;
 	}
+}
+void Destory(Queue** head)
+{
+	free(*head);
+	*head = NULL;
 }

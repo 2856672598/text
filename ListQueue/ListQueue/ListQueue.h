@@ -10,7 +10,9 @@ typedef struct Queue
 	struct Queue* next;
 }Queue;
 
-Queue* Init();
+//Queue* Init();
 Queue* Add(DataType n);
 void Push(Queue** head, DataType n);
+void Pop(Queue** head);
 void Print(Queue* head);
+void Destory(Queue** head);

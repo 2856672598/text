@@ -12,5 +12,10 @@ int main()
 	Push(&s, 3);
 	Push(&s, 4);
 
+	Pop(&s);
+	Pop(&s);
+	//Pop(&s);
+	//Pop(&s);
+	//Destory(&s);
 	Print(s);
 }
