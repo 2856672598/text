@@ -33,21 +33,30 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	char ch;
+//	while (ch = getchar())
+//	{
+//		if (ch <= 'z'&&ch >= 'a')
+//		{
+//			ch -= 32;
+//		}
+//		else if (ch <= 'Z'&&ch >= 'A')
+//		{
+//			ch += 32;
+//		}
+//		printf("%c", ch);
+//	}
+//	return 0;
+//}
+
 #include<stdio.h>
 int main()
 {
-	char ch;
-	while (ch = getchar())
-	{
-		if (ch <= 'z'&&ch >= 'a')
-		{
-			ch -= 32;
-		}
-		else if (ch <= 'Z'&&ch >= 'A')
-		{
-			ch += 32;
-		}
-		printf("%c", ch);
-	}
+	int a = 10;
+	int* b = &a;
+	printf("%p", b);
 	return 0;
 }
