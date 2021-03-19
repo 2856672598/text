@@ -299,25 +299,68 @@
 //	return head;
 //}
 
-//剑指 Offer 24. 反转链表
-//https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/
-#include<stdio.h>
-struct ListNode
-{
-	int val;
-	struct ListNode *next;
-};
-struct ListNode* reverseList(struct ListNode* head)
-{
-	if (head == NULL || head->next == NULL)
-		return head;
-	struct ListNode* prev = NULL, *cur = head;
-	while (cur != NULL)
-	{
-		struct ListNode* tmp = cur->next;
-		cur->next = prev;
-		prev = cur;
-		cur = tmp;
-	}
-	return prev;
-}
+////剑指 Offer 24. 反转链表
+////https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/
+//#include<stdio.h>
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode *next;
+//};
+//struct ListNode* reverseList(struct ListNode* head)
+//{
+//	if (head == NULL || head->next == NULL)
+//		return head;
+//	struct ListNode* prev = NULL, *cur = head;
+//	while (cur != NULL)
+//	{
+//		struct ListNode* tmp = cur->next;
+//		cur->next = prev;
+//		prev = cur;
+//		cur = tmp;
+//	}
+//	return prev;
+//}
+
+////剑指 Offer 31. 栈的压入、弹出序列
+////https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/
+//#include<stdbool.h>
+//#include<stdlib.h>
+//#include<stdio.h>
+//bool validateStackSequences(int* pushed, int pushedSize, int* popped, int poppedSize)
+//{
+//	if (poppedSize <= 1)
+//		return true;
+//	int* cur = malloc(sizeof(int)*pushedSize);
+//	int flag = 0, i = 0, j = 0;
+//	while (i < pushedSize)
+//	{
+//		cur[j] = pushed[i];
+//		while (j >= 0 && cur[j] == popped[flag])
+//		{
+//			j--;
+//			flag++;
+//		}
+//		j++;
+//		i++;
+//	}
+//	if (flag == poppedSize)
+//		return true;
+//	else
+//		return false;
+//}
+//int main()
+//{
+//	int arr1[] = { 1,0 };
+//	int arr2[] = { 1,0 };
+//	bool flag = validateStackSequences(arr1, 2, arr2, 2);
+//	if (flag)
+//		printf("成功\n");
+//	return 0;
+//}
+
+
+
+
+
+
