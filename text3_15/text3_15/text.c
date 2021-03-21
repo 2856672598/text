@@ -360,7 +360,47 @@
 //}
 
 
-
-
-
-
+////剑指 Offer 15. 二进制中1的个数
+////https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/submissions/
+//#include<stdio.h>
+//#include<stdint.h>
+//int hammingWeight(uint32_t n)
+//{
+//	int count = 0;
+//	while (n)
+//	{
+//		count += n & 1;
+//		n >>= 1;
+//	}
+//	return count;
+//}
+////方法二
+//int hammingWeight(uint32_t n)
+//{
+//	int count = 0;
+//	while (n)
+//	{
+//		count += n % 2;
+//		n /= 2;
+//	}
+//	return count;
+//}
+////方法三
+//int hammingWeight(uint32_t n)
+//{
+//	int count = 0;
+//	while (n)
+//	{
+//		count++;
+//		//19
+//		//10011---n
+//		//10010---n-1
+//		//10010----n
+//		//10001----n-1
+//		//10000----n
+//		//01111----n-1
+//		//00000---n
+//		n = (n - 1)&n;
+//	}
+//	return count;
+//}
