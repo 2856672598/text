@@ -138,7 +138,27 @@
 //	return 0;
 //}
 
-
+////二进制中一的个数
+//#include<stdio.h>
+//int count_one_bit(unsigned int x)
+//{
+//	int count = 0;
+//	while (x)
+//	{
+//		if (x % 2 == 1)
+//			count++;
+//		x /= 2;
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	int num = 0;
+//	scanf("%d", &num);
+//	int ret = count_one_bit(num);
+//	printf("%d", ret);
+//	return 0;
+//}
 //#include<stdio.h>
 //int main()
 //{
@@ -154,50 +174,111 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	int num = 8, count = 0;
+//	scanf("%d", &num);
+//	if (num >= 0)
+//	{
+//		while (num)
+//		{
+//			num = num & (num - 1);
+//			count++;
+//		}
+//	}
+//	else
+//	{
+//		//-2
+//		//1000 0000 0000 0000 0000 0000 0000 0010
+//		//1111 1111 1111 1111 1111 1111 1111 1101
+//		//1111 1111 1111 1111 1111 1111 1111 1110
+//
+//		//-4
+//		//1000 0000 0000 0000 0000 0000 0000 0100
+//		//1111 1111 1111 1111 1111 1111 1111 1011
+//		//1111 1111 1111 1111 1111 1111 1111 1100
+//
+//		//-8
+//		//1000 0000 0000 0000 0000 0000 0000 1000
+//		//1111 1111 1111 1111 1111 1111 1111 0111
+//		//1111 1111 1111 1111 1111 1111 1111 1000
+//		int tmp = num;
+//		while (tmp)
+//		{
+//			if (tmp % 2 == 0)
+//				count++;
+//			else
+//				break;
+//			tmp /= 2;
+//		}
+//	}
+//	if (count == 1 && num >= 0)
+//		printf("%d是2的n次方数\n", num);
+//	else if (count >= 1 && num <= 0)
+//		printf("%d是2的n次方数\n", num);
+//	else
+//		printf("NO\n");
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	char ch = 0;
+//	scanf("%c", &ch);
+//	if (ch >= 'a'&&ch <= 'z')
+//		ch -= 32;
+//	else if (ch >= 'A'&&ch <= 'Z')
+//		ch += 32;
+//	printf("%c", ch);
+//	return 0;
+//}
+
 #include<stdio.h>
+#include<math.h>
+int countDigitOne(int n)
+{
+	if (n <= 0)
+		return 0;
+	int tmp = n;
+	int num = 0;
+	int count = 0;
+	while (tmp)
+	{
+		tmp /= 10;
+		num++;
+	}
+	int i = 0;
+	while (num)
+	{
+		int base = (int)pow(10, i);
+		int cur = (n / base) % 10;
+		int next = n / (int)pow(10, i + 1);
+		int till = n % base;
+		if (cur == 1)
+		{
+			count += next * base + till + 1;
+		}
+		else if (cur > 1)
+		{
+			count += (next + 1) * base;
+		}
+		else
+		{
+			count += next * base;
+		}
+		i++;
+		num--;
+	}
+	return count;
+}
 int main()
 {
-	int num = 8, count = 0;
-	scanf("%d", &num);
-	if (num >= 0)
-	{
-		while (num)
-		{
-			num = num & (num - 1);
-			count++;
-		}
-	}
-	else
-	{
-		//-2
-		//1000 0000 0000 0000 0000 0000 0000 0010
-		//1111 1111 1111 1111 1111 1111 1111 1101
-		//1111 1111 1111 1111 1111 1111 1111 1110
-
-		//-4
-		//1000 0000 0000 0000 0000 0000 0000 0100
-		//1111 1111 1111 1111 1111 1111 1111 1011
-		//1111 1111 1111 1111 1111 1111 1111 1100
-
-		//-8
-		//1000 0000 0000 0000 0000 0000 0000 1000
-		//1111 1111 1111 1111 1111 1111 1111 0111
-		//1111 1111 1111 1111 1111 1111 1111 1000
-		int tmp = num;
-		while (tmp)
-		{
-			if (tmp % 2 == 0)
-				count++;
-			else
-				break;
-			tmp /= 2;
-		}
-	}
-	if (count == 1 && num >= 0)
-		printf("%d是2的n次方数\n", num);
-	else if (count >= 1 && num <= 0)
-		printf("%d是2的n次方数\n", num);
-	else
-		printf("NO\n");
+	int n = 0;
+	scanf("%d", &n);
+	int len = countDigitOne(n);
+	printf("%d", len);
 	return 0;
 }
