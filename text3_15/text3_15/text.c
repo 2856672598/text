@@ -404,3 +404,67 @@
 //	}
 //	return count;
 //}
+
+#include<stdio.h>
+#include<math.h>
+//int countDigitOne(int n)
+//{
+//	int count = 0;
+//	for (int i = 1; i <= n; i++)
+//	{
+//		int tmp = i;
+//		while (tmp)
+//		{
+//			if (tmp % 10 == 1)
+//				count++;
+//			tmp /= 10;
+//		}
+//	}
+//	return count;
+//}
+int countDigitOne(int n)
+{
+	if (n == 0)
+		return 0;
+	int count = 0;
+	int z = 0;
+	int tmp = n;
+	while (tmp)
+	{
+		z++;
+		tmp /= 10;
+	}
+	int i = 0;
+	int  k= 0;
+	while (z)
+	{
+		int base = (int)pow(10, i);
+		int cur = (n / base) % 10;
+		int next = n / (int)pow(10, i + 1);
+		int tail = n % base;
+		if (cur == 1)
+		{
+			count += next * base + (tail + 1) * 1;
+		}
+		else if (cur > 1)
+		{
+			count += (next + 1)*base;
+		}
+		else
+		{
+			count += next * base;
+		}
+		i++;
+		z--;
+	}
+	return count;
+}
+
+int main()
+{
+	int n = 0;
+	scanf("%d", &n);
+	int len = countDigitOne(n);
+	printf("%d",len);
+	return 0;
+}
