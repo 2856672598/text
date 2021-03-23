@@ -405,66 +405,139 @@
 //	return count;
 //}
 
-#include<stdio.h>
-#include<math.h>
+
+////剑指 Offer 43. 1～n 整数中 1 出现的次数
+////https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/
+//#include<stdio.h>
+//#include<math.h>
+////int countDigitOne(int n)
+////{
+////	int count = 0;
+////	for (int i = 1; i <= n; i++)
+////	{
+////		int tmp = i;
+////		while (tmp)
+////		{
+////			if (tmp % 10 == 1)
+////				count++;
+////			tmp /= 10;
+////		}
+////	}
+////	return count;
+////}
 //int countDigitOne(int n)
 //{
+//	if (n == 0)
+//		return 0;
 //	int count = 0;
-//	for (int i = 1; i <= n; i++)
+//	int z = 0;
+//	int tmp = n;
+//	while (tmp)
 //	{
-//		int tmp = i;
-//		while (tmp)
+//		z++;
+//		tmp /= 10;
+//	}
+//	int i = 0;
+//	int  k= 0;
+//	while (z)
+//	{
+//		int base = (int)pow(10, i);
+//		int cur = (n / base) % 10;
+//		int next = n / (int)pow(10, i + 1);
+//		int tail = n % base;
+//		if (cur == 1)
 //		{
-//			if (tmp % 10 == 1)
-//				count++;
-//			tmp /= 10;
+//			count += next * base + (tail + 1) * 1;
 //		}
+//		else if (cur > 1)
+//		{
+//			count += (next + 1)*base;
+//		}
+//		else
+//		{
+//			count += next * base;
+//		}
+//		i++;
+//		z--;
 //	}
 //	return count;
 //}
-int countDigitOne(int n)
-{
-	if (n == 0)
-		return 0;
-	int count = 0;
-	int z = 0;
-	int tmp = n;
-	while (tmp)
-	{
-		z++;
-		tmp /= 10;
-	}
-	int i = 0;
-	int  k= 0;
-	while (z)
-	{
-		int base = (int)pow(10, i);
-		int cur = (n / base) % 10;
-		int next = n / (int)pow(10, i + 1);
-		int tail = n % base;
-		if (cur == 1)
-		{
-			count += next * base + (tail + 1) * 1;
-		}
-		else if (cur > 1)
-		{
-			count += (next + 1)*base;
-		}
-		else
-		{
-			count += next * base;
-		}
-		i++;
-		z--;
-	}
-	return count;
-}
+//
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int len = countDigitOne(n);
+//	printf("%d",len);
+//	return 0;
+//}
 
+
+////剑指 Offer 14- I. 剪绳子
+////https://leetcode-cn.com/problems/jian-sheng-zi-lcof/submissions/
+//#include<stdio.h>
+//#include<math.h>
+//int cuttingRope(int n)
+//{
+//	if (n < 3)
+//		return 1;
+//	int tmp = 0;
+//	tmp = n % 3;
+//	int sum = 0;
+//	int len = n / 3;
+//	//当长度为3时，应该分为1,2；
+//	if (len == 1 && tmp == 0)
+//		return 2;
+//	if (tmp == 1)
+//	{
+//		sum = (int)pow(3, len - 1) * (3 + 1);
+//	}
+//	else if (tmp == 2)
+//	{
+//		sum = (int)pow(3, len) * 2;
+//	}
+//	else if (tmp == 0 && len != 1)
+//		sum = (int)pow(3, len);
+//	return sum;
+//}
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int len = cuttingRope(n);
+//	printf("%d", len);
+//	return 0;
+//}
+
+#include<stdio.h>
+double myPow(double x, int n)
+{
+	int i = 0;
+	double sum = 1, tmp = 1;
+	if (n < 0)
+	{
+		for (i = n; i < 0; i++)
+		{
+			tmp *= x;
+		}
+		sum = 1 / tmp;
+	}
+	else
+	{
+		for (i = 0; i < n; i++)
+		{
+			sum *= x;
+		}
+	}
+	return sum;
+}
 int main()
 {
 	int n = 0;
-	scanf("%d", &n);
-	int len = countDigitOne(n);
-	printf("%d",len);
+	double x = 0;
+	scanf("%lf %d", &x, &n);
+	double len = myPow(x, n);
+	printf("%f", len);
 	return 0;
 }
