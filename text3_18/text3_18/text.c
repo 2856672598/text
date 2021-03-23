@@ -236,49 +236,74 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//#include<math.h>
+//int countDigitOne(int n)
+//{
+//	if (n <= 0)
+//		return 0;
+//	int tmp = n;
+//	int num = 0;
+//	int count = 0;
+//	while (tmp)
+//	{
+//		tmp /= 10;
+//		num++;
+//	}
+//	int i = 0;
+//	while (num)
+//	{
+//		int base = (int)pow(10, i);
+//		int cur = (n / base) % 10;
+//		int next = n / (int)pow(10, i + 1);
+//		int till = n % base;
+//		if (cur == 1)
+//		{
+//			count += next * base + till + 1;
+//		}
+//		else if (cur > 1)
+//		{
+//			count += (next + 1) * base;
+//		}
+//		else
+//		{
+//			count += next * base;
+//		}
+//		i++;
+//		num--;
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int len = countDigitOne(n);
+//	printf("%d", len);
+//	return 0;
+//}
+
+
+
 #include<stdio.h>
-#include<math.h>
-int countDigitOne(int n)
-{
-	if (n <= 0)
-		return 0;
-	int tmp = n;
-	int num = 0;
-	int count = 0;
-	while (tmp)
-	{
-		tmp /= 10;
-		num++;
-	}
-	int i = 0;
-	while (num)
-	{
-		int base = (int)pow(10, i);
-		int cur = (n / base) % 10;
-		int next = n / (int)pow(10, i + 1);
-		int till = n % base;
-		if (cur == 1)
-		{
-			count += next * base + till + 1;
-		}
-		else if (cur > 1)
-		{
-			count += (next + 1) * base;
-		}
-		else
-		{
-			count += next * base;
-		}
-		i++;
-		num--;
-	}
-	return count;
-}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int sum = 0;
+//	for (int i = 1; i <= n; i++)
+//	{
+//		sum += i;
+//	}
+//	printf("%d", sum);
+//	return 0;
+//}
+
 int main()
 {
 	int n = 0;
 	scanf("%d", &n);
-	int len = countDigitOne(n);
-	printf("%d", len);
+	int sum = (1 + n)*n / 2;
+	printf("%d", sum);
 	return 0;
 }
