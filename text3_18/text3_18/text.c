@@ -285,25 +285,161 @@
 
 
 
-#include<stdio.h>
+//#include<stdio.h>
+////int main()
+////{
+////	int n = 0;
+////	scanf("%d", &n);
+////	int sum = 0;
+////	for (int i = 1; i <= n; i++)
+////	{
+////		sum += i;
+////	}
+////	printf("%d", sum);
+////	return 0;
+////}
+//
 //int main()
 //{
 //	int n = 0;
 //	scanf("%d", &n);
-//	int sum = 0;
-//	for (int i = 1; i <= n; i++)
-//	{
-//		sum += i;
-//	}
+//	int sum = (1 + n)*n / 2;
 //	printf("%d", sum);
 //	return 0;
 //}
 
+
+//#include<stdio.h>
+//#include<time.h>
+//#include<stdlib.h>
+//void  text1()
+//{
+//	int i = 10;
+//	while (i)
+//	{
+//		printf("%d\n", rand());
+//		i--;
+//	}
+//}
+//int main()
+//{
+//	srand((unsigned int)time(NULL));
+//	//text1();
+//	int i = 0;
+//	for (i = 0; i < 10; i++)
+//	{
+//		printf("%lld\n", time(NULL) % 10);
+//	}
+//	return 0;
+//}
+
+
+
+#include<stdio.h>
+#include<windows.h>
+#include<time.h>
+#include<conio.h>
+typedef struct snake
+{
+	int x;
+	int y;
+	struct snake * next;
+}snake;
+struct snake* InitSnake()
+{
+	snake* head = malloc(sizeof(snake));
+	if (head)
+	{
+		head->x = 8;
+		head->y = 10;
+		head->next = NULL;
+		return head;
+	}
+	return NULL;
+}
+void gotoxy(int x, int y)
+{
+	COORD coord;
+	coord.X = x;
+	coord.Y = y;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+void createfood()
+{
+	int x = 0, y = 0;
+	while (1)
+	{
+		x = rand() % 10;
+		y = rand() % 10;
+		if (x % 2 == 0 && x > 2 && y > 2);
+			break;
+	}
+	gotoxy(x, y);
+	printf("★");
+}
+void text()
+{
+	srand((unsigned int)time(NULL));
+	int n = 30;
+	snake* head = InitSnake();
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+
+			if (j == 0 || j == n - 1 || i == 0 || i == n - 1)
+				printf("■");
+			else
+				printf("  ");
+		}
+		printf("\n");
+	}
+	createfood();
+	/**
+	*控制台按键所代表的数字
+	*“↑”：72
+	*“↓”：80
+	*“←”：75
+	*“→”：77
+	*/
+
+	for (int i = 2; i <= 15; i++)
+	{
+		head->x = 10;
+		head->y = 5;
+		for (int j = 5; j < 15; j++)
+		{
+			Sleep(300);
+			head->x = head->x;
+			head->y = head->y + 1;
+			gotoxy(head->x, head->y);
+			printf("■");
+			gotoxy(head->x, head->y - 1);
+			//printf("  ");
+			int key1 = 0, key2 = 0;
+			if (_kbhit())
+			{
+				key1 = _getch();
+				key2 = _getch();
+			}
+			if (key2 == 77)
+			{
+				while (1)
+				{
+					Sleep(300);
+					head->x += 2;
+					head->y = head->y;
+					gotoxy(head->x, head->y);
+					printf("■");
+					gotoxy(head->x - 2, head->y);
+					printf("  ");
+				}
+			}
+		}
+	}
+}
 int main()
 {
-	int n = 0;
-	scanf("%d", &n);
-	int sum = (1 + n)*n / 2;
-	printf("%d", sum);
+	text();
 	return 0;
 }
