@@ -1,143 +1,91 @@
 #include"snake.h"
-int MapWidth = 40;
-int MapHeight = 20;
-void gotoxy(int x, int y)
+int status = 0;
+snake* food = NULL;
+void gotoxy(int x, int y)//调用Windows的API函数，可以在控制台的指定位置直接操作，这里可暂时不用深究
 {
 	COORD coord;
 	coord.X = x;
 	coord.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
-snake* InitSnake()
+snake*InitSnake()
 {
 	snake* till = malloc(sizeof(snake));
-	if (till)
+	till->next = NULL;
+	till->x = 24;
+	till->y = 15;
+	snake* head = NULL;
+	for (int i = 1; i <= 3; i++)
 	{
-		till->next = NULL;
-		till->x = 4;
-		till->y = 8;
+		head = malloc(sizeof(snake));
+		head->next = till;
+		head->x = 24 + i * 2;
+		head->y = 15;
+		till = head;
 	}
-	//for (int i = 1; i <= 2; i++)
-	//{
-	//	snake* head = malloc(sizeof(snake));
-	//	head->next = till;
-	//	head->x = till->x;
-	//	head->y = till->y + 1;
-	//	till = head;
-	//}
-	snake* tmp = till;
-	while (tmp != NULL)
+	while (till)
 	{
-		gotoxy(tmp->x, tmp->y);
+		gotoxy(till->x, till->y);
 		printf("■");
-		tmp = tmp->next;
+		till = till->next;
 	}
-	return till;
+	return head;
 }
-void CreateMap(int x, int y)
+void snakeMove(snake* head)
 {
-	int i = 0;
-	//左右
-	for (i = 1; i < y; i++)
+	snake* nexthead = malloc(sizeof(snake));
+	if (status == U)
 	{
-		gotoxy(0, i);
-		printf("■");
-		gotoxy(x - 2, i);
-		printf("■");
-	}
-	//上下
-	for (int i = 0; i < x; i += 2)
-	{
-		gotoxy(i, 0);
-		printf("■");
-		gotoxy(i, y);
-		printf("■");
-	}
-}
-snake* CreateFood()
-{
-	snake* food = malloc(sizeof(snake));
-	food->next = NULL;
-	food->x = 3;
-	while (food->x % 2 != 0 && food->x != 0)
-	{
-		food->x = rand() % MapWidth - 2;
-	}
-	food->y = rand() % MapHeight - 1;
-	gotoxy(food->x, food->y);
-	printf("★");
-	return food;
-}
-bool EatFood(snake* food, snake* head)
-{
-	if (food->x == head->x && food->y == food->y)
-	{
-		while (head->next != NULL)
+		nexthead->next = head;
+		nexthead->x = head->x;
+		nexthead->y = (head->y) - 1;
+		head = nexthead;
+		snake* q = head;
+		if (head==NULL/*q->x == food->x&&q->y == food->y*/)
 		{
-			head = head->next;
+			//吃食物
 		}
-		head->next = food;
-		free(food);
-		return true;
+		else
+		{
+			while (q->next)
+			{
+				Sleep(300);
+				gotoxy(q->x, q->y);
+				printf("■");
+				q = q->next;
+			}
+			gotoxy(q->x, q->y);
+			printf("■");
+			gotoxy(q->next->x, q->next->y);
+			free(q->next);
+			q->next = NULL;
+		}
 	}
-	return false;
 }
-void AgainstWall(snake* head)
+
+
+void keyboardControl(snake* head)
 {
-	if (head->x == MapWidth - 2 || head->x == 0 || head->y == MapHeight - 1 || head->y == 0)
-		printf("您死了\n");
-}
-void KeyDown(snake* head)
-{
-	int key1 = 0, key2 = 0;
-	if (_kbhit())
+	status = U;       //初始蛇向右移动
+	while (1)
 	{
-		key1 = _getch();
-		key2 = _getch();
-	}
-	/**
-	*控制台按键所代表的数字
-	*“↑”：72
-	*“↓”：80
-	*“←”：75
-	*“→”：77
-	*/
-	if (key2 == 75)
-	{
-			head->x -= 2;
-			head->y = head->y;
-			head = head->next;
-	}
-	if (key2 == 77)
-	{
-		//while (1)
-		//{
-		//	Sleep(300);
-		//	snake* flag = head;
-		//	while (flag != NULL)
-		//	{
-		//		flag->x = flag->x + 2;
-		//		flag->y = flag->y;
-		//		gotoxy(head->x, head->y);
-		//		printf("■");
-		//		gotoxy(head->x - 2, head->y);
-		//		printf("  ");
-		//		flag = flag->next;
-		//	}
-		//}
-		head->x = head->x + 2;
-		head->y = head->y;
-	}
-	if (key2 == 72)
-	{
-		head->x = head->x;
-		head->y = head->y--;
-		head = head->next;
-	}
-	if (key2 == 80)
-	{
-		head->x = head->x;
-		head->y = head->y++;
-		head = head->next;
+		if (GetAsyncKeyState(VK_UP) && status != D)            //GetAsyncKeyState函数用来判断函数调用时指定虚拟键的状态
+		{
+			status = U;           //如果蛇不是向下前进的时候，按上键，执行向上前进操作
+		}
+		else if (GetAsyncKeyState(VK_DOWN) && status != U)     //如果蛇不是向上前进的时候，按下键，执行向下前进操作
+		{
+			status = D;
+		}
+		else if (GetAsyncKeyState(VK_LEFT) && status != R)      //如果蛇不是向右前进的时候，按左键，执行向左前进
+		{
+			status = L;
+		}
+		else if (GetAsyncKeyState(VK_RIGHT) && status != L)     //如果蛇不是向左前进的时候，按右键，执行向右前进
+		{
+			status = R;
+		}
+		Sleep(300);
+		snakeMove(head);
 	}
 }
