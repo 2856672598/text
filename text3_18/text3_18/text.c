@@ -335,3 +335,54 @@
 
 
 
+//#include<stdio.h>
+//#include<math.h>
+//int main()
+//{
+//	double a, b, c, s = 0;
+//	printf("请输入三角形的三条边：");
+//	scanf("%lf %lf %lf", &a, &b, &c);
+//	if (a + b > c &&a + c > b&&b + c > a)
+//	{
+//		double p = (a + b + c) / 2;
+//		s = sqrt(p*(p - a)*(p - b)*(p - c));
+//		printf("%f", s);
+//	}
+//	else
+//		printf("无法组成三角形\n");
+//	return 0;
+//}
+
+//#include<stdio.h>
+//void main()
+//{
+//	float x, y;
+//	scanf("%f", &x);
+//	if (x > -5 && x < 0)
+//		y = x - 1;
+//	else if (x > 0 && x < 8)
+//		y = x + 1;
+//	else if (x == 0)
+//		y = x;
+//	else
+//		y = 10;
+//	printf("y=%f\n", y);
+//}
+
+
+#include<stdio.h>
+#include<math.h>
+void main()
+{
+	float a, b, c, p, s;
+	printf("Please enter a b c=\n");
+	scanf("%f %f %f", &a, &b, &c);
+	if (a + b > c && a + c > b&& b + c > a)
+	{
+		p = (a + b + c) / 2;
+		s = (float)sqrt(p*(p - a)*(p - b)*(p - c));
+		printf("%f", s);
+	}
+	else
+		printf("三角形不合法\n");
+}
