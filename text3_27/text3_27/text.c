@@ -54,30 +54,74 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr[] = "abcdef";
+//	char arr1[5] = { 0 };
+//	scanf("%s", arr1);
+//	int i = 0, j = 0;
+//	while (i < (int)strlen(arr) && j < (int)strlen(arr1))
+//	{
+//		if (arr[i] == arr1[j])
+//		{
+//			i++;
+//			j++;
+//		}
+//		else
+//		{
+//			i = i - j + 1;
+//			j = 0;
+//		}
+//	}
+//	if (j >= (int)strlen(arr1))
+//		printf("找到了");
+//	else
+//		printf("没找到\n");
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 1, b;
+//	b = (a = a * 2) + (a = a + 3);
+//	printf("%d %d", a, b);//10
+//	return 0;
+//}
+
+
+
 #include<stdio.h>
-#include<string.h>
 int main()
 {
-	char arr[] = "abcdef";
-	char arr1[5] = { 0 };
-	scanf("%s", arr1);
-	int i = 0, j = 0;
-	while (i < (int)strlen(arr) && j < (int)strlen(arr1))
-	{
-		if (arr[i] == arr1[j])
-		{
-			i++;
-			j++;
-		}
-		else
-		{
-			i = i - j + 1;
-			j = 0;
-		}
-	}
-	if (j >= (int)strlen(arr1))
-		printf("找到了");
-	else
-		printf("没找到\n");
+	int a = 3;
+	printf("%d %d %d %d", a++, ++a, a++, ++a);//6 7 4 7
 	return 0;
 }
+//kmp
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	int i = 0, j = 1;
+//	char arr[] = "ababc";
+//	int next[5] = { 0 };
+//	for (j = 1; j < (int)strlen(arr); j++)
+//	{
+//		while (i > 0 && arr[i] != arr[j])
+//		{
+//			i = next[i - 1];
+//		}
+//		if (arr[i] == arr[j])
+//			i++;
+//		next[j] = i;
+//	}
+//	for (i = 0; i < (int)strlen(arr); i++)
+//	{
+//		printf("%d ", next[i]);
+//	}
+//	return 0;
+//}
