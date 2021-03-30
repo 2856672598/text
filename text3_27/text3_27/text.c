@@ -146,8 +146,8 @@ bool kmp(char* string, int* next, char* arr, int sizea, int sizes)
 int main()
 {
 	int i = 0, j = 1;
-	char arr[] = "ababc";
-	int next[5] = { 0 };
+	char arr[] = "abcaa/*ababc*/";
+	int next[18] = { 0 };
 
 	int sz = strlen(arr);
 	Getnext(arr, next, sz);
