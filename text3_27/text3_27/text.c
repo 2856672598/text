@@ -103,79 +103,92 @@
 //}
 
 
-//kmp
+////kmp
+//#include<stdio.h>
+//#include<stdbool.h>
+//#include<string.h>
+//void Getnext(char* arr, int* next, int sz)
+//{
+//	//i指向字符串前缀
+//	//j指向字符串后缀末尾
+//	int i = 0, j = 0;
+//	for (j = 1; j < sz; j++)
+//	{
+//		while (i > 0 && arr[i] != arr[j])
+//		{
+//			i = next[i - 1];
+//		}
+//		if (arr[i] == arr[j])
+//			i++;
+//		next[j] = i;
+//	}
+//}
+//bool kmp(char* string, int* next, char* arr, int sizea, int sizes)
+//{
+//	int i = 0, j = 0;
+//	while (i < sizes&&j < sizea)
+//	{
+//		if (string[i] != arr[j] && j > 0)
+//		{
+//			j = next[j - 1];
+//		}
+//		else
+//		{
+//			i++;
+//			j++;
+//		}
+//	}
+//	if (j >= sizea && i <= sizes)
+//		return true;
+//	else
+//		return false;
+//}
+//int main()
+//{
+//	int i = 0, j = 1;
+//	char arr[] = "abcaa/*ababc*/";
+//	int next[18] = { 0 };
+//
+//	int sz = strlen(arr);
+//	Getnext(arr, next, sz);
+//	char string[] = "abababc";
+//
+//	int sizes = strlen(string);
+//	bool flag = kmp(string, next, arr, sz, sizes);
+//	if (flag)
+//		printf("找到了\n");
+//	else
+//		printf("没找到\n");
+//
+//	//i = 0, j = 0;
+//	//while (i < (int)strlen(arr1) && j < (int)strlen(arr))
+//	//{
+//	//	if (arr[j] != arr1[i] && j > 0)
+//	//	{
+//	//		j = next[j - 1];
+//	//	}
+//	//	else
+//	//	{
+//	//		i++;
+//	//		j++;
+//	//	}
+//	//}
+//	//if (j >= (int)strlen(arr))
+//	//	printf("找到了\n");
+//	//else
+//	//	printf("没找到\n");
+//	return 0;
+//}
+
+
 #include<stdio.h>
-#include<stdbool.h>
-#include<string.h>
-void Getnext(char* arr, int* next, int sz)
-{
-	//i指向字符串前缀
-	//j指向字符串后缀末尾
-	int i = 0, j = 0;
-	for (j = 1; j < sz; j++)
-	{
-		while (i > 0 && arr[i] != arr[j])
-		{
-			i = next[i - 1];
-		}
-		if (arr[i] == arr[j])
-			i++;
-		next[j] = i;
-	}
-}
-bool kmp(char* string, int* next, char* arr, int sizea, int sizes)
-{
-	int i = 0, j = 0;
-	while (i < sizes&&j < sizea)
-	{
-		if (string[i] != arr[j] && j > 0)
-		{
-			j = next[j - 1];
-		}
-		else
-		{
-			i++;
-			j++;
-		}
-	}
-	if (j >= sizea && i <= sizes)
-		return true;
-	else
-		return false;
-}
 int main()
 {
-	int i = 0, j = 1;
-	char arr[] = "abcaa/*ababc*/";
-	int next[18] = { 0 };
-
-	int sz = strlen(arr);
-	Getnext(arr, next, sz);
-	char string[] = "abababc";
-
-	int sizes = strlen(string);
-	bool flag = kmp(string, next, arr, sz, sizes);
-	if (flag)
-		printf("找到了\n");
-	else
-		printf("没找到\n");
-
-	//i = 0, j = 0;
-	//while (i < (int)strlen(arr1) && j < (int)strlen(arr))
-	//{
-	//	if (arr[j] != arr1[i] && j > 0)
-	//	{
-	//		j = next[j - 1];
-	//	}
-	//	else
-	//	{
-	//		i++;
-	//		j++;
-	//	}
-	//}
-	//if (j >= (int)strlen(arr))
-	//	printf("找到了\n");
-	//else
-	//	printf("没找到\n");
+	int a = 0, b = 0;
+	while (a != 0 && b != 0)
+	{
+		printf("hello,word");
+	}
+	printf("%d", a&&b);
 	return 0;
 }
