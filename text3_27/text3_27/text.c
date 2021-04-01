@@ -181,14 +181,95 @@
 //}
 
 
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0, b = 0;
+//	while (a != 0 && b != 0)
+//	{
+//		printf("hello,word");
+//	}
+//	printf("%d", a&&b);
+//	return 0;
+//}
+
+////977. 有序数组的平方
+////https://leetcode-cn.com/problems/squares-of-a-sorted-array/
+//#include<stdio.h>
+//#include<math.h>
+//#include<stdlib.h>
+//int compare(const void* a, const void*b)
+//{
+//	return *(int*)a - *(int*)b;
+//}
+//int* sortedSquares(int* nums, int numsSize, int* returnSize)
+//{
+//	for (int i = 0; i < numsSize; i++)
+//	{
+//		nums[i] = (int)pow(nums[i], 2);
+//	}
+//
+//	//for (int i = 0; i < numsSize; i++)
+//	//{
+//	//	for (int j = 0; j < numsSize - 1 - i; j++)
+//	//	{
+//	//		if (nums[j] > nums[j + 1])
+//	//		{
+//	//			int tmp = nums[j];
+//	//			nums[j] = nums[j + 1];
+//	//			nums[j + 1] = tmp;
+//	//		}
+//	//	}
+//	//}
+//	qsort(nums, numsSize, 4, compare);
+//	*returnSize = numsSize;
+//	return nums;
+//}
+//int main()
+//{
+//	int arr[] = { -4,-1,0,3,10 };
+//	int size = sizeof(arr) / sizeof(arr[0]);
+//	int returnsize = 0;
+//	sortedSquares(arr, size,&returnsize);
+//	for (int i = 0; i < returnsize; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
+
 #include<stdio.h>
+#include<stdlib.h>
+void mysort(int* arr, int size)
+{
+	int left = 0, right = size-1;
+	int pivot = arr[left];
+	while (left < right)
+	{
+		while (left < right&&arr[right] >= pivot)
+		{
+			right--;
+		}
+		if (left < right)
+			arr[left] = arr[right];
+		while (left < right&&arr[left] <= pivot)
+		{
+			left++;
+		}
+		if (left < right)
+			arr[right] = arr[left];
+		if (left >= right)
+			arr[left] = pivot;
+	}
+}
 int main()
 {
-	int a = 0, b = 0;
-	while (a != 0 && b != 0)
+	int arr[] = { 6,2,9,1,5,8,34,12,0 };
+	int size = sizeof(arr) / sizeof(arr[0]);
+	mysort(arr, size);
+	for (int i = 0; i < size; i++)
 	{
-		printf("hello,word");
+		printf("%d ", arr[i]);
 	}
-	printf("%d", a&&b);
 	return 0;
 }
