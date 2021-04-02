@@ -239,42 +239,133 @@
 //}
 
 //øÏÀŸ≈≈–Ú
+//#include<stdio.h>
+//#include<stdlib.h>
+//void mysort(int* arr, int left, int right)
+//{
+//	if (left >= right)
+//		return ;
+//	int L = left, R = right;
+//	int pivot = arr[left];
+//	while (left < right)
+//	{
+//		while (left < right&&arr[right] >= pivot)
+//		{
+//			right--;
+//		}
+//		if (left < right)
+//			arr[left] = arr[right];
+//		while (left < right&&arr[left] <= pivot)
+//		{
+//			left++;
+//		}
+//		if (left < right)
+//			arr[right] = arr[left];
+//		if (left >= right)
+//			arr[left] = pivot;
+//	}
+//	mysort(arr, L, right-1);
+//	mysort(arr, right + 1, R);
+//}
+//int main()
+//{
+//	int arr[] = { 6,2,9,1,5,8,34,12,0,45,24,90 };
+//	int size = sizeof(arr) / sizeof(arr[0]);
+//	mysort(arr, 0, size - 1);
+//	for (int i = 0; i < size; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
+
+
 #include<stdio.h>
 #include<stdlib.h>
-void mysort(int* arr, int left, int right)
+//double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size)
+//{
+//	int* new = malloc(sizeof(int)*(nums1Size + nums2Size));
+//	int i = 0, n1 = 0, n2 = 0;
+//	for (i = 0; i < nums1Size + nums2Size && n1 < nums1Size && n2 < nums2Size; i++)
+//	{
+//		if (nums1[n1] < nums2[n2])
+//		{
+//			new[i] = nums1[n1];
+//			n1++;
+//		}
+//		else
+//		{
+//			new[i] = nums2[n2];
+//			n2++;
+//		}
+//	}
+//	if (n1 >= nums1Size&&n2 < nums2Size)
+//	{
+//		while (n2 < nums2Size)
+//		{
+//			new[i] = nums2[n2];
+//			i++;
+//			n2++;
+//		}
+//	}
+//	else
+//	{
+//		while (n1 < nums1Size)
+//		{
+//			new[i] = nums1[n1];
+//			i++;
+//			n1++;
+//		}
+//	}
+//	int nums = nums1Size + nums2Size;
+//	if (nums % 2 == 0)
+//	{
+//		return (new[nums / 2] + new[(nums / 2) - 1]) / 2.0;
+//	}
+//	else
+//	{
+//		if (nums <= 1)
+//			return new[0];
+//		return new[nums / 2];
+//	}
+//}
+
+double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size)
 {
-	if (left >= right)
-		return ;
-	int L = left, R = right;
-	int pivot = arr[left];
-	while (left < right)
+	int numsize = nums1Size + nums2Size;
+	int len = numsize / 2;
+	int n1 = 0, n2 = 0, prev = 0, sum = 0;
+	for (int i = 0; i <= len; i++)
 	{
-		while (left < right&&arr[right] >= pivot)
+		int a = 0, b = 0;
+		if (nums1Size != 0 && n1 < nums1Size)
+			a = nums1[n1];
+		if (nums2Size != 0 && n2 < nums2Size)
+			b = nums2[n2];
+		if (n2 >= nums2Size || nums2Size == 0 || a <= b && nums1Size != 0 && nums1Size > n1)
 		{
-			right--;
+			prev = sum;
+			sum = nums1[n1];
+			n1++;
 		}
-		if (left < right)
-			arr[left] = arr[right];
-		while (left < right&&arr[left] <= pivot)
+		else
 		{
-			left++;
+			prev = sum;
+			sum = nums2[n2];
+			n2++;
 		}
-		if (left < right)
-			arr[right] = arr[left];
-		if (left >= right)
-			arr[left] = pivot;
 	}
-	mysort(arr, L, right-1);
-	mysort(arr, right + 1, R);
+	if (numsize % 2 == 0)
+		return (prev + sum) / 2.0;
+	else
+		return sum;
 }
+
 int main()
 {
-	int arr[] = { 6,2,9,1,5,8,34,12,0,45,24,90 };
-	int size = sizeof(arr) / sizeof(arr[0]);
-	mysort(arr, 0, size - 1);
-	for (int i = 0; i < size; i++)
-	{
-		printf("%d ", arr[i]);
-	}
+	int nums1[] = { 0,0 };
+	int nums2[] = { 0,0 };
+	double flag = findMedianSortedArrays(nums1, 2, nums2, 2);
+	printf("%f", flag);
 	return 0;
 }
