@@ -238,11 +238,14 @@
 //	return 0;
 //}
 
+//øÏÀŸ≈≈–Ú
 #include<stdio.h>
 #include<stdlib.h>
-void mysort(int* arr, int size)
+void mysort(int* arr, int left, int right)
 {
-	int left = 0, right = size-1;
+	if (left >= right)
+		return ;
+	int L = left, R = right;
 	int pivot = arr[left];
 	while (left < right)
 	{
@@ -261,12 +264,14 @@ void mysort(int* arr, int size)
 		if (left >= right)
 			arr[left] = pivot;
 	}
+	mysort(arr, L, right-1);
+	mysort(arr, right + 1, R);
 }
 int main()
 {
-	int arr[] = { 6,2,9,1,5,8,34,12,0 };
+	int arr[] = { 6,2,9,1,5,8,34,12,0,45,24,90 };
 	int size = sizeof(arr) / sizeof(arr[0]);
-	mysort(arr, size);
+	mysort(arr, 0, size - 1);
 	for (int i = 0; i < size; i++)
 	{
 		printf("%d ", arr[i]);
