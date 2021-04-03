@@ -280,92 +280,203 @@
 //}
 
 
-#include<stdio.h>
-#include<stdlib.h>
+//#include<stdio.h>
+//#include<stdlib.h>
+////double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size)
+////{
+////	int* new = malloc(sizeof(int)*(nums1Size + nums2Size));
+////	int i = 0, n1 = 0, n2 = 0;
+////	for (i = 0; i < nums1Size + nums2Size && n1 < nums1Size && n2 < nums2Size; i++)
+////	{
+////		if (nums1[n1] < nums2[n2])
+////		{
+////			new[i] = nums1[n1];
+////			n1++;
+////		}
+////		else
+////		{
+////			new[i] = nums2[n2];
+////			n2++;
+////		}
+////	}
+////	if (n1 >= nums1Size&&n2 < nums2Size)
+////	{
+////		while (n2 < nums2Size)
+////		{
+////			new[i] = nums2[n2];
+////			i++;
+////			n2++;
+////		}
+////	}
+////	else
+////	{
+////		while (n1 < nums1Size)
+////		{
+////			new[i] = nums1[n1];
+////			i++;
+////			n1++;
+////		}
+////	}
+////	int nums = nums1Size + nums2Size;
+////	if (nums % 2 == 0)
+////	{
+////		return (new[nums / 2] + new[(nums / 2) - 1]) / 2.0;
+////	}
+////	else
+////	{
+////		if (nums <= 1)
+////			return new[0];
+////		return new[nums / 2];
+////	}
+////}
+//
 //double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size)
 //{
-//	int* new = malloc(sizeof(int)*(nums1Size + nums2Size));
-//	int i = 0, n1 = 0, n2 = 0;
-//	for (i = 0; i < nums1Size + nums2Size && n1 < nums1Size && n2 < nums2Size; i++)
+//	int numsize = nums1Size + nums2Size;
+//	int len = numsize / 2;
+//	int n1 = 0, n2 = 0, prev = 0, sum = 0;
+//	for (int i = 0; i <= len; i++)
 //	{
-//		if (nums1[n1] < nums2[n2])
+//		int a = 0, b = 0;
+//		if (nums1Size != 0 && n1 < nums1Size)
+//			a = nums1[n1];
+//		if (nums2Size != 0 && n2 < nums2Size)
+//			b = nums2[n2];
+//		if (n2 >= nums2Size || nums2Size == 0 || a <= b && nums1Size != 0 && nums1Size > n1)
 //		{
-//			new[i] = nums1[n1];
+//			prev = sum;
+//			sum = nums1[n1];
 //			n1++;
 //		}
 //		else
 //		{
-//			new[i] = nums2[n2];
+//			prev = sum;
+//			sum = nums2[n2];
 //			n2++;
 //		}
 //	}
-//	if (n1 >= nums1Size&&n2 < nums2Size)
-//	{
-//		while (n2 < nums2Size)
-//		{
-//			new[i] = nums2[n2];
-//			i++;
-//			n2++;
-//		}
-//	}
+//	if (numsize % 2 == 0)
+//		return (prev + sum) / 2.0;
 //	else
-//	{
-//		while (n1 < nums1Size)
-//		{
-//			new[i] = nums1[n1];
-//			i++;
-//			n1++;
-//		}
-//	}
-//	int nums = nums1Size + nums2Size;
-//	if (nums % 2 == 0)
-//	{
-//		return (new[nums / 2] + new[(nums / 2) - 1]) / 2.0;
-//	}
-//	else
-//	{
-//		if (nums <= 1)
-//			return new[0];
-//		return new[nums / 2];
-//	}
+//		return sum;
+//}
+//
+//int main()
+//{
+//	int nums1[] = { 0,0 };
+//	int nums2[] = { 0,0 };
+//	double flag = findMedianSortedArrays(nums1, 2, nums2, 2);
+//	printf("%f", flag);
+//	return 0;
 //}
 
-double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size)
-{
-	int numsize = nums1Size + nums2Size;
-	int len = numsize / 2;
-	int n1 = 0, n2 = 0, prev = 0, sum = 0;
-	for (int i = 0; i <= len; i++)
-	{
-		int a = 0, b = 0;
-		if (nums1Size != 0 && n1 < nums1Size)
-			a = nums1[n1];
-		if (nums2Size != 0 && n2 < nums2Size)
-			b = nums2[n2];
-		if (n2 >= nums2Size || nums2Size == 0 || a <= b && nums1Size != 0 && nums1Size > n1)
-		{
-			prev = sum;
-			sum = nums1[n1];
-			n1++;
-		}
-		else
-		{
-			prev = sum;
-			sum = nums2[n2];
-			n2++;
-		}
-	}
-	if (numsize % 2 == 0)
-		return (prev + sum) / 2.0;
-	else
-		return sum;
-}
 
-int main()
-{
-	int nums1[] = { 0,0 };
-	int nums2[] = { 0,0 };
-	double flag = findMedianSortedArrays(nums1, 2, nums2, 2);
-	printf("%f", flag);
-	return 0;
-}
+////1535. 找出数组游戏的赢家
+////https://leetcode-cn.com/problems/find-the-winner-of-an-array-game/submissions/
+//#include<stdio.h>
+////int getWinner(int* arr, int arrSize, int k)
+////{
+////	int flag = 0;
+////	int max = arr[0];
+////	while (flag < k)
+////	{
+////		if (arr[0] > arr[1])
+////		{
+////			int tmp = arr[1], i = 0;
+////			for (i = 1; i < arrSize - 1; i++)
+////			{
+////				arr[i] = arr[i + 1];
+////			}
+////			arr[i] = tmp;
+////			if (max = arr[0])
+////				flag++;
+////			else
+////				flag = 0;
+////		}
+////		else if (arr[0] <= arr[1])
+////		{
+////			int i = 0;
+////			int tmp = arr[0];
+////			for (i = 0; i < arrSize - 1; i++)
+////			{
+////				arr[i] = arr[i + 1];
+////			}
+////			arr[i] = tmp;
+////			max = arr[1];
+////			flag++;
+////		}
+////	}
+////	return arr[0];
+////}
+//
+//int getWinner(int* arr, int arrSize, int k)
+//{
+//	int count = 0, i = 0;
+//	for (i = 0; i < arrSize - 1 && count < k; i++)
+//	{
+//		if (arr[i] > arr[i + 1])
+//		{
+//			count++;
+//			//当第一个数大于第二个数时，将第一个数的值复制到第2个数的位置上
+//			arr[i + 1] = arr[i];
+//		}
+//		else
+//			count = 1;
+//	}
+//}
+//int main()
+//{
+//	int arr[] = { 2,1,3,5,4,6,7 };
+//	int len = getWinner(arr, 7, 2);
+//	printf("%d\n", len);
+//	return 0;
+//}
+
+
+
+//#include <stdio.h>
+//void main()
+//{
+//	int x, k, i, p = 0, z = 0, m = 0;
+//	printf("请输入待输入数据的个数: ");
+//	scanf("%d", &k);
+//	printf("请输入%d个整数: ", k);
+//	while (k--)
+//	{
+//		scanf("%d", &x);
+//		if (x > 0)
+//			p++;
+//		else if (x < 0)
+//			m++;
+//		else
+//			z++;
+//	}
+//	printf("正数、零、负数个数分别为：%d,%d,%d\n", p, z, m);
+//}
+
+
+
+//#include <stdio.h>
+//void main()
+//{
+//	int i, t = 1;
+//	for (i = 1; i < 10; i++)
+//	{
+//		t = 2 * (t + 1);
+//	}
+//	printf("第一天桃子数量为: %d\n", t);
+//}
+
+//#include<stdio.h>
+//#include<Windows.h>
+//int main()
+//{
+//	int i = 9;
+//	while (i--)
+//	{
+//		printf("%d\r", i);
+//		fflush(stdout);
+//		Sleep(300);
+//	}
+//	return 0;
+//}
