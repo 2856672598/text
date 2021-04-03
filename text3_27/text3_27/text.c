@@ -480,3 +480,33 @@
 //	}
 //	return 0;
 //}
+
+
+#include<stdio.h>
+#include<math.h>
+double myPow(double x, int n)
+{
+	double sum = 1;
+	for (int i = 0; i < abs(n / 2); i++)
+	{
+		sum *= x;
+	}
+	if (n % 2 == 0)
+		sum *= sum;
+	else
+		sum = sum * sum*x;
+	if (n > 0)
+		return sum;
+	else if (n < 0)
+		return 1 / sum;
+	else
+		return 1;
+}
+int main()
+{
+	int x, n;
+	scanf("%d %d", &x, &n);
+	double len = myPow(x, n);
+	printf("%f", len);
+	return 0;
+}
