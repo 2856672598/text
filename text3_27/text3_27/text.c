@@ -484,28 +484,68 @@
 
 #include<stdio.h>
 #include<math.h>
+//double myPow(double x, int n)
+//{
+//	double sum = 1;
+//	for (int i = 0; i < abs(n / 2); i++)
+//	{
+//		sum *= x;
+//	}
+//	if (n % 2 == 0)
+//		sum *= sum;
+//	else
+//		sum = sum * sum*x;
+//	if (n > 0)
+//		return sum;
+//	else if (n < 0)
+//		return 1 / sum;
+//	else
+//		return 1;
+//}
+
 double myPow(double x, int n)
 {
-	double sum = 1;
-	for (int i = 0; i < abs(n / 2); i++)
+	double sum = 1.0;
+	int flag = n;
+	if (n < 0)
+		x = 1 / x;
+	while (flag)
 	{
-		sum *= x;
+		if (flag % 2 == 0)
+		{
+			flag /= 2;
+			x *= x;
+		}
+		else
+		{
+			sum *= x;
+			flag /= 2;
+			x *= x;
+		}
 	}
-	if (n % 2 == 0)
-		sum *= sum;
-	else
-		sum = sum * sum*x;
-	if (n > 0)
-		return sum;
-	else if (n < 0)
-		return 1 / sum;
-	else
-		return 1;
+	return sum;
 }
+
+//double myPow(double x, int n)
+//{
+//	double res = 1.0;
+//	if (n < 0)
+//		x = 1 / x;
+//	while (n)
+//	{
+//		if (n & 1)
+//			res = res * x;   //À¨ºÅÄÚµÈÍ¬(n % 2)
+//		x = x * x;
+//		n = n / 2;
+//	}
+//	return res;
+//}
+
 int main()
 {
-	int x, n;
-	scanf("%d %d", &x, &n);
+	int n;
+	double x;
+	scanf("%lf %d", &x, &n);
 	double len = myPow(x, n);
 	printf("%f", len);
 	return 0;
