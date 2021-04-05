@@ -482,71 +482,123 @@
 //}
 
 
-#include<stdio.h>
-#include<math.h>
+//#include<stdio.h>
+//#include<math.h>
+////double myPow(double x, int n)
+////{
+////	double sum = 1;
+////	for (int i = 0; i < abs(n / 2); i++)
+////	{
+////		sum *= x;
+////	}
+////	if (n % 2 == 0)
+////		sum *= sum;
+////	else
+////		sum = sum * sum*x;
+////	if (n > 0)
+////		return sum;
+////	else if (n < 0)
+////		return 1 / sum;
+////	else
+////		return 1;
+////}
+//
 //double myPow(double x, int n)
 //{
-//	double sum = 1;
-//	for (int i = 0; i < abs(n / 2); i++)
-//	{
-//		sum *= x;
-//	}
-//	if (n % 2 == 0)
-//		sum *= sum;
-//	else
-//		sum = sum * sum*x;
-//	if (n > 0)
-//		return sum;
-//	else if (n < 0)
-//		return 1 / sum;
-//	else
-//		return 1;
-//}
-
-double myPow(double x, int n)
-{
-	double sum = 1.0;
-	int flag = n;
-	if (n < 0)
-		x = 1 / x;
-	while (flag)
-	{
-		if (flag % 2 == 0)
-		{
-			flag /= 2;
-			x *= x;
-		}
-		else
-		{
-			sum *= x;
-			flag /= 2;
-			x *= x;
-		}
-	}
-	return sum;
-}
-
-//double myPow(double x, int n)
-//{
-//	double res = 1.0;
+//	double sum = 1.0;
+//	int flag = n;
 //	if (n < 0)
 //		x = 1 / x;
-//	while (n)
+//	while (flag)
 //	{
-//		if (n & 1)
-//			res = res * x;   //À¨ºÅÄÚµÈÍ¬(n % 2)
-//		x = x * x;
-//		n = n / 2;
+//		if (n % 2)
+//			sum *= x;
+//		n /= 2;
+//		x *= x;
 //	}
-//	return res;
+//	return sum;
+//}
+//int main()
+//{
+//	int n;
+//	double x;
+//	scanf("%lf %d", &x, &n);
+//	double len = myPow(x, n);
+//	printf("%f", len);
+//	return 0;
 //}
 
+//#include<stdio.h>
+//int Fib(int n)
+//{
+//	int sum = 0, a = 0, b = 1;
+//	if (n < 2)
+//		return n;
+//	while (n--)
+//	{
+//		sum = a + b;
+//		b = a;
+//		a = sum;
+//	}
+//	return sum;
+//}
+//
+////int Fib(int n)
+////{
+////	if (n < 2)
+////		return n == 0 ? 0 : 1;
+////	return Fib(n - 1) + Fib(n - 2);
+////}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int len = Fib(n);
+//	printf("%d", len);
+//	return 0;
+//}
+
+
+#include<stdio.h>
+void mypow(int * nums, int left, int right)
+{
+	int flag = nums[left], L = left, R = right;
+	if (left >= right)
+		return ;
+	while (left < right)
+	{
+		while (left < right && nums[right] >= flag)
+		{
+			right--;
+		}
+		if (left < right)
+			nums[left] = nums[right];
+		while (left < right && nums[left] < flag)
+		{
+			left++;
+		}
+		if (left < right)
+			nums[right] = nums[left];
+		if (left >= right)
+			nums[left] = flag;
+	}
+	mypow(nums, L, left - 1);
+	mypow(nums, left + 1, R);
+}
+int maximumProduct(int* nums, int numsSize)
+{
+	mypow(nums, 0, numsSize - 1);
+	int a = nums[0] * nums[1] * nums[numsSize - 1];
+	int b = nums[numsSize - 1] * nums[numsSize - 2] * nums[numsSize - 3];
+	if (a > b)
+		return a;
+	else
+		return b;
+}
 int main()
 {
-	int n;
-	double x;
-	scanf("%lf %d", &x, &n);
-	double len = myPow(x, n);
-	printf("%f", len);
+	int arr[] = { -8,-9,-10,7,9 };
+	int len = maximumProduct(arr, sizeof(arr) / sizeof(arr[0]));
+	printf("%d", len);
 	return 0;
 }
