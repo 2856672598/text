@@ -559,46 +559,150 @@
 //}
 
 
-#include<stdio.h>
-void mypow(int * nums, int left, int right)
-{
-	int flag = nums[left], L = left, R = right;
-	if (left >= right)
-		return ;
-	while (left < right)
-	{
-		while (left < right && nums[right] >= flag)
-		{
-			right--;
-		}
-		if (left < right)
-			nums[left] = nums[right];
-		while (left < right && nums[left] < flag)
-		{
-			left++;
-		}
-		if (left < right)
-			nums[right] = nums[left];
-		if (left >= right)
-			nums[left] = flag;
-	}
-	mypow(nums, L, left - 1);
-	mypow(nums, left + 1, R);
-}
-int maximumProduct(int* nums, int numsSize)
-{
-	mypow(nums, 0, numsSize - 1);
-	int a = nums[0] * nums[1] * nums[numsSize - 1];
-	int b = nums[numsSize - 1] * nums[numsSize - 2] * nums[numsSize - 3];
-	if (a > b)
-		return a;
-	else
-		return b;
-}
-int main()
-{
-	int arr[] = { -8,-9,-10,7,9 };
-	int len = maximumProduct(arr, sizeof(arr) / sizeof(arr[0]));
-	printf("%d", len);
-	return 0;
-}
+//#include<stdio.h>
+//#include<limits.h>
+//#include<math.h>
+////void mypow(int * nums, int left, int right)
+////{
+////	int flag = nums[left], L = left, R = right;
+////	if (left >= right)
+////		return ;
+////	while (left < right)
+////	{
+////		while (left < right && nums[right] >= flag)
+////		{
+////			right--;
+////		}
+////		if (left < right)
+////			nums[left] = nums[right];
+////		while (left < right && nums[left] < flag)
+////		{
+////			left++;
+////		}
+////		if (left < right)
+////			nums[right] = nums[left];
+////		if (left >= right)
+////			nums[left] = flag;
+////	}
+////	mypow(nums, L, left - 1);
+////	mypow(nums, left + 1, R);
+////}
+////int maximumProduct(int* nums, int numsSize)
+////{
+////	mypow(nums, 0, numsSize - 1);
+////	int a = nums[0] * nums[1] * nums[numsSize - 1];
+////	int b = nums[numsSize - 1] * nums[numsSize - 2] * nums[numsSize - 3];
+////	if (a > b)
+////		return a;
+////	else
+////		return b;
+////}
+//
+//int maximumProduct(int* nums, int numsSize)
+//{
+//	int min1 = INT_MAX, min2 = INT_MAX;
+//	int max1 = INT_MIN, max2 = INT_MIN, max3 = INT_MIN;
+//	for (int i = 0; i < numsSize; i++)
+//	{
+//		if (nums[i] <= min1)
+//		{
+//			min2 = min1;
+//			min1 = nums[i];
+//		}
+//		else if (nums[i] < min2)
+//			min2 = nums[i];
+//		if (nums[i] > max1)
+//		{
+//			max3 = max2;
+//			max2 = max1;
+//			max1 = nums[i];
+//		}
+//		else if (nums[i] > max2)
+//		{
+//			max3 = max2;
+//			max2 = nums[i];
+//		}
+//		else if (nums[i] > max3)
+//			max3 = nums[i];
+//	}
+//	return (int)fmax(min1*min2*max1, max1*max2*max3);
+//}
+//
+//int main()
+//{
+//	int arr[] = { -8,-9,-10,7,9 };
+//	int len = maximumProduct(arr, sizeof(arr) / sizeof(arr[0]));
+//	printf("%d", len);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//char * restoreString(char * s, int* indices, int indicesSize)
+//{
+//	char* arr = malloc(sizeof(char)*(indicesSize+1));
+//	int i = 0;
+//	while (i < indicesSize)
+//	{
+//		arr[indices[i]] = s[i];
+//		i++;
+//	}
+//	arr[i] = '\0';
+//	return arr;
+//}
+//
+//int main()
+//{
+//	char arr[] = "codeleet";
+//	int num[] = { 4,5,6,7,0,2,1,3 };
+//	char* nums = restoreString(arr, num, sizeof(num) / sizeof(num[0]));
+//	//for (int i = 0; i < sizeof(num) / sizeof(num[0]); i++)
+//	//{
+//	//	printf("%c", nums[i]);
+//	//}
+//	printf("%s", nums);
+//	return 0;
+//}
+
+
+////1508. 子数组和排序后的区间和
+////https://leetcode-cn.com/problems/range-sum-of-sorted-subarray-sums/
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<stdlib.h>
+//int compare(const void* a, const void* b)
+//{
+//	return *(int*)a - *(int*)b;
+//}
+//int rangeSum(int* nums, int numsSize, int n, int left, int right)
+//{
+//	int cur = 0, j = 0;
+//	int* num = malloc(sizeof(int)*((n*(n + 1)) / 2));
+//	while (cur < n)
+//	{
+//		int sum = 0;
+//		for (int i = cur; i < n; i++)
+//		{
+//			sum += nums[i];
+//			num[j] = sum;
+//			j++;
+//		}
+//		cur += 1;
+//	}
+//	qsort(num, n*(n + 1) / 2, sizeof(int), compare);
+//	int sum = 0;
+//	for (int i = left - 1; i < right; i++)
+//	{
+//		sum = (sum + num[i]) % 1000000007;
+//	}
+//	return sum;
+//}
+//int main()
+//{
+//	int arr[] = { 1,2,3,4 };
+//	int num = rangeSum(arr, sizeof(int), sizeof(arr) / sizeof(arr[0]), 1, 10);
+//	printf("\n%d", num);
+//	return 0;
+//}
+
+
