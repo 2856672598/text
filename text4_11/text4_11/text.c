@@ -57,16 +57,25 @@ void Init(CTree* ctree, int size)
 
 void Find(CTree ctree, DataType x)
 {
+	int flag = 0;
 	for (int i = 0; i < ctree.size; i++)
 	{
 		if (ctree.nodes[i].data == x)
 		{
 			Child* p = ctree.nodes[i].FistChild;
-			while (p)
+			if (p != NULL)
 			{
-				printf("%c ", p->child);
-				p = p->next;
+				printf("%c的子节点为：", x);
+				while (p)
+				{
+					flag = 1;
+					printf("%c ", ctree.nodes[p->child].data);
+					p = p->next;
+				}
 			}
+			else
+				printf("%c为叶子节点\n", x);
+			break;
 		}
 	}
 }
@@ -98,8 +107,8 @@ void text()
 	printf("输入节点数\n");
 	scanf("%d", &size);
 	Init(&node, size);
-	Print(node);
-	//Find(node, 'E');
+	//Print(node);
+	Find(node, 'F');
 }
 int main()
 {
