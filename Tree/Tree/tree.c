@@ -63,108 +63,142 @@
 
 
 
-//孩子表示法
+////孩子表示法
+//#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+////#include<string.h>
+//#include<stdlib.h>
+//#define MAX 100
+//typedef char TElem;
+////孩子节点
+//typedef struct Child
+//{
+//	struct Child* next;
+//	int pos;
+//}Child;
+////节点
+//typedef struct Tree
+//{
+//	TElem data;
+//	struct Child* child;//孩子头节点
+//}CTRoot;
+//
+////树
+//typedef struct
+//{
+//	CTRoot nodes[MAX];
+//	int size;//节点数
+//}CTree;
+//
+//
+//void Init(CTree* node, int size)
+//{
+//	node->size = size;
+//	for (int i = 0; i < size; i++)
+//	{
+//		printf("请输入第%d节点的数据\n", i + 1);
+//		getchar();
+//		scanf("%c", &(node->nodes[i].data));
+//		node->nodes[i].child = malloc(sizeof(Child));
+//		node->nodes[i].child->next = NULL;
+//
+//		printf("请输入%c的孩子节点数量\n", node->nodes[i].data);
+//		int count = 0;
+//		scanf("%d", &count);
+//		if (count != 0)
+//		{
+//			Child* p = node->nodes[i].child;
+//			for (int j = 0; j < count; j++)
+//			{
+//				Child * New = malloc(sizeof(Child));
+//				New->next = NULL;
+//				printf("请输入%d个在顺序表中的位置\n", j + 1);
+//				scanf("%d", &New->pos);
+//				p->next = New;
+//				p = New;
+//			}
+//		}
+//	}
+//}
+//
+//void Find(CTree node, TElem x)
+//{
+//	int flag = 0;
+//	for (int i = 0; i < node.size; i++)
+//	{
+//		if (node.nodes[i].data == x)
+//		{
+//			Child* p = node.nodes[i].child->next;
+//			while (p)
+//			{
+//				flag = 1;
+//				printf("%c ", node.nodes[p->pos].data);
+//				p = p->next;
+//			}
+//			if (flag == 0)
+//				printf("%c为叶子节点\n", x);
+//			return;
+//		}
+//	}
+//	printf("%c节点不存在\n", x);
+//}
+////刷新缓冲区
+//void MyFflush()
+//{
+//	int ch = 0;
+//	while (ch = getchar() != '\n'&&ch != EOF);
+//}
+//void text()
+//{
+//	CTree node;
+//	int size = 0;
+//	printf("请输入节点总数\n");
+//	scanf("%d", &size);
+//	Init(&node, size);
+//	while (1)
+//	{
+//		char ch;
+//		printf("\n输入要查找子节点\n");
+//		MyFflush();
+//		scanf("%c", &ch);
+//		Find(node, ch);
+//	}
+//}
+//
+//int main()
+//{
+//	text();
+//	return 0;
+//}
+
+
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
-//#include<string.h>
 #include<stdlib.h>
-#define MAX 100
-typedef char TElem;
-//孩子节点
-typedef struct Child
+typedef char DataType;
+typedef struct TNode
 {
-	struct Child* next;
-	int pos;
-}Child;
-//根节点
-typedef struct Tree
-{
-	TElem data;
-	struct Child* child;//孩子头节点
-}CTRoot;
+	DataType data;
+	struct TNode* FirstChild, *LeftSib;
+}TNode;
 
-//数据
-typedef struct
+TNode *Find(TNode *b, int inName)
 {
-	CTRoot nodes[MAX];
-	int size;//节点数
-}CTree;
-
-
-void Init(CTree* node, int size)
-{
-	node->size = size;
-	for (int i = 0; i < size; i++)
+	TNode *p;//定义一个接受查找的指针变量
+	if (b == NULL)
+		return NULL;
+	else
 	{
-		printf("请输入第%d节点的数据\n", i + 1);
-		getchar();
-		scanf("%c", &(node->nodes[i].data));
-		node->nodes[i].child = malloc(sizeof(Child));
-		node->nodes[i].child->next = NULL;
-
-		printf("请输入%c的孩子节点数量\n", node->nodes[i].data);
-		int count = 0;
-		scanf("%d", &count);
-		if (count != 0)
-		{
-			Child* p = node->nodes[i].child;
-			for (int j = 0; j < count; j++)
-			{
-				Child * New = malloc(sizeof(Child));
-				New->next = NULL;
-				printf("请输入%d个在顺序表中的位置\n", j + 1);
-				scanf("%d", &New->pos);
-				p->next = New;
-				p = New;
-			}
-		}
+		p = Find(b->FirstChild, 'F');//递归查找孩子
+		if (p != NULL)//如果查找到了
+			return p;
+		else return Find(b->LeftSib, inName);//递归查找兄弟
 	}
-}
-
-void Find(CTree node, TElem x)
-{
-	int flag = 0;
-	for (int i = 0; i < node.size; i++)
-	{
-		if (node.nodes[i].data == x)
-		{
-			Child* p = node.nodes[i].child->next;
-			while (p)
-			{
-				flag = 1;
-				printf("%c ", node.nodes[p->pos].data);
-				p = p->next;
-			}
-			if (flag == 0)
-				printf("%c为叶子节点\n", x);
-			return;
-		}
-	}
-	printf("%c节点不存在\n", x);
-}
-//刷新缓冲区
-void MyFflush()
-{
-	int ch = 0;
-	while (ch = getchar() != '\n'&&ch != EOF);
 }
 void text()
 {
-	CTree node;
-	int size = 0;
-	printf("请输入节点总数\n");
-	scanf("%d", &size);
-	Init(&node, size);
-	while (1)
-	{
-		char ch;
-		printf("\n输入要查找子节点\n");
-		MyFflush();
-		scanf("%c", &ch);
-		Find(node, ch);
-	}
-}
 
+}
 int main()
 {
 	text();
