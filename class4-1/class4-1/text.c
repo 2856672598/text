@@ -150,17 +150,44 @@
 //}
 
 
+//#include<stdio.h>
+//int main()
+//{
+//	int x, y;
+//	scanf("%d", &x);
+//	if (x < -10)
+//		y = 10;
+//	else if (x <= 10)
+//		y = 0;
+//	else
+//		y = -10;
+//	printf("%d", y);
+//	return 0;
+//}
+
 #include<stdio.h>
 int main()
 {
-	int x, y;
-	scanf("%d", &x);
-	if (x < -10)
-		y = 10;
-	else if (x <= 10)
-		y = 0;
-	else
-		y = -10;
-	printf("%d", y);
+	int n, sum = 0;
+	printf("请输入n的值");
+	scanf("%d", &n);
+	sum = (1 + n)*n / 2;
+	printf("%d", sum);
 	return 0;
 }
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int i = 1, sum = 0, n;
+//	printf("请输入n的值：");
+//	scanf("%d", &n);
+//	while (i <= n)
+//	{
+//		sum += i;
+//		i++;
+//	}
+//	printf("sum= %d", sum);
+//	return 0;
+//}
