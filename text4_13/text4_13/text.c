@@ -297,28 +297,123 @@
 //}
 
 
-//后序遍历
-//https://leetcode-cn.com/problems/binary-tree-postorder-traversal/
+////后序遍历
+////https://leetcode-cn.com/problems/binary-tree-postorder-traversal/
+//#include<stdio.h>
+//#include<stdlib.h>
+//struct TreeNode {
+//	int val;
+//	struct TreeNode *left;
+//	struct TreeNode *right;
+//};
+//void PostOrder(struct TreeNode* root, int* arr, int* size)
+//{
+//	if (root == NULL)
+//		return;
+//	//后序---左右根
+//	PostOrder(root->left, arr, size);
+//	PostOrder(root->right, arr, size);
+//	arr[(*size)++] = root->val;
+//}
+//int* postorderTraversal(struct TreeNode* root, int* returnSize)
+//{
+//	int* arr = malloc(sizeof(int) * 100);
+//	*returnSize = 0;
+//	PostOrder(root, arr, returnSize);
+//	return arr;
+//}
+
+//#define _CRT_SECURE_NO_WARNINGS
+// #include<stdio.h>
+// #include<stdlib.h>
+// typedef struct Node
+// {
+//	  int data;
+//	   struct Node* Left_Child;
+//	   struct Node* Right_Child;
+//	 }Node;
+//Node* Create_Tree()
+//{
+//	Node* newnode = (Node*)malloc(sizeof(Node));
+//	printf("节点信息：");
+//	int a = 0;
+//	scanf("%d", &a);
+//	if (a == 0)
+//		return NULL;
+//	newnode->data = a;
+//	printf("请输入%d的左子树节点",a);
+//	newnode->Left_Child = Create_Tree();
+//	printf("请输入%d的右子树节点",a);
+//	newnode->Right_Child = Create_Tree();
+//	return newnode;
+// }
+//void InOrder(Node* node)
+//{
+//       if (node == NULL)
+//         return;
+//       InOrder(node->Left_Child);
+//       printf("%d ", node->data);
+//       InOrder(node->Right_Child);
+//}
+//int main()
+//{
+//	Node* Tree = Create_Tree();
+//	InOrder(Tree);
+//	return 0;
+//}
+
+//栈实现二叉树的创建
+#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdlib.h>
-struct TreeNode {
-	int val;
-	struct TreeNode *left;
-	struct TreeNode *right;
-};
-void PostOrder(struct TreeNode* root, int* arr, int* size)
+typedef struct Node
 {
-	if (root == NULL)
-		return;
-	//后序---左右根
-	PostOrder(root->left, arr, size);
-	PostOrder(root->right, arr, size);
-	arr[(*size)++] = root->val;
+	int data;
+	struct Node* Left_Child;
+	struct Node* Right_Child;
+}Node;
+typedef struct Stack
+{
+	Node* Tree;
+	struct Stack* next;
+}Stack;
+void Init(struct Stack* Tree)
+{
+ 	Tree->next = NULL;
+	Tree->Tree = NULL;
 }
-int* postorderTraversal(struct TreeNode* root, int* returnSize)
+void Push(struct Stack* tree,struct Node* node)
 {
-	int* arr = malloc(sizeof(int) * 100);
-	*returnSize = 0;
-	PostOrder(root, arr, returnSize);
-	return arr;
+	Stack* NewNode = malloc(sizeof(Stack));
+	NewNode->next = tree;
+	NewNode->Tree = node;
+	node = NewNode;
+}
+void Pop(Stack* tree)
+{
+	Stack* p = NULL;
+	if (tree)
+	{
+		p = tree->next;
+		free(tree);
+		tree = p;
+	}
+}
+void Create_Tree(Stack* tree,Node* node)
+{
+	Node* newnode = malloc(sizeof(node));
+	printf("输入节点信息：");
+	int a = 0;
+	scanf("%d", &a);
+	if (a == 0)
+		return NULL;
+	newnode->data = a;
+	while (a)
+	{
+
+	}
+}
+int main()
+{
+	return 0;
 }
