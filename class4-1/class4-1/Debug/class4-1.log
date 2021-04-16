@@ -1,3 +1,2 @@
 ﻿  text.c
-d:\githup\text\class4-1\class4-1\text.c(232): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-d:\githup\text\class4-1\class4-1\text.c(229): warning C6031: 返回值被忽略: “scanf”。
+  class4-1.vcxproj -> D:\Githup\text\class4-1\Debug\class4-1.exe

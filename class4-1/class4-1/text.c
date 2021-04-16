@@ -213,27 +213,44 @@
 //}
 
 
+//#include<stdio.h>
+//#define M 3
+//#define N 4
+//void main()
+//{
+//	int i, j, sum, a[M][N];
+//	float b[M];
+//	printf("请输入%d*%d的矩阵:", M, N);
+//	for (i = 0; i < M; i++)
+//	{
+//		sum = 0;
+//		for (j = 0; j < N; j++)
+//		{
+//			scanf("%d", &a[i][j]);
+//			sum += a[i][j];
+//		}
+//		b[i] = sum * 1.0 / N;
+//	}
+//	printf("各行平均值依次为;\n");
+//	for (i = 0; i < M; i++)
+//	{
+//		printf("%f\n", b[i]);
+//	}
+//}
+
 #include<stdio.h>
-#define M 3
-#define N 4
-void main()
+int sum(int n)
 {
-	int i, j, sum, a[M][N];
-	float b[M];
-	printf("请输入%d*%d的矩阵:", M, N);
-	for (i = 0; i < M; i++)
-	{
-		sum = 0;
-		for (j = 0; j < N; j++)
-		{
-			scanf("%d", &a[i][j]);
-			sum += a[i][j];
-		}
-		b[i] = sum * 1.0 / N;
-	}
-	printf("各行平均值依次为;\n");
-	for (i = 0; i < M; i++)
-	{
-		printf("%f\n", b[i]);
-	}
+	if (n == 1)
+		return 1;
+	else
+		return sum(n - 1)*n;
+}
+int main()
+{
+	int n = 0;
+	scanf("%d", &n);
+	int len = sum(n);
+	printf("%d", len);
+	return 0;
 }
