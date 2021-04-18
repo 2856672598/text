@@ -374,46 +374,79 @@ typedef struct Node
 }Node;
 typedef struct Stack
 {
-	Node* Tree;
+	int count;
+	Node* node;
+	struct Stack* top;
 	struct Stack* next;
 }Stack;
-void Init(struct Stack* Tree)
+void Init(Stack* list)
 {
- 	Tree->next = NULL;
-	Tree->Tree = NULL;
+	list->count = 0;
+	list->top = NULL;
+	list->node = NULL;
+	list->next = NULL;
 }
-void Push(struct Stack* tree,struct Node* node)
+
+void Push(Node* node, Stack** list)
 {
-	Stack* NewNode = malloc(sizeof(Stack));
-	NewNode->next = tree;
-	NewNode->Tree = node;
-	node = NewNode;
+	Stack* NewNode = malloc(sizeof(list));
+	(*list)->count += 1;
+	NewNode->next = *list;
+	*list = NewNode;
+	(*list)->top = NewNode;
 }
-void Pop(Stack* tree)
+Stack* Pop(Stack* list)
 {
-	Stack* p = NULL;
-	if (tree)
+	Stack* tmp = NULL;
+	if (list)
 	{
-		p = tree->next;
-		free(tree);
-		tree = p;
+		tmp = list->top;
+		//free(list->top);
+		list = tmp->next;
+		list->count -= 1;
 	}
+	return tmp;
 }
-void Create_Tree(Stack* tree,Node* node)
+Node* Create_Tree()
 {
-	Node* newnode = malloc(sizeof(node));
-	printf("输入节点信息：");
+	Node* newnode = (Node*)malloc(sizeof(Node));
+	printf("节点信息：");
 	int a = 0;
 	scanf("%d", &a);
 	if (a == 0)
 		return NULL;
 	newnode->data = a;
-	while (a)
+	printf("请输入%d的左子树节点",a);
+	newnode->Left_Child = Create_Tree();
+	printf("请输入%d的右子树节点",a);
+	newnode->Right_Child = Create_Tree();
+	return newnode;
+ }
+void InOrder(Stack* list, Node* tree)
+{
+	Node* root = tree;
+	while (root != NULL || list->count != 0)
 	{
-
+		if (root != NULL)
+		{
+			printf("%d ", root->data);
+			if (root->Right_Child != NULL)
+				Push(root, &list);
+			root = root->Left_Child;
+		}
+		else
+		{
+			Stack* node = Pop(list);
+			root = node->node->Right_Child;
+		}
 	}
 }
 int main()
 {
+	Stack list;
+	//Init(&list);
+	Node* tree = Create_Tree();
+
+	InOrder(&list, tree);
 	return 0;
 }

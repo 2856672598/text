@@ -1,2 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<DEFECTS></DEFECTS>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>d:\githup\text\text4_13\text4_13</FILEPATH>
+      <FILENAME>text.c</FILENAME>
+      <LINE>393</LINE>
+      <COLUMN>16</COLUMN>
+    </SFA>
+    <DEFECTCODE>6011</DEFECTCODE>
+    <DESCRIPTION>取消对 NULL 指针“NewNode”的引用。</DESCRIPTION>
+    <FUNCTION>Push</FUNCTION>
+    <DECORATED>Push</DECORATED>
+    <FUNCLINE>386</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>d:\githup\text\text4_13\text4_13</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>388</LINE>
+        <COLUMN>8</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>声明</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>“NewNode”可能为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text4_13\text4_13</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>389</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>分支</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>跳过此分支(假定“*list==(((void *)0))”为 false)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text4_13\text4_13</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>393</LINE>
+        <COLUMN>16</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>使用情况</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>已取消对“NewNode”的引用，但可能仍为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>d:\githup\text\text4_13\text4_13</FILEPATH>
+      <FILENAME>text.c</FILENAME>
+      <LINE>408</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>6011</DEFECTCODE>
+    <DESCRIPTION>取消对 NULL 指针“list”的引用。</DESCRIPTION>
+    <FUNCTION>Pop</FUNCTION>
+    <DECORATED>Pop</DECORATED>
+    <FUNCLINE>399</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>d:\githup\text\text4_13\text4_13</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>401</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text4_13\text4_13</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>402</LINE>
+        <COLUMN>5</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>分支</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>“list”可能为 NULL (跳过此分支)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text4_13\text4_13</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>408</LINE>
+        <COLUMN>1</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>使用情况</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>已取消对“list”的引用，但可能仍为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>d:\githup\text\text4_13\text4_13</FILEPATH>
+      <FILENAME>text.c</FILENAME>
+      <LINE>415</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>6031</DEFECTCODE>
+    <DESCRIPTION>返回值被忽略: “scanf”。</DESCRIPTION>
+    <FUNCTION>Create_Tree</FUNCTION>
+    <DECORATED>Create_Tree</DECORATED>
+    <FUNCLINE>410</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>
