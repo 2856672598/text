@@ -366,6 +366,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdlib.h>
+#define MAX 20
 typedef struct Node
 {
 	int data;
@@ -374,79 +375,83 @@ typedef struct Node
 }Node;
 typedef struct Stack
 {
-	int count;
-	Node* node;
-	struct Stack* top;
-	struct Stack* next;
+	Node* arr[MAX];
+	int size;
 }Stack;
-void Init(Stack* list)
+void Init(Stack* s)
 {
-	list->count = 0;
-	list->top = NULL;
-	list->node = NULL;
-	list->next = NULL;
+	s->size = 1;
+	s->arr[0] = NULL;
+}
+void Push(Stack* s, Node* node)
+{
+	if (s->size != MAX)
+	{
+		s->arr[s->size++] = node;
+	}
+}
+void Pop(Stack* s)
+{
+	if (s->size != 0)
+	{
+		s->size -= 1;
+	}
 }
 
-void Push(Node* node, Stack** list)
+Node* Creat_Tree()
 {
-	Stack* NewNode = malloc(sizeof(list));
-	(*list)->count += 1;
-	NewNode->next = *list;
-	*list = NewNode;
-	(*list)->top = NewNode;
-}
-Stack* Pop(Stack* list)
-{
-	Stack* tmp = NULL;
-	if (list)
-	{
-		tmp = list->top;
-		//free(list->top);
-		list = tmp->next;
-		list->count -= 1;
-	}
-	return tmp;
-}
-Node* Create_Tree()
-{
-	Node* newnode = (Node*)malloc(sizeof(Node));
-	printf("节点信息：");
+	Node* node = malloc(sizeof(Node));
+	printf("节点信息");
 	int a = 0;
 	scanf("%d", &a);
 	if (a == 0)
 		return NULL;
-	newnode->data = a;
-	printf("请输入%d的左子树节点",a);
-	newnode->Left_Child = Create_Tree();
-	printf("请输入%d的右子树节点",a);
-	newnode->Right_Child = Create_Tree();
-	return newnode;
- }
-void InOrder(Stack* list, Node* tree)
+	node->data = a;
+	printf("%d的左子树", a);
+	node->Left_Child = Creat_Tree();
+	printf("%d的右子树", a);
+	node->Right_Child = Creat_Tree();
+	return node;
+}
+
+int Empty(Stack* s)
 {
-	Node* root = tree;
-	while (root != NULL || list->count != 0)
+	return s->size;
+}
+
+void InOrder(Stack* s, Node* node)
+{
+	Node* root = node;
+	//if (root == NULL)
+	//	return;
+	while (Empty(s) || root != NULL)
 	{
-		if (root != NULL)
+		while (root != NULL)
 		{
 			printf("%d ", root->data);
-			if (root->Right_Child != NULL)
-				Push(root, &list);
+			Push(s, root);
 			root = root->Left_Child;
 		}
-		else
+		Pop(s);
+		if (s->size > 0)
 		{
-			Stack* node = Pop(list);
-			root = node->node->Right_Child;
+			root = s->arr[s->size]->Right_Child;
 		}
 	}
 }
+//void InOrder(Node* node)
+//{
+//       if (node == NULL)
+//         return;
+//       InOrder(node->Left_Child);
+//       printf("%d ", node->data);
+//       InOrder(node->Right_Child);
+//}
 int main()
 {
-	Stack list;
-	//Init(&list);
-	Node* tree = Create_Tree();
-
-	InOrder(&list, tree);
+	Stack s;
+	Init(&s);
+	Node* node = Creat_Tree();
+	InOrder(&s, node);
 	return 0;
 }
