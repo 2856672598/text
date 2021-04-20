@@ -362,7 +362,7 @@
 //	return 0;
 //}
 
-//栈实现二叉树的创建
+//栈实现先序遍历
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdlib.h>
@@ -419,7 +419,8 @@ int Empty(Stack* s)
 	return s->size;
 }
 
-void InOrder(Stack* s, Node* node)
+
+void PreOder(Stack* s, Node* node)
 {
 	Node* root = node;
 	//if (root == NULL)
@@ -439,19 +440,49 @@ void InOrder(Stack* s, Node* node)
 		}
 	}
 }
-//void InOrder(Node* node)
-//{
-//       if (node == NULL)
-//         return;
-//       InOrder(node->Left_Child);
-//       printf("%d ", node->data);
-//       InOrder(node->Right_Child);
-//}
+//中序遍历
+void InOrder(Stack* s, Node* node)
+{
+	Node* root = node;
+	while (Empty(s) > 0 || root != NULL)
+	{
+		while (root)
+		{
+			Push(s, root);
+			root = root->Left_Child;
+		}
+		Pop(s);
+		if (s->size > 0)
+		{
+			printf("%d ", s->arr[s->size]->data);
+			root = s->arr[s->size]->Right_Child;
+		}
+	}
+}
+void PostOrder(Stack* s, Node* node)
+{
+	Node* root = node;
+	while (Empty(s) || root != NULL)
+	{
+		while (root)
+		{
+			Push(s, root);
+			root = root->Left_Child;
+		}
+		Pop(s);
+		if (s->size > 0)
+		{
+			root = s->arr[s->size]->Right_Child;
+		}
+	}
+}
 int main()
 {
 	Stack s;
 	Init(&s);
 	Node* node = Creat_Tree();
-	InOrder(&s, node);
+	//PreOder(&s, node);
+	//InOrder(&s, node);
+	PostOrder(&s, node);
 	return 0;
 }
