@@ -92,16 +92,45 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[] = { 3,2,6,3,5,6,5,2,8,4,8 };
+//	int size = sizeof(arr) / sizeof(arr[0]);
+//	int flag = 0;
+//	for (int i = 0; i < size; i++)
+//	{
+//		flag = flag ^ arr[i];
+//	}
+//	printf("%d", flag);
+//	return 0;
+//}
+
+//27. ÒÆ³ýÔªËØ
+//https://leetcode-cn.com/problems/remove-element/
 #include<stdio.h>
+int removeElement(int* nums, int numsSize, int val)
+{
+	int flag = 0;
+	int cur = 0;
+	for (cur = 0; cur < numsSize; cur++)
+	{
+		if (nums[cur] != val)
+		{
+			nums[flag++] = nums[cur];
+		}
+	}
+	return flag;
+}
 int main()
 {
-	int arr[] = { 3,2,6,3,5,6,5,2,8,4,8 };
+	int arr[] = { 0,1,2,2,3,0,4,2 };
+	int val = 2;
 	int size = sizeof(arr) / sizeof(arr[0]);
-	int flag = 0;
+	size = removeElement(arr, size, val);
 	for (int i = 0; i < size; i++)
 	{
-		flag = flag ^ arr[i];
+		printf("%d ", arr[i]);
 	}
-	printf("%d", flag);
 	return 0;
 }
