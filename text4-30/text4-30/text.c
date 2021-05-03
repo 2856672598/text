@@ -320,195 +320,356 @@
 //	return 0;
 //}
 
-//单链表的实现
-#include<stdio.h>
-#include<stdlib.h>
-#include<assert.h>
+////单链表的实现
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<assert.h>
+//
+//typedef int DataType;
+//typedef struct SListNode
+//{
+//	DataType data;
+//	struct SListNode* next;
+//}SListNode;
+//SListNode* BuySListNode(DataType data)
+//{
+//	SListNode* NewNode = malloc(sizeof(SListNode));
+//	assert(NewNode);
+//	NewNode->data = data;
+//	NewNode->next = NULL;
+//	return NewNode;
+//}
+//enum 
+//{
+//	EXIT,
+//	POPBACK,
+//	POPFRONT,
+//	PUSHBACK,
+//	PUSHFRONT,
+//	FIND,
+//	PRINT,
+//	ERASE
+//};
+//void menu()
+//{
+//	printf("******************************\n");
+//	printf("***1.PopBack     2.PopFront***\n");
+//	printf("***3.PushBack    4.PushFront***\n");
+//	printf("***5.Find       6.Print *******\n");
+//	printf("***0.EXIT     7.ERASE     *****\n");
+//}
+//void SListInsert(SListNode** pos, DataType data)
+//{
+//	SListNode*next = NULL;
+//	if (*pos != NULL)
+//	{
+//		SListNode*NewNode = BuySListNode(data);
+//		next = (*pos)->next;
+//		(*pos)->next = NewNode;
+//		NewNode->next = next;
+//	}
+//}
+//void PushBack(SListNode**Phead, DataType data)
+//{
+//	SListNode* NewNode = BuySListNode(data);
+//	if (*Phead == NULL)
+//	{
+//		*Phead = NewNode;
+//	}
+//	else
+//	{
+//		//SListNode* cur = *Phead;
+//		//while (cur->next != NULL)
+//		//{
+//		//	cur = cur->next;
+//		//}
+//		//cur->next = NewNode;
+//		//printf("添加成功\n");
+//		SListNode* flag = *Phead;
+//		while (flag->next != NULL)
+//		{
+//			flag = flag->next;
+//		}
+//		SListInsert(&flag, data);
+//	}
+//}
+//
+//void PushFront(SListNode** Phead, DataType data)
+//{
+//	SListNode*NewNode = BuySListNode(data);
+//	if (*Phead == NULL)
+//		*Phead = NewNode;
+//	else
+//	{
+//		NewNode->next = *Phead;
+//		*Phead = NewNode;
+//	}
+//}
+//
+//SListNode* SListFind(SListNode* head, DataType data)
+//{
+//	/*找到了返回该节点的地址，未找到返回NULL*/
+//	assert(head);
+//	SListNode* flag = head;
+//	while (flag != NULL)
+//	{
+//		if (flag->data == data)
+//			return flag;
+//		flag = flag->next;
+//	}
+//	return NULL;
+//}
+////指定删除
+//void Erase(SListNode** Phead, DataType data)
+//{
+//	//assert(*Phead);
+//	if (*Phead == NULL)
+//	{
+//		printf("链表为空\n");
+//		return;
+//	}
+//	SListNode* flag = *Phead;
+//	SListNode* cur = NULL;
+//	if ((*Phead)->data == data)
+//	{
+//		SListNode* next = (*flag).next;
+//		*Phead = next;
+//		return;
+//	}
+//	while (flag != NULL)
+//	{
+//		if (flag->data == data)
+//		{
+//			SListNode* next = flag->next;
+//			cur->next = next;
+//			free(flag);
+//			return;
+//		}
+//		cur = flag;
+//		flag = flag->next;
+//	}
+//}
+//
+////头删
+//void PopFront(SListNode** Phead)
+//{
+//	assert(*Phead);
+//	//if ((*Phead)->next == NULL)
+//	//{
+//	//	free(*Phead);
+//	//	*Phead = NULL;
+//	//}
+//	//SListNode* flag = *Phead;
+//	//flag = (*Phead)->next;
+//	//free(*Phead);
+//	//*Phead = flag;
+//	Erase(Phead, (*Phead)->data);
+//}
+////尾删
+//void PopBack(SListNode** Phead)
+//{
+//	//if (*Phead == NULL)
+//	//	return;
+//	//if ((*Phead)->next == NULL)
+//	//{
+//	//	free(*Phead);
+//	//}
+//	//else
+//	//{
+//	//	SListNode* tail = *Phead;
+//	//	SListNode* cur = *Phead;
+//	//	while (cur->next != NULL)
+//	//	{
+//	//		tail = cur;
+//	//		cur = cur->next;
+//	//	}
+//	//	free(cur);
+//	//	tail->next = NULL;
+//	//}
+//	SListNode* flag = *Phead;
+//	while (flag->next != NULL)
+//	{
+//		flag = flag->next;
+//	}
+//	Erase(Phead, flag->data);
+//}
+//void Print(SListNode* Phead)
+//{
+//	SListNode* flag = Phead;
+//	while (flag != NULL)
+//	{
+//		printf("%d ", flag->data);
+//		flag = flag->next;
+//	}
+//	printf("\n");
+//	if (Phead == NULL)
+//		printf("链表为空\n");
+//}
+//void text()
+//{
+//	int input, data;
+//	SListNode* head = NULL;
+//	do
+//	{
+//		menu();
+//		printf("请选择:");
+//		scanf("%d", &input);
+//		switch (input)
+//		{
+//		case EXIT:
+//			printf("退出\n");
+//			break;
+//		case POPBACK:
+//			PopBack(&head);
+//			break;
+//		case POPFRONT:
+//			PopFront(&head);
+//			break;
+//		case PUSHBACK:
+//			printf("请输入节点信息：");
+//			scanf("%d", &data);
+//			PushBack(&head, data);
+//			break;
+//		case PUSHFRONT:
+//			printf("请输入节点信息：");
+//			scanf("%d", &data);
+//			PushFront(&head, data);
+//			break;
+//		case FIND:
+//			printf("请输入需要查找的节点信息：");
+//			scanf("%d", &data);
+//			SListNode* pos = SListFind(head, data);
+//			if (!pos)
+//				printf("%d节点不存在\n", data);
+//			else
+//				printf("%d节点的地址为%p\n", data, pos);
+//			break;
+//		case PRINT:
+//			Print(head);
+//			break;
+//		case ERASE:
+//			printf("请输入需要删除的节点数据:");
+//			scanf("%d", &data);
+//			Erase(&head, data);
+//			break;
+//		default:
+//			printf("请重新选择:");
+//			break;
+//		}
+//	} while (input);
+//}
+//int main()
+//{
+//	text();
+//	return 0;
+//}
 
+//队列
+#include<stdio.h>
+#include<stdbool.h>
+#include<assert.h>
+#define MAX 30
 typedef int DataType;
-typedef struct SListNode
+typedef struct Node
 {
-	DataType data;
-	struct SListNode* next;
-}SListNode;
-SListNode* BuySListNode(DataType data)
+	DataType List[MAX];
+	int top, tail;
+}Queue;
+void InitQueue(Queue* list)
 {
-	SListNode* NewNode = malloc(sizeof(SListNode));
-	assert(NewNode);
-	NewNode->data = data;
-	NewNode->next = NULL;
-	return NewNode;
+	list->top = 0;
+	list->tail = 0;
 }
-enum 
+bool FullQueue(Queue* list)
 {
-	EXIT,
-	POPBACK,
-	POPFRONT,
-	PUSHBACK,
-	PUSHFRONT,
-	FIND,
-	PRINT,
-	ERASE
-};
+	if (list->tail < MAX)
+		return false;
+	else
+		return true;
+}
+//入队
+void QueuePush(Queue* list, DataType data)
+{
+	if (!FullQueue(list))
+	{
+		//没满
+		list->List[list->tail] = data;
+		list->tail++;
+		printf("添加成功\n");
+		return;
+	}
+	printf("队列已满\n");
+}
+//出队
+void QueuePop(Queue* list)
+{
+	if (list->tail <= list->top)
+		printf("队列为空\n");
+	else
+	{
+		//当队列不为空时
+		list->top += 1;
+		printf("出队成功\n");
+	}
+}
+void Print(Queue list)
+{
+	Queue flag = list;
+	while (flag.top < flag.tail)
+	{
+		printf("%d ", flag.List[flag.top]);
+		flag.top++;
+	}
+}
+int SizeNode(const Queue* list)
+{
+	assert(list);
+	int size = list->tail - (list->top);
+	return size;
+}
 void menu()
 {
-	printf("******************************\n");
-	printf("***1.PopBack     2.PopFront***\n");
-	printf("***3.PushBack    4.PushFront***\n");
-	printf("***5.Find       6.Print *******\n");
-	printf("***0.EXIT     7.ERASE     *****\n");
+	printf("**************************************\n");
+	printf("****1.QueuePoP        2.QueuePush*****\n");
+	printf("*****3.Size                 0.EXIT****\n");
+	printf("************* 4.Print *****************\n");
 }
-void SListInsert(SListNode** pos, DataType data)
+enum
 {
-	SListNode*next = NULL;
-	if (*pos != NULL)
-	{
-		SListNode*NewNode = BuySListNode(data);
-		next = (*pos)->next;
-		(*pos)->next = NewNode;
-		NewNode->next = next;
-	}
-}
-void PushBack(SListNode**Phead, DataType data)
-{
-	SListNode* NewNode = BuySListNode(data);
-	if (*Phead == NULL)
-	{
-		*Phead = NewNode;
-	}
-	else
-	{
-		//SListNode* cur = *Phead;
-		//while (cur->next != NULL)
-		//{
-		//	cur = cur->next;
-		//}
-		//cur->next = NewNode;
-		//printf("添加成功\n");
-		SListNode* flag = *Phead;
-		while (flag->next != NULL)
-		{
-			flag = flag->next;
-		}
-		SListInsert(&flag, data);
-	}
-}
-
-void PushFront(SListNode** Phead, DataType data)
-{
-	SListNode*NewNode = BuySListNode(data);
-	if (*Phead == NULL)
-		*Phead = NewNode;
-	else
-	{
-		NewNode->next = *Phead;
-		*Phead = NewNode;
-	}
-}
-
-SListNode* SListFind(SListNode* head, DataType data)
-{
-	/*找到了返回该节点的地址，未找到返回NULL*/
-	assert(head);
-	SListNode* flag = head;
-	while (flag != NULL)
-	{
-		if (flag->data == data)
-			return flag;
-		flag = flag->next;
-	}
-	return NULL;
-}
-//指定删除
-void Erase(SListNode** Phead, DataType data)
-{
-	//assert(*Phead);
-	if (*Phead == NULL)
-	{
-		printf("链表为空\n");
-		return;
-	}
-	SListNode* flag = *Phead;
-	SListNode* cur = NULL;
-	if ((*Phead)->data == data)
-	{
-		SListNode* next = (*flag).next;
-		*Phead = next;
-		return;
-	}
-	while (flag != NULL)
-	{
-		if (flag->data == data)
-		{
-			SListNode* next = flag->next;
-			cur->next = next;
-			free(flag);
-			return;
-		}
-		cur = flag;
-		flag = flag->next;
-	}
-}
-
-//头删
-void PopFront(SListNode** Phead)
-{
-	assert(*Phead);
-	//if ((*Phead)->next == NULL)
-	//{
-	//	free(*Phead);
-	//	*Phead = NULL;
-	//}
-	//SListNode* flag = *Phead;
-	//flag = (*Phead)->next;
-	//free(*Phead);
-	//*Phead = flag;
-	Erase(Phead, (*Phead)->data);
-}
-//尾删
-void PopBack(SListNode** Phead)
-{
-	//if (*Phead == NULL)
-	//	return;
-	//if ((*Phead)->next == NULL)
-	//{
-	//	free(*Phead);
-	//}
-	//else
-	//{
-	//	SListNode* tail = *Phead;
-	//	SListNode* cur = *Phead;
-	//	while (cur->next != NULL)
-	//	{
-	//		tail = cur;
-	//		cur = cur->next;
-	//	}
-	//	free(cur);
-	//	tail->next = NULL;
-	//}
-	SListNode* flag = *Phead;
-	while (flag->next != NULL)
-	{
-		flag = flag->next;
-	}
-	Erase(Phead, flag->data);
-}
-void Print(SListNode* Phead)
-{
-	SListNode* flag = Phead;
-	while (flag != NULL)
-	{
-		printf("%d ", flag->data);
-		flag = flag->next;
-	}
-	printf("\n");
-	if (Phead == NULL)
-		printf("链表为空\n");
-}
+	EXIT,
+	QUEUEPOP,
+	QUEUEPUSH,
+	SIZE,
+	PRINT
+};
 void text()
 {
-	int input, data;
-	SListNode* head = NULL;
+	Queue list;
+	InitQueue(&list);
+	for (int i = 0; i < 5; i++)
+	{
+		QueuePush(&list, i);
+	}
+	Print(list);
+	printf("\n");
+	int size = SizeNode(&list);
+	printf("队列中有%d个元素\n", size);
+	QueuePop(&list);
+	QueuePop(&list);
+	QueuePop(&list);
+	QueuePop(&list);
+	size = SizeNode(&list);
+	printf("队列中有%d个元素\n", size);
+	QueuePop(&list);
+	QueuePop(&list);
+	QueuePop(&list);
+	Print(list);
+}
+void text1()
+{
+	int data, input, size;
+	Queue list;
+	InitQueue(&list);
 	do
 	{
 		menu();
@@ -519,47 +680,30 @@ void text()
 		case EXIT:
 			printf("退出\n");
 			break;
-		case POPBACK:
-			PopBack(&head);
+		case QUEUEPOP:
+			QueuePop(&list);
 			break;
-		case POPFRONT:
-			PopFront(&head);
-			break;
-		case PUSHBACK:
-			printf("请输入节点信息：");
+		case QUEUEPUSH:
+			printf("请输入数据:");
 			scanf("%d", &data);
-			PushBack(&head, data);
+			QueuePush(&list, data);
 			break;
-		case PUSHFRONT:
-			printf("请输入节点信息：");
-			scanf("%d", &data);
-			PushFront(&head, data);
-			break;
-		case FIND:
-			printf("请输入需要查找的节点信息：");
-			scanf("%d", &data);
-			SListNode* pos = SListFind(head, data);
-			if (!pos)
-				printf("%d节点不存在\n", data);
-			else
-				printf("%d节点的地址为%p\n", data, pos);
+		case SIZE:
+			size = SizeNode(&list);
+			printf("队列中有%d个数据,剩余%d个空间\n", size, MAX - (list.tail));
 			break;
 		case PRINT:
-			Print(head);
-			break;
-		case ERASE:
-			printf("请输入需要删除的节点数据:");
-			scanf("%d", &data);
-			Erase(&head, data);
+			Print(list);
+			printf("\n");
 			break;
 		default:
-			printf("请重新选择:");
+			printf("选择错误");
 			break;
 		}
 	} while (input);
 }
 int main()
 {
-	text();
+	text1();
 	return 0;
 }
