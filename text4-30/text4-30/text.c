@@ -564,112 +564,242 @@
 //	return 0;
 //}
 
-//队列
-#include<stdio.h>
+////队列
+//#include<stdio.h>
+//#include<stdbool.h>
+//#include<assert.h>
+//#define MAX 30
+//typedef int DataType;
+//typedef struct Node
+//{
+//	DataType List[MAX];
+//	int top, tail;
+//}Queue;
+//void InitQueue(Queue* list)
+//{
+//	list->top = 0;
+//	list->tail = 0;
+//}
+//bool FullQueue(Queue* list)
+//{
+//	if (list->tail < MAX)
+//		return false;
+//	else
+//		return true;
+//}
+////入队
+//void QueuePush(Queue* list, DataType data)
+//{
+//	if (!FullQueue(list))
+//	{
+//		//没满
+//		list->List[list->tail] = data;
+//		list->tail++;
+//		printf("添加成功\n");
+//		return;
+//	}
+//	printf("队列已满\n");
+//}
+////出队
+//void QueuePop(Queue* list)
+//{
+//	if (list->tail <= list->top)
+//		printf("队列为空\n");
+//	else
+//	{
+//		//当队列不为空时
+//		list->top += 1;
+//		printf("出队成功\n");
+//	}
+//}
+//void Print(Queue list)
+//{
+//	Queue flag = list;
+//	while (flag.top < flag.tail)
+//	{
+//		printf("%d ", flag.List[flag.top]);
+//		flag.top++;
+//	}
+//}
+//int SizeNode(const Queue* list)
+//{
+//	assert(list);
+//	int size = list->tail - (list->top);
+//	return size;
+//}
+//void menu()
+//{
+//	printf("**************************************\n");
+//	printf("****1.QueuePoP        2.QueuePush*****\n");
+//	printf("*****3.Size                 0.EXIT****\n");
+//	printf("************* 4.Print *****************\n");
+//}
+//enum
+//{
+//	EXIT,
+//	QUEUEPOP,
+//	QUEUEPUSH,
+//	SIZE,
+//	PRINT
+//};
+//void text()
+//{
+//	Queue list;
+//	InitQueue(&list);
+//	for (int i = 0; i < 5; i++)
+//	{
+//		QueuePush(&list, i);
+//	}
+//	Print(list);
+//	printf("\n");
+//	int size = SizeNode(&list);
+//	printf("队列中有%d个元素\n", size);
+//	QueuePop(&list);
+//	QueuePop(&list);
+//	QueuePop(&list);
+//	QueuePop(&list);
+//	size = SizeNode(&list);
+//	printf("队列中有%d个元素\n", size);
+//	QueuePop(&list);
+//	QueuePop(&list);
+//	QueuePop(&list);
+//	Print(list);
+//}
+//void text1()
+//{
+//	int data, input, size;
+//	Queue list;
+//	InitQueue(&list);
+//	do
+//	{
+//		menu();
+//		printf("请选择:");
+//		scanf("%d", &input);
+//		switch (input)
+//		{
+//		case EXIT:
+//			printf("退出\n");
+//			break;
+//		case QUEUEPOP:
+//			QueuePop(&list);
+//			break;
+//		case QUEUEPUSH:
+//			printf("请输入数据:");
+//			scanf("%d", &data);
+//			QueuePush(&list, data);
+//			break;
+//		case SIZE:
+//			size = SizeNode(&list);
+//			printf("队列中有%d个数据,剩余%d个空间\n", size, MAX - (list.tail));
+//			break;
+//		case PRINT:
+//			Print(list);
+//			printf("\n");
+//			break;
+//		default:
+//			printf("选择错误");
+//			break;
+//		}
+//	} while (input);
+//}
+//int main()
+//{
+//	text1();
+//	return 0;
+//}
+
+
+//循环队列
 #include<stdbool.h>
 #include<assert.h>
-#define MAX 30
+#include<stdio.h>
+#define MAX 5
 typedef int DataType;
-typedef struct Node
+typedef struct Queue
 {
-	DataType List[MAX];
+	DataType arr[MAX];
 	int top, tail;
 }Queue;
-void InitQueue(Queue* list)
+enum
 {
-	list->top = 0;
+	EXIT,
+	POPQUEUE,
+	PUSHQUEUE,
+	PRINT,
+	LENGTH
+};
+
+void menu()
+{
+	printf("********************************************\n");
+	printf("******1.PopQueue            2.PushQueue*****\n");
+	printf("******3.Print                  0.EXIT  *****\n");
+	printf("****************4.LENGHTH********************\n");
+}
+
+void InItQueue(Queue* list)
+{
 	list->tail = 0;
+	list->top = 0;
 }
-bool FullQueue(Queue* list)
+bool Full(Queue* list)
 {
-	if (list->tail < MAX)
-		return false;
-	else
+	/*队列保存的最大数据数量为MAX-1*/
+	if ((list->tail + 1) % MAX == list->top)
 		return true;
+	else
+		return false;
 }
-//入队
 void QueuePush(Queue* list, DataType data)
 {
-	if (!FullQueue(list))
+	if (Full(list))
+	{
+		printf("空间已满\n");
+	}
+	else
 	{
 		//没满
-		list->List[list->tail] = data;
-		list->tail++;
+		list->arr[list->tail] = data;
+		list->tail = (list->tail + 1) % MAX;
 		printf("添加成功\n");
-		return;
 	}
-	printf("队列已满\n");
 }
-//出队
 void QueuePop(Queue* list)
 {
-	if (list->tail <= list->top)
+	if (list->top == list->tail)
 		printf("队列为空\n");
 	else
 	{
-		//当队列不为空时
-		list->top += 1;
-		printf("出队成功\n");
+		list->top = (list->top + 1) % MAX;
+		printf("出队\n");
 	}
 }
 void Print(Queue list)
 {
-	Queue flag = list;
-	while (flag.top < flag.tail)
+	if (list.tail != list.top)
 	{
-		printf("%d ", flag.List[flag.top]);
-		flag.top++;
+		while (list.tail != list.top)
+		{
+			printf("%d ", list.arr[list.top]);
+			list.top++;
+			if (list.top == MAX && (list.tail + 1) % MAX != list.top)
+				list.top = 0;
+		}
+		printf("\n");
 	}
+	else
+		printf("队列为空\n");
 }
-int SizeNode(const Queue* list)
+int QueueLength(Queue list)
 {
-	assert(list);
-	int size = list->tail - (list->top);
-	return size;
+	return ((list.tail) - (list.top) + MAX) % MAX;
 }
-void menu()
-{
-	printf("**************************************\n");
-	printf("****1.QueuePoP        2.QueuePush*****\n");
-	printf("*****3.Size                 0.EXIT****\n");
-	printf("************* 4.Print *****************\n");
-}
-enum
-{
-	EXIT,
-	QUEUEPOP,
-	QUEUEPUSH,
-	SIZE,
-	PRINT
-};
+
 void text()
 {
 	Queue list;
-	InitQueue(&list);
-	for (int i = 0; i < 5; i++)
-	{
-		QueuePush(&list, i);
-	}
-	Print(list);
-	printf("\n");
-	int size = SizeNode(&list);
-	printf("队列中有%d个元素\n", size);
-	QueuePop(&list);
-	QueuePop(&list);
-	QueuePop(&list);
-	QueuePop(&list);
-	size = SizeNode(&list);
-	printf("队列中有%d个元素\n", size);
-	QueuePop(&list);
-	QueuePop(&list);
-	QueuePop(&list);
-	Print(list);
-}
-void text1()
-{
+	InItQueue(&list);
 	int data, input, size;
-	Queue list;
-	InitQueue(&list);
 	do
 	{
 		menu();
@@ -680,30 +810,30 @@ void text1()
 		case EXIT:
 			printf("退出\n");
 			break;
-		case QUEUEPOP:
+		case POPQUEUE:
 			QueuePop(&list);
 			break;
-		case QUEUEPUSH:
+		case PUSHQUEUE:
 			printf("请输入数据:");
 			scanf("%d", &data);
 			QueuePush(&list, data);
 			break;
-		case SIZE:
-			size = SizeNode(&list);
-			printf("队列中有%d个数据,剩余%d个空间\n", size, MAX - (list.tail));
-			break;
 		case PRINT:
 			Print(list);
-			printf("\n");
+			break;
+		case LENGTH:
+			size = QueueLength(list);
+			printf("队列长度为%d\n", size);
 			break;
 		default:
-			printf("选择错误");
+			printf("输入错误\n");
 			break;
 		}
 	} while (input);
+
 }
 int main()
 {
-	text1();
+	text();
 	return 0;
 }
