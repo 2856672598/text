@@ -709,131 +709,348 @@
 //}
 
 
-//循环队列
-#include<stdbool.h>
-#include<assert.h>
+////循环队列
+//#include<stdbool.h>
+//#include<assert.h>
+//#include<stdio.h>
+//#define MAX 5
+//typedef int DataType;
+//typedef struct Queue
+//{
+//	DataType arr[MAX];
+//	int top, tail;
+//}Queue;
+//enum
+//{
+//	EXIT,
+//	POPQUEUE,
+//	PUSHQUEUE,
+//	PRINT,
+//	LENGTH
+//};
+//
+//void menu()
+//{
+//	printf("********************************************\n");
+//	printf("******1.PopQueue            2.PushQueue*****\n");
+//	printf("******3.Print                  0.EXIT  *****\n");
+//	printf("****************4.LENGHTH********************\n");
+//}
+//
+//void InItQueue(Queue* list)
+//{
+//	list->tail = 0;
+//	list->top = 0;
+//}
+//bool Full(Queue* list)
+//{
+//	/*队列保存的最大数据数量为MAX-1*/
+//	if ((list->tail + 1) % MAX == list->top)
+//		return true;
+//	else
+//		return false;
+//}
+//void QueuePush(Queue* list, DataType data)
+//{
+//	if (Full(list))
+//	{
+//		printf("空间已满\n");
+//	}
+//	else
+//	{
+//		//没满
+//		list->arr[list->tail] = data;
+//		list->tail = (list->tail + 1) % MAX;
+//		printf("添加成功\n");
+//	}
+//}
+//void QueuePop(Queue* list)
+//{
+//	if (list->top == list->tail)
+//		printf("队列为空\n");
+//	else
+//	{
+//		list->top = (list->top + 1) % MAX;
+//		printf("出队\n");
+//	}
+//}
+//void Print(Queue list)
+//{
+//	if (list.tail != list.top)
+//	{
+//		while (list.tail != list.top)
+//		{
+//			printf("%d ", list.arr[list.top]);
+//			list.top++;
+//			if (list.top == MAX && (list.tail + 1) % MAX != list.top)
+//				list.top = 0;
+//		}
+//		printf("\n");
+//	}
+//	else
+//		printf("队列为空\n");
+//}
+//int QueueLength(Queue list)
+//{
+//	return ((list.tail) - (list.top) + MAX) % MAX;
+//}
+//
+//void text()
+//{
+//	Queue list;
+//	InItQueue(&list);
+//	int data, input, size;
+//	do
+//	{
+//		menu();
+//		printf("请选择:");
+//		scanf("%d", &input);
+//		switch (input)
+//		{
+//		case EXIT:
+//			printf("退出\n");
+//			break;
+//		case POPQUEUE:
+//			QueuePop(&list);
+//			break;
+//		case PUSHQUEUE:
+//			printf("请输入数据:");
+//			scanf("%d", &data);
+//			QueuePush(&list, data);
+//			break;
+//		case PRINT:
+//			Print(list);
+//			break;
+//		case LENGTH:
+//			size = QueueLength(list);
+//			printf("队列长度为%d\n", size);
+//			break;
+//		default:
+//			printf("输入错误\n");
+//			break;
+//		}
+//	} while (input);
+//
+//}
+//int main()
+//{
+//	text();
+//	return 0;
+//}
+
+
+////链式队列
+//#include<stdio.h>
+//#include<assert.h>
+//#include<stdlib.h>
+//typedef int DataType;
+//
+//typedef struct Node
+//{
+//	DataType data;
+//	struct Node* next;
+//}Node;
+//enum
+//{
+//	EXIT,
+//	POP,
+//	PUSH,
+//	PRINT
+//};
+//void menu()
+//{
+//	printf("************************************\n");
+//	printf("*************0.EXIT*****************\n");
+//	printf("*************1.POP *****************\n");
+//	printf("*************2.PUSH*****************\n");
+//	printf("*************3.PRINT****************\n");
+//	printf("************************************\n");
+//}
+//Node* AddNode(DataType data)
+//{
+//	Node* node = malloc(sizeof(Node));
+//	node->next = NULL;
+//	node->data = data;
+//	return node;
+//}
+//void Push(Node** list,DataType data)
+//{
+//	Node* NewNode = AddNode(data);
+//	if (*list == NULL)
+//	{
+//		*list = NewNode;
+//		return;
+//	}
+//	Node* cur = *list;
+//	while (cur->next != NULL)
+//	{
+//		cur = cur->next;
+//	}
+//	cur->next = NewNode;
+//}
+//void Pop(Node** list)
+//{
+//	if (*list == NULL)
+//	{
+//		printf("队列为空\n");
+//		return;
+//	}
+//	Node* cur = (*list)->next;
+//	printf("%d出队成功\n", (*list)->data);
+//	free(*list);
+//	*list = cur;
+//}
+//void Print(Node* list)
+//{
+//	if (list == NULL)
+//	{
+//		printf("队列为空\n");
+//		return;
+//	}
+//	Node* cur = list;
+//	while (cur)
+//	{
+//		printf("%d ", cur->data);
+//		cur = cur->next;
+//	}
+//	printf("\n");
+//}
+//int QueueLength(Node* list)
+//{
+//	int size = 0;
+//	Node* cur = list;
+//	while (cur)
+//	{
+//		size++;
+//		cur = cur->next;
+//	}
+//	return size;
+//}
+//void text()
+//{
+//	Node* Queue = NULL;
+//	int data, input, size;
+//	do
+//	{
+//		menu();
+//		printf("请选择:");
+//		scanf("%d", &input);
+//		switch (input)
+//		{
+//		case EXIT:
+//			printf("退出\n");
+//			break;
+//		case POP:
+//			Pop(&Queue);
+//			break;
+//		case PUSH:
+//			printf("请输入数据:");
+//			scanf("%d", &data);
+//			Push(&Queue, data);
+//			break;
+//		case PRINT:
+//			Print(Queue);
+//			size=QueueLength(Queue);
+//			printf("队列中共有%d个数据\n", size);
+//			break;
+//		default:
+//			printf("输入错误\n");
+//			break;
+//		}
+//	} while (input);
+//}
+//int main()
+//{
+//	text();
+//	return 0;
+//}
+
+//双向链表
 #include<stdio.h>
-#define MAX 5
+#include<stdlib.h>
 typedef int DataType;
-typedef struct Queue
+typedef struct Node
 {
-	DataType arr[MAX];
-	int top, tail;
-}Queue;
-enum
+	struct Node* prev;
+	struct Node* next;
+	DataType data;
+}Node;
+Node* BuyListNode(DataType data)
 {
-	EXIT,
-	POPQUEUE,
-	PUSHQUEUE,
-	PRINT,
-	LENGTH
-};
-
-void menu()
-{
-	printf("********************************************\n");
-	printf("******1.PopQueue            2.PushQueue*****\n");
-	printf("******3.Print                  0.EXIT  *****\n");
-	printf("****************4.LENGHTH********************\n");
-}
-
-void InItQueue(Queue* list)
-{
-	list->tail = 0;
-	list->top = 0;
-}
-bool Full(Queue* list)
-{
-	/*队列保存的最大数据数量为MAX-1*/
-	if ((list->tail + 1) % MAX == list->top)
-		return true;
-	else
-		return false;
-}
-void QueuePush(Queue* list, DataType data)
-{
-	if (Full(list))
+	Node* NewNode = malloc(sizeof(Node));
+	if (NewNode)
 	{
-		printf("空间已满\n");
+		//不为NULL---创建成功
+		NewNode->data = data;
+		NewNode->next = NewNode->prev = NULL;
+		return NewNode;
 	}
-	else
-	{
-		//没满
-		list->arr[list->tail] = data;
-		list->tail = (list->tail + 1) % MAX;
-		printf("添加成功\n");
-	}
+	return NULL;
 }
-void QueuePop(Queue* list)
+void PushBack(Node** list, DataType data)
 {
-	if (list->top == list->tail)
-		printf("队列为空\n");
-	else
+	Node* NewNode = BuyListNode(data);
+	if (*list == NULL)
 	{
-		list->top = (list->top + 1) % MAX;
-		printf("出队\n");
+		*list = NewNode;
+		return;
 	}
-}
-void Print(Queue list)
-{
-	if (list.tail != list.top)
+	Node* cur = *list;
+	while (cur->next != NULL)
 	{
-		while (list.tail != list.top)
-		{
-			printf("%d ", list.arr[list.top]);
-			list.top++;
-			if (list.top == MAX && (list.tail + 1) % MAX != list.top)
-				list.top = 0;
-		}
-		printf("\n");
+		cur = cur->next;
 	}
-	else
-		printf("队列为空\n");
-}
-int QueueLength(Queue list)
-{
-	return ((list.tail) - (list.top) + MAX) % MAX;
+	cur->next = NewNode;
+	NewNode->prev = cur;
 }
 
-void text()
+void PopBack(Node** list)
 {
-	Queue list;
-	InItQueue(&list);
-	int data, input, size;
-	do
+	Node* cur = *list;
+	Node* prev = NULL;
+	while (cur->next)
 	{
-		menu();
-		printf("请选择:");
-		scanf("%d", &input);
-		switch (input)
-		{
-		case EXIT:
-			printf("退出\n");
-			break;
-		case POPQUEUE:
-			QueuePop(&list);
-			break;
-		case PUSHQUEUE:
-			printf("请输入数据:");
-			scanf("%d", &data);
-			QueuePush(&list, data);
-			break;
-		case PRINT:
-			Print(list);
-			break;
-		case LENGTH:
-			size = QueueLength(list);
-			printf("队列长度为%d\n", size);
-			break;
-		default:
-			printf("输入错误\n");
-			break;
-		}
-	} while (input);
-
+		prev = cur;
+		cur = cur->next;
+	}
+	free(cur->next);
+	prev->next = NULL;
+}
+void PopFront(Node** list)
+{
+	if (*list == NULL)
+		return;
+	Node* cur = (*list)->next;
+	free(*list);
+	*list = cur;
+	cur->prev = NULL;
+}
+void PushFront(Node** list, DataType data)
+{
+	Node* NewNode = BuyListNode(data);
+	NewNode->next = *list;
+	(*list)->prev = NewNode;
+	*list = NewNode;
+}
+void Print(Node* list)
+{
+	Node* cur = list;
+	while (cur)
+	{
+		printf("%d ", cur->data);
+		cur = cur->next;
+	}
+	printf("\n");
 }
 int main()
 {
-	text();
+	Node* list = NULL;
+	PushBack(&list, 1);
+	PushBack(&list, 2);
+	PushBack(&list, 3);
+	PushFront(&list, 100);
+	PushFront(&list, 101);
+	PopFront(&list);
+	Print(list);
 	return 0;
 }
