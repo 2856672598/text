@@ -968,6 +968,7 @@
 //双向链表
 #include<stdio.h>
 #include<stdlib.h>
+#include<assert.h>
 typedef int DataType;
 typedef struct Node
 {
@@ -975,6 +976,27 @@ typedef struct Node
 	struct Node* next;
 	DataType data;
 }Node;
+void menu()
+{
+	printf("******************************\n");
+	printf("******     0.EXIT    *********\n");
+	printf("******  1.PushBack   *********\n");
+	printf("******  2.PushFront  *********\n");
+	printf("******  3.PopBack    *********\n");
+	printf("******  4.PopFront   *********\n");
+	printf("******5.Print   6.Find********\n");
+	printf("******************************\n");
+}
+enum
+{
+	EXIT,
+	PUSHBACK,
+	PUSHFRONT,
+	POPBACK,
+	POPFRONT,
+	PRINT,
+	FIND
+};
 Node* BuyListNode(DataType data)
 {
 	Node* NewNode = malloc(sizeof(Node));
@@ -1025,16 +1047,44 @@ void PopFront(Node** list)
 	*list = cur;
 	cur->prev = NULL;
 }
+void Insert(Node* pos, DataType data)
+{
+	Node* NewNode = BuyListNode(data);
+	pos->next = NewNode;
+	NewNode->prev = pos;
+}
 void PushFront(Node** list, DataType data)
 {
 	Node* NewNode = BuyListNode(data);
+	if (*list == NULL)
+	{
+		*list = NewNode;
+		return;
+	}
 	NewNode->next = *list;
 	(*list)->prev = NewNode;
 	*list = NewNode;
 }
+
+Node* Find(Node* list,DataType data)
+{
+	Node* cur = list;
+	while (cur != NULL)
+	{
+		if (cur->data == data)
+			return cur;
+		cur = cur->next;
+	}
+	return NULL;
+}
 void Print(Node* list)
 {
 	Node* cur = list;
+	if (list == NULL)
+	{
+		printf("链表为空\n");
+		return;
+	}
 	while (cur)
 	{
 		printf("%d ", cur->data);
@@ -1042,15 +1092,59 @@ void Print(Node* list)
 	}
 	printf("\n");
 }
+void text()
+{
+	Node* list = NULL, *flag = NULL;
+	int data, input;
+	do
+	{
+		menu();
+		printf("请选择:");
+		scanf("%d", &input);
+		switch (input)
+		{
+		case EXIT:
+		{
+			printf("退出\n");
+			return;
+		}
+		case PUSHBACK:
+			printf("输入数据\n");
+			scanf("%d", &data);
+			PushBack(&list, data);
+			break;
+		case PUSHFRONT:
+			printf("输入数据\n");
+			scanf("%d", &data);
+			PushFront(&list, data);
+			break;
+		case POPBACK:
+			PopBack(&list);
+			break;
+		case POPFRONT:
+			PopFront(&list);
+			break;
+		case PRINT:
+			Print(list);
+			break;
+		case FIND:
+			printf("输入要查询的数据:");
+			scanf("%d", &data);
+			flag = Find(list, data);
+			if (flag)
+				printf("%d所在的位置为:%p\n", data, flag);
+			else
+				printf("不存在\n");
+			break;
+		default:
+			printf("选择错误\n");
+			break;
+		}
+	} while (input);
+}
 int main()
 {
-	Node* list = NULL;
-	PushBack(&list, 1);
-	PushBack(&list, 2);
-	PushBack(&list, 3);
-	PushFront(&list, 100);
-	PushFront(&list, 101);
-	PopFront(&list);
-	Print(list);
+
+	text();
 	return 0;
 }
