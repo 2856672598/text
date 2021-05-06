@@ -238,19 +238,51 @@
 //	}
 //}
 
+//#include<stdio.h>
+//int sum(int n)
+//{
+//	if (n == 1)
+//		return 1;
+//	else
+//		return sum(n - 1)*n;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int len = sum(n);
+//	printf("%d", len);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 5;
+//	int i = 0;
+//	int sum = 0;
+//	do
+//	{
+//		sum += i;
+//		i++;
+//	} while (i <= n);
+//	printf("%d", sum);
+//	return 0;
+//}
+
 #include<stdio.h>
-int sum(int n)
-{
-	if (n == 1)
-		return 1;
-	else
-		return sum(n - 1)*n;
-}
 int main()
 {
-	int n = 0;
+	int n;
+	int i = 1;
+	double sum = 0;
 	scanf("%d", &n);
-	int len = sum(n);
-	printf("%d", len);
+	do
+	{
+		sum += 1.0 / i;
+		i++;
+	} while (i <= n);
+	printf("%f", sum);
 	return 0;
 }
