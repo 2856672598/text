@@ -271,18 +271,62 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//int main()
+//{
+//	int n;
+//	int i = 1;
+//	double sum = 0;
+//	scanf("%d", &n);
+//	do
+//	{
+//		sum += 1.0 / i;
+//		i++;
+//	} while (i <= n);
+//	printf("%f", sum);
+//	return 0;
+//}
+
+
 #include<stdio.h>
-int main()
+//定义递归函数fib(int)
+int fib(int x)
 {
-	int n;
-	int i = 1;
-	double sum = 0;
-	scanf("%d", &n);
-	do
-	{
-		sum += 1.0 / i;
-		i++;
-	} while (i <= n);
-	printf("%f", sum);
-	return 0;
+	if (x == 2)
+		return 1;
+	else if (x == 1)
+		return 0;
+	return fib(x - 1) + fib(x - 2);
 }
+void main()
+{
+	int i, n;
+	printf("请输入项数: ");
+	scanf("%d", &n);
+	printf("前%d项fibonacci数列为:", n);
+	for (i = 1; i <= n; i++)
+		printf("%d ", fib(i));
+	printf("\n");
+}
+
+
+//#include<stdio.h>
+////定义int max(int,int)函数
+//int max(int* arr, int size)
+//{
+//	int MAX = arr[0];
+//	for (int i = 0; i < size; i++)
+//	{
+//		if (arr[i] > MAX)
+//			MAX = arr[i];
+//	}
+//	return MAX;
+//}
+//void main()
+//{
+//	int i, b[10];
+//	printf("请输入10个整数: ");
+//	for (i = 0; i < 10; i++)
+//		scanf("%d", &b[i]);
+//	printf("最大数为: %d\n", max(b, 10));
+//}
