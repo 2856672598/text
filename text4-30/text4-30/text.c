@@ -985,7 +985,7 @@ void menu()
 	printf("******  3.PopBack    *********\n");
 	printf("******  4.PopFront   *********\n");
 	printf("******5.Print   6.Find********\n");
-	printf("******************************\n");
+	printf("**********7.REASE*************\n");
 }
 enum
 {
@@ -995,7 +995,8 @@ enum
 	POPBACK,
 	POPFRONT,
 	PRINT,
-	FIND
+	FIND,
+	ERASE
 };
 Node* BuyListNode(DataType data)
 {
@@ -1077,6 +1078,39 @@ Node* Find(Node* list,DataType data)
 	}
 	return NULL;
 }
+void Erase(Node** list, DataType data)
+{
+	Node* Pop = Find(*list, data);
+	Node* next = NULL, *cur = NULL;
+	if (*list == NULL)
+	{
+		printf("链表为空\n");
+		return;
+	}
+	/*判断删除的是否是头结点*/
+	if (Pop == *list)
+	{
+		cur = Pop->next;
+		//判断链表是否只有一个节点
+		if (cur)
+			cur->prev = NULL;
+		free(*list);
+		*list = cur;
+		return;
+	}
+	if (Pop)
+	{
+		next = Pop->next;
+		Node* prev = Pop->prev;
+		free(Pop);
+		prev->next = next;
+		//判断删除的是否为尾节点
+		if (next)
+			next->prev = prev;
+		return;
+	}
+	printf("当前链表中不存在%d\n", data);
+}
 void Print(Node* list)
 {
 	Node* cur = list;
@@ -1135,6 +1169,12 @@ void text()
 				printf("%d所在的位置为:%p\n", data, flag);
 			else
 				printf("不存在\n");
+			break;
+		case ERASE:
+			printf("输入要删除的数据:");
+			scanf("%d", &data);
+			Erase(&list, data);
+			Print(list);
 			break;
 		default:
 			printf("选择错误\n");
