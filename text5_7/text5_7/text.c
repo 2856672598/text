@@ -294,89 +294,10 @@ ListNode* ListInit()
 	newnode->prev = newnode;
 	return newnode;
 }
-void ListPushBack(ListNode* phead, DataType x)
-{
-	ListNode* tail = phead->prev;
-	ListNode* next = BuyListNode(x);
-	tail->next = next;
-	next->prev = tail;
-	next->next = phead;
-	phead->prev = next;
-	printf("添加成功\n");
-}
-void ListPushFront(ListNode* phead, DataType x)
-{
-	ListNode* first = BuyListNode(x);
-	ListNode* next = phead->next;
-	first->prev = phead;
-	first->next = next;
-	next->prev = first;
-	phead->next = first;
-	printf("头插成功\n");
-}
-void ListPrint(ListNode* phead)
-{
-	ListNode* cur = phead->next;
-	if (cur == phead)
-	{
-		printf("链表为空\n");
-		return;
-	}
-	while (cur != phead)
-	{
-		printf("%d ", cur->data);
-		cur = cur->next;
-	}
-	printf("\n");
-}
-void ListPopBack(ListNode* phead)
-{
-	assert(phead);
-	if (phead->next == phead)
-	{
-		printf("链表为空\n");
-		return;
-	}
-	ListNode* tail = phead->prev;
-	tail->prev->next = phead;
-	phead->prev = tail->prev;
-	free(tail);
-	printf("尾删成功\n");
-}
-void ListPopFront(ListNode* phead)
-{
-	assert(phead);
-	//防止头结点被误删
-	if (phead->next == phead)
-	{
-		printf("链表为空\n");
-		return;
-	}
-	ListNode* cur = phead->next;
-	phead->next = cur->next;
-	cur->next->prev = phead;
-	printf("头删成功\n");
-}
-ListNode* ListFind(ListNode* phead, DataType x)
-{
-	ListNode* cur = phead->next;
-	while (cur != phead)
-	{
-		if (cur->data == x)
-			return cur;
-		cur = cur->next;
-	}
-	return NULL;
-}
 //指定插入
 void ListInsert(ListNode* pos, DataType x)
 {
-	//判断插入的位置是不是哨兵节点（头结点）
-	if (pos->next == pos)
-	{
-		printf("添加失败\n");
-		return;
-	}
+	/*指定位置的后面插入*/
 	ListNode* newnode = BuyListNode(x);
 	ListNode* next = pos->next;
 	newnode->next = next;
@@ -393,10 +314,10 @@ void ListErase(ListNode* pos)
 		printf("链表中不存在此数据\n");
 		return;
 	}
-	if (pos->next == pos);
+	if (pos->next == pos)
 	{
 		//输入的位置是哨兵节点
-		printf("此位置不可以删除\n");
+		printf("此位置不可以删除(链表为空)\n");
 		return;
 	}
 	ListNode* next = pos->next;
@@ -405,6 +326,89 @@ void ListErase(ListNode* pos)
 	next->prev = prev;
 	printf("删除成功\n");
 }
+void ListPushBack(ListNode* phead, DataType x)
+{
+	//ListNode* tail = phead->prev;
+	//ListNode* next = BuyListNode(x);
+	//tail->next = next;
+	//next->prev = tail;
+	//next->next = phead;
+	//phead->prev = next;
+	//printf("添加成功\n");
+
+	ListInsert(phead->prev, x);
+}
+void ListPushFront(ListNode* phead, DataType x)
+{
+	//ListNode* first = BuyListNode(x);
+	//ListNode* next = phead->next;
+	//first->prev = phead;
+	//first->next = next;
+	//next->prev = first;
+	//phead->next = first;
+	//printf("头插成功\n");
+
+	ListInsert(phead, x);
+}
+void ListPrint(ListNode* phead)
+{
+	ListNode* cur = phead->next;
+	if (cur == phead)
+	{
+		printf("链表为空\n");
+		return;
+	}
+	while (cur != phead)
+	{
+		printf("%d ", cur->data);
+		cur = cur->next;
+	}
+	printf("\n");
+}
+
+void ListPopBack(ListNode* phead)
+{
+	//assert(phead);
+	//if (phead->next == phead)
+	//{
+	//	printf("链表为空\n");
+	//	return;
+	//}
+	//ListNode* tail = phead->prev;
+	//tail->prev->next = phead;
+	//phead->prev = tail->prev;
+	//free(tail);
+	//printf("尾删成功\n");
+
+	ListErase(phead->prev);
+}
+void ListPopFront(ListNode* phead)
+{
+	//assert(phead);
+	////防止头结点被误删
+	//if (phead->next == phead)
+	//{
+	//	printf("链表为空\n");
+	//	return;
+	//}
+	//ListNode* cur = phead->next;
+	//phead->next = cur->next;
+	//cur->next->prev = phead;
+	//printf("头删成功\n");
+	ListErase(phead->next);
+}
+ListNode* ListFind(ListNode* phead, DataType x)
+{
+	ListNode* cur = phead->next;
+	while (cur != phead)
+	{
+		if (cur->data == x)
+			return cur;
+		cur = cur->next;
+	}
+	return NULL;
+}
+
 void ListDestory(ListNode*phead)
 {
 	ListNode* cur = phead->next;
@@ -465,7 +469,6 @@ void Text()
 				printf("输入要插入的数据:");
 				scanf("%d", &data);
 				ListInsert(flag, data);
-				printf("插入成功\n");
 			}
 			else
 				printf("%d不存在链表中\n", data);
