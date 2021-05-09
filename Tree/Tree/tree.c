@@ -175,32 +175,75 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdlib.h>
-typedef char DataType;
-typedef struct TNode
+typedef int DataType;
+typedef struct Node
 {
+	struct Node* leftchild;
+	struct Node* rightchid;
 	DataType data;
-	struct TNode* FirstChild, *LeftSib;
-}TNode;
-
-TNode *Find(TNode *b, int inName)
+}Node;
+Node* BuyNode(DataType x)
 {
-	TNode *p;//定义一个接受查找的指针变量
-	if (b == NULL)
-		return NULL;
-	else
+	Node* newnode = malloc(sizeof(Node));
+	if (newnode)
 	{
-		p = Find(b->FirstChild, 'F');//递归查找孩子
-		if (p != NULL)//如果查找到了
-			return p;
-		else return Find(b->LeftSib, inName);//递归查找兄弟
+		//创建成功
+		newnode->data = x;
+		newnode->leftchild = NULL;
+		newnode->rightchid = NULL;
 	}
+	return newnode;
 }
-void text()
+Node* CreateTree()
 {
+	int data = 0;
+	printf("节点信息:");
+	scanf("%d", &data);
+	if (data == -1)
+		return NULL;
+	Node* newnode = BuyNode(data);
+	printf("请输入%d左子树", data);
+	newnode->leftchild = CreateTree();
+	printf("请输入%d的右子树", newnode->data);
+	newnode->rightchid = CreateTree();
+	return newnode;
+}
 
+//先序遍历
+void Preorder(Node* tree)
+{
+	if (tree == NULL)
+		return;
+	printf("%d ", tree->data);
+	Preorder(tree->leftchild);
+	Preorder(tree->rightchid);
+}
+//中序
+void Inorder(Node* tree)
+{
+	if (tree == NULL)
+		return;
+	Inorder(tree->leftchild);
+	printf("%d ", tree->data);
+	Inorder(tree->rightchid);
+}
+void Postorder(Node* tree)
+{
+	if (tree == NULL)
+		return;
+	Postorder(tree->leftchild);
+	Postorder(tree->rightchid);
+	printf("%d", tree->data);
+}
+void Text()
+{
+	Node* tree = CreateTree();
+	//Preorder(tree);
+	//Inorder(tree);
+	Postorder(tree);
 }
 int main()
 {
-	text();
+	Text();
 	return 0;
 }
