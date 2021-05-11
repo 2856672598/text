@@ -109,13 +109,45 @@ TreeNode* CreateTree()
 //}
 
 
-
-
-
-
+//void Preorder(TreeNode* tree, Stack* plist)
+//{
+//	TreeNode* root = tree;
+//	StackPush(plist, root);
+//	//当栈不为空一直循环
+//	while (plist->top > 0)
+//	{
+//		TreeNode* node = StackPop(plist);
+//		if (node != NULL)
+//			printf("%d", node->data);
+//		else
+//			continue;
+//		StackPush(plist, node->rightchild);
+//		StackPush(plist, node->liftchild);
+//	}
+//}
+//void Inorder(TreeNode* tree, Stack* plist)
+//{
+//	//中序遍历左根右
+//	TreeNode* root = tree;
+//	while (plist->top > 0 || root != NULL)
+//	{
+//		while (root != NULL)
+//		{
+//			StackPush(plist, root);
+//			root = root->liftchild;
+//		}
+//		StackPop(plist);
+//		if (plist->top >= 0)
+//		{
+//			printf("%d ", plist->arr[plist->top]->data);
+//			root = plist->arr[plist->top]->rightchild;
+//		}
+//	}
+//}
 
 void Preorder(TreeNode* tree, Stack* plist)
 {
+	//前序遍历 根左右
 	TreeNode* root = tree;
 	StackPush(plist, root);
 	//当栈不为空一直循环
@@ -123,7 +155,9 @@ void Preorder(TreeNode* tree, Stack* plist)
 	{
 		TreeNode* node = StackPop(plist);
 		if (node != NULL)
-			printf("%d", node->data);
+		{
+			printf("%d ", node->data);
+		}
 		else
 			continue;
 		StackPush(plist, node->rightchild);
@@ -136,17 +170,37 @@ void Inorder(TreeNode* tree, Stack* plist)
 	TreeNode* root = tree;
 	while (plist->top > 0 || root != NULL)
 	{
+		//一直往下走直到找到空为止
 		while (root != NULL)
 		{
 			StackPush(plist, root);
 			root = root->liftchild;
 		}
-		StackPop(plist);
-		if (plist->top >= 0)
+		TreeNode* node = StackPop(plist);
+		//当栈空时返回NULL
+		if (node != NULL)
 		{
-			printf("%d ", plist->arr[plist->top]->data);
+			printf("%d ", node->data);
 			root = plist->arr[plist->top]->rightchild;
 		}
+	}
+}
+void Postorder(TreeNode* tree, Stack* plist)
+{
+	TreeNode* root = tree;
+	while (root != NULL || plist->top > 0)
+	{
+		while (root)
+		{
+			StackPush(plist, root);
+			root = root->liftchild;
+		}
+		TreeNode* node = StackPop(plist);
+		if (node)
+		{
+			root = node->rightchild;
+		}
+		printf("%d ", node->data);
 	}
 }
 int main()
@@ -154,6 +208,6 @@ int main()
 	Stack plist;
 	StackInit(&plist);
 	TreeNode* tree = CreateTree();
-	Inorder(tree, &plist);
+	Postorder(tree, &plist);
 	return 0;
 }
