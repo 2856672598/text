@@ -288,26 +288,26 @@
 //}
 
 
-#include<stdio.h>
-//定义递归函数fib(int)
-int fib(int x)
-{
-	if (x == 2)
-		return 1;
-	else if (x == 1)
-		return 0;
-	return fib(x - 1) + fib(x - 2);
-}
-void main()
-{
-	int i, n;
-	printf("请输入项数: ");
-	scanf("%d", &n);
-	printf("前%d项fibonacci数列为:", n);
-	for (i = 1; i <= n; i++)
-		printf("%d ", fib(i));
-	printf("\n");
-}
+//#include<stdio.h>
+////定义递归函数fib(int)
+//int fib(int x)
+//{
+//	if (x == 2)
+//		return 1;
+//	else if (x == 1)
+//		return 0;
+//	return fib(x - 1) + fib(x - 2);
+//}
+//void main()
+//{
+//	int i, n;
+//	printf("请输入项数: ");
+//	scanf("%d", &n);
+//	printf("前%d项fibonacci数列为:", n);
+//	for (i = 1; i <= n; i++)
+//		printf("%d ", fib(i));
+//	printf("\n");
+//}
 
 
 //#include<stdio.h>
@@ -330,3 +330,101 @@ void main()
 //		scanf("%d", &b[i]);
 //	printf("最大数为: %d\n", max(b, 10));
 //}
+
+
+#include<stdio.h>
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	for (int i = 1; i <= n; i++)
+//	{
+//		if (n%i == 0)
+//			printf("%d ", i);
+//	}
+//	return 0;
+//}
+
+//int main()
+//{
+//	int n = 0, i = 1;
+//	scanf("%d", &n);
+//	do
+//	{
+//		if (n%i == 0)
+//			printf("%d ", i);
+//		i++;
+//	} while (i <= n);
+//	return 0;
+//}
+
+//int main()
+//{
+//	for (int i = 3; i <= 80; i++)
+//	{
+//		int flag = 1;
+//		for (int j = 2; j < i; j++)
+//		{
+//			if (i%j == 0)
+//				flag = 0;
+//		}
+//		if (flag == 1)
+//			printf("%d ", i);
+//	}
+//	return 0;
+//}
+
+//int main()
+//{
+//	for (int i = 3; i <= 80; i++)
+//	{
+//		int flag = 1;
+//		for (int j = 2; j < i; j++)
+//			if (i%j == 0)
+//			{
+//				flag = 0;
+//				j = i;
+//			}
+//		if (flag)
+//			printf("%d ", i);
+//	}
+//	return 0;
+//}
+
+
+//int main()
+//{
+//	int n = 0;
+//	printf("请输入需要一个数:");
+//	scanf("%d", &n);
+//	for (int i = 2; i <= n; i++)
+//	{
+//		int flag = 1;
+//		for (int j = 2; j < i; j++)
+//		{
+//			if (i%j == 0)
+//			{
+//				flag = 0;
+//				j = i;
+//			}
+//		}
+//		if (flag)
+//			printf("%d ", i);
+//	}
+//	return 0;
+//}
+
+int main()
+{
+	int sum = 0;
+	for (int i = 1;; i++)
+	{
+		sum += i;
+		if (sum > 10000)
+		{
+			printf("%d ", i - 1);
+			break;
+		}
+	}
+	return 0;
+}
