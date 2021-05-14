@@ -332,7 +332,7 @@
 //}
 
 
-#include<stdio.h>
+//#include<stdio.h>
 //int main()
 //{
 //	int n = 0;
@@ -414,17 +414,72 @@
 //	return 0;
 //}
 
-int main()
+//int main()
+//{
+//	int sum = 0;
+//	for (int i = 1;; i++)
+//	{
+//		sum += i;
+//		if (sum > 10000)
+//		{
+//			printf("%d ", i - 1);
+//			break;
+//		}
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int find(char *p)
+//{
+//	int i = 0;
+//	while (*(p + i) != '\0')
+//	{
+//		if (*(p + i) == 'k')
+//			return 1;
+//		i++;
+//	}
+//	return 0;
+//}
+//
+//void main()
+//{
+//	char a[100];
+//	printf("请输入一个字符串: ");
+//	gets(a);
+//	if (find(a) == 1)
+//		printf("已找到!\n");
+//	else printf("没找到!\n");
+//}
+
+
+#include<stdio.h>
+#include<string.h>
+int hw(char *s)
 {
-	int sum = 0;
-	for (int i = 1;; i++)
+	int flag = 1;//1表示是回文，0表示非回文
+	char *p, *q; //字符串首尾指针
+	int size = strlen(s);
+	q = s + size - 1;
+	p = s;
+	while (p < q)
 	{
-		sum += i;
-		if (sum > 10000)
-		{
-			printf("%d ", i - 1);
-			break;
-		}
+		if (*q != *p)
+			return 0;
+		q--;
+		p++;
 	}
-	return 0;
+	return 1;
+}
+void main()
+{
+	int hw(char *s);
+	char s[80];
+	printf("请输入一个字符串: ");
+	gets(s);
+	if (hw(s))
+		printf("该字符串是回文!\n");
+	else
+		printf("该字符串不是回文!\n");
 }
