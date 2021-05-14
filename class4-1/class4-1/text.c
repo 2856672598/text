@@ -453,33 +453,51 @@
 //	else printf("没找到!\n");
 //}
 
+//#include<stdio.h>
+//#include<string.h>
+//int hw(char *s)
+//{
+//	int flag = 1;//1表示是回文，0表示非回文
+//	char *p, *q; //字符串首尾指针
+//	int size = strlen(s);
+//	q = s + size - 1;
+//	p = s;
+//	while (p < q)
+//	{
+//		if (*q != *p)
+//			return 0;
+//		q--;
+//		p++;
+//	}
+//	return 1;
+//}
+//void main()
+//{
+//	int hw(char *s);
+//	char s[80];
+//	printf("请输入一个字符串: ");
+//	gets(s);
+//	if (hw(s))
+//		printf("该字符串是回文!\n");
+//	else
+//		printf("该字符串不是回文!\n");
+//}
 
+//自幂数
 #include<stdio.h>
-#include<string.h>
-int hw(char *s)
+#include<math.h>
+int main()
 {
-	int flag = 1;//1表示是回文，0表示非回文
-	char *p, *q; //字符串首尾指针
-	int size = strlen(s);
-	q = s + size - 1;
-	p = s;
-	while (p < q)
+	for (int i = 1000; i <= 9999; i++)
 	{
-		if (*q != *p)
-			return 0;
-		q--;
-		p++;
+		int flag = i, sum = 0;
+		while (flag)
+		{
+			sum += (int)pow(flag % 10, 4);
+			flag /= 10;
+		}
+		if (sum == i)
+			printf("%d ", i);
 	}
-	return 1;
-}
-void main()
-{
-	int hw(char *s);
-	char s[80];
-	printf("请输入一个字符串: ");
-	gets(s);
-	if (hw(s))
-		printf("该字符串是回文!\n");
-	else
-		printf("该字符串不是回文!\n");
+	return 0;
 }
