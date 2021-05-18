@@ -1,3 +1,4 @@
+
 #include"Queueby_two_stack.h"
 void StackInit(Stack* ps)
 {
@@ -14,6 +15,16 @@ void StackDestory(Stack* ps)
 		free(cur);
 		cur = next;
 	}
+}
+void QueueuDestory(Queue* pq)
+{
+	assert(pq->Stack1);
+	assert(pq->Stack2);
+	StackDestory(pq->Stack1);
+	StackDestory(pq->Stack2);
+	free(pq->Stack1);
+	free(pq->Stack2);
+	pq->Stack1 = pq->Stack2 = NULL;
 }
 void StackPush(Stack* ps, Datatype x)
 {
@@ -93,7 +104,7 @@ void QueuePush(Queue* pq, Datatype x)
 void QueuePop(Queue* pq)
 {
 	assert(pq);
-	assert(pq->Stack1);
+	assert(pq->Stack1->top);
 	assert(pq->Stack2);
 	SNode* stack1 = reverse(pq->Stack1);
 	pq->Stack2->top = stack1;
@@ -106,10 +117,19 @@ Datatype QueueTop(Queue* qp)
 {
 	assert(qp);
 	assert(qp->Stack1);
+	assert(qp->Stack1->top);
+	//反转stack1中的链表，反转后就是stack2入栈的顺序
 	SNode* stack1 = reverse(qp->Stack1);
 	qp->Stack2->top = stack1;
 	Datatype data = qp->Stack2->top->data;
 	SNode* stack2 = reverse(qp->Stack2);
 	qp->Stack1->top = stack2;
 	return data;
+}
+void menu()
+{
+	printf("*******************\n");
+	printf("***1.Push  2.Pop***\n");
+	printf("***3.Top  0.EXIT***\n");
+	printf("*******************\n");
 }
