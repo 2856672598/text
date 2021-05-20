@@ -483,21 +483,44 @@
 //		printf("该字符串不是回文!\n");
 //}
 
-//自幂数
+////自幂数
+//#include<stdio.h>
+//#include<math.h>
+//int main()
+//{
+//	for (int i = 1000; i <= 9999; i++)
+//	{
+//		int flag = i, sum = 0;
+//		while (flag)
+//		{
+//			sum += (int)pow(flag % 10, 4);
+//			flag /= 10;
+//		}
+//		if (sum == i)
+//			printf("%d ", i);
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[10];
+//	for (int i = 0; i < 10; i++)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	for (int i = 0; i < 10; i++)
+//		printf("%d ", arr[i]);
+//	return 0;
+//}
+
 #include<stdio.h>
-#include<math.h>
-int main()
+void main()
 {
-	for (int i = 1000; i <= 9999; i++)
-	{
-		int flag = i, sum = 0;
-		while (flag)
-		{
-			sum += (int)pow(flag % 10, 4);
-			flag /= 10;
-		}
-		if (sum == i)
-			printf("%d ", i);
-	}
-	return 0;
+	int a = 3, b = 2, c = 1;
+	c = 5 ? ++a : b--;
+	printf("%d\n", c);
 }
+
