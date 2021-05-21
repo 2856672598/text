@@ -5,8 +5,9 @@ void Swap(HPDataType* a, HPDataType* b)
 	*a = *b;
 	*b = tmp;
 }
-//向下查找
-void LookDown(Heap* php, int root, int size)
+
+//小堆向下调整
+void AdjustDown(Heap* php, int root, int size)
 {
 	assert(php);
 	int parent = root;
@@ -28,33 +29,103 @@ void LookDown(Heap* php, int root, int size)
 	}
 }
 
-void HeapInit(Heap* php, HPDataType* arr, int size)
-{
-	assert(php);
-	HPDataType* new = malloc(sizeof(HPDataType)*size);
-	if (new)
-	{
-		memcpy(new, arr, size * sizeof(HPDataType));
-		php->a = new;
-		php->size = size;
-	}
-	for (int i = (php->size - 2) / 2; i >= 0; i--)
-	{
-		LookDown(php, i, php->size);
-	}
-}
-
-void HeapQsort(Heap* php)
+//小堆的向上调整
+void AdjustUp(Heap* php, int root, int size)
 {
 	assert(php);
 	assert(php->a);
-	int flag = php->size - 1;
-	while (flag)
+	int parent = root;
+	int child = root * 2 + 1;
+	while (parent >= 0)
 	{
-		Swap(&php->a[0], &php->a[flag]);
-		flag--;
-		LookDown(php, 0, flag);
+		//需要判断只有一个子节点的情况
+		if (child + 1 < php->size && php->a[child] > php->a[child + 1])
+		{
+			child++;
+		}
+		if (php->a[child] < php->a[parent])
+		{
+			//需要进行调整
+			Swap(&php->a[child], &php->a[parent]);
+			child = parent;
+			parent = (child - 1) / 2;
+		}
+		else
+			return;
 	}
 }
-void HeapDestory(Heap* php);
-void HeadPush(Heap*php, HPDataType x);
+
+void HeapInit(Heap* php, HPDataType* arr, int size)
+{
+	assert(php);
+	HPDataType* a = malloc(sizeof(HPDataType)*size);
+	if (a)
+	{
+		memcpy(a, arr, sizeof(HPDataType)*size);
+		php->a = a;
+		php->capacity = php->size = size;
+	}
+	//建堆
+	for (int i = (size - 1 - 1) / 2; i >= 0; i--)
+	{
+		AdjustDown(php, i, size);
+	}
+}
+
+
+void HeapDestory(Heap* php)
+{
+	assert(php);
+	free(php->a);
+	php->size = php->capacity = 0;
+	php->a = NULL;
+}
+
+void HeadPush(Heap*php, HPDataType x)
+{
+	assert(php);
+	assert(php->a);
+	if (php->size >= php->capacity)
+	{
+		//需要扩容
+		HPDataType* tmp = realloc(php->a, sizeof(HPDataType)*php->size * 2);
+		if (tmp)
+		{
+			php->a = tmp;
+			php->capacity *= 2;
+		}
+	}
+	//在尾上插入
+	php->a[php->size++] = x;
+	AdjustUp(php, (php->size - 2) / 2, php->size);
+}
+
+void HeapPop(Heap* php)
+{
+	assert(php);
+	//判断是否为空
+	assert(php->size > 0);
+	printf("%d ", php->a[0]);
+	Swap(&php->a[0], &php->a[php->size - 1]);
+	php->size--;
+	AdjustDown(php, 0, php->size);
+}
+
+
+void HeapSort(Heap*php)
+{
+	assert(php);
+	assert(php->a);
+
+	//while (php->size)
+	//{
+	//	HeapPop(php);
+	//}
+	int tmp = php->size;
+	while (tmp > 0)
+	{
+		Swap(&php->a[0], &php->a[tmp-1]);
+		tmp--;
+		AdjustDown(php, 0, tmp);
+	}
+}
