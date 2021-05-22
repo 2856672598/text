@@ -51,12 +51,24 @@ void QueuePop(Queue*pq)
 		pq->head = next;
 	}
 }
+Datatype QueueTop(Queue*qp)
+{
+	assert(qp);
+	assert(qp->head);
+	return qp->head->data;
+}
+Datatype QueueTail(Queue*qp)
+{
+	assert(qp);
+	assert(qp->tail);
+	return qp->tail->data;
+}
 //返回栈顶元素
 Datatype StackTop(Stack* qp)
 {
 	assert(qp);
 	//assert(qp->Queue1);
-	assert(qp->Queue1->head);
+	assert(qp->Queue1);
 	return qp->Queue1->head->data;
 }
 
@@ -82,10 +94,16 @@ void StackPush(Stack* ps, Datatype x)
 {
 	assert(ps);
 	QueuePush(ps->Queue2, x);
-	ps->Queue2->tail->next = ps->Queue1->head;
-	ps->Queue1->head = ps->Queue2->head;
-	//QueueDestory(ps->Queue2);
-	ps->Queue2->head = ps->Queue2->tail = NULL;
+	while (!QueueEmpty(ps->Queue1))
+	{
+		//队列1不为空
+		QueuePush(ps->Queue2, QueueTop(ps->Queue1));
+		QueuePop(ps->Queue1);
+	}
+	//交换下队列一队列二；
+	Queue* tmp = ps->Queue1;
+	ps->Queue1 = ps->Queue2;
+	ps->Queue2 = tmp;
 }
 void StackPop(Stack* ps)
 {
@@ -97,7 +115,15 @@ void StackPop(Stack* ps)
 	ps->Queue1->head = ps->Queue2->head;
 	ps->Queue2->tail = ps->Queue2->head = NULL;
 }
-
+void StackDestory(Stack*ps)
+{
+	assert(ps);
+	QueueDestory(ps->Queue1);
+	QueueDestory(ps->Queue2);
+	free(ps->Queue1);
+	free(ps->Queue2);
+	ps->Queue1 = ps->Queue2 = NULL;
+}
 void menu()
 {
 	printf("#############################\n");

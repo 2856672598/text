@@ -1,2 +1,3 @@
 ﻿  Stackby_two_queue.c
-  Stackby_two_queue.vcxproj -> D:\Githup\text\Stackby_two_queue\Debug\Stackby_two_queue.exe
+d:\githup\text\stackby_two_queue\stackby_two_queue\stackby_two_queue.c(87): warning C6011: 取消对 NULL 指针“queue2”的引用。
+d:\githup\text\stackby_two_queue\stackby_two_queue\stackby_two_queue.c(86): warning C6011: 取消对 NULL 指针“queue1”的引用。

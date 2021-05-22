@@ -14,8 +14,7 @@ void text1()
 		{
 		case EXIT:
 			printf("ÍË³ö");
-			QueueDestory(s.Queue1);
-			QueueDestory(s.Queue2);
+			StackDestory(&s);
 			return;
 			break;
 		case PUSH:
