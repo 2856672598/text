@@ -172,78 +172,206 @@
 //}
 
 
-#define _CRT_SECURE_NO_WARNINGS
+//#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//#include<stdlib.h>
+//typedef int DataType;
+//typedef struct Node
+//{
+//	struct Node* leftchild;
+//	struct Node* rightchid;
+//	DataType data;
+//}Node;
+//Node* BuyNode(DataType x)
+//{
+//	Node* newnode = malloc(sizeof(Node));
+//	if (newnode)
+//	{
+//		//创建成功
+//		newnode->data = x;
+//		newnode->leftchild = NULL;
+//		newnode->rightchid = NULL;
+//	}
+//	return newnode;
+//}
+//Node* CreateTree()
+//{
+//	int data = 0;
+//	printf("节点信息:");
+//	scanf("%d", &data);
+//	if (data == -1)
+//		return NULL;
+//	Node* newnode = BuyNode(data);
+//	printf("请输入%d左子树", data);
+//	newnode->leftchild = CreateTree();
+//	printf("请输入%d的右子树", newnode->data);
+//	newnode->rightchid = CreateTree();
+//	return newnode;
+//}
+//
+////先序遍历
+//void Preorder(Node* tree)
+//{
+//	if (tree == NULL)
+//		return;
+//	printf("%d ", tree->data);
+//	Preorder(tree->leftchild);
+//	Preorder(tree->rightchid);
+//}
+////中序
+//void Inorder(Node* tree)
+//{
+//	if (tree == NULL)
+//		return;
+//	Inorder(tree->leftchild);
+//	printf("%d ", tree->data);
+//	Inorder(tree->rightchid);
+//}
+//void Postorder(Node* tree)
+//{
+//	if (tree == NULL)
+//		return;
+//	Postorder(tree->leftchild);
+//	Postorder(tree->rightchid);
+//	printf("%d", tree->data);
+//}
+//void Text()
+//{
+//	Node* tree = CreateTree();
+//	//Preorder(tree);
+//	//Inorder(tree);
+//	Postorder(tree);
+//}
+//int main()
+//{
+//	Text();
+//	return 0;
+//}
+
+
 #include<stdio.h>
+#include<assert.h>
 #include<stdlib.h>
-typedef int DataType;
-typedef struct Node
+typedef char TDataType;
+typedef struct TNode
 {
-	struct Node* leftchild;
-	struct Node* rightchid;
-	DataType data;
-}Node;
-Node* BuyNode(DataType x)
+	struct TNode* leftchild;
+	struct TNode* rightchild;
+	TDataType data;
+}TNode;
+TNode* CreateTree(TNode* root)
 {
-	Node* newnode = malloc(sizeof(Node));
-	if (newnode)
-	{
-		//创建成功
-		newnode->data = x;
-		newnode->leftchild = NULL;
-		newnode->rightchid = NULL;
-	}
-	return newnode;
+	return 0;
 }
-Node* CreateTree()
+void PreOrder(TNode* root)
 {
-	int data = 0;
-	printf("节点信息:");
-	scanf("%d", &data);
-	if (data == -1)
-		return NULL;
-	Node* newnode = BuyNode(data);
-	printf("请输入%d左子树", data);
-	newnode->leftchild = CreateTree();
-	printf("请输入%d的右子树", newnode->data);
-	newnode->rightchid = CreateTree();
-	return newnode;
+	TNode* cur = root;
+	if (cur == NULL)
+	{
+		printf("NULL ");
+		return;
+	}
+	printf("%c ", cur->data);
+	PreOrder(cur->leftchild);
+	PreOrder(cur->rightchild);
+}
+void InOrder(TNode* root)
+{
+	TNode* cur = root;
+	if (cur == NULL)
+	{
+		printf("NULL ");
+		return;
+	}
+	InOrder(cur->leftchild);
+	printf("%c ", cur->data);
+	InOrder(cur->rightchild);
+}
+void PostOrder(TNode* root)
+{
+	TNode* cur = root;
+	if (cur == NULL)
+	{
+		printf("NULL ");
+		return;
+	}
+	PostOrder(cur->leftchild);
+	PostOrder(cur->rightchild);
+	printf("%c ", cur->data);
+}
+int TreeLeafSize(TNode* root)
+{
+	if (root == NULL)
+		return 0;
+	if (root->leftchild == NULL && root->rightchild == NULL)
+		return 1;
+	return TreeLeafSize(root->leftchild) + TreeLeafSize(root->rightchild);
 }
 
-//先序遍历
-void Preorder(Node* tree)
+int TreeSize(TNode* root)
 {
-	if (tree == NULL)
-		return;
-	printf("%d ", tree->data);
-	Preorder(tree->leftchild);
-	Preorder(tree->rightchid);
+	if (root == NULL)
+		return 0;
+	return TreeSize(root->leftchild) + TreeSize(root->rightchild) + 1;
 }
-//中序
-void Inorder(Node* tree)
+
+//int size = 0;
+//int TreeSize(TNode* root)
+//{
+//	if (root == NULL)
+//		return 0;
+//	size++;
+//	TreeSize(root->leftchild);
+//	TreeSize(root->rightchild);
+//
+//	return size;
+//}
+
+int TreeDepth(TNode* root)
 {
-	if (tree == NULL)
-		return;
-	Inorder(tree->leftchild);
-	printf("%d ", tree->data);
-	Inorder(tree->rightchid);
+	if (root == NULL)
+		return 0;
+	if (root->leftchild == NULL && root->rightchild == NULL)
+		return 1;
+	return 1 + (TreeDepth(root->leftchild) > TreeDepth(root->rightchild) ?
+		TreeDepth(root->leftchild) : TreeDepth(root->rightchild));
 }
-void Postorder(Node* tree)
+void text()
 {
-	if (tree == NULL)
-		return;
-	Postorder(tree->leftchild);
-	Postorder(tree->rightchid);
-	printf("%d", tree->data);
-}
-void Text()
-{
-	Node* tree = CreateTree();
-	//Preorder(tree);
-	//Inorder(tree);
-	Postorder(tree);
+	TNode* p1 = malloc(sizeof(TNode));
+	p1->data = 'a';
+	TNode* p2 = malloc(sizeof(TNode));
+	p2->data = 'b';
+	TNode* p3 = malloc(sizeof(TNode));
+	p3->data = 'c';
+	TNode* p4 = malloc(sizeof(TNode));
+	p4->data = 'd';
+	TNode* p5 = malloc(sizeof(TNode));
+	p5->data = 'e';
+	TNode* p6= malloc(sizeof(TNode));
+	p6->data = 'f';
+	p1->leftchild = p2;
+	p1->rightchild = p3;
+	p2->leftchild = p4;
+	p2->rightchild = p5;
+	p4->leftchild = p4->rightchild = NULL;
+	p5->leftchild = NULL;
+	p5->rightchild = p6;
+	p6->leftchild = p6->rightchild = NULL;
+	p3->leftchild = p3->rightchild = NULL;
+
+	//PreOrder(p1);
+	//InOrder(p1);
+	PostOrder(p1);
+	//printf("\nTreeSize:%d\n", TreeSize(p1));
+	//printf("\nTreeSize:%d\n", TreeSize(p1));
+	////size = 0;
+	//printf("TreeSize:%d\n", TreeSize(p1));
+	//printf("TreeLeafSize:%d\n", TreeLeafSize(p1));
+	printf("TreeDepth:%d\n", TreeDepth(p1));
 }
 int main()
 {
-	Text();
+	text();
 	return 0;
 }
