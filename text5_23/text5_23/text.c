@@ -103,32 +103,59 @@
 //	return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
 //}
 
-//572. 另一个树的子树
-//https://leetcode-cn.com/problems/subtree-of-another-tree/
-struct TreeNode
-{
-	int val;
-	struct TreeNode *left;
-	struct TreeNode *right;
-};
-bool isSameTree(struct TreeNode* p, struct TreeNode* q)
-{
-	if (p == NULL && q == NULL)
-		return true;
-	//结构不相同
-	if (p == NULL && q != NULL)
-		return false;
-	if (p != NULL && q == NULL)
-		return false;
-	if (p->val != q->val)
-		return false;
-	return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
-}
-bool isSubtree(struct TreeNode* root, struct TreeNode* subRoot)
-{
-	if (root == NULL)
-		false;
-	if (isSameTree(root, subRoot))
-		return true;
-	return isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot);
-}
+////572. 另一个树的子树
+////https://leetcode-cn.com/problems/subtree-of-another-tree/
+//struct TreeNode
+//{
+//	int val;
+//	struct TreeNode *left;
+//	struct TreeNode *right;
+//};
+//bool isSameTree(struct TreeNode* p, struct TreeNode* q)
+//{
+//	if (p == NULL && q == NULL)
+//		return true;
+//	//结构不相同
+//	if (p == NULL && q != NULL)
+//		return false;
+//	if (p != NULL && q == NULL)
+//		return false;
+//	if (p->val != q->val)
+//		return false;
+//	return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+//}
+//bool isSubtree(struct TreeNode* root, struct TreeNode* subRoot)
+//{
+//	if (root == NULL)
+//		false;
+//	if (isSameTree(root, subRoot))
+//		return true;
+//	return isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot);
+//}
+
+
+
+
+////110. 平衡二叉树
+//struct TreeNode
+//{
+//	int val;
+//	struct TreeNode *left;
+//	struct TreeNode *right;
+//};
+//int TreeDepth(struct TreeNode* root)
+//{
+//	if (root == NULL)
+//		return 0;
+//	int left = TreeDepth(root->left);
+//	int right = TreeDepth(root->right);
+//	return left > right ? left + 1 : right + 1;
+//}
+//bool isBalanced(struct TreeNode* root)
+//{
+//	if (root == NULL)
+//		return true;
+//	int left = TreeDepth(root->left);
+//	int right = TreeDepth(root->right);
+//	return abs(left - right) <= 1 && isBalanced(root->left) && isBalanced(root->right);
+//}
