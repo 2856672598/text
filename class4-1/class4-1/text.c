@@ -516,11 +516,85 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-void main()
-{
-	int a = 3, b = 2, c = 1;
-	c = 5 ? ++a : b--;
-	printf("%d\n", c);
-}
+//#include<stdio.h>
+//void main()
+//{
+//	int a = 3, b = 2, c = 1;
+//	c = 5 ? ++a : b--;
+//	printf("%d\n", c);
+//}
 
+//#include<stdio.h>
+//int main()
+//{
+//	int a[3][3];
+//	int sum = 0;
+//	for (int i = 0; i < 3; i++)
+//	{
+//		for (int j = 0; j < 3; j++)
+//		{
+//			scanf("%d", &a[i][j]);
+//			if (i == j || i + j == 2)
+//				sum += a[i][j];
+//			if (i == j && i + j == 2)
+//				sum += a[i][j];
+//		}
+//	}
+//	printf("sum = %d\n", sum);
+//	return 0;
+//}
+
+//
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[3][6], v[6];
+//	for (int i = 0; i < 6; i++)
+//	{
+//		int sum = 0;
+//		printf("请输入第%d名学生3科成绩成绩", i + 1);
+//		for (int j = 0; j < 3; j++)
+//		{
+//			scanf("%d", &arr[j][i]);
+//			sum += arr[j][i];
+//		}
+//		v[i] = sum / 3;
+//	}
+//	for (int i = 0; i < 6; i++)
+//	{
+//		printf("%d ", v[i]);
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	char arr1[10], arr2[10];
+//	scanf("%s", arr1);
+//
+//	printf("%s\n", arr1);
+//	getchar();
+//	gets(arr2);
+//	puts(arr2);
+//	return 0;
+//}
+
+
+#include<stdio.h>
+void MyStrcat(char* arr1, char* arr2)
+{
+	int i = 0, j = 0;
+	while (arr1[i] != '\0')
+		i++;
+	while ((arr1[i++] = arr2[j++]) != '\0');
+}
+int main()
+{
+	char arr1[30] = "hello";
+	char arr2[] = "word";
+	MyStrcat(arr1, arr2);
+	printf("%s", arr1);
+	return 0;
+}
