@@ -369,6 +369,12 @@ void AdjustDwon(int* nums, int root, int size)
 			break;
 	}
 }
+void Swap(int* a, int* b)
+{
+	int tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
 int thirdMax(int* nums, int numsSize)
 {
 	//½¨¶Ñ
@@ -376,19 +382,31 @@ int thirdMax(int* nums, int numsSize)
 	{
 		AdjustDwon(nums, i, numsSize);
 	}
-	int flag = 0;
-	for (int i = numsSize - 1; i >= 0; i--)
+
+	int ans = nums[0];
+	int max = ans;
+	int count = 0;
+	int size = numsSize;
+	while (count < 3)
 	{
-		int tmp = nums[i];
-		nums[i] = nums[0];
-		nums[0] = tmp;
-		AdjustDwon(nums, 0, i);
-		
+		Swap(&nums[0], &nums[size - 1]);
+		AdjustDwon(nums, 0, size);
+		size--;
+		if (size < 1)
+			return max;
+		if (nums[0] != ans)
+		{
+			count++;
+			ans = nums[0];
+		}
+		else
+			continue;
 	}
+	return nums[0];
 }
 int main()
 {
-	int arr[] = { 3,2, 1 };
+	int arr[] = { 3, 2, 1 };
 	int size = sizeof(arr) / sizeof(arr[0]);
 	printf("%d ", thirdMax(arr, size));
 	return 0;
