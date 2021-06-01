@@ -347,6 +347,7 @@
 
 
 
+//414. 第三大的数
 #include<stdio.h>
 #include<stdlib.h>
 void AdjustDwon(int* nums, int root, int size)
@@ -383,30 +384,29 @@ int thirdMax(int* nums, int numsSize)
 		AdjustDwon(nums, i, numsSize);
 	}
 
-	int ans = nums[0];
-	int max = ans;
+	int max = nums[0];
+	int ans = max;
 	int count = 0;
 	int size = numsSize;
-	while (count < 3)
+	while (count < 2)
 	{
 		Swap(&nums[0], &nums[size - 1]);
-		AdjustDwon(nums, 0, size);
 		size--;
+
 		if (size < 1)
 			return max;
+		AdjustDwon(nums, 0, size);
 		if (nums[0] != ans)
 		{
 			count++;
 			ans = nums[0];
 		}
-		else
-			continue;
 	}
 	return nums[0];
 }
 int main()
 {
-	int arr[] = { 3, 2, 1 };
+	int arr[] = { 3,2, 1,2 };
 	int size = sizeof(arr) / sizeof(arr[0]);
 	printf("%d ", thirdMax(arr, size));
 	return 0;
