@@ -347,67 +347,140 @@
 
 
 
-//414. 第三大的数
+////414. 第三大的数
+//#include<stdio.h>
+//#include<stdlib.h>
+//void AdjustDwon(int* nums, int root, int size)
+//{
+//	int parent = root;
+//	int child = parent * 2 + 1;
+//	while (child < size)
+//	{
+//		if (child + 1 < size && nums[child] < nums[child + 1])
+//			child++;
+//		if (nums[child] > nums[parent])
+//		{
+//			int tmp = nums[child];
+//			nums[child] = nums[parent];
+//			nums[parent] = tmp;
+//			parent = child;
+//			child = parent * 2 + 1;
+//		}
+//		else
+//			break;
+//	}
+//}
+//void Swap(int* a, int* b)
+//{
+//	int tmp = *a;
+//	*a = *b;
+//	*b = tmp;
+//}
+//int thirdMax(int* nums, int numsSize)
+//{
+//	//建堆
+//	for (int i = (numsSize - 1 - 1) / 2; i >= 0; i--)
+//	{
+//		AdjustDwon(nums, i, numsSize);
+//	}
+//
+//	int max = nums[0];
+//	int ans = max;
+//	int count = 0;
+//	int size = numsSize;
+//	while (count < 2)
+//	{
+//		Swap(&nums[0], &nums[size - 1]);
+//		size--;
+//
+//		if (size < 1)
+//			return max;
+//		AdjustDwon(nums, 0, size);
+//		if (nums[0] != ans)
+//		{
+//			count++;
+//			ans = nums[0];
+//		}
+//	}
+//	return nums[0];
+//}
+//int main()
+//{
+//	int arr[] = { 3,2, 1,2 };
+//	int size = sizeof(arr) / sizeof(arr[0]);
+//	printf("%d ", thirdMax(arr, size));
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+////int fib(int n)
+////{
+////	if (n < 2)
+////		return n;
+////	return fib(n - 2) + fib(n - 1);
+////}
+//
+//int fib(int n)
+//{
+//	int cur = 1, prev = 0, sum = 0;
+//	if (n < 2)
+//		return n;
+//	for (int i = 2; i <= n; i++)
+//	{
+//		sum = cur + prev;
+//		prev = cur;
+//		cur = sum;
+//	}
+//	return sum;
+//}
+//int main()
+//{
+//	int n = 5;
+//	printf("%d ", fib(n));
+//	return 0;
+//}
+
+
 #include<stdio.h>
-#include<stdlib.h>
-void AdjustDwon(int* nums, int root, int size)
-{
-	int parent = root;
-	int child = parent * 2 + 1;
-	while (child < size)
-	{
-		if (child + 1 < size && nums[child] < nums[child + 1])
-			child++;
-		if (nums[child] > nums[parent])
-		{
-			int tmp = nums[child];
-			nums[child] = nums[parent];
-			nums[parent] = tmp;
-			parent = child;
-			child = parent * 2 + 1;
-		}
-		else
-			break;
-	}
-}
-void Swap(int* a, int* b)
-{
-	int tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-int thirdMax(int* nums, int numsSize)
-{
-	//建堆
-	for (int i = (numsSize - 1 - 1) / 2; i >= 0; i--)
-	{
-		AdjustDwon(nums, i, numsSize);
-	}
+//int missingNumber(int* nums, int numsSize)
+//{
+//	for (int i = 0; i < numsSize; i++)
+//	{
+//		for (int j = 0; j < numsSize - i - 1; j++)
+//		{
+//			if (nums[j] > nums[j + 1])
+//			{
+//				int tmp = nums[j];
+//				nums[j] = nums[j+1];
+//				nums[j + 1] = tmp;
+//			}
+//		}
+//	}
+//	int i = 0;
+//	for (i = 0; i < numsSize; i++)
+//	{
+//		if (nums[i] != i)
+//			break;
+//	}
+//	return i;
+//}
 
-	int max = nums[0];
-	int ans = max;
-	int count = 0;
-	int size = numsSize;
-	while (count < 2)
-	{
-		Swap(&nums[0], &nums[size - 1]);
-		size--;
 
-		if (size < 1)
-			return max;
-		AdjustDwon(nums, 0, size);
-		if (nums[0] != ans)
-		{
-			count++;
-			ans = nums[0];
-		}
+int missingNumber(int* nums, int numsSize)
+{
+	int sum = 0;
+	for (int i = 0; i < numsSize; i++)
+	{
+		sum += nums[i];
 	}
-	return nums[0];
+	int flag = (1 + numsSize) * numsSize / 2;
+	return flag - sum;
 }
 int main()
 {
-	int arr[] = { 3,2, 1,2 };
+	int arr[] = { 3,0,1,2,5 };
 	int size = sizeof(arr) / sizeof(arr[0]);
-	printf("%d ", thirdMax(arr, size));
+	printf("%d ", missingNumber(arr, size));
 	return 0;
 }
