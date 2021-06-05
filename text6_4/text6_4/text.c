@@ -1,5 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdbool.h>
+#include<time.h>
+#include<stdlib.h>
 
 void Swap(int*a, int* b)
 {
@@ -175,41 +178,81 @@ void BubbleSort(int* a, int n)
 
 
 //快排
+int GetMid(int*a, int left, int right)
+{
+	int mid = (left + right) >> 1;
+	if (a[left] >a[mid])
+	{
+		if (a[mid] > a[right])
+			return mid;
+		else if (a[left] > a[right])
+			return right;
+		else
+			return left;
+	}
+	else
+	{
+		if (a[mid] < a[right])
+			return mid;
+		else if (a[left] > a[right])
+			return right;
+		else
+			return left;
+	}
+}
+
 void Qsort(int* a, int left, int right)
 {
 	int begin = left, end = right;
-
-	if (left > right)
+	if (begin >= end)
 		return;
+	//三数取中
+	int mid = GetMid(a, left, right);
+	Swap(&a[mid], &a[left]);
 
-	int key = a[begin];
-	int pivot = begin;
+	int pivot = left, key = a[left];
 	while (begin < end)
 	{
-		//找小放到左边
-		while (begin < end&& a[end] >= key)
+		//从右往左找比key小的
+		while (begin < end&&a[end] >= key)
 		{
-			--end;
+			end--;
 		}
-		//进坑
+		//找到后进坑
 		a[pivot] = a[end];
 		pivot = end;
-
-		//找大进坑
-		while (begin < end&& a[begin] <= key)
+		//从左向右找比key大的放进坑里
+		while (begin < end&&a[begin] <= key)
 		{
 			begin++;
 		}
 		a[pivot] = a[begin];
 		pivot = begin;
 	}
-	//找到key的位置
+	//把key放入坑中
 	a[pivot] = key;
 	Qsort(a, left, pivot - 1);
 	Qsort(a, pivot + 1, right);
+	if (pivot - left + 1 > 10)
+		Qsort(a, left, pivot - 1);
+	else
+		InsertSort(a + left, pivot - left + 1);
+
+	if (right - pivot + 1 > 10)
+		Qsort(a, pivot + 1, right);
+	else
+		InsertSort(a + pivot, right - pivot + 1);
 }
 int main()
 {
+	//int n = 100000;
+	//srand((unsigned)time(NULL));
+	//int* arr1 = malloc(sizeof(int) * n);
+	//for (int i = 0; i < n; i++)
+	//{
+	//	arr1[i] = rand();
+	//}
+
 	int arr[] = { 0,-1,5,8,3,7,4,6,2,-9 };
 	int size = sizeof(arr) / sizeof(arr[0]);
 	//InsertSort(arr, size);
@@ -225,5 +268,6 @@ int main()
 	Qsort(arr, 0, size - 1);
 	for (int i = 0; i < size; i++)
 		printf("%d ", arr[i]);
+	text();
 	return 0;
 }
