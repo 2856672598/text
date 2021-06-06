@@ -243,6 +243,103 @@ void Qsort(int* a, int left, int right)
 	else
 		InsertSort(a + pivot, right - pivot + 1);
 }
+
+void Qsort2(int* a, int left, int right)
+{
+	int begin = left, end = right, key = left;
+	if (begin >= end)
+		return;
+	//三数取中
+	int mid = GetMid(a, left, right);
+	Swap(&a[mid], &a[key]);
+
+	while (begin < end)
+	{
+		while (begin < end && a[end] >= a[key])
+			end--;
+		while (begin < end && a[begin] <= a[key])
+			begin++;
+		Swap(&a[end], &a[begin]);
+	}
+	Swap(&a[key], &a[begin]);
+
+	Qsort2(a, left, begin - 1);
+	Qsort2(a, begin + 1, right);
+}
+
+void Qsort3(int* a, int left, int right)
+{
+	//快慢指针
+	if (left >= right)
+		return;
+	int mid = GetMid(a, left, right);
+	Swap(&a[left], &a[mid]);
+
+	int cur = left + 1, prev = left, keyi = left;
+	while (cur <= right)
+	{
+		//遇到比key小的就交换
+		if (a[cur] < a[keyi])
+		{
+			prev++;
+			Swap(&a[prev], &a[cur]);
+		}
+		cur++;
+	}
+	//将prev与key进行交换
+	Swap(&a[prev], &a[keyi]);
+
+	Qsort3(a, left, prev - 1);
+	Qsort3(a, prev + 1, right);
+}
+
+//归并排序
+void _MergeSort(int* a, int left, int right, int* tmp)
+{
+	if (left >= right)
+		return;
+	//排序---划分子问题---让左右区间都有序
+	int mid = (left + right) >> 1;
+	_MergeSort(a, left, mid, tmp);
+	_MergeSort(a, mid + 1, right, tmp);
+	//归并
+	int left1 = left, right1 = mid;
+	int left2 = mid + 1, right2 = right;
+	int insert = left;
+	while (left1 <= right1 && left2 <= right2)
+	{
+		if (a[left1] < a[left2])
+		{
+			tmp[insert++] = a[left1++];
+		}
+		else
+		{
+			tmp[insert++] = a[left2++];
+		}
+	}
+	while (left1 <= right1)
+	{
+		tmp[insert++] = a[left1++];
+	}
+	while (left2 <= right2)
+	{
+		tmp[insert++] = a[left2++];
+	}
+	//拷贝
+	for (int i = left; i <= right; i++)
+	{
+		a[i] = tmp[i];
+	}
+
+}
+void MergeSort(int* a, int n)
+{
+	int* tmp = malloc(sizeof(int)*n);
+
+	_MergeSort(a, 0, n - 1, tmp);
+
+	free(tmp);
+}
 int main()
 {
 	//int n = 100000;
@@ -253,7 +350,7 @@ int main()
 	//	arr1[i] = rand();
 	//}
 
-	int arr[] = { 0,-1,5,8,3,7,4,6,2,-9 };
+	int arr[] = { 0,-1,5,8,3,7,4,6,2,-9,5,5,8 };
 	int size = sizeof(arr) / sizeof(arr[0]);
 	//InsertSort(arr, size);
 	
@@ -265,9 +362,13 @@ int main()
 
 	//BubbleSort(arr, size);
 
-	Qsort(arr, 0, size - 1);
+	//Qsort2(arr, 0, size - 1);
+
+	//Qsort3(arr, 0, size - 1);
+
+	MergeSort(arr, size);
 	for (int i = 0; i < size; i++)
 		printf("%d ", arr[i]);
-	text();
+
 	return 0;
 }
