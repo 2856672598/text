@@ -122,10 +122,42 @@ char * addBinary(char * a, char * b)
 	arr[len] = '\0';
 	return arr;
 }
-int main()
+
+//231. 2 的幂
+bool isPowerOfTwo(int n)
 {
-	char arr1[] = "11";
-	char arr2[] = "1";
-	printf("%s", addBinary(arr1, arr2));
-	return 0;
+	if (n == 0)
+		return false;
+	while (n % 2 == 0)
+	{
+		n /= 2;
+		if (n == 0)
+			break;
+	}
+	//0次方等于1
+	if (n == 0 || n == 1)
+		return true;
+	else
+		return false;
+}
+//922. 按奇偶排序数组 II
+int* sortArrayByParityII(int* nums, int numsSize, int* returnSize)
+{
+	*returnSize = numsSize;
+	int* arr = malloc(sizeof(int)*numsSize);
+	int i = 0, add = 0, even = 1;
+	for (int i = 0; i < numsSize; i++)
+	{
+		if (nums[i] % 2 == 0)
+		{
+			arr[add] = nums[i];
+			add += 2;
+		}
+		else
+		{
+			arr[even] = nums[i];
+			even += 2;
+		}
+	}
+	return arr;
 }
