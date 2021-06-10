@@ -1,2 +1,2 @@
 ﻿  text.c
-  text_6_7.vcxproj -> D:\Githup\text\text_6_7\Debug\text_6_7.exe
+d:\githup\text\text_6_7\text_6_7\text.c(189): warning C4047: “初始化”:“int”与“int *”的间接级别不同

@@ -161,3 +161,47 @@ int* sortArrayByParityII(int* nums, int numsSize, int* returnSize)
 	}
 	return arr;
 }
+
+int* findDisappearedNumbers(int* nums, int numsSize, int* returnSize)
+{
+	int* arr = malloc(sizeof(int)*(numsSize + 1));
+	memset(arr, 0, 4 * (numsSize + 1));
+	for (int i = 0; i < numsSize; i++)
+	{
+		arr[nums[i]] += 1;
+	}
+	*returnSize = 0;
+	for (int i = 1; i <= numsSize; i++)
+	{
+		if (arr[i] == 0)
+		{
+			arr[*returnSize] = i;
+			(*returnSize)++;
+		}
+	}
+	return arr;
+}
+
+//832. ·­×ªÍ¼Ïñ
+int** flipAndInvertImage(int** image, int imageSize, int* imageColSize, int* returnSize, int** returnColumnSizes)
+{
+	*returnSize = imageSize;
+	*returnColumnSizes = imageColSize;
+	for (int i = 0; i < imageSize; i++)
+	{
+		int left = 0, right = (*imageColSize) - 1;
+		while (left < right)
+		{
+			if (image[i][left] == image[i][right])
+			{
+				image[i][left] ^= 1;
+				image[i][right] ^= 1;
+			}
+			left++;
+			right--;
+		}
+		if (left == right)
+			image[i][left] ^= 1;
+	}
+	return image;
+}
