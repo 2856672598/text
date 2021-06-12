@@ -3,7 +3,7 @@
 #include<stdbool.h>
 #include<time.h>
 #include<stdlib.h>
-
+#include"stack.h"
 void Swap(int*a, int* b)
 {
 	int tmp = *a;
@@ -293,6 +293,50 @@ void Qsort3(int* a, int left, int right)
 	Qsort3(a, prev + 1, right);
 }
 
+//非递归实现快排
+int Single(int* arr, int left, int right)
+{
+	int pivot = left, key = arr[left];
+	while (left < right)
+	{
+		while (left < right && arr[right] >= key)
+			right--;
+		arr[pivot] = arr[right];
+		pivot = right;
+		while (left < right &&  arr[left] <= key)
+			left++;
+		arr[pivot] = arr[left];
+		pivot = left;
+	}
+	arr[pivot] = key;
+	return pivot;
+}
+void Qsort4(int* arr, int arrsize)
+{
+	ST st;
+	InitStack(&st);
+	int left = 0, right = arrsize - 1;
+	StackPush(&st, left, right);
+	while (!StackEmpty(&st))
+	{
+		Data data = StackTop(&st);
+		StackPop(&st);
+		left = data.left;
+		right = data.right;
+		int pivot = Single(arr, left, right);
+
+		if (pivot + 1 < right)
+		{
+			StackPush(&st, pivot + 1, right);
+		}
+		if (pivot - 1 > left)
+		{
+			StackPush(&st, left, pivot - 1);
+		}
+	}
+	DestoryStack(&st);
+}
+
 //归并排序
 void _MergeSort(int* a, int left, int right, int* tmp)
 {
@@ -332,13 +376,65 @@ void _MergeSort(int* a, int left, int right, int* tmp)
 	}
 
 }
+//void MergeSort(int* a, int n)
+//{
+//	int* tmp = malloc(sizeof(int)*n);
+//
+//	_MergeSort(a, 0, n - 1, tmp);
+//
+//	free(tmp);
+//}
+
+void MergeSort1(int* a, int n, int* tmp)
+{
+	int gap = 1;
+	while (gap < n)
+	{
+		for (int i = 0; i < n; i += gap * 2)
+		{
+			int begin1 = i, end1 = i + gap - 1;
+			int begin2 = i + gap, end2 = i + gap * 2 - 1;
+			int insert = i;
+			//右区间可能不够--调整右区间的边界
+			if (end2 >= n)
+			{
+				end2 = n - 1;
+			}
+			//右区间可能不存在
+			if (begin2 >= n)
+				break;
+
+			while (begin1 <= end1 && begin2 <= end2)
+			{
+				if (a[begin1] < a[begin2])
+				{
+					tmp[insert++] = a[begin1++];
+				}
+				else
+					tmp[insert++] = a[begin2++];
+			}
+			while (begin1 <= end1)
+			{
+				tmp[insert++] = a[begin1++];
+			}
+			while (begin2 <= end2)
+			{
+				tmp[insert++] = a[begin2++];
+			}
+			//拷贝
+			for (int j = 0; j < end2; j++)
+			{
+				a[j] = tmp[j];
+			}
+		}
+		gap *= 2;
+	}
+	free(tmp);
+}
 void MergeSort(int* a, int n)
 {
 	int* tmp = malloc(sizeof(int)*n);
-
-	_MergeSort(a, 0, n - 1, tmp);
-
-	free(tmp);
+	MergeSort1(a, n, tmp);
 }
 int main()
 {
@@ -367,6 +463,8 @@ int main()
 	//Qsort3(arr, 0, size - 1);
 
 	MergeSort(arr, size);
+
+	//Qsort4(arr, size);
 	for (int i = 0; i < size; i++)
 		printf("%d ", arr[i]);
 
