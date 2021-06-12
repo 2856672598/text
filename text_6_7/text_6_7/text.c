@@ -205,3 +205,68 @@ int** flipAndInvertImage(int** image, int imageSize, int* imageColSize, int* ret
 	}
 	return image;
 }
+
+//485. 最大连续 1 的个数
+int findMaxConsecutiveOnes(int* nums, int numsSize)
+{
+	int i = 0, count = 0, max = 0;
+	while (i < numsSize)
+	{
+		while (i < numsSize && nums[i] == 1)
+		{
+			i++;
+			count++;
+		}
+		if (count > max)
+			max = count;
+		count = 0;
+		i++;
+	}
+	return max;
+}
+
+//561. 数组拆分 I
+//使用冒泡超时
+int Cmp(const void* a, const void* b)
+{
+	return *((int*)a) - *((int*)b);
+}
+
+int arrayPairSum(int* nums, int numsSize)
+{
+	//排序后偶数位相加
+	qsort(nums, numsSize, sizeof(int), Cmp);
+	int sum = 0;
+	for (int i = 0; i < numsSize; i += 2)
+	{
+		sum += nums[i];
+	}
+	return sum;
+}
+//int main()
+//{
+//	int arr[] = { 1,4,3,2 };
+//	int size = sizeof(arr) / sizeof(arr[0]);
+//
+//	int sum = arrayPairSum(arr, size);
+//	printf("%d ", sum);
+//	return 0;
+//}
+
+
+//717. 1比特与2比特字符
+bool isOneBitCharacter(int* bits, int bitsSize)
+{
+	int i = 0;
+	while (i < bitsSize - 1)
+	{
+		if (bits[i] == 1)
+			i += 2;
+		else
+			i++;
+	}
+	if (i == bitsSize - 1)
+		return true;
+	else
+		return false;
+}
