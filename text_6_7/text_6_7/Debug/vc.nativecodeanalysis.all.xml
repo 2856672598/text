@@ -1588,7 +1588,7 @@
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>6386</DEFECTCODE>
-    <DESCRIPTION>写入到“arr”时缓冲区溢出: 可写大小为“sizeof(int)*(unsigned int)numsSize”个字节，但可能写入了“8”个字节。</DESCRIPTION>
+    <DESCRIPTION>写入到“arr”时缓冲区溢出: 可写大小为“sizeof(int)*(unsigned int)(numsSize+1)”个字节，但可能写入了“8”个字节。</DESCRIPTION>
     <FUNCTION>findDisappearedNumbers</FUNCTION>
     <DECORATED>findDisappearedNumbers</DECORATED>
     <FUNCLINE>165</FUNCLINE>
@@ -1633,12 +1633,6 @@
         <FILENAME>text.c</FILENAME>
         <LINE>169</LINE>
         <COLUMN>19</COLUMN>
-        <KEYEVENT>
-          <ID>3</ID>
-          <KIND>分支</KIND>
-          <IMPORTANCE>Full</IMPORTANCE>
-          <MESSAGE>跳过此循环(假定“i&lt;numsSize”为 false)</MESSAGE>
-        </KEYEVENT>
       </SFA>
       <SFA>
         <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
@@ -1694,10 +1688,10 @@
         <LINE>174</LINE>
         <COLUMN>19</COLUMN>
         <KEYEVENT>
-          <ID>4</ID>
+          <ID>3</ID>
           <KIND>分支</KIND>
           <IMPORTANCE>Full</IMPORTANCE>
-          <MESSAGE>进入此循环(假定“i&lt;numsSize”)</MESSAGE>
+          <MESSAGE>进入此循环(假定“i&lt;=numsSize”)</MESSAGE>
         </KEYEVENT>
       </SFA>
       <SFA>
@@ -1706,7 +1700,7 @@
         <LINE>176</LINE>
         <COLUMN>13</COLUMN>
         <KEYEVENT>
-          <ID>5</ID>
+          <ID>4</ID>
           <KIND>分支</KIND>
           <IMPORTANCE>Full</IMPORTANCE>
           <MESSAGE>进入此分支(假定“arr[i]==0”)</MESSAGE>
@@ -1728,7 +1722,7 @@
         <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
         <FILENAME>text.c</FILENAME>
         <LINE>174</LINE>
-        <COLUMN>32</COLUMN>
+        <COLUMN>33</COLUMN>
       </SFA>
       <SFA>
         <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
@@ -1736,10 +1730,10 @@
         <LINE>174</LINE>
         <COLUMN>19</COLUMN>
         <KEYEVENT>
-          <ID>6</ID>
+          <ID>5</ID>
           <KIND>分支</KIND>
           <IMPORTANCE>Full</IMPORTANCE>
-          <MESSAGE>继续此循环(假定“i&lt;numsSize”)</MESSAGE>
+          <MESSAGE>继续此循环(假定“i&lt;=numsSize”)</MESSAGE>
         </KEYEVENT>
       </SFA>
       <SFA>
@@ -1748,7 +1742,7 @@
         <LINE>176</LINE>
         <COLUMN>13</COLUMN>
         <KEYEVENT>
-          <ID>7</ID>
+          <ID>6</ID>
           <KIND>分支</KIND>
           <IMPORTANCE>Full</IMPORTANCE>
           <MESSAGE>进入此分支(假定“arr[i]==0”)</MESSAGE>
@@ -1760,10 +1754,587 @@
         <LINE>178</LINE>
         <COLUMN>20</COLUMN>
         <KEYEVENT>
-          <ID>8</ID>
+          <ID>7</ID>
           <KIND>使用情况</KIND>
           <IMPORTANCE>Essential</IMPORTANCE>
           <MESSAGE>写入到“arr”无效(位于其可写范围之外)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+      <FILENAME>text.c</FILENAME>
+      <LINE>317</LINE>
+      <COLUMN>12</COLUMN>
+    </SFA>
+    <DEFECTCODE>28182</DEFECTCODE>
+    <DESCRIPTION>取消对 NULL 指针的引用。“tmp”包含与“l2”相同的 NULL 值。查看第 303 行以找出可能会发生此情况的前一位置</DESCRIPTION>
+    <FUNCTION>mergeTwoLists</FUNCTION>
+    <DECORATED>mergeTwoLists</DECORATED>
+    <FUNCLINE>279</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>3</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>281</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>283</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>286</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>286</LINE>
+        <COLUMN>32</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>287</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>289</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>291</LINE>
+        <COLUMN>15</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>298</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>299</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>301</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>303</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>311</LINE>
+        <COLUMN>13</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>312</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>313</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>287</LINE>
+        <COLUMN>19</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>声明</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>“tmp”可能为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>316</LINE>
+        <COLUMN>8</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>分支</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>进入此分支(假定“l1!=(((void *)0))”)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>317</LINE>
+        <COLUMN>12</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>使用情况</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>已取消对“tmp”的引用，但可能仍为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+      <FILENAME>text.c</FILENAME>
+      <LINE>331</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>6011</DEFECTCODE>
+    <DESCRIPTION>取消对 NULL 指针“p3”的引用。</DESCRIPTION>
+    <FUNCTION>main</FUNCTION>
+    <DECORATED>main</DECORATED>
+    <FUNCLINE>322</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>324</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>325</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>327</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>328</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>330</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>声明</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>“p3”可能为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>331</LINE>
+        <COLUMN>9</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>使用情况</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>已取消对“p3”的引用，但可能仍为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+      <FILENAME>text.c</FILENAME>
+      <LINE>325</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>6011</DEFECTCODE>
+    <DESCRIPTION>取消对 NULL 指针“p1”的引用。</DESCRIPTION>
+    <FUNCTION>main</FUNCTION>
+    <DECORATED>main</DECORATED>
+    <FUNCLINE>322</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>324</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>声明</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>“p1”可能为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>325</LINE>
+        <COLUMN>9</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>使用情况</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>已取消对“p1”的引用，但可能仍为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+      <FILENAME>text.c</FILENAME>
+      <LINE>328</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>6011</DEFECTCODE>
+    <DESCRIPTION>取消对 NULL 指针“p2”的引用。</DESCRIPTION>
+    <FUNCTION>main</FUNCTION>
+    <DECORATED>main</DECORATED>
+    <FUNCLINE>322</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>324</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>325</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>327</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>声明</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>“p2”可能为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>328</LINE>
+        <COLUMN>9</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>使用情况</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>已取消对“p2”的引用，但可能仍为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+      <FILENAME>text.c</FILENAME>
+      <LINE>334</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>6011</DEFECTCODE>
+    <DESCRIPTION>取消对 NULL 指针“p4”的引用。</DESCRIPTION>
+    <FUNCTION>main</FUNCTION>
+    <DECORATED>main</DECORATED>
+    <FUNCLINE>322</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>324</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>325</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>327</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>328</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>330</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>331</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>333</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>声明</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>“p4”可能为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>334</LINE>
+        <COLUMN>9</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>使用情况</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>已取消对“p4”的引用，但可能仍为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+      <FILENAME>text.c</FILENAME>
+      <LINE>337</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>6011</DEFECTCODE>
+    <DESCRIPTION>取消对 NULL 指针“p5”的引用。</DESCRIPTION>
+    <FUNCTION>main</FUNCTION>
+    <DECORATED>main</DECORATED>
+    <FUNCLINE>322</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>324</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>325</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>327</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>328</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>330</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>331</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>333</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>334</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>336</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>声明</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>“p5”可能为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>337</LINE>
+        <COLUMN>9</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>使用情况</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>已取消对“p5”的引用，但可能仍为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+      <FILENAME>text.c</FILENAME>
+      <LINE>340</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>6011</DEFECTCODE>
+    <DESCRIPTION>取消对 NULL 指针“p6”的引用。</DESCRIPTION>
+    <FUNCTION>main</FUNCTION>
+    <DECORATED>main</DECORATED>
+    <FUNCLINE>322</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>324</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>325</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>327</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>328</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>330</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>331</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>333</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>334</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>336</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>337</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>339</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>声明</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>“p6”可能为 NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>d:\githup\text\text_6_7\text_6_7</FILEPATH>
+        <FILENAME>text.c</FILENAME>
+        <LINE>340</LINE>
+        <COLUMN>9</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>使用情况</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>已取消对“p6”的引用，但可能仍为 NULL</MESSAGE>
         </KEYEVENT>
       </SFA>
     </PATH>

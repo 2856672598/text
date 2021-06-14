@@ -270,3 +270,102 @@ bool isOneBitCharacter(int* bits, int bitsSize)
 	else
 		return false;
 }
+
+//剑指 Offer 25. 合并两个排序的链表
+typedef struct ListNode
+{
+	int val;
+	struct ListNode *next;
+}ListNode;
+struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2)
+{
+	if (l1 == NULL)
+		return l2;
+	if (l2 == NULL)
+		return l1;
+
+	struct ListNode* head = NULL, *tmp = NULL;
+	if (l1->val < l2->val)
+	{
+		head = l1;
+		l1 = l1->next;
+	}
+	else
+	{
+		head = l2;
+		l2 = l2->next;
+	}
+	tmp = head;
+	while (l1!= NULL && l2!= NULL)
+	{
+		if (l1->val < l2->val)
+		{
+			tmp->next = l1;
+			tmp = l1;
+			l1 = l1->next;
+		}
+		else
+		{
+			tmp->next = l2;
+			tmp = l2;
+			l2 = l2->next;
+		}
+	}
+	if (l1 != NULL)
+		tmp->next = l1;
+	if (l2 != NULL)
+		tmp->next = l2;
+	return head;
+}
+//int main()
+//{
+//	ListNode* p1 = malloc(sizeof(ListNode));
+//	p1->val = 1;
+//
+//	ListNode* p2 = malloc(sizeof(ListNode));
+//	p2->val = 2;
+//
+//	ListNode* p3 = malloc(sizeof(ListNode));
+//	p3->val = 4;
+//
+//	ListNode* p4 = malloc(sizeof(ListNode));
+//	p4->val = 1;
+//
+//	ListNode* p5 = malloc(sizeof(ListNode));
+//	p5->val = 3;
+//
+//	ListNode* p6 = malloc(sizeof(ListNode));
+//	p6->val = 4;
+//	p1->next = p2;
+//	p2->next = p3;
+//	p3->next = NULL;
+//
+//	p4->next = p5;
+//	p5->next = p6;
+//	p6->next = NULL;
+//
+//	ListNode* head = mergeTwoLists(p1, p4);
+//	while (head)
+//	{
+//		printf("%d ", head->val);
+//		head = head->next;
+//	}
+//	return 0;
+//}
+
+//剑指 Offer 21. 调整数组顺序使奇数位于偶数前面
+int* exchange(int* nums, int numsSize, int* returnSize)
+{
+	int* arr = malloc(sizeof(int)*numsSize);
+	int left = 0, right = numsSize - 1;
+	for (int i = 0; i < numsSize; i++)
+	{
+		if (nums[i] % 2 == 1)
+			arr[left++] = nums[i];
+		else
+			arr[right--] = nums[i];
+	}
+	*returnSize = numsSize;
+	return arr;
+}
+
