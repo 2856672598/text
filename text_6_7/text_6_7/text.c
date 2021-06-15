@@ -369,3 +369,31 @@ int* exchange(int* nums, int numsSize, int* returnSize)
 	return arr;
 }
 
+#include<stdio.h>
+int main()
+{
+	char arr[100] = { 0 };
+	char py[][10] = { "ling","yi","er","san","si","wu","liu","qi","ba","jiu" };
+	scanf("%s", arr);
+	int size = strlen(arr);
+	int sum = 0;
+	for (int i = 0; i < size; i++)
+	{
+		sum += arr[i] - '0';
+	}
+	int a[5] = { 0 };
+	int i = 0;
+	while (sum)
+	{
+		a[i++] = sum % 10;
+		sum /= 10;
+	}
+	i -= 1;
+	for (i; i >= 0; i--)
+	{
+		printf("%s", py[a[i]]);
+		if (i != 0)
+			printf(" ");
+	}
+	return 0;
+}
