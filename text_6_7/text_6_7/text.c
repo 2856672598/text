@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdbool.h>
 #include<stdlib.h>
@@ -369,31 +370,129 @@ int* exchange(int* nums, int numsSize, int* returnSize)
 	return arr;
 }
 
+//#include<stdio.h>
+//int main()
+//{
+//	char arr[100] = { 0 };
+//	char py[][10] = { "ling","yi","er","san","si","wu","liu","qi","ba","jiu" };
+//	scanf("%s", arr);
+//	int size = strlen(arr);
+//	int sum = 0;
+//	for (int i = 0; i < size; i++)
+//	{
+//		sum += arr[i] - '0';
+//	}
+//	int a[5] = { 0 };
+//	int i = 0;
+//	while (sum)
+//	{
+//		a[i++] = sum % 10;
+//		sum /= 10;
+//	}
+//	i -= 1;
+//	for (i; i >= 0; i--)
+//	{
+//		printf("%s", py[a[i]]);
+//		if (i != 0)
+//			printf(" ");
+//	}
+//	return 0;
+//}
+
+//1004 成绩排名 (20 分)
+//#include<stdio.h>
+//typedef struct student
+//{
+//	char id[20];
+//	char name[20];
+//	int result;
+//}student;
+//int main()
+//{
+//	int n = 0;
+//	int max = -1, min = 101;
+//	struct student input;
+//	struct student Max, Min;
+//	scanf("%d", &n);
+//	while (n)
+//	{
+//		scanf("%s %s %d", input.name, input.id, &input.result);
+//		if (max < input.result)
+//		{
+//			Max.result = input.result;
+//			strcpy(Max.name, input.name);
+//			strcpy(Max.id, input.id);
+//			max = input.result;
+//		}
+//		if (min > input.result)
+//		{
+//			Min.result = input.result;
+//			strcpy(Min.name, input.name);
+//			strcpy(Min.id, input.id);
+//			min = input.result;
+//		}
+//
+//		n--;
+//	}
+//	printf("%s %s\n", Max.name, Max.id);
+//	printf("%s %s\n", Min.name, Min.id);
+//	return 0;
+//}
+
+//1006 换个格式输出整数 (15 分)
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0;
+//	int arr[3] = { 0 };
+//	scanf("%d", &n);
+//	int i = 0;
+//	while (n)
+//	{
+//		arr[i++] = n % 10;
+//		n /= 10;
+//	}
+//	while (arr[2])
+//	{
+//		printf("%c", 'B');
+//		arr[2] -= 1;
+//	}
+//	while (arr[1])
+//	{
+//		printf("%c", 'S');
+//		arr[1] -= 1;
+//	}
+//	for (i = 1; i <= arr[0]; i++)
+//		printf("%d", i);
+//	return 0;
+//}
+
 #include<stdio.h>
 int main()
 {
-	char arr[100] = { 0 };
-	char py[][10] = { "ling","yi","er","san","si","wu","liu","qi","ba","jiu" };
-	scanf("%s", arr);
-	int size = strlen(arr);
-	int sum = 0;
-	for (int i = 0; i < size; i++)
+	int arr[3];
+	for (int i = 0; i < 3; i++)
+		scanf("%d", &arr[i]);
+
+	if (arr[1] < arr[2])
 	{
-		sum += arr[i] - '0';
+		int tmp = arr[2];
+		arr[2] = arr[1];
+		arr[1] = tmp;
 	}
-	int a[5] = { 0 };
-	int i = 0;
-	while (sum)
+	if (arr[0] < arr[2])
 	{
-		a[i++] = sum % 10;
-		sum /= 10;
+		int tmp = arr[2];
+		arr[2] = arr[0];
+		arr[0] = tmp;
 	}
-	i -= 1;
-	for (i; i >= 0; i--)
+	if (arr[1] > arr[0])
 	{
-		printf("%s", py[a[i]]);
-		if (i != 0)
-			printf(" ");
+		int tmp = arr[1];
+		arr[1] = arr[0];
+		arr[0] = tmp;
 	}
+	for (int i = 0; i < 3; i++)
+		printf("%d", arr[i]);
 	return 0;
 }

@@ -1,3 +1,2 @@
 ﻿  text.c
-d:\githup\text\text_6_7\text_6_7\text.c(377): error C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1274): note: 参见“scanf”的声明
+  text_6_7.vcxproj -> D:\Githup\text\text_6_7\Debug\text_6_7.exe
