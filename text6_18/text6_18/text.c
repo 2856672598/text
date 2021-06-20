@@ -373,49 +373,68 @@
 //}
 
 
+//#include<stdio.h>
+//int search(int* nums, int numsSize, int target)
+//{
+//	int left = 0, right = numsSize - 1;
+//	int num = 0;
+//	while (left <= right)
+//	{
+//		int min = (left + right) / 2;
+//		if (nums[min] > target)
+//			right = min - 1;
+//		else if (nums[min] < target)
+//			left = min + 1;
+//		else
+//		{
+//			int flag = min - 1;
+//			while (left <= flag)
+//			{
+//				if (nums[flag] == target)
+//					num++;
+//				else
+//					break;
+//				flag--;
+//			}
+//			flag = min + 1;
+//			while (flag <= right)
+//			{
+//				if (nums[flag] == target)
+//					num++;
+//				else
+//					break;
+//				flag++;
+//			}
+//			num += 1;
+//			return num;
+//		}
+//	}
+//	return num;
+//}
+//int main()
+//{
+//	int arr[] = { 5,7,7,8,8,10 };
+//	int target = 8;
+//	int flag = search(arr, 6, target);
+//	printf("%d", flag);
+//	return 0;
+//}
+
+
 #include<stdio.h>
-int search(int* nums, int numsSize, int target)
+int cmp(const void* a, const void* b)
 {
-	int left = 0, right = numsSize - 1;
-	int num = 0;
-	while (left <= right)
-	{
-		int min = (left + right) / 2;
-		if (nums[min] > target)
-			right = min - 1;
-		else if (nums[min] < target)
-			left = min + 1;
-		else
-		{
-			int flag = min - 1;
-			while (left <= flag)
-			{
-				if (nums[flag] == target)
-					num++;
-				else
-					break;
-				flag--;
-			}
-			flag = min + 1;
-			while (flag <= right)
-			{
-				if (nums[flag] == target)
-					num++;
-				else
-					break;
-				flag++;
-			}
-			num += 1;
-			return num;
-		}
-	}
-	return num;
+	return (*(int*)a) - (*(int*)b);
 }
-int main()
+int majorityElement(int* nums, int numsSize)
 {
-	int arr[] = { 5,7,7,8,8,10 };
-	int target = 8;
-	int flag = search(arr, 6, target);
-	printf("%d", flag);
-	return 0;
+	qsort(nums, numsSize, sizeof(int), cmp);
+	int min = (numsSize - 1) / 2;
+	for (int i = 0; min < numsSize; i++)
+	{
+		if (nums[i] == nums[min])
+			break;
+		min++;
+	}
+	return nums[min];
 }
