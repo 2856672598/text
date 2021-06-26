@@ -1,2 +1,3 @@
 ﻿  text.c
+d:\githup\text\text6_24\text6_24\text.c(479): warning C4715: “lastRemaining”: 不是所有的控件路径都返回值
   text6_24.vcxproj -> D:\Githup\text\text6_24\Debug\text6_24.exe

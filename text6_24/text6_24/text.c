@@ -228,47 +228,223 @@
 //}
 
 
+//#include<stdio.h>
+//#include<stdlib.h>
+//int* spiralOrder(int** matrix, int matrixSize, int* matrixColSize, int* returnSize)
+//{
+//	if (matrixSize == 0 || *matrixColSize == 0)
+//	{
+//		*returnSize = 0;
+//		return NULL;
+//	}
+//	int row = matrixSize, col = *matrixColSize;
+//	int total = row * col;
+//
+//	int* arr = malloc(sizeof(int)*total);
+//	int left = 0, right = col - 1;
+//	int top = 0, bottom = row - 1;
+//	*returnSize = 0;
+//	while (left <= right && top <= bottom)
+//	{
+//		//上面
+//		for (int column = left; column <= right; column++)
+//			arr[(*returnSize)++] = *(*(matrix + top) + column);
+//		//左面
+//		for (int soon = top + 1; soon <= bottom; soon++)
+//			arr[(*returnSize)++] = *(*(matrix + soon) + right);
+//
+//		//下面
+//		if (top < bottom && left < right)
+//		{
+//			for (int column = right - 1; column > left; column--)
+//				arr[(*returnSize)++] = *(*(matrix + bottom) + column);
+//			for (int soon = bottom; soon > top; soon--)
+//				arr[(*returnSize)++] = *(*(matrix + soon) + left);
+//		}
+//		left++;
+//		right--;
+//		bottom--;
+//		top++;
+//	}
+//	return arr;
+//}
+//int main()
+//{
+//	int arr[3][3] = { 1,2,3,4,5,6,7,8,9 };
+//	int returnSize = 0;
+//	int col = 3;
+//	int* p[3];
+//	p[0] = arr[0];
+//	p[1] = arr[1];
+//	p[2] = arr[2];
+//	int* arr1 = spiralOrder(p, 3, &col, &returnSize);
+//	for (int i = 0; i < returnSize; i++)
+//		printf("%d ", arr1[i]);
+//	return 0;
+//}
+
+////剑指 Offer 52. 两个链表的第一个公共节点
+//#include<stdio.h>
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode *next;
+//};
+//int length(struct ListNode* head)
+//{
+//	int count = 0;
+//	while (head)
+//	{
+//		head = head->next;
+//		count++;
+//	}
+//	return count;
+//}
+////struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB)
+////{
+////	int lengtha = length(headA);
+////	int lengthb = length(headB);
+////	int k = 0;
+////	if (lengtha > lengthb)
+////	{
+////		k = lengtha - lengthb;
+////		while (headA && k)
+////		{
+////			k--;
+////			headA = headA->next;
+////		}
+////	}
+////	else
+////	{
+////		k = lengthb - lengtha;
+////		while (headB && k)
+////		{
+////			k--;
+////			headB = headB->next;
+////		}
+////	}
+////	while (headA != headB)
+////	{
+////		headA = headA->next;
+////		headB = headB->next;
+////	}
+////	return headA;
+////}
+//
+//
+//#include<stdlib.h>
+//struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB)
+//{
+//	struct ListNode* node1 = headA, *node2 = headB;
+//	while (node1 != node2)
+//	{
+//		//if (node1)
+//		//	node1 = node1->next;
+//		//else
+//		//	node1 = headB;
+//		//if (node2)
+//		//	node2 = node2->next;
+//		//else
+//		//	node2 = headA;
+//		node1 = node1 ? node1->next : headB;
+//		node2 = node2 ? node2->next : headA;
+//	}
+//	return node1;
+//}
+//int main()
+//{
+//	struct ListNode* p1 = malloc(sizeof(struct ListNode));
+//	p1->val = 2;
+//	struct ListNode* p2 = malloc(sizeof(struct ListNode));
+//	p2->val = 6;
+//	struct ListNode* p3 = malloc(sizeof(struct ListNode));
+//	p3->val = 4;
+//	struct ListNode* p4 = malloc(sizeof(struct ListNode));
+//	p4->val = 1;
+//	struct ListNode* p5 = malloc(sizeof(struct ListNode));
+//	p5->val = 5;
+//	p1->next = p2;
+//	p2->next = p3;
+//	p3->next = NULL;
+//	p4->next = p5;
+//	p5->next = NULL;
+//	getIntersectionNode(p1, p4);
+//	return 0;
+//}
+
+
+
+//#include<stdio.h>
+////暴力求解---无法通过leetcode
+//int maxSubArray(int* nums, int numsSize)
+//{
+//	int max = nums[0];
+//	for (int i = 0; i < numsSize; i++)
+//	{
+//		for (int j = i; j < numsSize; j++)
+//		{
+//			int sum = 0;
+//			for (int z = i; z <= j; z++)
+//				sum += nums[z];
+//			if (sum > max)
+//				max = sum;
+//		}
+//	}
+//	return max;
+//}
+//int main()
+//{
+//	int arr[] = { -2,-1 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	int max = maxSubArray(arr, sz);
+//	printf("Max=%d", max);
+//	return 0;
+//}
+
+
+
 #include<stdio.h>
 #include<stdlib.h>
-int* spiralOrder(int matrix[][3], int matrixSize, int* matrixColSize, int* returnSize)
+#include<string.h>
+char* reverseWords(char* s)
 {
-	int row = matrixSize, col = *matrixColSize;
-	int total = row * col;
-
-	int* arr = malloc(sizeof(int)*total);
-	int left = 0, right = col - 1;
-	int top = 0, bottom = row - 1;
-	*returnSize = 0;
-	while (left <= right && top <= bottom)
+	int sz = strlen(s);
+	int left = sz - 1, right = sz - 1;
+	char* ret = malloc(sizeof(char)*(sz + 1));
+	int insert = 0;
+	while (left >= 0)
 	{
-		//
-		for (int column = left; column <= right; column++)
-			arr[(*returnSize)++] = matrix[top][column];
-		for (int soon = top + 1; soon <= bottom; soon++)
-			arr[(*returnSize)++] = matrix[soon][right];
-
-		//下面
-		if (top < bottom && left < right)
+		right = left;
+		while (left >= 0 && s[left] == ' ')
 		{
-			for (int column = right - 1; column > left; column--)
-				arr[(*returnSize)++] = matrix[bottom][column];
-			for (int soon = bottom; soon > top; soon--)
-				arr[(*returnSize)++] = matrix[soon][left];
+			right--;
+			left--;
 		}
-		left++;
-		right--;
-		bottom--;
-		top++;
+
+		while (left >= 0 && s[left] != ' ')
+			left--;
+		int cur = left + 1;
+
+		while (cur <= right)
+		{
+			ret[insert++] = s[cur++];
+		}
+		//拷贝后才加空格
+		if (left + 1 <= right)
+			ret[insert++] = ' ';
 	}
-	return arr;
+	if (insert != 0)
+		ret[insert - 1] = '\0';
+	else
+		ret[insert] = '\0';
+	return ret;
 }
 int main()
 {
-	int arr[3][3] = { 1,2,3,4,5,6,7,8,9 };
-	int returnSize = 0;
-	int col = 3;
-	int* arr1 = spiralOrder(arr, 3, &col, &returnSize);
-	for (int i = 0; i < returnSize; i++)
-		printf("%d ", arr1[i]);
+	char arr[] = "t";
+	char* ret = reverseWords(arr);
+	printf("%s", ret);
+	free(ret);
 	return 0;
 }
+
