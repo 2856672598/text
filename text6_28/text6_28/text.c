@@ -6,7 +6,7 @@ Stack* st = NULL;
 bool IsPass(int**maze, int n, int m, Seat pos)
 {
 	if (pos.row >= 0 && pos.row < n
-		&& pos.col >= 0 && pos.row < m
+		&& pos.col >= 0 && pos.col < m
 		&&maze[pos.row][pos.col] == 0)
 		return true;
 	else
@@ -83,36 +83,39 @@ void Prin(Stack** head)
 int main()
 {
 	int n, m;
-	scanf("%d %d", &n, &m);
-	int** arr = malloc(sizeof(int*)*n);
-	if (*arr)
+	while (scanf("%d %d", &n, &m) != EOF)
 	{
+		int** arr = malloc(sizeof(int*)*n);
+		if (*arr)
+		{
+			for (int i = 0; i < n; i++)
+			{
+				arr[i] = malloc(sizeof(int)*m);
+				assert(arr[i]);
+				for (int j = 0; j < m; j++)
+				{
+					scanf("%d", &arr[i][j]);
+				}
+			}
+			Seat cur = { 0,0 };
+
+			if (GetMazePath(arr, n, m, cur))
+			{
+				Prin(&st);
+			}
+			else
+				printf("没有出路\n");
+		}
+
+		StackDestory(st);
+
+		//释放掉申请的二维数组
 		for (int i = 0; i < n; i++)
 		{
-			arr[i] = malloc(sizeof(int)*m);
-			assert(arr[i]);
-			for (int j = 0; j < m; j++)
-			{
-				scanf("%d", &arr[i][j]);
-			}
+			free(arr[i]);
 		}
-		Seat cur = { 0,0 };
-
-		if (GetMazePath(arr, n, m, cur))
-		{
-			Prin(&st);
-		}
-		else
-			printf("没有出路\n");
+		free(arr);
 	}
 
-	StackDestory(st);
-
-	//释放掉申请的二维数组
-	for (int i = 0; i < n; i++)
-	{
-		free(arr[i]);
-	}
-	free(arr);
 	return 0;
 }
