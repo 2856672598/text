@@ -92,13 +92,83 @@
 //}
 
 
+//#include<stdio.h>
+//void Sort(int* nums, int numsSize)
+//{
+//	for (int i = 0; i < numsSize - 1; i++)
+//	{
+//		int end = i, flag = nums[end + 1];
+//		while (end>=0)
+//		{
+//			if (nums[end] > flag)
+//			{
+//				nums[end + 1] = nums[end];
+//				end--;
+//			}
+//			else
+//				break;
+//		}
+//		nums[end + 1] = flag;
+//	}
+//}
+//int specialArray(int* nums, int numsSize)
+//{
+//	Sort(nums, numsSize);
+//	for (int i = 1; i <= numsSize; i++)
+//	{
+//		int target = i, left = 0, right = numsSize - 1;
+//		int pos = -1;
+//		while (left <= right)
+//		{
+//			int min = left + (right - left) / 2;
+//			if (nums[min] >= target)
+//			{
+//				pos = min;
+//				right = min - 1;
+//			}
+//			else
+//				left = min + 1;
+//		}
+//		if (numsSize - pos == target)
+//			return target;
+//	}
+//	return  -1;
+//}
+//int main()
+//{
+//	int nums[] = { 0,0 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int ret = specialArray(nums, size);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+
 #include<stdio.h>
-void Sort(int* nums, int numsSize)
+#include<math.h>
+//int findTheDistanceValue(int* arr1, int arr1Size, int* arr2, int arr2Size, int d)
+//{
+//	int count = 0;
+//	for (int i = 0; i < arr1Size; i++)
+//	{
+//		int flag = 0;
+//		for (int j = 0; j < arr2Size; j++)
+//		{
+//			if (abs(arr1[i] - arr2[j]) < d)
+//				flag = 1;
+//		}
+//		if (!flag)
+//			count++;
+//	}
+//	return count;
+//}
+
+void Sqrt(int *nums, int size)
 {
-	for (int i = 0; i < numsSize - 1; i++)
+	for (int i = 0; i < size - 1; i++)
 	{
 		int end = i, flag = nums[end + 1];
-		while (end>=0)
+		while (end >= 0)
 		{
 			if (nums[end] > flag)
 			{
@@ -111,34 +181,27 @@ void Sort(int* nums, int numsSize)
 		nums[end + 1] = flag;
 	}
 }
-int specialArray(int* nums, int numsSize)
+int findTheDistanceValue(int* arr1, int arr1Size, int* arr2, int arr2Size, int d)
 {
-	Sort(nums, numsSize);
-	for (int i = 1; i <= numsSize; i++)
+	Sqrt(arr2, arr2Size);
+	int count = 0;
+	for (int i = 0; i < arr1Size; i++)
 	{
-		int target = i, left = 0, right = numsSize - 1;
-		int pos = 0;
-		while (left <= right)
-		{
-			int min = left + (right - left) / 2;
-			if (nums[min] >= target)
-			{
-				pos = min;
-				right = min - 1;
-			}
-			else
-				left = min + 1;
-		}
-		if (numsSize - pos == target)
-			return target;
+		if (abs(arr1[i] - arr2[0]) > d)
+			count++;
 	}
-	return  -1;
+	return count;
 }
+
+
 int main()
 {
-	int nums[] = { 3,6,7,7,0 };
-	int size = sizeof(nums) / sizeof(nums[0]);
-	int ret = specialArray(nums, size);
-	printf("%d", ret);
+	int arr1[] = { 4,5,8 };
+	int arr2[] = { 10,9,1,8 };
+	int d = 2;
+	int arr1Size = sizeof(arr1) / sizeof(arr1[0]);
+	int arr2Size = sizeof(arr2) / sizeof(arr2[0]);
+	int count = findTheDistanceValue(arr1, arr1Size, arr2, arr2Size, d);
+	printf("%d", count);
 	return 0;
 }
