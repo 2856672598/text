@@ -163,45 +163,90 @@
 //	return count;
 //}
 
-void Sqrt(int *nums, int size)
-{
-	for (int i = 0; i < size - 1; i++)
-	{
-		int end = i, flag = nums[end + 1];
-		while (end >= 0)
-		{
-			if (nums[end] > flag)
-			{
-				nums[end + 1] = nums[end];
-				end--;
-			}
-			else
-				break;
-		}
-		nums[end + 1] = flag;
-	}
-}
-int findTheDistanceValue(int* arr1, int arr1Size, int* arr2, int arr2Size, int d)
-{
-	Sqrt(arr2, arr2Size);
-	int count = 0;
-	for (int i = 0; i < arr1Size; i++)
-	{
-		if (abs(arr1[i] - arr2[0]) > d)
-			count++;
-	}
-	return count;
-}
+//int main()
+//{
+//	int arr1[] = { 4,5,8 };
+//	int arr2[] = { 10,9,1,8 };
+//	int d = 2;
+//	int arr1Size = sizeof(arr1) / sizeof(arr1[0]);
+//	int arr2Size = sizeof(arr2) / sizeof(arr2[0]);
+//	int count = findTheDistanceValue(arr1, arr1Size, arr2, arr2Size, d);
+//	printf("%d", count);
+//	return 0;
+//}
+
+//#include<stdbool.h>
+//#include<stdio.h>
+//bool Find(int nums[4][4], int row, int col, int target)
+//{
+//	int i = 0, j = col - 1;
+//	//从右上角开始判断
+//	while (i < row && j >= 0)
+//	{
+//		if (nums[i][j] < target)
+//			i++;
+//		else if (nums[i][j] > target)
+//			j--;
+//		else
+//			return true;
+//	}
+//	return false;
+//}
+//int main()
+//{
+//	int arr[4][4] = { 1, 2, 8, 9,2, 4, 9, 12,4, 7, 10, 13 };
+//	int target = 10;
+//	bool flag = Find(arr, 4, 4, target);
+//	printf("%d", flag);
+//	return 0;
+//}
 
 
-int main()
-{
-	int arr1[] = { 4,5,8 };
-	int arr2[] = { 10,9,1,8 };
-	int d = 2;
-	int arr1Size = sizeof(arr1) / sizeof(arr1[0]);
-	int arr2Size = sizeof(arr2) / sizeof(arr2[0]);
-	int count = findTheDistanceValue(arr1, arr1Size, arr2, arr2Size, d);
-	printf("%d", count);
-	return 0;
-}
+//#include<stdio.h>
+////int findKthPositive(int* arr, int arrSize, int k)
+////{
+////	int maxSize = arr[arrSize - 1];
+////	int count = 0, cur = 0, i = 0;
+////	for (i = 1; i <= maxSize; i++)
+////	{
+////		if (i != arr[cur])
+////			count++;
+////		else
+////			cur++;
+////		if (count == k)
+////			break;
+////	}
+////	if (count != k)
+////		return arr[arrSize - 1] + k - count;
+////	else
+////		return i;
+////}
+//
+////二分法
+//int findKthPositive(int* arr, int arrSize, int k)
+//{
+//	int left = 0, right = arrSize - 1, mid = 0;
+//	while (left < right)
+//	{
+//		mid = left + (right - left) / 2;
+//		if (arr[mid] - mid - 1 < k)
+//			left = mid + 1;
+//		else
+//			right = mid;
+//	}
+//	if (arr[left] - left > k)
+//	{
+//		return arr[left] + k - (arr[left] - left);
+//	}
+//	else
+//		return arr[left] + k - (arr[left] - left) + 1;
+//}
+//int main()
+//{
+//	int nums[] = { 1,2,3,4 };
+//	int k = 2;
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int ret = findKthPositive(nums, size, k);
+//	printf("%d", ret);
+//	return 0;
+//}
