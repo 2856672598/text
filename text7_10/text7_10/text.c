@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 //#include<stdio.h>
 //struct ListNode
 //{
@@ -249,4 +250,168 @@
 //	int ret = findKthPositive(nums, size, k);
 //	printf("%d", ret);
 //	return 0;
+//}
+
+
+////202. 快乐数
+//#include<stdio.h>
+//#include<stdbool.h>
+//int SumSqu(int n)
+//{
+//	int sum = 0;
+//	while (n)
+//	{
+//		int tmp = n % 10;
+//		sum += tmp * tmp;
+//		n /= 10;
+//	}
+//	return sum;
+//}
+//bool isHappy(int n)
+//{
+//	int fast = n, slow = n;
+//	do
+//	{
+//		fast = SumSqu(fast);
+//		fast = SumSqu(fast);
+//		slow = SumSqu(slow);
+//		if (fast == 1)
+//			return true;
+//	} while (fast != slow);
+//	return false;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	printf("%d", isHappy(n));
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<string.h>
+//void Rever(char* s, int left, int right)
+//{
+//	while (left < right)
+//	{
+//		char tmp = s[left];
+//		s[left] = s[right];
+//		s[right] = tmp;
+//		left++;
+//		right--;
+//	}
+//}
+//char * reverseStr(char * s, int k)
+//{
+//	for (int i = 0; i < (int)strlen(s); i += 2 * k)
+//	{
+//		if (i + k < (int)strlen(s))
+//			Rever(s, i, i + k - 1);
+//		else
+//			Rever(s, i, strlen(s) - 1);
+//	}
+//	return s;
+//}
+//int main()
+//{
+//	char nums[] = "abcdefg";
+//	int k = 2;
+//	reverseStr(nums, k);
+//	printf("%s", nums);
+//	return 0;
+//}
+
+////383. 赎金信
+//#include<stdio.h>
+//#include<string.h>
+//#include<stdbool.h>
+//#include<stdlib.h>
+//int compare(const void* a, const void* b)
+//{
+//	return *(char*)a - *(char*)b;
+//}
+//bool canConstruct(char * ransomNote, char * magazine)
+//{
+//	qsort(ransomNote, strlen(ransomNote), sizeof(char), compare);
+//	qsort(magazine, strlen(magazine), sizeof(char), compare);
+//
+//	int begin1 = 0, begin2 = 0;
+//	int end1 = strlen(ransomNote), end2 = strlen(magazine);
+//	while (begin1 < end1 && begin2 < end2)
+//	{
+//		if (ransomNote[begin1] == magazine[begin2])
+//		{
+//			begin1++;
+//			begin2++;
+//		}
+//		else if (ransomNote[begin1] > magazine[begin2])
+//			begin2++;
+//		else
+//			break;
+//		if (begin1 == end1)
+//			return true;
+//	}
+//	return false;
+//}
+//int main()
+//{
+//	char ransomNote[] = "aab";
+//	char magazine[] = "baa";
+//	bool res = canConstruct(ransomNote, magazine);
+//	printf("%d", res);
+//	return 0;
+//}
+
+//#include<stdio.h>
+////超时
+////int trailingZeroes(int n)
+////{
+////	int sum = 1;
+////	for (int i = 1; i <= n; i++)
+////	{
+////		sum *= i;
+////	}
+////	int count = 0;
+////	while (sum)
+////	{
+////		if (sum % 10)
+////			break;
+////		else
+////			count++;
+////		sum /= 10;
+////	}
+////	return  count;
+////}
+//
+//int trailingZeroes(int n)
+//{
+//	int count = 0;
+//	while (n)
+//	{
+//		count += n / 5;
+//		n /= 5;
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int count = trailingZeroes(n);
+//	printf("%d", count);
+//	return 0;
+//}
+
+////面试题 05.01. 插入
+//#include<stdio.h>
+//int insertBits(int N, int M, int i, int j)
+//{
+//	int begin = i, end = j;
+//	//把i-j之前置为0
+//	for (begin; begin <= end; begin++)
+//	{
+//		N &= ~((unsigned int)1 << i);
+//	}
+//	N |= M << i;
+//	return N;
 //}
