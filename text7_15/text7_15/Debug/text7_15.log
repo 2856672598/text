@@ -1,0 +1,3 @@
+﻿  text.c
+d:\githup\text\text7_15\text7_15\text.c(124): warning C4013: “strlen”未定义；假设外部返回 int
+  text7_15.vcxproj -> D:\Githup\text\text7_15\Debug\text7_15.exe
