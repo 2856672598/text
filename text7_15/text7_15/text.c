@@ -1,4 +1,4 @@
-
+#define _CRT_SECURE_NO_WARNINGS
 ////1089.复写零
 //#include<stdio.h>
 //void duplicateZeros(int* arr, int arrSize)
@@ -248,54 +248,212 @@
 //	return false;
 //}
 
-//1346. 检查整数及其两倍数是否存在
-void Sort(int* arr, int size)
-{
-	for (int i = 0; i < size - 1; i++)
-	{
-		int end = i, flag = arr[end + 1];
-		while (end >= 0)
-		{
-			if (arr[end] > flag)
-			{
-				arr[end + 1] = arr[end];
-				end--;
-			}
-			else
-				break;
-		}
-		arr[end + 1] = flag;
-	}
-}
-int Find(int* arr, int size, int target)
-{
-	int left = 0, right = size - 1;
-	while (left <= right)
-	{
-		int mid = left + (right - left) / 2;
-		if (arr[mid] > target)
-			right = mid - 1;
-		else if (arr[mid] < target)
-			left = mid + 1;
-		else
-			return mid;
-	}
-	return -1;
-}
-bool checkIfExist(int* arr, int arrSize)
-{
-	Sort(arr, arrSize);
-	for (int i = 0; i < arrSize; i++)
-	{
-		int pos = Find(arr, arrSize, arr[i] * 2);
-		if (pos != -1 && pos != i)
-			return true;
-	}
-	return false;
-}
-int main()
-{
-	int arr[] = { -2,0,10,-19,4,6,-8 };
-	checkIfExist(arr, 7);
-	return 0;
-}
+////1346. 检查整数及其两倍数是否存在
+//void Sort(int* arr, int size)
+//{
+//	for (int i = 0; i < size - 1; i++)
+//	{
+//		int end = i, flag = arr[end + 1];
+//		while (end >= 0)
+//		{
+//			if (arr[end] > flag)
+//			{
+//				arr[end + 1] = arr[end];
+//				end--;
+//			}
+//			else
+//				break;
+//		}
+//		arr[end + 1] = flag;
+//	}
+//}
+//int Find(int* arr, int size, int target)
+//{
+//	int left = 0, right = size - 1;
+//	while (left <= right)
+//	{
+//		int mid = left + (right - left) / 2;
+//		if (arr[mid] > target)
+//			right = mid - 1;
+//		else if (arr[mid] < target)
+//			left = mid + 1;
+//		else
+//			return mid;
+//	}
+//	return -1;
+//}
+//bool checkIfExist(int* arr, int arrSize)
+//{
+//	Sort(arr, arrSize);
+//	for (int i = 0; i < arrSize; i++)
+//	{
+//		int pos = Find(arr, arrSize, arr[i] * 2);
+//		if (pos != -1 && pos != i)
+//			return true;
+//	}
+//	return false;
+//}
+//int main()
+//{
+//	int arr[] = { -2,0,10,-19,4,6,-8 };
+//	checkIfExist(arr, 7);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<string.h>
+//#include<stdlib.h>
+//char* compressString(char* S)
+//{
+//	int size = strlen(S);
+//	char* res = malloc(sizeof(char)*(size * 2 + 1));
+//	int count = 1, insert = 0;
+//	for (int i = 1; i < size + 1; i++)//size的位置为\0不会溢出
+//	{
+//		if (S[i] == S[i - 1])
+//			count++;
+//		else
+//		{
+//			res[insert++] = S[i - 1];
+//			insert += sprintf(&res[insert], "%d", count);
+//			count = 1;
+//		}
+//	}
+//	res[insert] = '\0';
+//	if (insert >= size)
+//	{
+//		for (int i = 0; i <= size; i++)
+//			res[i] = S[i];
+//	}
+//	return res;
+//}
+//int main()
+//{
+//	char nums[] = "a";
+//	char* res = compressString(nums);
+//	printf("%s", res);
+//	free(res);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//int** findContinuousSequence(int target, int* returnSize, int** returnColumnSizes)
+//{
+//	*returnSize = 0;
+//	int size = target / 2 + 1;
+//	int** res = malloc(sizeof(int*) * size / 2);
+//	int* col = malloc(sizeof(int)*size);
+//	for (int i = 1; i <= size; i++)
+//	{
+//		int sum = 0;
+//		int cur = 0;
+//		for (int j = i; j <= size; j++)
+//		{
+//			sum += j;
+//			if (sum > target)
+//				break;
+//			else if (sum == target)
+//			{
+//				res[*returnSize] = malloc(sizeof(int)*size);
+//				col[*returnSize] = j - i + 1;
+//				for (int z = i; z <= j; z++)
+//					res[*returnSize][cur++] = z;
+//				(*returnSize)++;
+//				break;
+//			}
+//		}
+//	}
+//	*returnColumnSizes = col;
+//	return res;
+//}
+
+
+////面试题 02.06. 回文链表
+//#include<stdio.h>
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode *next;
+//};
+//struct ListNode* Reverse(struct ListNode* head)
+//{
+//	struct ListNode* prev = NULL, *cur = head;
+//	while (cur != NULL)
+//	{
+//		struct ListNode* next = cur->next;
+//		cur->next = prev;
+//		prev = cur;
+//		cur = next;
+//	}
+//	return prev;
+//}
+//bool isPalindrome(struct ListNode* head)
+//{
+//	if (head == NULL)
+//		return true;
+//	struct ListNode* fast = head, *slow = head;
+//	while (fast->next != NULL && fast->next->next != NULL)
+//	{
+//		fast = fast->next->next;
+//		slow = slow->next;
+//	}
+//	struct ListNode*flag = Reverse(slow->next);
+//	struct ListNode*cur1 = head, *cur2 = flag;
+//	while (cur2 != NULL)
+//	{
+//		if (cur1->val != cur2->val)
+//			break;
+//		cur1 = cur1->next;
+//		cur2 = cur2->next;
+//	}
+//	slow->next = Reverse(flag);
+//	if (cur2 == NULL)
+//		return true;
+//	else
+//		return false;
+//}
+
+
+//// 125. 验证回文串
+//#include<stdio.h>
+//#include<string.h>
+//#include<stdlib.h>
+//bool isPalindrome(char * s)
+//{
+//	int size = strlen(s);
+//	char* res = malloc(sizeof(char)*size);
+//	int count = 0;
+//	for (int i = 0; i < size; i++)
+//	{
+//		if (s[i] >= 'A'&&s[i] <= 'Z' || s[i] >= 'a'&&s[i] <= 'z' || s[i] >= '0'&&s[i] <= '9')
+//		{
+//			if (s[i] >= 'A'&&s[i] <= 'Z')
+//				res[count++] = (s[i] + 32);
+//			else
+//				res[count++] = s[i];
+//		}
+//	}
+//	int left = 0, right = count - 1;
+//	while (left < right)
+//	{
+//		if (res[left] != res[right])
+//			break;
+//		left++;
+//		right--;
+//	}
+//	free(res);
+//	if (left == right)
+//		return false;
+//	else
+//		return true;
+//}
+//int main()
+//{
+//	char nums[] = "A man, a plan, a canal: Panama";
+//	int flag = isPalindrome(nums);
+//	printf("%d", flag);
+//	return 0;
+//}
