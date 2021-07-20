@@ -484,31 +484,338 @@
 //}
 
 
-//新增的最少台阶数
+////新增的最少台阶数
+//#include<stdio.h>
+//int addRungs(int* rungs, int rungsSize, int dist)
+//{
+//	int count = 0;
+//	int prev = 0;
+//	for (int i = 0; i < rungsSize; i++)
+//	{
+//		if (rungs[i] - prev > dist)
+//		{
+//			count += (rungs[i] - prev) / dist;
+//			if (dist == 1 || (rungs[i] - prev) % dist == 0)
+//				count -= 1;
+//			prev += dist * ((rungs[i] - prev) / dist);
+//			i -= 1;
+//		}
+//		else
+//			prev = rungs[i];
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	int arr[] = { 12,24 };
+//	int dist = 4;
+//	printf("%d", addRungs(arr, 2, dist));
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int OneNumber(unsigned int n)
+//{
+//	int count = 0;
+//	unsigned int  flag = 1;
+//	while (n)
+//	{
+//		if (n & 1)
+//			count++;
+//		n >>= 1;
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	unsigned int n;
+//	scanf("%u", &n);
+//	int count = OneNumber(n);
+//	printf("%d", count);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int fun(int x)
+//{
+//	int count = 0;
+//	while (x) {
+//		count++;
+//		x = x & (x - 1);
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	printf("fun(2017)=%d\n", fun(2019));
+//}
+
+
+//#define CIR(r) r*r
+//#include<stdio.h>
+//void main()
+//{
+//	int a = 1;
+//	int b = 2;
+//	int t;
+//	t = CIR(a + b);
+//	printf("%d\n", t);
+//	return;
+//}
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<assert.h>
+//void Sort(int* nums, int size)
+//{
+//	for (int i = 0; i < size - 1; i++)
+//	{
+//		int end = i, flag = nums[end + 1];
+//		while (end >= 0)
+//		{
+//			if (nums[end] > flag)
+//			{
+//				nums[end + 1] = nums[end];
+//				end--;
+//			}
+//			else
+//				break;
+//		}
+//		nums[end + 1] = flag;
+//	}
+//}
+//int* KMin(int* nums, int size, int k)
+//{
+//	Sort(nums, size);
+//	int* res = malloc(sizeof(int)*k);
+//	assert(res);
+//	for (int i = 0; i < k; i++)
+//	{
+//		res[i] = nums[i];
+//	}
+//	return res;
+//}
+//int main()
+//{
+//	int nums[] = { 2,5,1,9,4,8,0,6,3 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int k = 5;
+//	int* res = KMin(nums, size, k);
+//	for (int i = 0; i < k; i++)
+//		printf("%d ", res[i]);
+//	free(res);
+//	return 0;
+//}
+
+
 #include<stdio.h>
-int addRungs(int* rungs, int rungsSize, int dist)
+//int firstUniqChar(char * s)
+//{
+//	int size = strlen(s);
+//	for (int i = 0; i < size; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < size; j++)
+//		{
+//			if (s[i] == s[j] && j != i)
+//				break;
+//		}
+//		if (j >= size)
+//			return i;
+//	}
+//	return -1;
+//}
+
+//int firstUniqChar(char * s)
+//{
+//	int arr[26] = { 0 };
+//	int size = strlen(s);
+//	for (int i = 0; i < size; i++)
+//	{
+//		arr[s[i] - 'a']++;
+//	}
+//	for (int i = 0; i < size; i++)
+//	{
+//		if (arr[s[i] - 'a'] == 1)
+//			return i;
+//	}
+//	return -1;
+//}
+//int main()
+//{
+//	return 0;
+//}
+
+
+////461. 汉明距离
+//#include<stdio.h>
+//int hammingDistance(int x, int y)
+//{
+//	int count = 0;
+//	int flag = x ^ y;//1的位置就是不相同的位置
+//	while (flag)
+//	{
+//		if (flag & 1)
+//			count++;
+//		flag >>= 1;
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	int x, y;
+//	scanf("%d %d", &x, &y);
+//	int count = hammingDistance(x, y);
+//	printf("%d", count);
+//	return 0;
+//}
+
+////405. 数字转换为十六进制数
+///*
+//当负数右移时，其结果取决于机器，空出的位置可能补0，或者补符号位
+//*/
+//#include<stdio.h>
+//#include<stdlib.h>
+//char * toHex(int num)
+//{
+//	char* res = malloc(sizeof(char) * 8);
+//	int insert = 0, sum = 0;
+//	char arr[] = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
+//	unsigned flag = num;
+//	if (flag == 0)
+//		res[insert++] = '0';
+//	while (flag)
+//	{
+//		sum = 0;
+//		for (int i = 0; i < 4; i++)
+//		{
+//			sum += (flag & 1) << i;
+//			flag >>= 1;
+//		}
+//		if (sum % 16)
+//			res[insert++] = arr[abs(sum % 16)];
+//		else
+//			res[insert++] = arr[abs(sum / 16)];
+//	}
+//	res[insert] = '\0';
+//	int left = 0, right = insert - 1;
+//	while (left < right)
+//	{
+//		char tmp = res[left];
+//		res[left] = res[right];
+//		res[right] = tmp;
+//		left++;
+//		right--;
+//	}
+//	return res;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	char* res = toHex(n);
+//	printf("%s", res);
+//  free(res);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<stdbool.h>
+//bool hasAlternatingBits(int n)
+//{
+//	int i = 0;
+//	int prev = 0;
+//	while (n)
+//	{
+//		if (i == 0)
+//		{
+//			prev = n & 1;
+//		}
+//		else
+//		{
+//			int cur = n & 1;
+//			if (cur == prev)
+//				return false;
+//			prev = cur;
+//		}
+//		n >>= 1;
+//		i++;
+//	}
+//	return true;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	bool res = hasAlternatingBits(n);
+//	printf("%d", res);
+//	return 0;
+//}
+
+
+//868. 二进制间距
+#include<stdio.h>
+//int binaryGap(int n)
+//{
+//	int begin = -1, end = 0, max = 0, i = 0;
+//	while (n)
+//	{
+//		if (n & 1)
+//		{
+//			if (begin == -1)
+//			{
+//				begin = i;
+//			}
+//			else
+//			{
+//				end++;
+//				if (end - begin > max)
+//					max = end - begin;
+//				begin = end;
+//			}
+//		}
+//		else
+//		{
+//			end++;
+//		}
+//		n >>= 1;
+//		i++;
+//	}
+//	return max;
+//}
+//方法二
+int binaryGap(int n)
 {
-	int count = 0;
-	int prev = 0;
-	for (int i = 0; i < rungsSize; i++)
+	int i = 0, prev = -1, max = 0;
+	/*
+	记录上次1出现的位置 
+	*/
+	while (n)
 	{
-		if (rungs[i] - prev > dist)
+		if (n & 1)
 		{
-			count += (rungs[i] - prev) / dist;
-			if (dist == 1 || (rungs[i] - prev) % dist == 0)
-				count -= 1;
-			prev += dist * ((rungs[i] - prev) / dist);
-			i -= 1;
+			if (prev == -1)
+				prev = i;
+			else
+			{
+				if ((i - prev) >= max)
+				{
+					max = i - prev;
+					prev = i;
+				}
+			}
 		}
-		else
-			prev = rungs[i];
+		n >>= 1;
+		i++;
 	}
-	return count;
+	return max;
 }
 int main()
 {
-	int arr[] = { 12,24 };
-	int dist = 4;
-	printf("%d", addRungs(arr, 2, dist));
+	int n = 0;
+	scanf("%d", &n);
+	int res = binaryGap(n);
+	printf("%d", res);
 	return 0;
 }
