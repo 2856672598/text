@@ -143,31 +143,241 @@
 //	return 0;
 //}
 
-//1720. 解码异或后的数组
+////1720. 解码异或后的数组
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<assert.h>
+//int* decode(int* encoded, int encodedSize, int first, int* returnSize)
+//{
+//	int* arr = malloc(sizeof(int)*(encodedSize + 1));
+//	assert(arr);
+//	arr[0] = first;
+//	for (int i = 1; i <= encodedSize; i++)
+//	{
+//		arr[i] = arr[i - 1] ^ encoded[i - 1];
+//	}
+//	*returnSize = encodedSize + 1;
+//	return arr;
+//}
+//int main()
+//{
+//	int encoded[] = { 1,2,3 };
+//	int encodedSize = sizeof(encoded) / sizeof(encoded[0]);
+//	int first = 1;
+//	int returnSize = 0;
+//	int* res = decode(encoded, encodedSize, first, &returnSize);
+//	for (int i = 0; i < returnSize; i++)
+//		printf("%d", res[i]);
+//	free(res);
+//	return 0;
+//}
+
+////面试题 05.06. 整数转换
+//#include<stdio.h>
+//int convertInteger(int A, int B)
+//{
+//	unsigned int flag = A ^ B;
+//	int count = 0;
+//	while (flag)
+//	{
+//		if (flag & 1)
+//			count++;
+//		flag >>= 1;
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	int a = 0, b = 0;
+//	scanf("%d %d", &a, &b);
+//	int ret = convertInteger(a, b);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int IsleapYear(int year)
+//{
+//	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
+//		return 1;
+//	return 0;
+//}
+//int main()
+//{
+//	for (int i = 1000; i <= 2000; i++)
+//	{
+//		if (IsleapYear(i))
+//			printf("%d ", i);
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int Is_Prime(int x)
+//{
+//	for (int i = 2; i <= x / 2; i++)
+//	{
+//		if (x % i == 0)
+//			return 0;
+//	}
+//	return 1;
+//}
+//int main()
+//{
+//	for (int i = 100; i < 200; i++)
+//	{
+//		if (Is_Prime(i))
+//			printf("%d ", i);
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+////int Is_LeapYear(int y)
+////{
+////	return (y % 4 == 0 && y % 100 != 0 || y % 400 == 0);
+////}
+//
+//void Swap(int* x, int* y)
+//{
+//	int tmp = *x;
+//	*x = *y;
+//	*y = tmp;
+//}
+//int main()
+//{
+//	int x = 0, y = 0;
+//	scanf("%d %d", &x, &y);
+//	printf("交换前x = %d,y = %d\n", x, y);
+//	Swap(&x, &y);
+//	printf("交换后 x = %d,y = %d\n", x, y);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//void MultTable(int n)
+//{
+//	for (int i = 1; i <= n; i++)
+//	{
+//		for (int j = 1; j <= i; j++)
+//		{
+//			printf("%2d * %2d = %2d ", j, i, i*j);
+//		}
+//		printf("\n");
+//	}
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	MultTable(n);
+//	return 0;
+//}
+
+////1446. 连续字符
+//#include<stdio.h>
+//#include<string.h>
+//int maxPower(char * s)
+//{
+//	int size = strlen(s);
+//	int max = 0;
+//	for (int i = 0; i < size; i++)
+//	{
+//		int j = 0;
+//		for (j = i + 1; j < size; j++)
+//		{
+//			if (s[i] != s[j])
+//				break;
+//		}
+//		if ((j - i) > max)
+//			max = j - i;
+//	}
+//	return max;
+//}
+//int main()
+//{
+//	char arr[] = "leetcode";
+//	int ret = maxPower(arr);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+////58. 最后一个单词的长度
+//#include<stdio.h>
+//#include<string.h>
+//int lengthOfLastWord(char * s)
+//{
+//	int size = strlen(s);
+//	int count = 0;
+//	for (int i = size - 1; i >= 0; i--)
+//	{
+//		if (s[i] != ' ')
+//			count++;
+//		else if (count != 0)
+//			break;
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	char arr[] = "Hello World";
+//	int ret = lengthOfLastWord(arr);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+////74.搜索二维矩阵
+//#include<stdio.h>
+//#include<stdbool.h>
+//bool searchMatrix(int** matrix, int matrixSize, int* matrixColSize, int target)
+//{
+//	int row = 0, col = *matrixColSize - 1;
+//	while (row < matrixSize || col >= 0)
+//	{
+//		if (matrix[row][col] > target)
+//			col--;
+//		else if (matrix[row][col] < target)
+//			row++;
+//		else
+//			return true;
+//	}
+//	return false;
+//}
+
+
 #include<stdio.h>
-#include<stdlib.h>
-#include<assert.h>
-int* decode(int* encoded, int encodedSize, int first, int* returnSize)
+#include<stdbool.h>
+//bool search(int* nums, int numsSize, int target)
+//{
+//	for (int i = 0; i < numsSize; i++)
+//		if (nums[i] == target)
+//			return true;
+//	return false;
+//}
+
+bool search(int* nums, int numsSize, int target)
 {
-	int* arr = malloc(sizeof(int)*(encodedSize + 1));
-	assert(arr);
-	arr[0] = first;
-	for (int i = 1; i <= encodedSize; i++)
+	int left = 0, right = numsSize - 1;
+	while (left <= right)
 	{
-		arr[i] = arr[i - 1] ^ encoded[i - 1];
+		int mid = left + (right - left) / 2;
+		if (nums[mid] == target)
+			return true;
+		if (nums[mid] > nums[0])
+		{
+			if (nums[mid] < target)
+				left = mid + 1;
+			else
+				right = mid - 1;
+		}
+		else
+		{
+			if (nums[mid] < target)
+				left = mid + 1;
+			else
+				right = mid - 1;
+		}
 	}
-	*returnSize = encodedSize + 1;
-	return arr;
-}
-int main()
-{
-	int encoded[] = { 1,2,3 };
-	int encodedSize = sizeof(encoded) / sizeof(encoded[0]);
-	int first = 1;
-	int returnSize = 0;
-	int* res = decode(encoded, encodedSize, first, &returnSize);
-	for (int i = 0; i < returnSize; i++)
-		printf("%d", res[i]);
-	free(res);
-	return 0;
+	return false;
 }
