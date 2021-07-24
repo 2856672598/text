@@ -630,63 +630,210 @@
 //	return 0;
 //}
 
-//209. 长度最小的子数组
-#include<stdio.h>
-#include<limits.h>
+////209. 长度最小的子数组
+//#include<stdio.h>
+//#include<limits.h>
+////int minSubArrayLen(int target, int* nums, int numsSize)
+////{
+////	int count = INT_MAX;
+////	for (int i = 0; i < numsSize; i++)
+////	{
+////		int sum = nums[i];
+////		int j = i;
+////		if (nums[i] < target)
+////		{
+////			for (j = i + 1; j < numsSize && sum < target; j++)
+////			{
+////				sum += nums[j];
+////				if (sum >= target)
+////					break;
+////			}
+////		}
+////		if (j < numsSize && j - i + 1 < count)
+////			count = j - i + 1;
+////	}
+////	if (count == INT_MAX)
+////		count = 0;
+////	return count;
+////}
+//
+////滑动窗口
 //int minSubArrayLen(int target, int* nums, int numsSize)
 //{
-//	int count = INT_MAX;
-//	for (int i = 0; i < numsSize; i++)
+//	if (numsSize == 0)
+//		return 0;
+//	int number = INT_MAX;
+//	int begin = 0, end = 0;
+//	int sum = 0;
+//	while (end <= numsSize - 1)
 //	{
-//		int sum = nums[i];
-//		int j = i;
-//		if (nums[i] < target)
+//		sum += nums[end];
+//		while (sum >= target)
 //		{
-//			for (j = i + 1; j < numsSize && sum < target; j++)
-//			{
-//				sum += nums[j];
-//				if (sum >= target)
-//					break;
-//			}
+//			if (end - begin + 1 < number)
+//				number = end - begin + 1;
+//			sum -= nums[begin];
+//			begin++;
 //		}
-//		if (j < numsSize && j - i + 1 < count)
-//			count = j - i + 1;
+//		end++;
 //	}
-//	if (count == INT_MAX)
-//		count = 0;
-//	return count;
+//	if (number == INT_MAX)
+//		number = 0;
+//	return number;
+//}
+//
+//int main()
+//{
+//	int nums[] = { 5,1,3,5,10,7,4,9,2,8 };
+//	int target = 15;
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	printf("%d", minSubArrayLen(target, nums, size));
+//	return 0;
 //}
 
-//滑动窗口
-int minSubArrayLen(int target, int* nums, int numsSize)
+
+////287. 寻找重复数
+//#include<stdio.h>
+//#include<stdlib.h>
+////void Sort(int* nums, int size)
+////{
+////	for (int i = 0; i < size - 1; i++)
+////	{
+////		int end = i, flag = nums[end + 1];
+////		while (end >= 0)
+////		{
+////			if (nums[end] > flag)
+////			{
+////				nums[end + 1] = nums[end];
+////				end--;
+////			}
+////			else
+////				break;
+////		}
+////		nums[end + 1] = flag;
+////	}
+////}
+////int Cmp(const void* a, const void* b)
+////{
+////	return *((int*)a) - *((int*)b);
+////}
+////int findDuplicate(int* nums, int numsSize)
+////{
+////	int* arr = malloc(sizeof(int)*numsSize);
+////	for (int i = 0; i < numsSize; i++)
+////		arr[i] = nums[i];
+////	qsort(arr, numsSize, sizeof(int), Cmp);
+////	int left = 0, right = numsSize - 1;
+////	while (left < right)
+////	{
+////		int mid = left + (right - left) / 2;
+////		if (arr[mid] > mid)
+////			left = mid + 1;
+////		else 
+////			right = mid - 1;
+////	}
+////	int ret = arr[left];
+////	free(arr);
+////	return ret;
+////}
+//
+////快慢指针法
+//int findDuplicate(int* nums, int numsSize)
+//{
+//	int fast = 0, slow = 0;
+//	do
+//	{
+//		fast = nums[nums[fast]];
+//		slow = nums[slow];
+//	} while (fast != slow);
+//	fast = 0;
+//	while (fast != slow)
+//	{
+//		fast = nums[fast];
+//		slow = nums[slow];
+//	}
+//	return fast;
+//}
+//
+//int main()
+//{
+//	int nums[] = { 1,3,4,5,6,2,4 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	printf("%d", findDuplicate(nums, size));
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//char * maximumTime(char * time)
+//{
+//	if (time[0] == '?')
+//	{
+//		time[0] = (time[1] >= '4' && time[1] <= '9') ? '1' : '2';
+//	}
+//	if (time[1] == '?')
+//	{
+//		time[1] = (time[0] == '2') ? '3' : '9';
+//	}
+//	if (time[3] == '?')
+//		time[3] = '5';
+//	if (time[4] == '?')
+//		time[4] = '9';
+//	return time;
+//}
+//int main()
+//{
+//	char time[] = "2?:?0";
+//	printf("%s", maximumTime(time));
+//	return 0;
+//}
+
+#include<stdio.h>
+////超时
+//int maxDistance(int* nums1, int nums1Size, int* nums2, int nums2Size)
+//{
+//	int max = 0;
+//	for (int i = 0; i < nums1Size; i++)
+//	{
+//		int j = i;
+//		if (j < nums2Size && nums1[i] <= nums2[j])
+//		{
+//			while (j < nums2Size)
+//			{
+//				if (nums1[i] > nums2[j])
+//					break;
+//				j++;
+//			}
+//			if (j != i)
+//				j -= 1;
+//		}
+//		if (j - i > max)
+//			max = j - i;
+//	}
+//	return max;
+//}
+
+int maxDistance(int* nums1, int nums1Size, int* nums2, int nums2Size)
 {
-	if (numsSize == 0)
-		return 0;
-	int number = INT_MAX;
-	int begin = 0, end = 0;
-	int sum = 0;
-	while (end <= numsSize - 1)
+	int begin1 = 0, ret = 0;
+	for (int i = 0; i < nums2Size; i++)
 	{
-		sum += nums[end];
-		while (sum >= target)
+		while (begin1 < nums1Size && nums1[begin1]>nums2[i])
 		{
-			if (end - begin + 1 < number)
-				number = end - begin + 1;
-			sum -= nums[begin];
-			begin++;
+			begin1++;
 		}
-		end++;
+		if (begin1 < nums1Size)
+			ret = i - begin1 > ret ? i - begin1 : ret;
 	}
-	if (number == INT_MAX)
-		number = 0;
-	return number;
+	return ret;
 }
 
 int main()
 {
-	int nums[] = { 5,1,3,5,10,7,4,9,2,8 };
-	int target = 15;
-	int size = sizeof(nums) / sizeof(nums[0]);
-	printf("%d", minSubArrayLen(target, nums, size));
+	int nums1[] = { 55,30,5,4,2 };
+	int nums2[] = { 100,20,10,10,5 };
+	int nums1Size = sizeof(nums1) / sizeof(nums1[0]);
+	int nums2Size = sizeof(nums2) / sizeof(nums2[0]);
+	printf("%d", maxDistance(nums1, nums1Size, nums2, nums2Size));
 	return 0;
 }
