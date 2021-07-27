@@ -480,17 +480,119 @@
 //}
 
 
+//#include<stdio.h>
+//void Base(int x)
+//{
+//	if (x >= 6)
+//		Base(x / 6);
+//	printf("%d", x % 6);
+//}
+//int main()
+//{
+//	int x;
+//	scanf("%d", &x);
+//	Base(x);
+//	return 0;
+//}
+
+
+
+////31. 下一个排列
+//#include<stdio.h>
+//void nextPermutation(int* nums, int numsSize)
+//{
+//	//找第二小的数
+//	int i = numsSize - 2;
+//	while (i >= 0 && nums[i] >= nums[i + 1])
+//		i--;
+//	if (i >= 0)
+//	{
+//		int j = numsSize - 1;
+//		while (j >= 0 && nums[i] >= nums[j])
+//		{
+//			j--;
+//		}
+//		int tmp = nums[i];
+//		nums[i] = nums[j];
+//		nums[j] = tmp;
+//	}
+//	int left = i + 1, right = numsSize - 1;
+//	while (left < right)
+//	{
+//		int tmp = nums[left];
+//		nums[left] = nums[right];
+//		nums[right] = tmp;
+//		left++;
+//		right--;
+//	}
+//}
+//int main()
+//{
+//	int nums[] = { 2,2,7,5,4,3,2,2,1 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	nextPermutation(nums, size);
+//	for (int i = 0; i < size; i++)
+//		printf("%d", nums[i]);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//void Bubb_Sort(int* nums, int size)
+//{
+//	int i = 0;
+//	for (int i = 0; i < size; i++)
+//	{
+//		int j = 0, flag = 1;
+//		for (int j = 0; j < size - 1 - i; j++)
+//		{
+//			if (nums[j] > nums[j + 1])
+//			{
+//				int tmp = nums[j];
+//				nums[j] = nums[j + 1];
+//				nums[j + 1] = tmp;
+//				flag = 0;
+//			}
+//		}
+//		if (flag)
+//			break;
+//	}
+//}
+//int main()
+//{
+//	int nums[] = { 1,2,3,4,5,6,7,8,0 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	Bubb_Sort(nums, size);
+//	for (int i = 0; i < size; i++)
+//		printf("%d ", nums[i]);
+//	return 0;
+//}
+
 #include<stdio.h>
-void Base(int x)
+void Swap(int* nums1, int size1, int* nums2, int size2)
 {
-	if (x >= 6)
-		Base(x / 6);
-	printf("%d", x % 6);
+	int begin1 = 0, begin2 = 0;
+	while (begin1 < size1&& begin2 < size2)
+	{
+		int tmp = nums1[begin1];
+		nums1[begin1] = nums2[begin2];
+		nums2[begin2] = tmp;
+		begin1++;
+		begin2++;
+	}
 }
 int main()
 {
-	int x;
-	scanf("%d", &x);
-	Base(x);
+	int nums1[] = { 1,2,3,4,5 };
+	int nums2[] = { 6,7,8,9,10 };
+	int size1 = sizeof(nums1) / sizeof(nums1[0]);
+	int size2 = sizeof(nums2) / sizeof(nums2[0]);
+	int i = 0;
+	Swap(nums1, size1, nums2, size2);
+	for (i = 0; i < size1; i++)
+		printf("%d ", nums1[i]);
+	printf("\n");
+	for (i = 0; i < size2; i++)
+		printf("%d ", nums2[i]);
 	return 0;
 }
