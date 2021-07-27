@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<assert.h>
 #include<stdbool.h>
+#include<stdio.h>
 typedef struct TreeNode
 {
 	int val;
@@ -27,3 +28,4 @@ void QueuePush(Queue* PQ, TreeNode* data);
 void QueuePop(Queue* PQ);
 bool QueueEmpty(Queue* PQ);
 TreeNode* QueueTop(Queue* PQ);
+void QueueDestory(Queue* PQ);

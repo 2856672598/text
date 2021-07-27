@@ -43,7 +43,6 @@ void QueuePop(Queue* PQ)
 bool QueueEmpty(Queue* PQ)
 {
 	assert(PQ);
-	assert(PQ->Queue);
 	if (PQ->Queue == NULL)
 		return true;
 	else
@@ -55,4 +54,19 @@ TreeNode* QueueTop(Queue* PQ)
 	assert(PQ);
 	assert(PQ->Queue);
 	return PQ->Queue->data;
+}
+
+void QueueDestory(Queue* PQ)
+{
+	assert(PQ);
+	if (PQ->Queue != NULL)
+	{
+		while (PQ->Queue)
+		{
+			QueueNode* next = PQ->Queue->next;
+			free(PQ->Queue);
+			PQ->Queue = next;
+		}
+		PQ->Queue = PQ->Tail = NULL;
+	}
 }

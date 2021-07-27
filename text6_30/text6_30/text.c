@@ -266,6 +266,7 @@
 #include"Queue.h"
 int* levelOrder(struct TreeNode* root, int* returnSize)
 {
+	*returnSize = 0;
 	if (root == NULL)
 		return NULL;
 	Queue Q;
@@ -275,14 +276,41 @@ int* levelOrder(struct TreeNode* root, int* returnSize)
 	while (!QueueEmpty(&Q))
 	{
 		TreeNode* data = QueueTop(&Q);
-		ret[*returnSize++] = data->val;
-		QueuePush(&Q, data->left);
-		QueuePush(&Q, data->right);
+		//当左右节点不为空入队
+		ret[(*returnSize)++] = data->val;
+		if (data->left)
+			QueuePush(&Q, data->left);
+		if (data->right)
+			QueuePush(&Q, data->right);
 		QueuePop(&Q);
 	}
+	QueueDestory(&Q);
 	return ret;
 }
 int main()
 {
+	TreeNode* p1 = malloc(sizeof(TreeNode));
+	p1->val = 3;
+	TreeNode* p2 = malloc(sizeof(TreeNode));
+	p2->val = 9;
+	TreeNode* p3 = malloc(sizeof(TreeNode));
+	p3->val = 20;
+	TreeNode* p4 = malloc(sizeof(TreeNode));
+	p4->val = 15;
+	TreeNode* p5 = malloc(sizeof(TreeNode));
+	p5->val = 7;
+	p1->left = p2;
+	p1->right = p3;
+	p2->left = p2->right = NULL;
+	p3->left = p4;
+	p3->right = p5;
+	p4->left = p4->right = p5->left = p5->right = NULL;
 
+	int returnSize = 0;
+
+	int* ret = levelOrder(p1, &returnSize);
+	for (int i = 0; i < returnSize; i++)
+		printf("%d ", ret[i]);
+	free(ret);
+	return 0;
 }
