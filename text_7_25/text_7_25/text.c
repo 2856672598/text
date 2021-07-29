@@ -568,31 +568,569 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//void Swap(int* nums1, int size1, int* nums2, int size2)
+//{
+//	int begin1 = 0, begin2 = 0;
+//	while (begin1 < size1&& begin2 < size2)
+//	{
+//		int tmp = nums1[begin1];
+//		nums1[begin1] = nums2[begin2];
+//		nums2[begin2] = tmp;
+//		begin1++;
+//		begin2++;
+//	}
+//}
+//int main()
+//{
+//	int nums1[] = { 1,2,3,4,5 };
+//	int nums2[] = { 6,7,8,9,10 };
+//	int size1 = sizeof(nums1) / sizeof(nums1[0]);
+//	int size2 = sizeof(nums2) / sizeof(nums2[0]);
+//	int i = 0;
+//	Swap(nums1, size1, nums2, size2);
+//	for (i = 0; i < size1; i++)
+//		printf("%d ", nums1[i]);
+//	printf("\n");
+//	for (i = 0; i < size2; i++)
+//		printf("%d ", nums2[i]);
+//	return 0;
+//}
+
+////1012 数字分类 (20 分)
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0, input = 0;
+//	int a1 = 0, a2 = 0, a3 = 0, a4 = 0, a5 = 0;
+//	int flag = 1, count2 = 0, count4 = 0;
+//	scanf("%d", &n);
+//	while (n)
+//	{
+//		scanf("%d", &input);
+//		int rema = input % 5;
+//		if (rema == 0 && input % 2 == 0)
+//			a1 += input;
+//		if (rema == 1)
+//		{
+//			a2 += flag * input;
+//			flag *= -1;
+//			count2++;
+//		}
+//		if (rema == 2)
+//			a3 += 1;
+//		if (rema == 3)
+//		{
+//			a4 += input;
+//			count4++;
+//		}
+//		if (rema == 4)
+//		{
+//			if (input > a5)
+//				a5 = input;
+//		}
+//		n--;
+//	}
+//	if (a1 == 0)
+//		printf("%c ", 'N');
+//	else
+//		printf("%d ", a1);
+//	if (count2 == 0)
+//		printf("%c ", 'N');
+//	else
+//		printf("%d ", a2);
+//	if (a3 == 0)
+//		printf("%c ", 'N');
+//	else
+//		printf("%d ", a3);
+//
+//	if (count4 == 0)
+//		printf("%c ", 'N');
+//	else
+//		printf("%.1lf ", a4*1.0 / count4);
+//	if (a5 == 0)
+//		printf("%c", 'N');
+//	else
+//		printf("%d", a5);
+//	return 0;
+//}
+
+
+////1009 说反话 (20 分)
+//#include<stdio.h>
+//#include<string.h>
+//void Swap(char* nums, int left, int right)
+//{
+//	while (left < right)
+//	{
+//		char tmp = nums[left];
+//		nums[left] = nums[right];
+//		nums[right] = tmp;
+//		left++;
+//		right--;
+//	}
+//}
+//int main()
+//{
+//	char nums[81];
+//	gets(nums);
+//	int size = strlen(nums);
+//	int begin = 0, cur = 0;
+//	while (cur <= size)
+//	{
+//		if (nums[cur] != ' '&& nums[cur] != '\0')
+//			cur++;
+//		else
+//		{
+//			Swap(nums, begin, cur - 1);
+//			begin = cur + 1;
+//			cur++;
+//		}
+//	}
+//	Swap(nums, 0, size - 1);
+//	printf("%s", nums);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//void Init(int* nums, int size, int val)
+//{
+//	int i = 0;
+//	for (i = 0; i < size; i++)
+//	{
+//		nums[i] = val;
+//	}
+//}
+//void Print(int* nums, int size)
+//{
+//	int i = 0;
+//	for (i = 0; i < size; i++)
+//		printf("%d ", nums[i]);
+//}
+//void Reverse(int* nums, int left, int right)
+//{
+//	while (left < right)
+//	{
+//		int tmp = nums[left];
+//		nums[left] = nums[right];
+//		nums[right] = tmp;
+//		right--;
+//		left++;
+//	}
+//}
+//int main()
+//{
+//	int nums[] = { 1,2,3,4,5,9,0,3 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	//Init(nums, size, 0);
+//
+//	//Print(nums, size);
+//
+//	Reverse(nums, 0, size - 1);
+//	Print(nums, size);
+//	return 0;
+//}
+
+
+////1013 数素数 (20 分)
+//#include<stdio.h>
+//#include<stdbool.h>
+//#include<math.h>
+//bool Prime(int x)
+//{
+//	int i = 2;
+//	for (i = 2; i <= sqrt(x); i++)
+//	{
+//		if (x%i == 0)
+//			return false;
+//	}
+//	return true;
+//}
+//int main()
+//{
+//	int i = 0, count = 0, a, b;
+//	int flag = 0;
+//	scanf("%d %d", &a, &b);
+//	for (i = 2;; i++)
+//	{
+//		if (Prime(i))
+//		{
+//			count++;
+//			if (count >= a && count <= b)
+//			{
+//				flag++;
+//				printf("%d", i);
+//				if (flag % 10 == 0)
+//					printf("\n");
+//				else if (count != b)
+//					printf(" ");
+//			}
+//			if (count > b)
+//				break;
+//		}
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int m, n;
+//	scanf("%d %d", &m, &n);
+//	unsigned tmp = (unsigned)m^n;
+//	int count = 0;
+//	while (tmp)
+//	{
+//		if (tmp & 1)
+//			count++;
+//		tmp >>= 1;
+//	}
+//	printf("%d", count);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	unsigned int tmp = (unsigned)n;
+//	int arr[32] = { 0 };
+//	int i = 0;
+//	while (tmp)
+//	{
+//		arr[i++] = tmp & 1;
+//		tmp >>= 1;
+//	}
+//	printf("奇数位：");
+//	for (i = 0; i < 32; i += 2)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	printf("\n偶数位：");
+//	for (i = 1; i < 32; i += 2)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int NumberOf1(int n)
+//{
+//	unsigned int tmp = (unsigned)n;
+//	int count = 0;
+//	while (tmp)
+//	{
+//		if (tmp & 1)
+//			count++;
+//		tmp >>= 1;
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int ret = NumberOf1(n);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//void Swap1(int* a, int* b)
+//{
+//	int tmp = *a;
+//	*a = *b;
+//	*b = tmp;
+//}
+//
+//void Swap2(int* a, int* b)
+//{
+//	*a = (*a) ^ (*b);
+//	*b = (*a) ^ (*b);
+//	*a = (*a) ^ (*b);
+//}
+//
+//int main()
+//{
+//	int a, b;
+//	scanf("%d %d", &a, &b);
+//	printf("交换前a = %d,b = %d\n", a, b);
+//	Swap2(&a, &b);
+//	printf("交换后a = %d,b = %d", a, b);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//void Sort(int* nums, int size)
+//{
+//	int i = 0;
+//	for (i = 0; i < size - 1; i++)
+//	{
+//		int end = i, flag = nums[end + 1];
+//		while (end >= 0)
+//		{
+//			if (nums[end] > nums[end + 1])
+//			{
+//				nums[end + 1] = nums[end];
+//				end--;
+//			}
+//			else
+//				break;
+//		}
+//		nums[end + 1] = flag;
+//	}
+//}
+//
+//int cmp(const void* a, const void* b)
+//{
+//	return (*(int*)a) - (*(int*)b);
+//}
+//
+//int majorityElement(int* nums, int numsSize)
+//{
+//	qsort(nums, numsSize, sizeof(int), cmp);
+//	int mid = numsSize / 2;
+//	int left = 0, right = numsSize - 1;
+//	while (mid <= right)
+//	{
+//		if (nums[left] != nums[mid])
+//		{
+//			left++;
+//			mid++;
+//		}
+//		else
+//			break;
+//	}
+//	return nums[mid];
+//}
+//int main()
+//{
+//	int nums[] = { 3,2,3 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int ret = majorityElement(nums, size);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int a, x;
+//	for (a = 0, x = 0; a <= 1 && !x++; a++)
+//	{
+//		a++;
+//	}
+//	printf("%d %d", a, x);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//int* singleNumbers(int* nums, int size, int* returnSize)
+//{
+//	int i = 0, tmp = 0;
+//	for (i = 0; i < size; i++)
+//	{
+//		tmp ^= nums[i];
+//	}
+//	unsigned int flag = 1;
+//	while (tmp)
+//	{
+//		if (tmp & flag)
+//			break;
+//		flag <<= 1;
+//	}
+//	int ret1 = 0, ret2 = 0;
+//	for (i = 0; i < size; i++)
+//	{
+//		if (nums[i] & flag)
+//		{
+//			ret1 ^= nums[i];
+//		}
+//		else
+//			ret2 ^= nums[i];
+//	}
+//	*returnSize = 0;
+//	int* ret = malloc(sizeof(int) * 2);
+//	if (ret)
+//	{
+//		ret[(*returnSize)++] = ret1;
+//		ret[(*returnSize)++] = ret2;
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	int nums[] = { 1,2,10,4,1,4,3,3 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int returnSize = 0;
+//	int* ret = singleNumbers(nums, size, &returnSize);
+//	int i = 0;
+//	for (i = 0; i < returnSize; i++)
+//		printf("%d ", ret[i]);
+//	free(ret);
+//	return 0;
+//}
+
+////75. 颜色分类
+//#include<stdio.h>
+//void sortColors(int* nums, int numsSize)
+//{
+//	int i = 0;
+//	for (i = 0; i < numsSize - 1; i++)
+//	{
+//		int end = i, flag = nums[end + 1];
+//		while (end >= 0)
+//		{
+//			if (nums[end] > flag)
+//			{
+//				nums[end + 1] = nums[end];
+//				end--;
+//			}
+//			else
+//				break;
+//		}
+//		nums[end + 1] = flag;
+//	}
+//}
+//int main()
+//{
+//	int nums[] = { 2,0,2,1,1,0 };
+//	int numsSize = sizeof(nums) / sizeof(nums[0]);
+//	int i = 0;
+//	sortColors(nums, numsSize);
+//	for (i = 0; i < numsSize; i++)
+//	{
+//		printf("%d ", nums[i]);
+//	}
+//	return 0;
+//}
+
+
+//79. 单词搜索
 #include<stdio.h>
-void Swap(int* nums1, int size1, int* nums2, int size2)
+#include<stdbool.h>
+#include<stdlib.h>
+#include<string.h>
+typedef struct Seat
 {
-	int begin1 = 0, begin2 = 0;
-	while (begin1 < size1&& begin2 < size2)
-	{
-		int tmp = nums1[begin1];
-		nums1[begin1] = nums2[begin2];
-		nums2[begin2] = tmp;
-		begin1++;
-		begin2++;
-	}
+	int x;
+	int y;
+}Seat;
+bool Is_Path(char** board, int boardSize, int* boardColSize, Seat pos, char * word)
+{
+	if (pos.x >= 0 && pos.x < boardSize &&pos.y >= 0 && pos.y < *boardColSize&&board[pos.x][pos.y] == *word)
+		return true;
+	return false;
 }
+bool _exist(char** board, int boardSize, int* boardColSize, char * word, Seat pos)
+{
+	int size = strlen(word);
+	if (board[pos.x][pos.y] == *word && size == 1)//ba  ab
+		return true;
+	
+	//防止死递归应该走过的路更改
+	board[pos.x][pos.y] = '*';
+
+	//下
+	Seat next;
+	next.x = pos.x + 1;
+	next.y = pos.y;
+	if (Is_Path(board, boardSize, boardColSize, next, word + 1))
+	{
+		//位置合法
+		if (_exist(board, boardSize, boardColSize, word + 1, next))
+			return true;
+		//换条路继续找
+	}
+
+	//右
+	next.x = pos.x;
+	next.y = pos.y + 1;
+	if (Is_Path(board, boardSize, boardColSize, next, word + 1))
+	{
+		//位置合法
+		if (_exist(board, boardSize, boardColSize, word + 1, next))
+			return true;
+	}
+
+	//上
+	next.x = pos.x - 1;
+	next.y = pos.y;
+	if (Is_Path(board, boardSize, boardColSize, next, word + 1))
+	{
+		//位置合法
+		if (_exist(board, boardSize, boardColSize, word + 1, next))
+			return true;
+	}
+
+	//左
+	next.x = pos.x;
+	next.y = pos.y - 1;
+	if (Is_Path(board, boardSize, boardColSize, next, word + 1))
+	{
+		//位置合法
+		if (_exist(board, boardSize, boardColSize, word + 1, next))
+			return true;
+	}
+
+	//当前位置的四个方向均不通
+	board[pos.x][pos.y] = *word;
+	return false;
+}
+
+bool exist(char** board, int boardSize, int* boardColSize, char * word)
+{
+	int i = 0;
+	for (i = 0; i < boardSize; i++)
+	{
+		int j = 0;
+		for (j = 0; j < *boardColSize; j++)
+		{
+			Seat pos;
+			pos.x = i;
+			pos.y = j;
+			if (board[pos.x][pos.y] == *word)
+			{
+				if (_exist(board, boardSize, boardColSize, word, pos))
+					return true;
+			}
+		}
+	}
+	return false;
+}
+
 int main()
 {
-	int nums1[] = { 1,2,3,4,5 };
-	int nums2[] = { 6,7,8,9,10 };
-	int size1 = sizeof(nums1) / sizeof(nums1[0]);
-	int size2 = sizeof(nums2) / sizeof(nums2[0]);
+	int row = 2;
+	int col = 1;
+	char** nums = malloc(sizeof(char*) * row);
 	int i = 0;
-	Swap(nums1, size1, nums2, size2);
-	for (i = 0; i < size1; i++)
-		printf("%d ", nums1[i]);
-	printf("\n");
-	for (i = 0; i < size2; i++)
-		printf("%d ", nums2[i]);
+	for (i = 0; i < row; i++)
+	{
+		nums[i] = malloc(sizeof(char) * col);
+		int j = 0;
+		for (j = 0; j < col; j ++ )
+		{
+			scanf("%c", &nums[i][j]);
+		}
+		getchar();
+	}
+	char word[] = "ba";
+	int flag = exist(nums, row, &col, word);
+	printf("%d", flag);
+	for (i = 0; i < row; i++)
+	{
+		free(nums[i]);
+	}
 	return 0;
 }
+
