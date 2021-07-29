@@ -67,37 +67,66 @@ int Get_Mine_Count(char board[ROWS][COLS], int row, int col)
 	return count;
 }
 
-void Open(char show[ROWS][COLS], char mine[ROWS][COLS], int row, int col, int* flag)
+//void Open(char show[ROWS][COLS], char mine[ROWS][COLS], int row, int col)
+//{
+//	int count = 0;
+//	if (row > 0 && row <= ROW && col > 0 && col <= COL)
+//	{
+//		count = Get_Mine_Count(mine, row, col);
+//	}
+//	if (count != 0)
+//		show[row][col] = '0' + count;
+//	if (count == 0 && row > 0 && row <= ROW && col > 0 && col <= COL && show[row][col] != ' ')
+//	{
+//		show[row][col] = ' ';
+//		Open(show, mine, row - 1, col);
+//		//Open(show, mine, row - 1, col + 1);
+//		Open(show, mine, row, col + 1);
+//		//Open(show, mine, row + 1, col + 1);
+//		Open(show, mine, row + 1, col);
+//		//Open(show, mine, row + 1, col - 1);
+//		Open(show, mine, row, col - 1);
+//		//Open(show, mine, row - 1, col - 1);
+//	}
+//}
+
+
+void Open(char show[ROWS][COLS], char mine[ROWS][COLS], int row, int col)
 {
-	int count = 0;
 	if (row > 0 && row <= ROW && col > 0 && col <= COL)
 	{
-		count = Get_Mine_Count(mine, row, col);
-	}
-	if (count != 0)
-		show[row][col] = '0' + count;
-	if (count == 0 && row > 0 && row <= ROW && col > 0 && col <= COL && show[row][col] != ' ')
-	{
-		show[row][col] = ' ';
-		(*flag) += 1;
-		Open(show, mine, row - 1, col, flag);
-		//Open(show, mine, row - 1, col + 1);
-		Open(show, mine, row, col + 1, flag);
-		//Open(show, mine, row + 1, col + 1);
-		Open(show, mine, row + 1, col, flag);
-		//Open(show, mine, row + 1, col - 1);
-		Open(show, mine, row, col - 1, flag);
-		//Open(show, mine, row - 1, col - 1);
+		int count = Get_Mine_Count(mine, row, col);
+		if (count != 0)
+			show[row][col] = '0' + count;
+		else if (show[row][col] != ' ')
+		{
+			show[row][col] = ' ';
+			int i = 0;
+			for (int i = row - 1; i <= row + 1; i++)
+			{
+				int j = 0;
+				for (j = col - 1; j <= col + 1; j++)
+				{
+					Open(show, mine, i, j);
+				}
+			}
+		}
+		else
+		{
+			//show[row][col]!=' '递归停止
+			return ;
+		}
+
 	}
 }
 
 void PlayerMove(char show[ROWS][COLS], char mine[ROWS][COLS], int row, int col)
 {
-	int x, y, flag = 0;
+	int x, y;
 	PrinBoard(show, ROW, COL);
 	while (1)
 	{
-		printf("输入需要排查的坐标>\n");
+		printf("输入需要排查的坐标>");
 		scanf("%d %d", &x, &y);
 		if (x >= 1 && x <= row && y >= 1 && y <= col && show[x][y] == '*')
 		{
@@ -110,41 +139,27 @@ void PlayerMove(char show[ROWS][COLS], char mine[ROWS][COLS], int row, int col)
 			}
 			else
 			{
-				//统计周围的雷数
-				int count = Get_Mine_Count(mine, x, y);
-				if (count == 0)
-				{
-					Open(show, mine, x, y, &flag);
-				}
-				else
-					show[x][y] = count + '0';
+				Open(show, mine, x, y);
 				PrinBoard(show, ROW, COL);
-				flag++;
 			}
 		}
-		if (flag + MINES == ROW * COL)
+		else
 		{
-			printf("恭喜您赢了\n");
-			break;
+			printf("您当前输入的坐标不合法,请重新输入\n");
 		}
-		int i = 0, j = 0;
-		for (i = 1; i <= row; i++)
+		int i = 0, flag = 0;
+		for (i = 1; i <= ROW; i++)
 		{
-			for (j = 1; j <= col; j++)
+			int j = 0;
+			for (j = 1; j <= COL; j++)
 			{
 				if (show[i][j] == '*')
-				{
-					if (mine[i][j] == ' ')
-						break;
-				}
+					flag++;
 			}
-			if (j <= col)
-				break;
 		}
-		if (i > row)
+		if (flag == MINES)
 		{
-			printf("恭喜玩家获胜\n");
-			PrinBoard(mine, row, col);
+			printf("玩家获胜\n");
 			break;
 		}
 	}

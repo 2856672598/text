@@ -10,7 +10,7 @@ enum
 	COL = 10,
 	ROWS = ROW + 2,
 	COLS = COL + 2,
-	MINES = 5
+	MINES = 5 //À×Êý
 };
 
 void InitBoard(char board[ROWS][COLS], int row, int col, char val);
@@ -22,4 +22,4 @@ void PlayerMove(char show[ROWS][COLS], char mine[ROWS][COLS], int row, int col);
 
 int Get_Mine_Count(char board[ROWS][COLS], int row, int col);
 
-void Open(char show[ROWS][COLS], char mine[ROWS][COLS], int row, int col, int* flag);
+void Open(char show[ROWS][COLS], char mine[ROWS][COLS], int row, int col);

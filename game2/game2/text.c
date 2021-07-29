@@ -20,8 +20,6 @@ void game()
 	//²¼ÖÃÀ×
 	CreateMine(mine, ROW, COL, size);
 
-	//PrinBoard(mine, ROW, COL);
-	//PrinBoard(show, ROW, COL);
 
 	PlayerMove(show, mine, ROW, COL);
 }
