@@ -1,7 +1,7 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 
 
-////171. Excel±íÁĞĞòºÅ
+////171. Excelè¡¨åˆ—åºå·
 //#include<stdio.h>
 //#include<string.h>
 //int titleToNumber(char * columnTitle)
@@ -26,7 +26,7 @@
 //	return 0;
 //}
 
-////434. ×Ö·û´®ÖĞµÄµ¥´ÊÊı
+////434. å­—ç¬¦ä¸²ä¸­çš„å•è¯æ•°
 //#include<stdio.h>
 //int countSegments(char * s)
 //{
@@ -61,12 +61,12 @@
 //	int size = strlen(s);
 //	int left = 0, right = 0;
 //	int maxleng = 0;
-//	int arr[256] = { 0 };//ÓÃÀ´¼ÇÂ¼³öÏÖµÄ´ÎÊı
+//	int arr[256] = { 0 };//ç”¨æ¥è®°å½•å‡ºç°çš„æ¬¡æ•°
 //	while (right < size)
 //	{
 //		arr[s[right]]++;
 //
-//		while (arr[s[right]] > 1)//Ö±µ½ÕÒµ½ºÍs[right]ÏàÍ¬µÄÏÂÒ»¸öÎ»ÖÃ²ÅÍ£Ö¹
+//		while (arr[s[right]] > 1)//ç›´åˆ°æ‰¾åˆ°å’Œs[right]ç›¸åŒçš„ä¸‹ä¸€ä¸ªä½ç½®æ‰åœæ­¢
 //		{
 //			arr[s[left]]--;
 //			left++;
@@ -87,7 +87,7 @@
 //	return 0;
 //}
 
-////1008 Êı×éÔªËØÑ­»·ÓÒÒÆÎÊÌâ (20 ·Ö)
+////1008 æ•°ç»„å…ƒç´ å¾ªç¯å³ç§»é—®é¢˜ (20 åˆ†)
 //#include<stdio.h>
 //void Swap(int* nums, int left, int right)
 //{
@@ -157,39 +157,281 @@
 //	return 0;
 //}
 
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr1[10][10] = { 0 };
+//	int n, m;
+//	scanf("%d %d", &n, &m);
+//	int i = 0;
+//	for (i = 0; i < n; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < m; j++)
+//		{
+//			scanf("%d", &arr1[i][j]);
+//		}
+//	}
+//
+//	for (i = 0; i < m; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < n; j++)
+//		{
+//			printf("%d ", arr1[j][i]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5,6 };
+//	int size = sizeof(arr) / sizeof(arr[0]);
+//	int i = 0;
+//	int* p = arr;
+//	for (i = 0; i < size; i++)
+//	{
+//		printf("%d ", *(arr + i));
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0, sum = 0;
+//	scanf("%d", &n);
+//	int prev = 0;
+//	int i = 0;
+//	for (i = 0; i < 5; i++)
+//	{
+//		prev = prev * 10 + n;
+//		sum += prev;
+//	}
+//	printf("%d", sum);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<math.h>
+//int main()
+//{
+//	int i = 0;
+//	for (i = 0; i < 100000; i++)
+//	{
+//		int tmp = i, count = 0;
+//		long long sum = 0;
+//		while (tmp)
+//		{
+//			count++;
+//			tmp /= 10;
+//		}
+//		tmp = i;
+//		while (tmp)
+//		{
+//			sum += (int)pow(tmp % 10, count);
+//			tmp /= 10;
+//		}
+//		if (sum == i)
+//			printf("%d ", i);
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int maxProduct(int* nums, int numsSize)
+//{
+//	int i = 0, max = nums[0];
+//	for (i = 0; i < numsSize; i++)
+//	{
+//		int j = 0, sum = 1;
+//		for (j = i; j < numsSize; j++)
+//		{
+//			sum *= nums[j];
+//			if (sum > max)
+//				max = sum;
+//		}
+//	}
+//	return max;
+//}
+//int main()
+//{
+//	int nums[] = { 2,3,-2,4 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int max = maxProduct(nums, size);
+//	printf("%d", max);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	char a[1000];
+//	int i;
+//	for (i = 0; i < 1000; i++)
+//	{
+//		a[i] = (char)(-1 - i);
+//	}
+//	printf("%d\n", strlen(a));
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int fun(char *s)
+//{
+//	char *p = s;
+//	while (*p != '\0') {
+//		p++;
+//	}
+//	return(p - s);
+//}
+//int main()
+//{
+//	printf("%d\n", fun("goodbye!"));
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	//â€­00000000000000000000000010100101â€¬
+//	//000001111111111111111111 
+//	//00000000000000000000000011111010
+//	unsigned char a = 0xA5;
+//	unsigned char b = ~a >> 5;
+//	printf("%d\n", b);//250
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	const int i = 0;
+//	int *j = (int *)&i;
+//	*j = 1;
+//	printf("%d,%d", i, *j);
+//}
+
+//#include<stdio.h>
+//void fun(int x, int y, int *c, int *d)
+//{
+//	*c = x + y;
+//	*d = x - y;
+//}
+//int main()
+//{
+//	int a = 4, b = 3, c = 0, d = 0;
+//	fun(a, b, &c, &d);
+//	printf("%d %d\n", c, d);
+//}
+
+
+
+////å›æ–‡æ•°åˆ¤æ–­
+//#include<stdio.h>
+//#include<stdbool.h>
+//bool IsPalindrome(int x)
+//{
+//	int arr[10] = { 0 };
+//	int i = 0;
+//	int tmp = x;
+//	while (tmp)
+//	{
+//		arr[i++] = tmp % 10;
+//		tmp /= 10;
+//	}
+//	int left = 0, right = i - 1;
+//	while (left < right)
+//	{
+//		if (arr[left] != arr[right])
+//			break;
+//		left++;
+//		right--;
+//	}
+//	if (left < right)
+//		return false;
+//	return true;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	printf("%d", IsPalindrome(n));
+//	return 0;
+//}
+
+//#include<stdio.h>
+//void main()
+//{
+//	char *szStr = "abcde";
+//	szStr += 2;
+//	printf("%lu\n", szStr);
+//	return;
+//}
+
+
+//1027 æ‰“å°æ²™æ¼ (20 åˆ†)
 #include<stdio.h>
 int main()
 {
-	int arr1[10][10] = { 0 };
-	int n, m;
-	scanf("%d %d", &n, &m);
+	int n = 0;
+	scanf("%d", &n);
+	getchar();//è¯»æ‰ç©ºæ ¼
+
+	char flag = getchar();
+	int max = 1, count = 1, sum = 0;
+	while (1)
+	{
+		sum += max + 2;
+		if (sum * 2 + 1 > n)
+			break;
+		max += 2;
+		count++;
+	}
+
 	int i = 0;
-	for (i = 0; i < n; i++)
+	for (i = 0; i < count; i++)
 	{
-		int j = 0;
-		for (j = 0; j < m; j++)
-		{
-			scanf("%d", &arr1[i][j]);
-		}
-	}
+		int z = 0;
+		for (z = i; z > 0; z--)
+			printf(" ");
 
-	for (i = 0; i < m; i++)
-	{
 		int j = 0;
-		for (j = 0; j < m; j++)
+		for (j = max; j > 0; j--)
 		{
-			arr1[j-1][i] = arr1[i][j];
+			printf("%c", flag);
 		}
+		printf("\n");
+		max -= 2;
 	}
-
-	for (int i = 0; i < m; i++)
+	max = 1;
+	for (i = count - 2; i >= 0; i--)
 	{
+		int z = 0;
+		for (z = i; z > 0; z--)
+			printf(" ");
+
+
 		int j = 0;
-		for (j = 0; j < n; j++)
+		max += 2;
+		for (j = 0; j < max; j++)
 		{
-			printf("%d ", arr1[i][j]);
+			printf("%c", flag);
 		}
 		printf("\n");
 	}
+	printf("%d", n - (sum * 2 + 1 - (max + 2) * 2));
 	return 0;
 }
+
+
+
