@@ -379,59 +379,272 @@
 //}
 
 
-//1027 打印沙漏 (20 分)
+////1027 打印沙漏 (20 分)
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	getchar();//读掉空格
+//
+//	char flag = getchar();
+//	int max = 1, count = 1, sum = 0;
+//	while (1)
+//	{
+//		sum += max + 2;
+//		if (sum * 2 + 1 > n)
+//			break;
+//		max += 2;
+//		count++;
+//	}
+//
+//	int i = 0;
+//	for (i = 0; i < count; i++)
+//	{
+//		int z = 0;
+//		for (z = i; z > 0; z--)
+//			printf(" ");
+//
+//		int j = 0;
+//		for (j = max; j > 0; j--)
+//		{
+//			printf("%c", flag);
+//		}
+//		printf("\n");
+//		max -= 2;
+//	}
+//	max = 1;
+//	for (i = count - 2; i >= 0; i--)
+//	{
+//		int z = 0;
+//		for (z = i; z > 0; z--)
+//			printf(" ");
+//
+//
+//		int j = 0;
+//		max += 2;
+//		for (j = 0; j < max; j++)
+//		{
+//			printf("%c", flag);
+//		}
+//		printf("\n");
+//	}
+//	printf("%d", n - (sum * 2 + 1 - (max + 2) * 2));
+//	return 0;
+//}
+
+
+
+//#include<stdio.h>
+//#include<stdbool.h>
+//bool isThree(int n)
+//{
+//	int count = 0;
+//	if (n < 4)
+//		return false;
+//	for (int i = 2; i < n; i++)
+//	{
+//		if (n%i == 0)
+//			count++;
+//		if (count >= 2)
+//			break;
+//	}
+//	if (count != 1)
+//		return false;
+//	return true;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	printf("%d", isThree(n));
+//	return 0;
+//}
+
+////5831. 你可以工作的最大周数
+//#include<stdio.h>
+//long long numberOfWeeks(int* milestones, int milestonesSize)
+//{
+//	int max = 0;
+//	long long sum = 0;
+//	int i = 0;
+//	for(i=0;i<milestonesSize;i++)
+//	{
+//		sum += milestones[i];
+//		if (milestones[i] > max)
+//			max = milestones[i];
+//	}
+//	if (max * 2 - 1 < sum)
+//		return sum;
+//	return (sum - max) * 2 + 1;
+//}
+//int main()
+//{
+//	int nums[] = { 1,2,3 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	printf("%lld", numberOfWeeks(nums, size));
+//	return 0;
+//}
+
+////1929. 数组串联
+//#include<stdio.h>
+//#include<stdlib.h>
+//int* getConcatenation(int* nums, int numsSize, int* returnSize)
+//{
+//	int* ret = malloc(sizeof(int)*numsSize * 2);
+//	*returnSize = 0;
+//	int i = 0;
+//	for (i = 0; i < 2 * numsSize; i++)
+//	{
+//		ret[(*returnSize)++] = nums[i%numsSize];
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	int nums[] = { 1,2,3,4,5 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int returnSize = 0;
+//	int i = 0;
+//	int* ret = getConcatenation(nums, size, &returnSize);
+//	for (i = 0; i < returnSize; i++)
+//		printf("%d ", ret[i]);
+//	free(ret);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	int carry = 0;
+//	int div = 0;
+//	char arr[1001] = "0";
+//	scanf("%s %d", arr, &div);
+//	int size = strlen(arr);
+//	int i = 0, flag = 0;
+//	for (i = 0; i < size; i++)
+//	{
+//		int tmp = carry * 10 + (arr[i] - '0');
+//		if (tmp / div != 0 || flag || size == 1)
+//		{
+//			printf("%d", tmp / div);
+//			flag = 1;
+//		}
+//		carry = tmp % div;
+//	}
+//	printf(" %d", carry);
+//	return 0;
+//}
+
+
+////1016 部分A+B (15 分)
+//#include<stdio.h>
+//int NewNumber(int x, int p)
+//{
+//	int number = 0;
+//	while (x)
+//	{
+//		if (x % 10 == p)
+//			number = number * 10 + p;
+//		x /= 10;
+//	}
+//	return number;
+//}
+//int main()
+//{
+//	int a, da, b, db, pa, pb;
+//	scanf("%d %d %d %d", &a, &da, &b, &db);
+//	pa = NewNumber(a, da);
+//	pb = NewNumber(b, db);
+//	printf("%d", pa + pb);
+//	return 0;
+//}
+
+
 #include<stdio.h>
+int Max(int* arr, int size)
+{
+	int i = 0;
+	for (i = 0; i < size - 1; i++)
+	{
+		int end = 0, flag = arr[end + 1];
+		while (end >= 0)
+		{
+			if (arr[end] > flag)
+			{
+				arr[end + 1] = arr[end];
+				end--;
+			}
+			else
+				break;
+		}
+		arr[end + 1] = flag;
+	}
+	return arr[0];
+}
 int main()
 {
 	int n = 0;
+	int awin = 0, adraw = 0, afail = 0;
+	int bwin = 0, bdraw = 0, bfail = 0;
+
+	char a, b;
 	scanf("%d", &n);
-	getchar();//读掉空格
-
-	char flag = getchar();
-	int max = 1, count = 1, sum = 0;
-	while (1)
+	getchar();
+	int a1 = 0, b1 = 0, c1 = 0;
+	int a2 = 0, b2 = 0, c2 = 0;
+	while (n)
 	{
-		sum += max + 2;
-		if (sum * 2 + 1 > n)
-			break;
-		max += 2;
-		count++;
-	}
-
-	int i = 0;
-	for (i = 0; i < count; i++)
-	{
-		int z = 0;
-		for (z = i; z > 0; z--)
-			printf(" ");
-
-		int j = 0;
-		for (j = max; j > 0; j--)
+		scanf("%c %c", &a, &b);
+		getchar();
+		if (a == 'C'&&b == 'J' || a == 'J'&&b == 'B' || a == 'B'&&b == 'C')
 		{
-			printf("%c", flag);
+			awin++;
+			bfail++;
+			if (a == 'C')
+				c1++;
+			else if (a == 'B')
+				b1++;
+			else
+				a1++;
 		}
-		printf("\n");
-		max -= 2;
-	}
-	max = 1;
-	for (i = count - 2; i >= 0; i--)
-	{
-		int z = 0;
-		for (z = i; z > 0; z--)
-			printf(" ");
-
-
-		int j = 0;
-		max += 2;
-		for (j = 0; j < max; j++)
+		else if (a == b)
 		{
-			printf("%c", flag);
+			adraw++;
+			bdraw++;
 		}
-		printf("\n");
+		else
+		{
+			bwin++;
+			afail++;
+			if (b == 'C')
+				c2++;
+			else if (b == 'B')
+				b2++;
+			else
+				a2++;;
+		}
+		n--;
 	}
-	printf("%d", n - (sum * 2 + 1 - (max + 2) * 2));
+	printf("%d %d %d\n", awin, adraw, afail);
+	printf("%d %d %d\n", bwin, bdraw, bfail);
+
+	if (a1 > b1&&b > c1)
+		printf("A");
+	else if (a1 > b1&&a1 < c1)
+		printf("C");
+	else
+		printf("B");
+
+	printf(" ");
+
+	if (a2 > b2&&b2 > c2)
+		printf("A");
+	else if (a2 > b2&&a2 < c2)
+		printf("C");
+	else
+		printf("B");
 	return 0;
 }
-
-
-
