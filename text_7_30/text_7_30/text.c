@@ -563,88 +563,333 @@
 //}
 
 
+////1018 锤子剪刀布 (20 分)
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0;
+//	int awin = 0, adraw = 0, afail = 0;
+//	int bwin = 0, bdraw = 0, bfail = 0;
+//
+//	char a, b;
+//	scanf("%d", &n);
+//	getchar();
+//	int a1 = 0, b1 = 0, c1 = 0;
+//	int a2 = 0, b2 = 0, c2 = 0;
+//	while (n)
+//	{
+//		scanf("%c %c", &a, &b);
+//		getchar();
+//		if (a == 'C'&&b == 'J' || a == 'J'&&b == 'B' || a == 'B'&&b == 'C')
+//		{
+//			awin++;
+//			bfail++;
+//			if (a == 'C')
+//				c1++;
+//			else if (a == 'B')
+//				b1++;
+//			else
+//				a1++;
+//		}
+//		else if (a == b)
+//		{
+//			adraw++;
+//			bdraw++;
+//		}
+//		else if(b == 'C'&&a == 'J' || b == 'J'&&a == 'B' || b == 'B'&&a == 'C')
+//		{
+//			bwin++;
+//			afail++;
+//			if (b == 'C')
+//				c2++;
+//			else if (b == 'B')
+//				b2++;
+//			else
+//				a2++;
+//		}
+//		n--;
+//	}
+//	printf("%d %d %d\n", awin, adraw, afail);
+//	printf("%d %d %d\n", bwin, bdraw, bfail);
+//
+//
+//	if (b1 >= a1 && b1 >= c1)
+//		printf("B");
+//	else if (c1 >= b1 && c1 >= a1)
+//		printf("C");
+//	else if (a1 >= b1 && a1 >= c1)
+//		printf("J");
+//
+//	printf(" ");
+//
+//	if (b2 >= a2 && b2 >= c2)
+//		printf("B");
+//	else if (c2 >= b2 && c2 >= a2)
+//		printf("C");
+//	else if (a2 >= b2 && a2 >= c2)
+//		printf("J");
+//	return 0;
+//}
+
+
+////1023 组个最小数 (20 分)
+//#include<stdio.h>
+//int main()
+//{
+//	int i = 0;
+//	int arr[10] = { 0 };
+//	for (i = 0; i < 10; i++)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	for (i = 1; i < 10; i++)
+//	{
+//		if (arr[i] != 0)
+//		{
+//			printf("%d", arr[i]);
+//			arr[i]--;
+//			break;
+//		}
+//	}
+//	for (i = 0; i < 10; i++)
+//	{
+//		while (arr[i])
+//		{
+//			printf("%d", i);
+//			arr[i]--;
+//		}
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr[101];
+//	gets(arr);
+//	int size = strlen(arr);
+//	int left = 0, right = size - 1;
+//	while (left < right)
+//	{
+//		char tmp = arr[left];
+//		arr[left] = arr[right];
+//		arr[right] = tmp;
+//		left++;
+//		right--;
+//	}
+//	printf("%s", arr);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//void PrintDiamond(int n)
+//{
+//	int i = 0, flag = 1;
+//	//上半部分
+//	for (i = 0; i < n; i++)
+//	{
+//		int z = n;
+//		for (z = n - i - 1; z > 0; z--)
+//		{
+//			printf("  ");
+//		}
+//		int j = 0;
+//		for (j = 0; j < flag; j++)
+//		{
+//			printf("%c ", '*');
+//		}
+//		flag += 2;
+//		printf("\n");
+//	}
+//	flag -= 2;//上半部分多加一个2
+//	//下半部分
+//	for (i -= 1; i > 0; i--)
+//	{
+//		int z = 0;
+//		for (z = 0; z < n - i; z++)
+//		{
+//			printf("  ");
+//		}
+//		int j = 0;
+//		flag -= 2;
+//		for (j = 0; j < flag; j++)
+//		{
+//			printf("%c ", '*');
+//		}
+//		printf("\n");
+//	}
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	PrintDiamond(n);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int money = 0;
+//	int count = 0, flag = 0;
+//	scanf("%d", &money);
+//	count += money;
+//	flag = money;
+//	while (flag > 2)
+//	{
+//		count += flag / 2;
+//		int tmp = flag % 2;
+//		flag = flag / 2 + tmp;
+//	}
+//	printf("%d", count);
+//	return 0;
+//}
+
+////137. 只出现一次的数字 II
+//#include<stdio.h>
+//int singleNumber(int* nums, int numsSize)
+//{
+//	int i = 0;
+//	int arr[32] = { 0 };
+//	for (i = 0; i < numsSize; i++)
+//	{
+//		int falg = 1, total = 0;
+//		unsigned tmp = nums[i];
+//		int insert = 31;
+//		while (tmp)
+//		{
+//			if (tmp & 1)
+//				arr[insert] += 1;
+//			tmp >>= 1;
+//			insert--;
+//		}
+//	}
+//	int ret = 0, j = 0;
+//	for (i = 31; i >= 0; i--)
+//	{
+//		if (arr[i] % 3)
+//			ret += (unsigned)1 << j;
+//		j++;
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	int nums[] = { -2,-2,1,1,4,1,4,4,-4,-2 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	printf("%d", singleNumber(nums, size));
+//	return 0;
+//}
+
+
+////1042 字符统计 (20 分)
+//#include<stdio.h>
+//int main()
+//{
+//	char ch;
+//	int arr[26] = { 0 };
+//	while (~scanf("%c", &ch))
+//	{
+//		if (ch >= 'a'&&ch <= 'z' || ch >= 'A'&&ch <= 'Z')
+//		{
+//			if (ch >= 'a')
+//				arr[ch - 32 - 'A']++;
+//			else
+//				arr[ch - 'A']++;
+//		}
+//	}
+//	int max = arr[0];
+//	char maxletter = 'a';
+//	int i = 0;
+//	for (i = 0; i < 26; i++)
+//	{
+//		if (arr[i] > max)
+//		{
+//			max = arr[i];
+//			maxletter = i + 'a';
+//		}
+//
+//	}
+//	printf("%c %d", maxletter, max);
+//	return 0;
+//}
+
+
+
 #include<stdio.h>
-int Max(int* arr, int size)
+#include<stdlib.h>
+void Sort(int* nums, int numsSize)
 {
 	int i = 0;
-	for (i = 0; i < size - 1; i++)
+	for (i = 0; i < numsSize - 1; i++)
 	{
-		int end = 0, flag = arr[end + 1];
+		int end = i, flag = nums[end + 1];
 		while (end >= 0)
 		{
-			if (arr[end] > flag)
+			if (nums[end] > flag)
 			{
-				arr[end + 1] = arr[end];
+				nums[end + 1] = nums[end];
 				end--;
 			}
 			else
 				break;
 		}
-		arr[end + 1] = flag;
+		nums[end + 1] = flag;
 	}
-	return arr[0];
 }
-int main()
+int* majorityElement(int* nums, int numsSize, int* returnSize)
 {
-	int n = 0;
-	int awin = 0, adraw = 0, afail = 0;
-	int bwin = 0, bdraw = 0, bfail = 0;
-
-	char a, b;
-	scanf("%d", &n);
-	getchar();
-	int a1 = 0, b1 = 0, c1 = 0;
-	int a2 = 0, b2 = 0, c2 = 0;
-	while (n)
+	int* ret = malloc(sizeof(int) * 3);
+	*returnSize = 0;
+	if (numsSize == 1)
 	{
-		scanf("%c %c", &a, &b);
-		getchar();
-		if (a == 'C'&&b == 'J' || a == 'J'&&b == 'B' || a == 'B'&&b == 'C')
+		ret[(*returnSize)++] = nums[0];
+		return ret;
+	}
+
+	if (numsSize == 2)
+	{
+		if (nums[1] == nums[0])
+			ret[(*returnSize)++] = nums[0];
+		else
 		{
-			awin++;
-			bfail++;
-			if (a == 'C')
-				c1++;
-			else if (a == 'B')
-				b1++;
-			else
-				a1++;
+			ret[(*returnSize)++] = nums[0];
+			ret[(*returnSize)++] = nums[1];
 		}
-		else if (a == b)
+		return ret;
+	}
+	Sort(nums, numsSize);
+	int k = numsSize / 3;
+
+	int cur = k, begin = 0;
+	while (cur < numsSize)
+	{
+		if (nums[begin] == nums[cur])
 		{
-			adraw++;
-			bdraw++;
+			ret[(*returnSize)++] = nums[cur];
+			begin = cur + 1;
+			cur += k + 1;
 		}
 		else
 		{
-			bwin++;
-			afail++;
-			if (b == 'C')
-				c2++;
-			else if (b == 'B')
-				b2++;
-			else
-				a2++;;
+			begin++;
 		}
-		n--;
 	}
-	printf("%d %d %d\n", awin, adraw, afail);
-	printf("%d %d %d\n", bwin, bdraw, bfail);
-
-	if (a1 > b1&&b > c1)
-		printf("A");
-	else if (a1 > b1&&a1 < c1)
-		printf("C");
-	else
-		printf("B");
-
-	printf(" ");
-
-	if (a2 > b2&&b2 > c2)
-		printf("A");
-	else if (a2 > b2&&a2 < c2)
-		printf("C");
-	else
-		printf("B");
+	return ret;
+}
+int main()
+{
+	int nums[] = { 2,2 };
+	int size = sizeof(nums) / sizeof(nums[0]);
+	int returnSize = 0;
+	int* ret = majorityElement(nums, size, &returnSize);
+	int i = 0;
+	for (i = 0; i < returnSize; i++)
+		printf("%d ", ret[i]);
+	free(ret);
 	return 0;
 }
