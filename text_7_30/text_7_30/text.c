@@ -819,77 +819,191 @@
 //}
 
 
+////229. 求众数 II
+//
+//#include<stdio.h>
+//#include<stdlib.h>
+//void Sort(int* nums, int numsSize)
+//{
+//	int i = 0;
+//	for (i = 0; i < numsSize - 1; i++)
+//	{
+//		int end = i, flag = nums[end + 1];
+//		while (end >= 0)
+//		{
+//			if (nums[end] > flag)
+//			{
+//				nums[end + 1] = nums[end];
+//				end--;
+//			}
+//			else
+//				break;
+//		}
+//		nums[end + 1] = flag;
+//	}
+//}
+//int* majorityElement(int* nums, int numsSize, int* returnSize)
+//{
+//	int* ret = malloc(sizeof(int) * 3);
+//	*returnSize = 0;
+//	if (numsSize == 1)
+//	{
+//		ret[(*returnSize)++] = nums[0];
+//		return ret;
+//	}
+//
+//	if (numsSize == 2)
+//	{
+//		if (nums[1] == nums[0])
+//			ret[(*returnSize)++] = nums[0];
+//		else
+//		{
+//			ret[(*returnSize)++] = nums[0];
+//			ret[(*returnSize)++] = nums[1];
+//		}
+//		return ret;
+//	}
+//	Sort(nums, numsSize);
+//	int k = numsSize / 3;
+//
+//	int cur = 0, begin = 0;
+//	while (cur < numsSize)
+//	{
+//		if (nums[cur] == nums[begin])
+//		{
+//			cur++;
+//		}
+//		else
+//		{
+//			if (cur - begin > k)
+//			{
+//				ret[(*returnSize)++] = nums[begin];
+//			}
+//			begin = cur;
+//			cur++;
+//		}
+//	}
+//	if (cur - begin > k)
+//		ret[(*returnSize)++] = nums[begin];
+//	return ret;
+//}
+//int main()
+//{
+//	int nums[] = { 8,8,8,8 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int returnSize = 0;
+//	int* ret = majorityElement(nums, size, &returnSize);
+//	int i = 0;
+//	for (i = 0; i < returnSize; i++)
+//		printf("%d ", ret[i]);
+//	free(ret);
+//	return 0;
+//}
+
+////43. 字符串相乘
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<string.h>
+//char * multiply(char * num1, char * num2)
+//{
+//	int size1 = strlen(num1), size2 = strlen(num2);
+//	char* ret = malloc(sizeof(char)*(size1 + size2 + 2));
+//	if (*num1 == '0' || *num2 == '0')
+//	{
+//		ret[0] = '0';
+//		ret[1] = '\0';
+//		return ret;
+//	}
+//
+//	int i = 0, insert = -1;
+//	memset(ret, '0', size1 + size2 + 2);
+//
+//	int carry = 0, tmp = 0;
+//	for (i = size2 - 1; i >= 0; i--)
+//	{
+//		int j = 0;
+//		insert += 1;
+//		tmp = insert;
+//		for (j = size1 - 1; j >= 0; j--)
+//		{
+//			int sum = ((num2[i] - '0') * (num1[j] - '0') + carry + ret[tmp] - '0');
+//			carry = sum / 10;
+//			ret[tmp++] = (sum % 10) + '0';
+//		}
+//		if (carry)
+//		{
+//			ret[tmp] = (carry + ret[tmp]);
+//			carry = 0;
+//			tmp++;
+//		}
+//	}
+//	ret[tmp] = '\0';
+//	int left = 0, right = tmp - 1;
+//	while (left<right)
+//	{
+//		char tmp = ret[left];
+//		ret[left] = ret[right];
+//		ret[right] = tmp;
+//		left++;
+//		right--;
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	char num1[111], num2[111];
+//	scanf("%s %s", &num1, &num2);
+//	char* ret = multiply(num1, num2);
+//	printf("%s", ret);
+//	free(ret);
+//	return 0;
+//}
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int i = 0;
+//	int arr[5] = { 0 };
+//	for (i = 0; i <= 7; i++)
+//	{
+//		arr[i] = 0;
+//		printf("%p\n", &arr[i]);//死循环
+//	}
+//	return 0;
+//}
+
 
 #include<stdio.h>
-#include<stdlib.h>
-void Sort(int* nums, int numsSize)
+void adjustArr(int* arr,int size)
 {
-	int i = 0;
-	for (i = 0; i < numsSize - 1; i++)
+	int left = 0, right = size - 1;
+	while (left < right)
 	{
-		int end = i, flag = nums[end + 1];
-		while (end >= 0)
+		//先在左边找奇数
+		while (left <= right && arr[left] % 2)
 		{
-			if (nums[end] > flag)
-			{
-				nums[end + 1] = nums[end];
-				end--;
-			}
-			else
-				break;
+			left++;
 		}
-		nums[end + 1] = flag;
-	}
-}
-int* majorityElement(int* nums, int numsSize, int* returnSize)
-{
-	int* ret = malloc(sizeof(int) * 3);
-	*returnSize = 0;
-	if (numsSize == 1)
-	{
-		ret[(*returnSize)++] = nums[0];
-		return ret;
-	}
-
-	if (numsSize == 2)
-	{
-		if (nums[1] == nums[0])
-			ret[(*returnSize)++] = nums[0];
-		else
+		//右边找偶数
+		while (right >= left && arr[right] % 2 == 0)
 		{
-			ret[(*returnSize)++] = nums[0];
-			ret[(*returnSize)++] = nums[1];
+			right--;
 		}
-		return ret;
+		int tmp = arr[left];
+		arr[left] = arr[right];
+		arr[right] = tmp;
 	}
-	Sort(nums, numsSize);
-	int k = numsSize / 3;
-
-	int cur = k, begin = 0;
-	while (cur < numsSize)
-	{
-		if (nums[begin] == nums[cur])
-		{
-			ret[(*returnSize)++] = nums[cur];
-			begin = cur + 1;
-			cur += k + 1;
-		}
-		else
-		{
-			begin++;
-		}
-	}
-	return ret;
 }
 int main()
 {
-	int nums[] = { 2,2 };
+	int nums[] = { 1,2,3,4,5,6,7,8,9 };
 	int size = sizeof(nums) / sizeof(nums[0]);
-	int returnSize = 0;
-	int* ret = majorityElement(nums, size, &returnSize);
 	int i = 0;
-	for (i = 0; i < returnSize; i++)
-		printf("%d ", ret[i]);
-	free(ret);
+	adjustArr(nums, size);
+
+	for (i = 0; i < size; i++)
+		printf("%d ", nums[i]);
 	return 0;
 }
