@@ -975,35 +975,290 @@
 //}
 
 
-#include<stdio.h>
-void adjustArr(int* arr,int size)
-{
-	int left = 0, right = size - 1;
-	while (left < right)
-	{
-		//先在左边找奇数
-		while (left <= right && arr[left] % 2)
-		{
-			left++;
-		}
-		//右边找偶数
-		while (right >= left && arr[right] % 2 == 0)
-		{
-			right--;
-		}
-		int tmp = arr[left];
-		arr[left] = arr[right];
-		arr[right] = tmp;
-	}
-}
-int main()
-{
-	int nums[] = { 1,2,3,4,5,6,7,8,9 };
-	int size = sizeof(nums) / sizeof(nums[0]);
-	int i = 0;
-	adjustArr(nums, size);
+//#include<stdio.h>
+//void adjustArr(int* arr,int size)
+//{
+//	int left = 0, right = size - 1;
+//	while (left < right)
+//	{
+//		//先在左边找偶数
+//		while (left < right && arr[left] % 2)
+//		{
+//			left++;
+//		}
+//		//右边找奇数
+//		while (right > left && arr[right] % 2 == 0)
+//		{
+//			right--;
+//		}
+//		int tmp = arr[left];
+//		arr[left] = arr[right];
+//		arr[right] = tmp;
+//		left++;
+//		right--;
+//	}
+//}
+//int main()
+//{
+//	int nums[] = { 1,2,3,4,5,6,7,8,9,1,1,1 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int i = 0;
+//	adjustArr(nums, size);
+//
+//	for (i = 0; i < size; i++)
+//		printf("%d ", nums[i]);
+//	return 0;
+//}
 
-	for (i = 0; i < size; i++)
-		printf("%d ", nums[i]);
-	return 0;
-}
+
+
+//#include<stdio.h>
+//#include<assert.h>
+//void my_strcpy(char* dest, const char* src)
+//{
+//	assert(dest);
+//	assert(src);
+//	while (*dest++ = *src++);
+//}
+//int main()
+//{
+//	char arr1[20];
+//	char arr2[] = "hello";
+//	my_strcpy(arr1, arr2);
+//	printf("%s", arr1);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int m = 10;
+//	int n = 20;
+//	//const int* p = &m;
+//	//p = &n;
+//	//printf("%d", *p);
+//
+//	int* const p = &m;
+//	*p = n;
+//	printf("%d", *p);
+//	return 0;
+//}
+
+
+
+
+//#include<stdio.h>
+//#include<assert.h>
+//unsigned my_strlen(const char* nums)
+//{
+//	assert(nums);
+//	int count = 0;
+//	while (*nums++)
+//	{
+//		count++;
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	char nums[] = "hello";
+//	int ret = my_strlen(nums);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+////611. 有效三角形的个数
+//#include<stdio.h>
+//#include<assert.h>
+//void sort(int* nums, int numsSize)
+//{
+//	assert(nums);
+//	int i = 0;
+//	for (i = 0; i < numsSize - 1; i++)
+//	{
+//		int end = i, flag = nums[end + 1];
+//		while (end >= 0)
+//		{
+//			if (nums[end] < flag)
+//			{
+//				nums[end + 1] = nums[end];
+//				end--;
+//			}
+//			else
+//				break;
+//		}
+//		nums[end + 1] = flag;
+//	}
+//}
+//int triangleNumber(int* nums, int numsSize)
+//{
+//	sort(nums, numsSize);
+//
+//	int i = 0, count = 0;
+//	for (i = 0; i < numsSize; i++)
+//	{
+//		int left = i + 1, right = numsSize - 1;
+//		while (left < right)
+//		{
+//			if (nums[left] + nums[right] > nums[i])
+//			{
+//				count += right - left;
+//				left++;
+//			}
+//			else
+//				right--;
+//		}
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	int nums[] = { 2,2,3,4 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int len = triangleNumber(nums, size);
+//	printf("%d", len);
+//	return 0;
+//}
+
+//
+//#include<stdio.h>
+//#include<assert.h>
+//char* my_strcpy(char* tar, const char* str)
+//{
+//	assert(tar);
+//	assert(str);
+//	char* ret = tar;
+//	while (*tar++ = *str++);
+//	return ret;
+//}
+//int main()
+//{
+//	char arr1[10];
+//	char arr2[] = "hello";
+//	char* ret = my_strcpy(arr1, arr2);
+//	printf("%s", arr1);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//void Sort(int* nums, int numsSize)
+//{
+//	int i = 0;
+//	for (i = 0; i < numsSize - 1; i++)
+//	{
+//		int end = i, flag = nums[end + 1];
+//		while (end>=0)
+//		{
+//			if (nums[end] > flag)
+//			{
+//				nums[end + 1] = nums[end];
+//				end--;
+//			}
+//			else
+//				break;
+//		}
+//		nums[end + 1] = flag;
+//	}
+//}
+//int triangleNumber(int* nums, int numsSize)
+//{
+//	Sort(nums, numsSize);
+//	int i = 0, count = 0;
+//	for (i = 0; i < numsSize; i++)
+//	{
+//		int j = 0;
+//		for (j = i + 1; j < numsSize; j++)
+//		{
+//			int left = j + 1, right = numsSize - 1, mid = 0;
+//			int flag = j;
+//			while (left <= right)
+//			{
+//				mid = left + (right - left) / 2;
+//				if (nums[i] + nums[j] > nums[mid])
+//				{
+//					flag = mid;
+//					left = mid + 1;
+//				}
+//				else
+//					right = mid - 1;
+//			}
+//			count += flag - j;
+//		}
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	int nums[] = { 2,2,3,4 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int ret = triangleNumber(nums, size);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+
+////26. 删除有序数组中的重复项
+//#include<stdio.h>
+//#include<assert.h>
+//int removeDuplicates(int* nums, int numsSize)
+//{
+//	assert(nums);
+//	if (numsSize < 2)
+//		return numsSize;
+//	int fast = 1, slow = 1;
+//	while (fast < numsSize)
+//	{
+//		if (nums[fast] != nums[slow - 1])
+//		{
+//			nums[slow++] = nums[fast++];
+//		}
+//		else
+//			fast++;
+//	}
+//	return slow;
+//}
+//int main()
+//{
+//	int nums[] = { 1,2,3,3,4,5,5,6 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int len = removeDuplicates(nums, size);
+//	int i = 0;
+//	for (i = 0; i < len; i++)
+//		printf("%d ", nums[i]);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<assert.h>
+//int removeDuplicates(int* nums, int numsSize)
+//{
+//	assert(nums);
+//	if (numsSize < 2)
+//		return numsSize;
+//	int fast = 2, slow = 2;
+//	while (fast < numsSize)
+//	{
+//		if (nums[fast] != nums[slow - 2])
+//		{
+//			nums[slow++] = nums[fast++];
+//		}
+//		else
+//			fast++;
+//	}
+//	return slow;
+//}
+//int main()
+//{
+//	int nums[] = { 0,0,1,1,1,1,2,3,3 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int len = removeDuplicates(nums, size);
+//	int i = 0;
+//	for (i = 0; i < len; i++)
+//		printf("%d ", nums[i]);
+//	return 0;
+//}
+
+
