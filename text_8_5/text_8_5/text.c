@@ -190,45 +190,239 @@
 //	}
 //	return 0;
 //}
+//
+////443. 压缩字符串
+//#include<stdio.h>
+//#include<assert.h>
+//#include<string.h>
+//int compress(char* chars, int charsSize)
+//{
+//	assert(chars);
+//	int insert = 0;
+//	if (charsSize == 1)
+//		insert = 1;
+//	int left = 0, right = 1;
+//	char arr[1000] = "0";
+//	while (right < charsSize)
+//	{
+//		while (right < charsSize && chars[left] == chars[right])
+//		{
+//			right++;
+//		}
+//		chars[insert++] = chars[left];
+//		if (right - left != 1)
+//		{
+//			sprintf(arr, "%d", right - left);
+//
+//			int i = 0;
+//			for (i = 0; i < (int)strlen(arr); i++)
+//				chars[insert++] = arr[i];
+//		}
+//		left = right;
+//	}
+//	return insert;
+//}
+//int main()
+//{
+//	char nums[] = "a";
+//	int size = strlen(nums);
+//	int len = compress(nums, size);
+//	int i = 0;
+//	for (i = 0; i < len; i++)
+//		printf("%c", nums[i]);
+//	return 0;
+//}
 
-//443. 压缩字符串
+
+//#include<stdio.h>
+//#include<math.h>
+//int findNthDigit(int n)
+//{
+//	long long digit = 1;
+//	long long  count = 9;
+//	while (n > digit*count)
+//	{
+//		n -= count * digit;
+//		digit++;
+//		count *= 10;
+//	}
+//	int flag = (int)pow(10, digit - 1);
+//
+//	int rema = n % digit;
+//	n = flag + n / digit - 1;
+//	if (rema)
+//		n += 1;
+//	int ret = 0;
+//	if (rema == 0)
+//		ret = n % 10;
+//	else
+//	{
+//		while (digit - rema >= 0)
+//		{
+//			ret = n % 10;
+//			rema++;
+//			n /= 10;
+//		}
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int len = findNthDigit(n);
+//	printf("%d", len);
+//	return 0;
+//}
+
+
+
+//杨辉三角
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 0;
+//	int arr[100][100] = { 0 };
+//	scanf("%d", &n);
+//	int i = 0;
+//	for (i = 0; i < n; i++)
+//	{
+//		arr[i][0] = arr[i][i] = 1;
+//	}
+//	for (i = 2; i < n; i++)
+//	{
+//		int j = 0;
+//		for (j = 1; j < i; j++)
+//		{
+//			arr[i][j] = arr[i - 1][j] + arr[i - 1][j - 1];
+//		}
+//	}
+//	for (i = 0; i < n; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j <= i; j++)
+//			printf("%d ", arr[i][j]);
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[4] = { 0 };
+//	int i = 0;
+//	for (i = 0; i < 4; i++)
+//	{
+//		arr[i] = 1;
+//		if (((arr[0] != 1) + (arr[2] == 1) + (arr[3] == 1) + (arr[3] != 1)) == 3)
+//			break;
+//		arr[i] = 0;
+//	}
+//	printf("%c", 'A' + i);
+//	return 0;
+//}
+
+
+////1170. 比较字符串最小字母出现频次
+//#include<stdio.h>
+//#include<assert.h>
+//int f(const char* ret)
+//{
+//	assert(ret);
+//	int arr[26] = { 0 };
+//	int size = strlen(ret);
+//	int i = 0;
+//	char min = 'z';
+//	for (i = 0; i < size; i++)
+//	{
+//		arr[ret[i]-'a']++;
+//		if (ret[i] < min)
+//			min = ret[i];
+//	}
+//	return arr[min - 'a'];
+//}
+//int* numSmallerByFrequency(char ** queries, int queriesSize, char ** words, int wordsSize, int* returnSize)
+//{
+//	assert(queries);
+//	assert(words);
+//	int* ret = malloc(sizeof(int)*queriesSize);
+//	assert(ret);
+//	*returnSize = 0;
+//	int i = 0;
+//	for (i = 0; i < queriesSize; i++)
+//	{
+//		int j = 0, count = 0;
+//		for (j = 0; j < wordsSize; j++)
+//		{
+//			if (f(words[j]) > f(queries[i]))
+//			{
+//				count++;
+//			}
+//		}
+//		ret[*(returnSize)++] = count;
+//	}
+//	return ret;
+//}
+
+
+////1004. 最大连续1的个数 III
+//#include<stdio.h>
+//int longestOnes(int* nums, int numsSize, int k)
+//{
+//	int left = 0, right = 0;
+//	int ans = 0, ret = 0;
+//	while (right < numsSize)
+//	{
+//		if (nums[right] == 0)
+//			ans++;
+//		while (ans > k)
+//		{
+//			if (nums[left] == 0)
+//				ans -= 1;
+//			left++;
+//		}
+//
+//		right++;
+//
+//		if (ret < right - left)
+//			ret = right - left;
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	int nums[] = { 0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1 };
+//	int k = 3;
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int ret = longestOnes(nums, size, k);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+
 #include<stdio.h>
-#include<assert.h>
-#include<string.h>
-int compress(char* chars, int charsSize)
+int nthUglyNumber(int n, int a, int b, int c)
 {
-	assert(chars);
-	int insert = 0;
-	if (charsSize == 1)
-		insert = 1;
-	int left = 0, right = 1;
-	char arr[1000] = "0";
-	while (right < charsSize)
+	int i = 0;
+	for (i = 1;; i++)
 	{
-		while (right < charsSize && chars[left] == chars[right])
+		if (i%a == 0 || i % b == 0 || a % c == 0)
 		{
-			right++;
+			n--;
 		}
-		chars[insert++] = chars[left];
-		if (right - left != 1)
-		{
-			sprintf(arr, "%d", right - left);
-
-			int i = 0;
-			for (i = 0; i < (int)strlen(arr); i++)
-				chars[insert++] = arr[i];
-		}
-		left = right;
+		if (n == 0)
+			break;
 	}
-	return insert;
+	return i;
 }
 int main()
 {
-	char nums[] = "a";
-	int size = strlen(nums);
-	int len = compress(nums, size);
-	int i = 0;
-	for (i = 0; i < len; i++)
-		printf("%c", nums[i]);
+	int n = 0;
+	int a = 2, b = 11, c = 14;
+	scanf("%d", &n);
+	int ret = nthUglyNumber(n, a, b, c);
+	printf("%d", ret);
 	return 0;
 }
