@@ -402,27 +402,195 @@
 //}
 
 
+//#include<stdio.h>
+//int nthUglyNumber(int n, int a, int b, int c)
+//{
+//	int i = 0;
+//	for (i = 1;; i++)
+//	{
+//		if (i%a == 0 || i % b == 0 || a % c == 0)
+//		{
+//			n--;
+//		}
+//		if (n == 0)
+//			break;
+//	}
+//	return i;
+//}
+//int main()
+//{
+//	int n = 0;
+//	int a = 2, b = 11, c = 14;
+//	scanf("%d", &n);
+//	int ret = nthUglyNumber(n, a, b, c);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+////1201. 丑数 III
+//#include<stdio.h>
+//#include<math.h>
+//long long CommonMmultiple(long long  x, long long y)
+//{
+//	long long a = x, b = y, c = 0;
+//	while (a%b)
+//	{
+//		c = a % b;
+//		a = b;
+//		b = c;
+//	}
+//	return (x * y / b);
+//}
+//int min(int a, int b, int c)
+//{
+//	int min = a;
+//	if (a < b&&a < c)
+//		min = a;
+//	if (b < a&&b < c)
+//		min = b;
+//	if (c < a&&c < b)
+//		min = c;
+//	return min;
+//}
+//int nthUglyNumber(int n, int a, int b, int c)
+//{
+//	int left = min(a, b, c), right = 2 * (int)pow(10, 9), mid = 0;
+//
+//	long long _ab = CommonMmultiple(a, b),
+//		_ac = CommonMmultiple(a, c),
+//		_bc = CommonMmultiple(b, c),
+//		_abc = CommonMmultiple(a, _bc);
+//	while (left < right)
+//	{
+//		mid = left + (right - left) / 2;
+//		//容斥定理
+//		long long sum = ((mid / a) + (mid / b) + (mid / c) - (mid / _ab) - (mid / _ac) - (mid / _bc) + (mid / _abc));
+//		if (sum < n)
+//			left = mid + 1;
+//		else
+//			right = mid - 1;
+//
+//
+//		if (sum == n && (mid%a == 0 || mid % b == 0 || mid % c == 0))
+//			return mid;
+//
+//	}
+//
+//	return left;
+//}
+//int main()
+//{
+//	int n = 0;
+//	int a = 2, b = 3, c = 3;
+//	scanf("%d", &n);
+//	long long ret = nthUglyNumber(n, a, b, c);
+//	printf("%lld", ret);
+//	return 0;
+//}
+
+
+//面试题 16.21. 交换和
 #include<stdio.h>
-int nthUglyNumber(int n, int a, int b, int c)
+#include<assert.h>
+#include<stdlib.h>
+#include<math.h>
+
+int Compart(const void* x, const void* y)
+{
+	assert(x&&y);
+	return (*(int*)x - *(int*)y);
+}
+
+void Sort(int* nums, int numsSize)
 {
 	int i = 0;
-	for (i = 1;; i++)
+	for (i = 0; i < numsSize - 1; i++)
 	{
-		if (i%a == 0 || i % b == 0 || a % c == 0)
+		int end = i, flag = nums[end + 1];
+		while (end >= 0)
 		{
-			n--;
+			if (nums[end] > flag)
+			{
+				nums[end + 1] = nums[end];
+				end--;
+			}
+			else
+				break;
 		}
-		if (n == 0)
-			break;
+		nums[end + 1] = flag;
 	}
-	return i;
+}
+int DupliRemo(int* nums, int size)
+{
+	assert(nums);
+	int cur = 1, prev = 0;
+	while (cur < size)
+	{
+		while (cur < size && nums[prev] == nums[cur])
+		{
+			cur++;
+		}
+		if (cur < size)
+		{
+			nums[prev + 1] = nums[cur];
+			prev++;
+			cur++;
+		}
+	}
+	return prev;
+}
+int* findSwapValues(int* array1, int array1Size, int* array2, int array2Size, int* returnSize)
+{
+	assert(array1&&array2);
+	int i = 0;
+	int sum1 = 0, sum2 = 0;
+	for (i = 0; i < array1Size; i++)
+	{
+		sum1 += array1[i];
+	}
+	for (i = 0; i < array2Size; i++)
+		sum2 += array2[i];
+	int sum = sum1 + sum2;
+	qsort(array1, array1Size, sizeof(int), Compart);
+	qsort(array2, array2Size, sizeof(int), Compart);
+	int* ret = malloc(sizeof(int) * 2);
+	*returnSize = 0;
+	//去重
+	int arr1Size = DupliRemo(array1, array1Size);
+	int arr2Size = DupliRemo(array2, array2Size);
+
+	if (sum % 2 == 0)
+	{
+		int flag = sum / 2;
+		//固定array1
+		for (i = 0; i <= arr1Size; i++)
+		{
+			int j = 0;
+			while (j <= arr2Size && (sum1 - array1[i] + array2[j]) != (sum2 - array2[j] + array1[i]))
+			{
+				j++;
+			}
+			if (j <= arr2Size && sum1 - array1[i] + array2[j] == sum2 - array2[j] + array1[i])
+			{
+				ret[(*returnSize)++] = array1[i];
+				ret[(*returnSize)++] = array2[j];
+				break;
+			}
+		}
+	}
+	return ret;
 }
 int main()
 {
-	int n = 0;
-	int a = 2, b = 11, c = 14;
-	scanf("%d", &n);
-	int ret = nthUglyNumber(n, a, b, c);
-	printf("%d", ret);
+	int array1[] = { 519, 886, 282, 382, 662, 4718, 258, 719, 494, 795 };
+	int array2[] = { 52, 20, 78, 50, 38, 96, 81, 20 };
+	int size1 = sizeof(array1) / sizeof(array1[0]);
+	int size2 = sizeof(array2) / sizeof(array2[0]);
+	int returnSize = 0;
+	int* ret = findSwapValues(array1, size1, array2, size2, &returnSize);
+	int i = 0;
+	for (i = 0; i < returnSize; i++)
+		printf("%d ", ret[i]);
 	return 0;
 }
+
