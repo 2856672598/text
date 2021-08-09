@@ -1,7 +1,7 @@
-
+﻿
 #define _CRT_SECURE_NO_WARNINGS 1
 
-////82. ɾ�����������е��ظ�Ԫ�� II
+////82. 删除排序链表中的重复元素 II
 //#include<stdio.h>
 //#include<stdlib.h>
 //
@@ -65,7 +65,7 @@
 //}
 
 
-////567. �ַ���������
+////567. 字符串的排列
 //#include<stdio.h>
 //#include<assert.h>
 //#include<stdbool.h>
@@ -177,7 +177,7 @@
 //		int data[13] = { 0, 31,29,31,30,31,30,31,31,30,31,30,31 };
 //		if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
 //		{
-//			//����
+//			//闰年
 //			printf("%d\n", data[month]);
 //		}
 //		else
@@ -191,7 +191,7 @@
 //	return 0;
 //}
 //
-////443. ѹ���ַ���
+////443. 压缩字符串
 //#include<stdio.h>
 //#include<assert.h>
 //#include<string.h>
@@ -277,7 +277,7 @@
 
 
 
-//�������
+//杨辉三角
 //#include<stdio.h>
 //int main()
 //{
@@ -325,7 +325,7 @@
 //}
 
 
-////1170. �Ƚ��ַ�����С��ĸ����Ƶ��
+////1170. 比较字符串最小字母出现频次
 //#include<stdio.h>
 //#include<assert.h>
 //int f(const char* ret)
@@ -367,7 +367,7 @@
 //}
 
 
-////1004. �������1�ĸ��� III
+////1004. 最大连续1的个数 III
 //#include<stdio.h>
 //int longestOnes(int* nums, int numsSize, int k)
 //{
@@ -427,7 +427,7 @@
 //	return 0;
 //}
 
-////1201. ���� III
+////1201. 丑数 III
 //#include<stdio.h>
 //#include<math.h>
 //long long CommonMmultiple(long long  x, long long y)
@@ -463,7 +463,7 @@
 //	while (left < right)
 //	{
 //		mid = left + (right - left) / 2;
-//		//�ݳⶨ��
+//		//容斥定理
 //		long long sum = ((mid / a) + (mid / b) + (mid / c) - (mid / _ab) - (mid / _ac) - (mid / _bc) + (mid / _abc));
 //		if (sum < n)
 //			left = mid + 1;
@@ -489,108 +489,334 @@
 //}
 
 
-//������ 16.21. ������
-#include<stdio.h>
-#include<assert.h>
-#include<stdlib.h>
-#include<math.h>
+////面试题 16.21. 交换和
+//#include<stdio.h>
+//#include<assert.h>
+//#include<stdlib.h>
+//#include<math.h>
+//
+//int Compart(const void* x, const void* y)
+//{
+//	assert(x&&y);
+//	return (*(int*)x - *(int*)y);
+//}
+//
+//void Sort(int* nums, int numsSize)
+//{
+//	int i = 0;
+//	for (i = 0; i < numsSize - 1; i++)
+//	{
+//		int end = i, flag = nums[end + 1];
+//		while (end >= 0)
+//		{
+//			if (nums[end] > flag)
+//			{
+//				nums[end + 1] = nums[end];
+//				end--;
+//			}
+//			else
+//				break;
+//		}
+//		nums[end + 1] = flag;
+//	}
+//}
+//int DupliRemo(int* nums, int size)
+//{
+//	assert(nums);
+//	int cur = 1, prev = 0;
+//	while (cur < size)
+//	{
+//		while (cur < size && nums[prev] == nums[cur])
+//		{
+//			cur++;
+//		}
+//		if (cur < size)
+//		{
+//			nums[prev + 1] = nums[cur];
+//			prev++;
+//			cur++;
+//		}
+//	}
+//	return prev;
+//}
+//int* findSwapValues(int* array1, int array1Size, int* array2, int array2Size, int* returnSize)
+//{
+//	assert(array1&&array2);
+//	int i = 0;
+//	int sum1 = 0, sum2 = 0;
+//	for (i = 0; i < array1Size; i++)
+//	{
+//		sum1 += array1[i];
+//	}
+//	for (i = 0; i < array2Size; i++)
+//		sum2 += array2[i];
+//	int sum = sum1 + sum2;
+//	qsort(array1, array1Size, sizeof(int), Compart);
+//	qsort(array2, array2Size, sizeof(int), Compart);
+//	int* ret = malloc(sizeof(int) * 2);
+//	*returnSize = 0;
+//	//去重
+//	int arr1Size = DupliRemo(array1, array1Size);
+//	int arr2Size = DupliRemo(array2, array2Size);
+//
+//	if (sum % 2 == 0)
+//	{
+//		int flag = sum / 2;
+//		//固定array1
+//		for (i = 0; i <= arr1Size; i++)
+//		{
+//			int j = 0;
+//			while (j <= arr2Size && (sum1 - array1[i] + array2[j]) != (sum2 - array2[j] + array1[i]))
+//			{
+//				j++;
+//			}
+//			if (j <= arr2Size && sum1 - array1[i] + array2[j] == sum2 - array2[j] + array1[i])
+//			{
+//				ret[(*returnSize)++] = array1[i];
+//				ret[(*returnSize)++] = array2[j];
+//				break;
+//			}
+//		}
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	int array1[] = { 519, 886, 282, 382, 662, 4718, 258, 719, 494, 795 };
+//	int array2[] = { 52, 20, 78, 50, 38, 96, 81, 20 };
+//	int size1 = sizeof(array1) / sizeof(array1[0]);
+//	int size2 = sizeof(array2) / sizeof(array2[0]);
+//	int returnSize = 0;
+//	int* ret = findSwapValues(array1, size1, array2, size2, &returnSize);
+//	int i = 0;
+//	for (i = 0; i < returnSize; i++)
+//		printf("%d ", ret[i]);
+//	return 0;
+//}
 
-int Compart(const void* x, const void* y)
-{
-	assert(x&&y);
-	return (*(int*)x - *(int*)y);
-}
 
-void Sort(int* nums, int numsSize)
-{
-	int i = 0;
-	for (i = 0; i < numsSize - 1; i++)
-	{
-		int end = i, flag = nums[end + 1];
-		while (end >= 0)
-		{
-			if (nums[end] > flag)
-			{
-				nums[end + 1] = nums[end];
-				end--;
-			}
-			else
-				break;
-		}
-		nums[end + 1] = flag;
-	}
-}
-int DupliRemo(int* nums, int size)
-{
-	assert(nums);
-	int cur = 1, prev = 0;
-	while (cur < size)
-	{
-		while (cur < size && nums[prev] == nums[cur])
-		{
-			cur++;
-		}
-		if (cur < size)
-		{
-			nums[prev + 1] = nums[cur];
-			prev++;
-			cur++;
-		}
-	}
-	return prev;
-}
-int* findSwapValues(int* array1, int array1Size, int* array2, int array2Size, int* returnSize)
-{
-	assert(array1&&array2);
-	int i = 0;
-	int sum1 = 0, sum2 = 0;
-	for (i = 0; i < array1Size; i++)
-	{
-		sum1 += array1[i];
-	}
-	for (i = 0; i < array2Size; i++)
-		sum2 += array2[i];
-	int sum = sum1 + sum2;
-	qsort(array1, array1Size, sizeof(int), Compart);
-	qsort(array2, array2Size, sizeof(int), Compart);
-	int* ret = malloc(sizeof(int) * 2);
-	*returnSize = 0;
-	//ȥ��
-	int arr1Size = DupliRemo(array1, array1Size);
-	int arr2Size = DupliRemo(array2, array2Size);
 
-	if (sum % 2 == 0)
-	{
-		int flag = sum / 2;
-		//�̶�array1
-		for (i = 0; i <= arr1Size; i++)
-		{
-			int j = 0;
-			while (j <= arr2Size && (sum1 - array1[i] + array2[j]) != (sum2 - array2[j] + array1[i]))
-			{
-				j++;
-			}
-			if (j <= arr2Size && sum1 - array1[i] + array2[j] == sum2 - array2[j] + array1[i])
-			{
-				ret[(*returnSize)++] = array1[i];
-				ret[(*returnSize)++] = array2[j];
-				break;
-			}
-		}
-	}
-	return ret;
-}
-int main()
-{
-	int array1[] = { 519, 886, 282, 382, 662, 4718, 258, 719, 494, 795 };
-	int array2[] = { 52, 20, 78, 50, 38, 96, 81, 20 };
-	int size1 = sizeof(array1) / sizeof(array1[0]);
-	int size2 = sizeof(array2) / sizeof(array2[0]);
-	int returnSize = 0;
-	int* ret = findSwapValues(array1, size1, array2, size2, &returnSize);
-	int i = 0;
-	for (i = 0; i < returnSize; i++)
-		printf("%d ", ret[i]);
-	return 0;
-}
 
+//#include<stdio.h>
+//#include<string.h>
+//#include<stdbool.h>
+//#include<assert.h>
+//#include<stdlib.h>
+//bool isPrefixString(char * s, char ** words, int wordsSize)
+//{
+//	assert(s&&words);
+//	int i = 0, cur = 0, flag = 0;
+//	int sSize = strlen(s), count = 0;
+//	for (i = 0; i < wordsSize; i++)
+//	{
+//		if (flag == 1)
+//			return false;
+//		int sizei = strlen(words[i]);
+//		count += sizei;
+//		if (count > sSize)
+//		{
+//			flag = 1;
+//			continue;
+//		}
+//		int j = 0;
+//		for (j = 0; j < sizei; j++)
+//		{
+//			if (cur < sSize &&s[cur] == words[i][j])
+//			{
+//				cur++;
+//			}
+//			else
+//			{
+//				flag = 1;
+//				break;
+//			}
+//		}
+//		if (cur == sSize)
+//			break;
+//	}
+//	if (flag == 1 || count < sSize)
+//		return false;
+//	return true;
+//}
+//int main()
+//{
+//	char s[] = "cccc";
+//	char** words = malloc(sizeof(char*) * 4);
+//	int m = 1, n = 1;
+//	int i = 0;
+//	for (i = 0; i < m; i++)
+//	{
+//		words[i] = malloc(sizeof(char)*n);
+//	}
+//	words[0] = "cccccccccc";
+//	printf("%d", isPrefixString(s, words, 4));
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	char a = -128;
+//	//10000000000000000000000010000000
+//	//11111111111111111111111101111111
+//	//11111111111111111111111110000000
+//	//截断10000000
+//
+//	//11111111111111111111111110000000
+//	printf("%u", a);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	char a = 128;
+//	//10000000
+//	//11111111111111111111111110000000
+//
+//	//00000000000000000000000010000000
+//	printf("%u", a);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	unsigned int i = 0;
+//	for (i = 9; i >= 0; i--)
+//	{
+//		printf("%u\n", i);
+//	}
+//	return 0;
+//}
+
+
+//#include <stdio.h>
+//int main()
+//{
+//	char a = -1;
+//	//10000000000000000000000010000001---  -1的二进制
+//	//10000000000000000000000011111110----- 反码
+//	//10000000000000000000000011111111----- 补码
+//	//11111111-- a中存储的发生截断
+//
+//	//11111111111111111111111111111111---整形提升，char一般默认是有符号的
+//	//以%d形式打印,符号位为1认为是个负数
+//	//11111111111111111111111111111110----反码
+//	//10000000000000000000000000000001-----原码---打印出-1
+//
+//	signed char b = -1;//b和a同理
+//	unsigned char c = -1;
+//	//10000000000000000000000010000001 --- -1的原码
+//	//10000000000000000000000011111110 ---- 反码
+//	//10000000000000000000000011111111 ------补码
+//	//11111111--c中存储的发生截断
+//
+//	//00000000000000000000000011111111---因为b为无符号的整形提升补0
+//	//以%d形式打印,符号位为0认为是个正数
+//	//正数原反补相等
+//	//00000000000000000000000011111111----255
+//	printf("a=%d,b=%d,c=%d", a, b, c);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 10;
+//	float* p = (float*)&n;
+//	printf("%d\n", n);
+//	printf("%f\n", *p);
+//	*p = 10.0;
+//	printf("%d\n", n);
+//	printf("%f\n", *p);
+//	return 0;
+//}
+
+
+//#include <stdio.h>
+//int main()
+//{
+//	char a = -128;
+//	//10000000000000000000000010000000  -128原码
+//	//11111111111111111111111101111111 ----反码
+//	//11111111111111111111111110000000 ----补码
+//
+//	//截断放到a中
+//	//10000000
+//	//整形提升，因为a的类型是char，char是有符号的补符号位
+//	//11111111111111111111111110000000
+//	//以%u形式打印，%u是无符号的，它认为内存中存储的也是一个无符号的数
+//	//11111111111111111111111110000000-----转化为10进制为‭4294967168‬
+//	printf("%u\n", a);
+//	return 0;
+//}
+
+
+//#include <stdio.h>
+//int main()
+//{
+//	char a = 128;
+//	//00000000000000000000000010000000   128原码(正数原反补相等）
+//	//char 类型占1个字节8个比特位，会发生截断
+//	//10000000----a中存放的
+//
+//	//以%u打印需要进行整形提升，a的类型为char有符号数 符号位为1，整形提升补1
+//	//11111111111111111111111110000000  --整形提升
+//	//11111111111111111111111110000000  --十进制为 ‭4294967168‬
+//	printf("%u\n", a);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int i = -20;
+//	//100000000000000000000000‭00010100‬
+//	//11111111111111111111111111101011
+//	//11111111111111111111111111101100
+//	unsigned int j = 10;
+//	//0000000000000000000000000000‭1010‬
+//
+//	//11111111111111111111111111110110
+//	//11111111111111111111111111110101
+//	//10000000000000000000000000001010----- -‭10
+//	printf("%d", i + j);//‭-10
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int A = 0, B = 0, C = 0, D = 0, E = 0;
+//	for (A = 1; A <= 5; A++)
+//	{
+//		for (B = 1; B <= 5; B++)
+//		{
+//			for (C = 1; C <= 5; C++)
+//			{
+//				for (D = 1; D <= 5; D++)
+//				{
+//					for (E = 1; E <= 5; E++)
+//					{
+//						if ((A == 3 || B == 2) &&
+//							(B == 2 || E == 4) &&
+//							(C == 1 || D == 2) &&
+//							(C == 5 || D == 3) &&
+//							(E == 4 || A == 1))
+//						{
+//							if (A*B*C*D*E == 120)
+//								printf("A = %d B = %d C = %d D = %d E = %d\n", A, B, C, D, E);
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
+//	return 0;
+//}
