@@ -312,3 +312,274 @@
 //}
 
 
+//#include<stdio.h>
+//int  main()
+//{
+//	int n = 1000000;
+//	int count = 0;
+//	while (n)
+//	{
+//		count += n % 7;
+//		n /= 7;
+//	}
+//	printf("%d", count);
+//	return 0;
+//}
+
+////825. 适龄的朋友
+//#include<stdio.h>
+//int numFriendRequests(int* ages, int agesSize)
+//{
+//	int arr[121] = { 0 };
+//	int i = 0;
+//	for (i = 0; i < agesSize; i++)
+//	{
+//		arr[ages[i]]++;
+//	}
+//	int size = sizeof(arr) / sizeof(arr[0]);
+//	int count = 0;
+//	for (i = 0; i < size; i++)
+//	{
+//		if (arr[i] == 0)
+//			continue;
+//		int j = 0;
+//		for (j = 0; j < size; j++)
+//		{
+//			if (arr[j] == 0)
+//				continue;
+//			if (j <= 0.5*i + 7
+//				|| j > i
+//				|| (j > 100 && i < 100))
+//				continue;
+//			if (i == j)
+//			{
+//				count += arr[i] * (arr[j] - 1);
+//			}
+//			else
+//				count += arr[i] * arr[j];
+//
+//		}
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	int ages[] = { 16,17,18 };
+//	int size = sizeof(ages) / sizeof(ages[0]);
+//	int ret = numFriendRequests(ages, size);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<string.h>
+//#include<assert.h>
+//int integerComp(const void* x, const void* y)
+//{
+//	assert(x&&y);
+//	return *(int*)x - *(int*)y;
+//}
+//int floatComp(const void*x, const void* y)
+//{
+//	assert(x&&y);
+//	if (*(float*)x == *(float*)y)
+//		return 0;
+//	return (*(float*)x > *(float*)y) ? 1 : -1;
+//}
+//int charComp(const void* x, const void* y)
+//{
+//	assert(x&&y);
+//	return *(char*)x - *(char*)y;
+//}
+//void text1()
+//{
+//	int nums1[] = { 1,6,3,6,2,8 };
+//	int size1 = sizeof(nums1) / sizeof(nums1[0]);
+//	qsort(nums1, size1, sizeof(int), integerComp);
+//	int i = 0;
+//	for (i = 0; i < size1; i++)
+//		printf("%d ", nums1[i]);
+//	printf("\n");
+//}
+//void text2()
+//{
+//	char nums2[] = "vftwxpoqadf";
+//	int size2 = strlen(nums2);
+//	qsort(nums2, size2, sizeof(char), charComp);
+//	int i = 0;
+//	for (i = 0; i < size2; i++)
+//		printf("%c ", nums2[i]);
+//	printf("\n");
+//}
+//void text3()
+//{
+//	float nums3[] = { 1.45,1.456,7.89,45.6,12.6,89.0,23.65,237.9 };
+//	int size3 = sizeof(nums3) / sizeof(nums3[0]);
+//	qsort(nums3, size3, sizeof(float), floatComp);
+//	int i = 0;
+//	for (i = 0; i < size3; i++)
+//		printf("%f ", nums3[i]);
+//	printf("\n");
+//}
+//int main()
+//{
+//	text1();
+//	text2();
+//	text3();
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<stdbool.h>
+//#include<assert.h>
+//bool searchMatrix(int(*arr)[5], int target, int rowSize, int colSize)
+//{
+//	assert(arr);
+//	int row = 0, col = colSize - 1;
+//	int flag = 0;
+//	while (row < rowSize&&col >= 0)
+//	{
+//		if (arr[row][col] > target)
+//		{
+//			col--;
+//		}
+//		else if (arr[row][col] < target)
+//			row++;
+//		else
+//		{
+//			flag = 1;
+//			break;
+//		}
+//	}
+//	if (flag)
+//		return true;
+//	return false;
+//}
+//int main()
+//{
+//	int matrix[][5] = { 1, 4, 7, 11, 15,
+//		2, 5, 8, 12, 19,
+//		3, 6, 9, 16, 22,
+//		10, 13, 14, 17, 24,
+//		18, 21, 23, 26, 30 };
+//	int target = 16, row = 4, col = 5;
+//	int ret = searchMatrix(matrix, target, row, col);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<assert.h>
+//int add(const int x, const int y)
+//{
+//	return x + y;
+//}
+//int sub(const int x, const int y)
+//{
+//	return x - y;
+//}
+//int mul(const int x, const int y)
+//{
+//	return x * y;
+//}
+//int div(const int x, const int y)
+//{
+//	return x / y;
+//}
+//void menu()
+//{
+//	printf("*************************************\n");
+//	printf("***** 1. ADD             2. SUB******\n");
+//	printf("***** 3. Mul             4. DIV******\n");
+//	printf("************** 0. EXIT **************\n");
+//}
+//void calcu(int(*p)(int, int))
+//{
+//	assert(p);
+//	int x, y;
+//	printf("请输入两个操作数>");
+//	scanf("%d %d", &x, &y);
+//	int ret = p(x, y);
+//	printf("ret = %d\n", ret);
+//}
+//int main()
+//{
+//	int input = 0;
+//	do
+//	{
+//		menu();
+//		printf("请选择>");
+//		scanf("%d", &input);
+//		switch (input)
+//		{
+//		case 1:
+//			calcu(add);
+//			break;
+//		case 2:
+//			calcu(sub);
+//			break;
+//		case 3:
+//			calcu(mul);
+//			break;
+//		case 4:
+//			calcu(div);
+//			break;
+//		case 0:
+//			printf("退出\n");
+//			break;
+//		default:
+//			printf("输入错误\n");
+//			break;
+//		}
+//	} while (input);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int add(int x, int y)
+//{
+//	return x + y;
+//}
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	int(*p)(int, int) = &add;
+//	int ret = p(a, b);
+//	printf("%d", ret);//调用
+//	return 0;
+//}
+
+
+#include<stdio.h>
+#include<assert.h>
+int maxSubarray(int* nums, int size)
+{
+	assert(nums);
+	int max = nums[0];
+	int i = 0;
+	for (i = 0; i < size; i++)
+	{
+		int sum = nums[i];
+		int j = 0;
+		for (j = i + 1; j < size; j++)
+		{
+			sum += nums[j];
+			if (sum > max)
+				max = sum;
+		}
+	}
+	return max;
+}
+int main()
+{
+	int nums[] = { 1,-2,3,10,-4,7,2,-5 };
+	int size = sizeof(nums) / sizeof(nums[0]);
+	int ret = maxSubarray(nums, size);
+	printf("%d", ret);
+	return 0;
+}
