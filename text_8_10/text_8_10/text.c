@@ -555,31 +555,165 @@
 //}
 
 
+//#include<stdio.h>
+//#include<assert.h>
+//int maxSubarray(int* nums, int size)
+//{
+//	assert(nums);
+//	int max = nums[0];
+//	int i = 0;
+//	for (i = 0; i < size; i++)
+//	{
+//		int sum = nums[i];
+//		int j = 0;
+//		for (j = i + 1; j < size; j++)
+//		{
+//			sum += nums[j];
+//			if (sum > max)
+//				max = sum;
+//		}
+//	}
+//	return max;
+//}
+//int main()
+//{
+//	int nums[] = { 1,-2,3,10,-4,7,2,-5 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int ret = maxSubarray(nums, size);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+
+////658. 找到 K 个最接近的元素
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<assert.h>
+////int comp(const void* x, const void* y)
+////{
+////	return *(int*)x - *(int*)y;
+////}
+////int* findClosestElements(int* arr, int arrSize, int k, int x, int* returnSize)
+////{
+////	int i = 0;
+////	for (i = 0; i < arrSize - 1; i++)
+////	{
+////		int end = i, flag = arr[end + 1];
+////		while (end >= 0)
+////		{
+////			if (abs(arr[end] - x) > abs(flag - x))
+////			{
+////				arr[end + 1] = arr[end];
+////				end--;
+////			}
+////			else
+////				break;
+////		}
+////		arr[end + 1] = flag;
+////	}
+////	int* ret = malloc(sizeof(int)*k);
+////	for (i = 0; i < k; i++)
+////		ret[i] = arr[i];
+////	*returnSize = k;
+////	qsort(ret, k, sizeof(int), comp);
+////	return ret;
+////}
+//
+//int* findClosestElements(int* arr, int arrSize, int k, int x, int* returnSize)
+//{
+//	assert(arr);
+//	int left = 0, right = arrSize - 1;
+//	while (right - left >= k)
+//	{
+//		if (abs(arr[left] - x) <= abs(arr[right] - x))
+//			right--;
+//		else
+//			left++;
+//	}
+//	*returnSize = k;
+//	return &arr[left];
+//}
+//int main()
+//{
+//	int nums[] = { 0,0,1,2,3,3,4,7,7,8 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int k = 3, x = 5;
+//	int returnSize = 0;
+//	int* ret = findClosestElements(nums, size, k, x, &returnSize);
+//	int i = 0;
+//	for (i = 0; i < returnSize; i++)
+//		printf("%d ", ret[i]);
+//	//free(ret);
+//	return 0;
+//}
+
+
+
+
+//#include<stdio.h>
+//#include<string.h>
+//#include<assert.h>
+//char firstUniqChar(char* s)
+//{
+//	assert(s);
+//	int size = strlen(s);
+//	int i = 0;
+//	int count[26] = { 0 };
+//	for (i = 0; i < size; i++)
+//	{
+//		count[s[i] - 'a']++;
+//	}
+//	for (i = 0; i < 26; i++)
+//	{
+//		if (count[i] == 1)
+//			break;
+//	}
+//	return count[i] + 'a';
+//}
+//int main()
+//{
+//	char s[] = "abaccdeff";
+//	printf("%c", firstUniqChar(s));
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<string.h>
+//#include<assert.h>
+//char firstRepeatChar(char* s)
+//{
+//	assert(s);
+//	int size = strlen(s);
+//	int i = 0;
+//	int count[26] = { 0 };
+//	for (i = 0; i < size; i++)
+//	{
+//		if (count[s[i] - 'a'] == 1)
+//			break;
+//		else
+//			count[s[i] - 'a']++;
+//	}
+//	return s[i];
+//}
+//int main()
+//{
+//	char s[] = "qwywyer23tdd";
+//	printf("%c", firstRepeatChar(s));
+//	return 0;
+//}
+
 #include<stdio.h>
-#include<assert.h>
-int maxSubarray(int* nums, int size)
-{
-	assert(nums);
-	int max = nums[0];
-	int i = 0;
-	for (i = 0; i < size; i++)
-	{
-		int sum = nums[i];
-		int j = 0;
-		for (j = i + 1; j < size; j++)
-		{
-			sum += nums[j];
-			if (sum > max)
-				max = sum;
-		}
-	}
-	return max;
-}
-int main()
-{
-	int nums[] = { 1,-2,3,10,-4,7,2,-5 };
-	int size = sizeof(nums) / sizeof(nums[0]);
-	int ret = maxSubarray(nums, size);
-	printf("%d", ret);
-	return 0;
-}
+//long long myPow(int x, int y)
+//{
+//	int flag = y % 2;
+//	long long sum = x;
+//	while (y / 2)
+//	{
+//		sum *= sum;
+//		y /= 2;
+//	}
+//	if (flag)
+//		sum *= x;
+//	return sum;
+//}
