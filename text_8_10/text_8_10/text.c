@@ -1,9 +1,9 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 
 //#include<stdio.h>
 //#include<stdbool.h>
 //#include<assert.h>
-////240. ËÑË÷¶şÎ¬¾ØÕó II
+////240. æœç´¢äºŒç»´çŸ©é˜µ II
 //bool searchMatrix(int** matrix, int matrixSize, int* matrixColSize, int target)
 //{
 //	assert(matrix && matrixColSize);
@@ -43,11 +43,11 @@
 //	char nums2[] = "hello";
 //	const char* p1 = "hello";
 //	const char* p2 = "hello";
-//	if (nums1 == nums2)//±äÁ¿nums1 ºÍnums2 ÊÇµ¥¶À¿ª±Ù¿Õ¼äµÄ
+//	if (nums1 == nums2)//å˜é‡nums1 å’Œnums2 æ˜¯å•ç‹¬å¼€è¾Ÿç©ºé—´çš„
 //		printf("nums1 == nums2\n");
 //	else
 //		printf("nums1!= nums2\n");
-//	if (p1 == p2)//p1 p2¶¼ÊÇÖ¸ÏòÍ¬Ò»¸ö×Ö·û´®³£Á¿
+//	if (p1 == p2)//p1 p2éƒ½æ˜¯æŒ‡å‘åŒä¸€ä¸ªå­—ç¬¦ä¸²å¸¸é‡
 //		printf("p1 == p2\n");
 //	else
 //		printf("p1 != p2\n");
@@ -240,14 +240,14 @@
 //}
 
 
-////1962. ÒÆ³ıÊ¯×ÓÊ¹×ÜÊı×îĞ¡
+////1962. ç§»é™¤çŸ³å­ä½¿æ€»æ•°æœ€å°
 //#include<stdio.h>
 //#include<assert.h>
 //void adjustDown(int* nums, int size, int root)
 //{
 //	assert(nums);
 //	int parent = root;
-//	int child = root * 2 + 1;//Ä¬ÈÏ×óº¢×Ó
+//	int child = root * 2 + 1;//é»˜è®¤å·¦å­©å­
 //	while (child < size)
 //	{
 //		if (child + 1 < size&&nums[child] < nums[child + 1])
@@ -268,7 +268,7 @@
 //}
 //void heapSort(int* nums, int size)
 //{
-//	//½¨¶Ñ
+//	//å»ºå †
 //	int i = 0;
 //	for (i = (size - 1 - 1) / 2; i >= 0; i--)
 //	{
@@ -326,7 +326,7 @@
 //	return 0;
 //}
 
-////825. ÊÊÁäµÄÅóÓÑ
+////825. é€‚é¾„çš„æœ‹å‹
 //#include<stdio.h>
 //int numFriendRequests(int* ages, int agesSize)
 //{
@@ -500,7 +500,7 @@
 //{
 //	assert(p);
 //	int x, y;
-//	printf("ÇëÊäÈëÁ½¸ö²Ù×÷Êı>");
+//	printf("è¯·è¾“å…¥ä¸¤ä¸ªæ“ä½œæ•°>");
 //	scanf("%d %d", &x, &y);
 //	int ret = p(x, y);
 //	printf("ret = %d\n", ret);
@@ -511,7 +511,7 @@
 //	do
 //	{
 //		menu();
-//		printf("ÇëÑ¡Ôñ>");
+//		printf("è¯·é€‰æ‹©>");
 //		scanf("%d", &input);
 //		switch (input)
 //		{
@@ -528,10 +528,10 @@
 //			calcu(div);
 //			break;
 //		case 0:
-//			printf("ÍË³ö\n");
+//			printf("é€€å‡º\n");
 //			break;
 //		default:
-//			printf("ÊäÈë´íÎó\n");
+//			printf("è¾“å…¥é”™è¯¯\n");
 //			break;
 //		}
 //	} while (input);
@@ -550,7 +550,7 @@
 //	int b = 20;
 //	int(*p)(int, int) = &add;
 //	int ret = p(a, b);
-//	printf("%d", ret);//µ÷ÓÃ
+//	printf("%d", ret);//è°ƒç”¨
 //	return 0;
 //}
 
@@ -585,7 +585,7 @@
 //}
 
 
-////658. ÕÒµ½ K ¸ö×î½Ó½üµÄÔªËØ
+////658. æ‰¾åˆ° K ä¸ªæœ€æ¥è¿‘çš„å…ƒç´ 
 //#include<stdio.h>
 //#include<stdlib.h>
 //#include<assert.h>
@@ -703,17 +703,250 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-//long long myPow(int x, int y)
+//#include<stdio.h>
+//double myPow(double x, int y)
 //{
-//	int flag = y % 2;
-//	long long sum = x;
-//	while (y / 2)
+//	double sum = 1.0;
+//	if (x == 0 || y == 0)
+//		return sum;
+//	if (y < 0)
+//		x = 1 / x;
+//	while (y)
 //	{
-//		sum *= sum;
+//		if (y & 1)
+//			sum *= x;
+//		x *= x;
 //		y /= 2;
 //	}
-//	if (flag)
-//		sum *= x;
 //	return sum;
 //}
+//
+////double _myPow(double x, int y)
+////{
+////	double sum = 1.0;
+////	if (y == 0)
+////		return 1;
+////	sum = _myPow(x, y / 2);
+////	if (y % 2)
+////	{
+////		sum = sum * (sum*x);
+////	}
+////	else
+////		sum *= sum;
+////	return sum;
+////}
+////double myPow(double x, int y)
+////{
+////	if (y < 0)
+////		return 1 / _myPow(x, y);
+////	else
+////		return _myPow(x, y);
+////}
+//int main()
+//{
+//	double x = 0;
+//	int y = 0;
+//	scanf("%lf %d", &x, &y);
+//	printf("%lf", myPow(x, y));
+//	return 0;
+//}
+
+
+
+//#include<stdio.h>
+//#include<assert.h>
+//#include<stdlib.h>
+//int* addK(int* nums, int numsSize, int k, int* returnSize)
+//{
+//	assert(nums);
+//	int begin = 0, end = 1;
+//	while (end < numsSize)
+//	{
+//		while (nums[begin] + nums[end] < k)
+//		{
+//			end++;
+//		}
+//		if (nums[begin] + nums[end] != k)
+//		{
+//			begin++;
+//			end = begin + 1;
+//		}
+//		else
+//			break;
+//	}
+//	int* ret = malloc(sizeof(int) * 2);
+//	*returnSize = 0;
+//	if (end < numsSize)
+//	{
+//		ret[(*returnSize)++] = begin;
+//		ret[(*returnSize)++] = end;
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	int nums[] = { -1,1,2,3,4,5,6,7,10,89 };
+//	int k = 88;
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	int returnSize = 0;
+//	int* ret = addK(nums, size, k, &returnSize);
+//	int i = 0;
+//	for (i = 0; i < returnSize; i++)
+//		printf("%d ", ret[i]);
+//	free(ret);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<stdbool.h>
+//bool isTwoPow(int n)
+//{
+//	return (n & (n - 1)) == 0 ? 1 : 0;
+//}
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	if (isTwoPow(n))
+//		printf("%dæ˜¯2çš„æ¬¡æ–¹æ•°\n", n);
+//	else
+//		printf("%dä¸æ˜¯2çš„æ¬¡æ–¹æ•°\n", n);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<assert.h>
+//#include<string.h>
+//#include<stdlib.h>
+//char* compressString(char* s)
+//{
+//	assert(s);
+//	int size = strlen(s);
+//	char* ret = malloc(sizeof(char)*(size * 2 + 1));
+//	int begin = 0, cur = 1, insert = 0;
+//	while (cur <= size)
+//	{
+//		while (s[cur] != '\0'&&s[cur] == s[begin])
+//			cur++;
+//
+//		ret[insert++] = s[begin];
+//		insert += sprintf(&ret[insert], "%d", cur - begin);//sprintfè¿”å›çš„æ˜¯ç¼“å†²åŒºä¸­çš„å­—èŠ‚æ•°
+//		//ä¸ç›´æ¥++insertçš„åŸå› æ˜¯é˜²æ­¢cur-beginæ˜¯å¤šä½æ•°ï¼Œé€ æˆè¦†ç›–
+//		begin = cur;
+//		cur++;
+//	}
+//	ret[insert] = '\0';
+//	int retSize = strlen(ret);
+//	if (retSize < size&&retSize != 0)
+//		return ret;
+//	free(ret);
+//	return s;
+//}
+//int main()
+//{
+//	char s[] = "rrrrrLLLLLPPPPPPRRRRRgggNNNNNVVVVVVVVVVDDDDDDDDDDIIIIIIIIIIlllllllAAAAqqqqqqqbbbNNNNffffff";
+//	printf("%s", compressString(s));
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<assert.h>
+//#include<stdlib.h>
+//#include<string.h>
+//char* removeSpaces(char* s)
+//{
+//	assert(s);
+//	int size = strlen(s);
+//	char* ret = malloc(sizeof(char)*(size + 1));
+//	int insert = 0, i = 0, flag = 0;
+//	while (s[i] == ' ')
+//	{
+//		i++;
+//	}
+//	for (i; i < size; i++)
+//	{
+//		if (s[i] != ' ')
+//		{
+//			if (flag == 1)
+//				ret[insert++] = ' ';
+//			flag = 0;
+//			ret[insert++] = s[i];
+//		}
+//		else
+//			flag = 1;
+//	}
+//	ret[insert] = '\0';
+//	return ret;
+//}
+//int main()
+//{
+//	char s[] = "     abc    cdf v v b    ";
+//	printf("%s", removeSpaces(s));
+//	return  0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int i;
+//	char acNew[20] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+//	for (i = 0; i < 10; i++) {
+//		acNew[i] = '0';
+//	}
+//	printf("%d\n", strlen(acNew));
+//	return;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	unsigned short sht = 0;
+//	sht--;
+//	printf("%d", sht);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	unsigned int a = 0xFFFFFFF7;
+//	unsigned char i = (unsigned char)a;
+//	printf("%d\n", i);
+//	char *b = (char *)&a;
+//	printf("%08x,%08x", i, *b);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0xFFFFFFF7;
+//	char i = (char)a;
+//	char* p = (char*)&a;
+//	printf("%d %x", i, *p);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[] = { 6,7,8,9,10 };
+//	int *ptr = arr;
+//	*(ptr++) += 123;
+//	printf("%d,%d", *ptr, *(++ptr));//å‡½æ•°ä¼ å‚ï¼Œä»å³å‘å·¦
+//	return 0;
+//}
+
+#include<stdio.h>
+int main()
+{
+	int a = 2;
+	printf("%d %d", a, a++);//3 ,2
+	return 0;
+}
