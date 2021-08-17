@@ -242,7 +242,7 @@
 //}
 
 
-#include<stdio.h>
+//#include<stdio.h>
 //int main()
 //{
 //	int k, j, s;
@@ -283,12 +283,128 @@
 
 
 //#include <stdio.h>
+//int main()
+//{
+//	int a[5] = { 1, 2, 3, 4, 5 };
+//	int* p1 = (int*)(&a + 1);
+//	int* p2 = (int*)((int)a + 1);
+//	int* p3 = (int*)(a + 1);
+//	printf("%d, %x, %d\n", p1[-1], p2[0], p3[1]);//5 2000 3
+//	return 0;
+//}
+
+
+
+////551. 学生出勤记录 I
+//#include<stdio.h>
+//#include<stdbool.h>
+//#include<assert.h>
+//bool checkRecord(char * s)
+//{
+//	int sz = strlen(s);
+//	int i = 0, flag = 0;
+//	int arr[2] = { 0 };
+//	for (i = 0; i < sz; i++)
+//	{
+//		if (s[i] == 'A')
+//		{
+//			arr[0]++;
+//			if (arr[0] >= 2)
+//			{
+//				flag = 1;
+//				break;
+//			}
+//		}
+//		if (s[i] == 'L')
+//		{
+//			arr[1]++;
+//			if (arr[1] == 3)
+//			{
+//				flag = 1;
+//				break;
+//			}
+//		}
+//		else
+//			arr[1] = 0;
+//	}
+//	if (flag == 1)
+//		return false;
+//	return true;
+//}
+//int main()
+//{
+//	char s[] = "PLPALLP";
+//	bool ret = checkRecord(s);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+
+////1423. 可获得的最大点数
+////利用滑动窗口
+//
+//#include<stdio.h>
+//#include<assert.h>
+//int maxScore(int* cardPoints, int cardPointsSize, int k)
+//{
+//	assert(cardPoints);
+//	int sum = 0;
+//	int i = 0;
+//	for (i = 0; i < cardPointsSize - k; i++)
+//	{
+//		sum += cardPoints[i];
+//	}
+//	int min = sum;
+//	int left = 0, right = cardPointsSize - k, minSum = sum;
+//	while (right < cardPointsSize)
+//	{
+//		sum += cardPoints[right];
+//		minSum += cardPoints[right] - cardPoints[left];
+//		right++;
+//		left++;
+//		if (min > minSum)
+//			min = minSum;
+//	}
+//	sum -= min;
+//	return sum;
+//}
+//
+//
+//int main()
+//{
+//	int arr[] = { 9,7,7,9,7,7,9 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	int k = 6;
+//	int ret = maxScore(arr, sz, k);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+
+
+#include<stdio.h>
+#include<stdbool.h>
+bool containsNearbyDuplicate(int* nums, int numsSize, int k)
+{
+	int i = 0, flag = 0;
+	for (i = 0; i < numsSize; i++)
+	{
+		int j = i + 1;
+		while (j < numsSize && j - i <= k)
+		{
+			if (nums[i] == nums[j])
+				return true;
+			else
+				j++;
+		}
+	}
+	return false;
+}
 int main()
 {
-	int a[5] = { 1, 2, 3, 4, 5 };
-	int* p1 = (int*)(&a + 1);
-	int* p2 = (int*)((int)a + 1);
-	int* p3 = (int*)(a + 1);
-	printf("%d, %x, %d\n", p1[-1], p2[0], p3[1]);//5 2000 3
+	int nums[] = { 1,2,3,4,1 };
+	int k = 3;
+	int sz = sizeof(nums) / sizeof(nums[0]);
+	printf("%d", containsNearbyDuplicate(nums, sz, k));
 	return 0;
 }
