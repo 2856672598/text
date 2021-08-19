@@ -382,29 +382,48 @@
 
 
 
+//#include<stdio.h>
+//#include<stdbool.h>
+//bool containsNearbyDuplicate(int* nums, int numsSize, int k)
+//{
+//	int i = 0, flag = 0;
+//	for (i = 0; i < numsSize; i++)
+//	{
+//		int j = i + 1;
+//		while (j < numsSize && j - i <= k)
+//		{
+//			if (nums[i] == nums[j])
+//				return true;
+//			else
+//				j++;
+//		}
+//	}
+//	return false;
+//}
+//int main()
+//{
+//	int nums[] = { 1,2,3,4,1 };
+//	int k = 3;
+//	int sz = sizeof(nums) / sizeof(nums[0]);
+//	printf("%d", containsNearbyDuplicate(nums, sz, k));
+//	return 0;
+//}
+
+
+//1967. 作为子字符串出现在单词中的字符串数目
 #include<stdio.h>
-#include<stdbool.h>
-bool containsNearbyDuplicate(int* nums, int numsSize, int k)
+int numOfStrings(char ** patterns, int patternsSize, char * word)
 {
-	int i = 0, flag = 0;
-	for (i = 0; i < numsSize; i++)
+	int i = 0;
+	int count = 0;
+	for (i = 0; i < patternsSize; i++)
 	{
-		int j = i + 1;
-		while (j < numsSize && j - i <= k)
-		{
-			if (nums[i] == nums[j])
-				return true;
-			else
-				j++;
-		}
+		if (strstr(word, patterns[i]))
+			count++;
 	}
-	return false;
+	return count;
 }
 int main()
 {
-	int nums[] = { 1,2,3,4,1 };
-	int k = 3;
-	int sz = sizeof(nums) / sizeof(nums[0]);
-	printf("%d", containsNearbyDuplicate(nums, sz, k));
 	return 0;
 }
