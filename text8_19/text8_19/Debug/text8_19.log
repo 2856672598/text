@@ -1,0 +1,3 @@
+﻿  text.cpp
+c:\users\wang\source\repos\text8_19\text8_19\text.cpp(131): warning C4172: 返回局部变量或临时变量的地址: c
+  text8_19.vcxproj -> C:\Users\wang\source\repos\text8_19\Debug\text8_19.exe
