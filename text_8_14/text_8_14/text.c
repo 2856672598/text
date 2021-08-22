@@ -410,20 +410,61 @@
 //}
 
 
-//1967. 作为子字符串出现在单词中的字符串数目
+////1967. 作为子字符串出现在单词中的字符串数目
+//#include<stdio.h>
+//int numOfStrings(char ** patterns, int patternsSize, char * word)
+//{
+//	int i = 0;
+//	int count = 0;
+//	for (i = 0; i < patternsSize; i++)
+//	{
+//		if (strstr(word, patterns[i]))
+//			count++;
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	return 0;
+//}
+
+
+//1838. 最高频元素的频数
 #include<stdio.h>
-int numOfStrings(char ** patterns, int patternsSize, char * word)
+#include<assert.h>
+#include<stdlib.h>
+int Comp(const void* x, const void* y)
 {
-	int i = 0;
-	int count = 0;
-	for (i = 0; i < patternsSize; i++)
+	return *(int*)x - *(int*)y;
+}
+int maxFrequency(int* nums, int numsSize, int k)
+{
+	assert(nums);
+	qsort(nums, numsSize, sizeof(int), Comp);
+	long long count = 1;
+	long long left = 0, right = 1;
+	while (right < numsSize)
 	{
-		if (strstr(word, patterns[i]))
-			count++;
+		k -= (nums[right] - nums[right - 1])*(right - left);
+		if (k >= 0)
+		{
+			count = right - left + 1;
+		}
+		else
+		{
+			k += (nums[right] - nums[left]);
+			left++;
+		}
+		right++;
 	}
 	return count;
 }
 int main()
 {
+	int nums[] = { 1,4,8,13 };
+	int k = 5;
+	int sz = sizeof(nums) / sizeof(nums[0]);
+	int ret = maxFrequency(nums, sz, k);
+	printf("%d", ret);
 	return 0;
 }
