@@ -139,3 +139,313 @@
 //	cout << "Add(2, 3) is " << ret << endl;//返回为局部变量时，引用返回是不安全的
 //	return 0;
 //}
+
+
+//#include<iostream>
+//#include<ctime>
+//using namespace std;
+//struct A
+//{
+//	int arr[10000];
+//};
+//struct A a;
+//struct A text1()
+//{
+//	return a;
+//}
+//struct A& text2()
+//{
+//	return a;
+//}
+//int main()
+//{
+//	int i = 0;
+//	int time1 = clock();
+//	for (i = 0; i < 100000; i++)
+//		text1();
+//	int time2 = clock();
+//	int time3 = clock();
+//	for (i = 0; i < 100000; i++)
+//		text2();
+//	int time4 = clock();
+//	cout << "text1 time:" << time2 - time1 << endl;
+//	cout << "text2 time:" << time4 - time2 << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	int arr[] = { 1,2,3,4 };
+//	//c语言
+//	int i = 0;
+//	for (i = 0; i < sizeof(arr) / sizeof(int); i++)
+//	{
+//		arr[i] *= 2;
+//	}
+//	for (i = 0; i < sizeof(arr) / sizeof(int); i++)
+//		printf("%d ", arr[i]);
+//	printf("\n");
+//
+//	//范围for
+//	for (auto&a : arr)
+//	{
+//		a *= 2;
+//	}
+//	for (auto a : arr)
+//	{
+//		cout << a << " ";
+//	}
+//	cout << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//void Fun(int n)
+//{
+//	cout << "整形" << endl;
+//}
+//void Fun(int* n)
+//{
+//	cout << "整形指针" << endl;
+//}
+//int main()
+//{
+//	Fun(0);
+//	Fun(NULL);
+//	Fun(nullptr);//c++11中建议空指针使用nullptr;
+//	return 0;
+//}
+
+
+
+//#include<iostream>
+//using namespace std;
+//
+//class ListNode
+//{
+//	//1.成员变量
+//	//2.成员函数
+//private:
+//	int _val;
+//	ListNode* _next;
+//	ListNode* _prev;
+//};
+//
+//
+////struct ListNode
+////{
+////	int _val;
+////	ListNode* _next;
+////	ListNode* _prev;
+////};
+//
+//int main()
+//{
+//	ListNode s;
+//	//s._val = 0;//err 私有的和保护的在外部不可以被修改
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//class A
+//{
+//public:
+//	int _x;
+//	int _y;
+//	int Add(int _x, int  _y)
+//	{
+//		return _x + _y;
+//	}
+//};
+//class B
+//{
+//	int Add(int x, int y)
+//	{
+//		int sum = x + y;
+//		return sum;
+//	}
+//};
+//int main()
+//{
+//	A a;
+//	//实例化类的对象的大小为，变量相加的大小（需要考虑内存对齐）
+//	cout << sizeof(A) << endl;//8
+//
+//	//当实例化对象没有变量时，大小为1
+//	cout << sizeof(B) << endl;//1
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//class Data
+//{
+//public:
+//	void Init(int year, int month, int day)//void Init(Data* this ,int year, int month, int day)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//	void Print()//void Print(Data* this)
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//int main()
+//{
+//	Data a;
+//	a.Init(2021, 8, 24);//a.Init(&a , 2021 , 8 , 24);
+//	a.Print();
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//class A
+//{
+//public:
+//	void PrintA()
+//	{
+//		cout << _a << endl;
+//	}
+//	void Show()
+//	{
+//		cout << "show" << endl;
+//	}
+//private:
+//	int _a;
+//};
+//int main()
+//{
+//	A* a = NULL;
+//	//成员函数存储在公共代码段，所以不会到对象中去查找成员函数
+//	//PrintA函数中由于this指针会解引用，导致崩溃（NULL）
+//	//Show函数没有对this指针进行解引用，所以正常输出
+//	a->PrintA();//程序崩溃
+//	a->Show();//正常输出
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//class Date
+//{
+//public:
+//	//构造函数-->支持函数重载
+//	Date(int year, int month, int day)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//	Date()
+//	{
+//		_year = 0;
+//		_month = 1;
+//		_day = 1;
+//	}
+//	void Print()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//int main()
+//{
+//	Date d1(2021, 8, 24);
+//	d1.Print();
+//	Date d2;//Data d2() 构造函数无参时，不要写括号
+//	d2.Print();
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//class Time
+//{
+//public:
+//	Time()
+//	{
+//		_hour = 0;
+//		_minute = 0;
+//		_second = 0;
+//	}
+//private:
+//	int _hour;
+//	int _minute;
+//	int _second;
+//
+//};
+//
+//class Date
+//{
+//public:
+//	void Print()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//	Time _t;
+//};
+//int main()
+//{
+//	Date d1;
+//	d1.Print();
+//	return 0;
+//}
+
+
+#include<iostream>
+using namespace std;
+class Date
+{
+public:
+	//全缺省构造函数
+	Date(int year = 0, int month = 1, int day = 1)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+
+	//析构函数
+	~Date()
+	{
+		;
+	}
+	void Print()
+	{
+		cout << _year << "-" << _month << "-" << _day << endl;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+int main()
+{
+	Date d1;
+	d1.Print();
+	return 0;
+}
