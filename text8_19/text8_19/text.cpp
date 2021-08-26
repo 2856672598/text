@@ -562,6 +562,90 @@
 //	return 0;
 //}
 
+//
+//#include<iostream>
+//using namespace std;
+//class Date
+//{
+//public:
+//	//构造函数
+//	Date(int year, int month, int day)
+//	{
+//		if (year >= 0 && month >= 1 && month <= 12 && day >= 1 && day <= MonthDays(year, month))
+//		{
+//			_year = year;
+//			_month = month;
+//			_day = day;
+//		}
+//		else
+//			cout << "日期非法" << endl;
+//	}
+//	//拷贝构造函数
+//	Date(const Date& d)
+//	{
+//		_year = d._year;
+//		_month = d._month;
+//		_day = d._day;
+//	}
+//	int MonthDays(int year, int month)
+//	{
+//		int days[13] = { 0,31,29,31,30,31,30,31,31,30,31,30,31 };
+//		if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+//			return days[month];
+//		return 28;
+//	}
+//	void Print()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//
+//	bool operator<(const Date& d)
+//	{
+//		if (_year < d._year)
+//			return true;
+//		else if (_year == d._year&&_month < d._month)
+//			return true;
+//		else if (_year == d._year&& _month == d._month&&_day < d._day)
+//			return true;
+//		return  false;
+//	}
+//	bool operator>(const Date&d)
+//	{
+//		if (_year > d._year)
+//			return true;
+//		else if (_year == d._year&&_month > d._month)
+//			return true;
+//		else if (_year == d._year&& _month == d._month&&_day > d._day)
+//			return true;
+//		return  false;
+//	}
+//	bool operator==(const Date&d)
+//	{
+//		if (d._year == _year
+//			&& d._month == _month
+//			&& d._day == _day)
+//			return true;
+//		return false;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//int main()
+//{
+//	Date d1(2021, 8, 25);
+//	d1.Print();
+//
+//	Date d2(2021, 2, 29);
+//	d2.Print();
+//
+//	cout << (d1 < d2) << endl;
+//	cout << (d1 > d2) << endl;
+//	return 0;
+//}
+
+
 
 #include<iostream>
 using namespace std;
@@ -569,16 +653,16 @@ class Date
 {
 public:
 	//构造函数
-	Date(int year, int month, int day)
+	Date(int year = 0, int month = 1, int day = 1)
 	{
-		if (year >= 0 && month >= 1 && month <= 12 && day >= 1 && day <= MonthDays(year, month))
+		if (MonthDays(year, month) >= day && year >= 0 && month >= 1 && month <= 12)
 		{
 			_year = year;
 			_month = month;
 			_day = day;
 		}
 		else
-			cout << "日期非法" << endl;
+			printf("日期非法\n");
 	}
 	//拷贝构造函数
 	Date(const Date& d)
@@ -589,16 +673,21 @@ public:
 	}
 	int MonthDays(int year, int month)
 	{
-		int days[13] = { 0,31,29,31,30,31,30,31,31,30,31,30,31 };
-		if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
-			return days[month];
-		return 28;
+		int days[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+		if (month == 2 && ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0))
+			days[month] = 29;
+		return days[month];
 	}
 	void Print()
 	{
 		cout << _year << "-" << _month << "-" << _day << endl;
 	}
-
+	bool operator==(const Date& d)
+	{
+		return _year == d._year
+			&& _month == d._month
+			&&_day == d._day;
+	}
 	bool operator<(const Date& d)
 	{
 		if (_year < d._year)
@@ -607,25 +696,139 @@ public:
 			return true;
 		else if (_year == d._year&& _month == d._month&&_day < d._day)
 			return true;
-		return  false;
-	}
-	bool operator>(const Date&d)
-	{
-		if (_year > d._year)
-			return true;
-		else if (_year == d._year&&_month > d._month)
-			return true;
-		else if (_year == d._year&& _month == d._month&&_day > d._day)
-			return true;
-		return  false;
-	}
-	bool operator==(const Date&d)
-	{
-		if (d._year == _year
-			&& d._month == _month
-			&& d._day == _day)
-			return true;
 		return false;
+	}
+	bool operator>=(const Date& d)
+	{
+		return !(*this < d);
+	}
+	bool operator<=(const Date& d)
+	{
+		return *this < d || *this == d;
+	}
+	bool operator>(const Date& d)
+	{
+		return !(*this <= d);
+	}
+	Date operator+(int day)
+	{
+		Date ret(*this);
+		ret._day += day;
+		while (ret._day > MonthDays(ret._year, ret._month))
+		{
+			ret._day -= MonthDays(ret._year, ret._month);
+			ret._month++;
+			if (ret._month > 12)
+			{
+				ret._year++;
+				ret._month -= 12;
+			}
+		}
+		return ret;
+	}
+	Date& operator+=(int day)
+	{
+		_day += day;
+		while (_day > MonthDays(_year, _month))
+		{
+			_day -= MonthDays(_year, _month);
+			_month++;
+			if (_month > 12)
+			{
+				_year++;
+				_month -= 12;
+			}
+		}
+		return *this;
+	}
+	Date operator-(int day)
+	{
+		Date d(*this);
+		d._day -= day;
+		while (d._day < 1)
+		{
+			d._month--;
+			if (d._month == 0)
+			{
+				d._year -= 1;
+				d._month = 12;
+			}
+			d._day += MonthDays(d._year, d._month);
+		}
+		return d;
+	}
+	Date& operator-=(int day)
+	{
+		_day -= day;
+		while (_day < 1)
+		{
+			_month--;
+			if (_month == 0)
+			{
+				_year -= 1;
+				_month = 12;
+			}
+			_day += MonthDays(_year, _month);
+		}
+		return *this;
+	}
+	//Date& operator++(int day)
+	//{
+	//	_day++;
+	//	if (_day > MonthDays(_year, _month))
+	//	{
+	//		_day -= MonthDays(_year, _month);
+	//		_month += 1;
+	//	}
+	//	if (_month > 12)
+	//	{
+	//		_month = 1;
+	//		_year++;
+	//	}
+	//	return *this;
+	//}
+	//后置++
+	Date operator++(int)
+	{
+		Date d(*this);
+		(*this) += 1;
+		return d;
+	}
+	Date operator--(int)
+	{
+		Date d(*this);
+		(*this) -= 1;
+		return d;
+	}
+
+	//前置++
+	Date& operator++()
+	{
+		(*this) += 1;
+		return *this;
+	}
+	Date& operator--()
+	{
+		(*this) -= 1;
+		return *this;
+	}
+	//日期-日期
+	int operator-(const Date& d)
+	{
+		Date max = *this;
+		Date min = d;
+		if (max < min)
+		{
+			max = d;
+			min = *this;
+		}
+		int day = 0;
+		while (min < max)
+		{
+			day++;
+			min++;
+		}
+		return day;
 	}
 private:
 	int _year;
@@ -634,13 +837,47 @@ private:
 };
 int main()
 {
-	Date d1(2021, 8, 25);
+	Date d1(2021, 8, 26);
 	d1.Print();
-
-	Date d2(2021, 2, 29);
-	d2.Print();
-
+	Date d2(2022, 9, 23);
+	cout << (d1 == d2) << endl;
 	cout << (d1 < d2) << endl;
 	cout << (d1 > d2) << endl;
+
+	Date d3;
+	d3 = d1 + 10000;
+	d3.Print();
+
+	//d1 += 100000;
+	//d1.Print();
+
+	Date d4;
+	d4 = d1 - 10000;
+	d4.Print();
+
+	d1 -= 10000;
+	d1.Print();
+
+	Date d5(1999, 12, 31);
+
+	Date d6;
+	d6 = d5++;
+	cout << "d5++：";
+	d6.Print();
+	cout << "d5：";
+	d5.Print();
+
+
+	d6 = d5--;
+	cout << "d5--：";
+	d6.Print();
+	cout << "d5：";
+	d5.Print();
+
+	Date d7(2011, 12, 15);
+	Date d8(2050, 10, 19);
+	cout << (d7 - d8) << endl;
 	return 0;
 }
+
+
