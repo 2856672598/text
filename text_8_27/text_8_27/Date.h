@@ -17,10 +17,11 @@ public:
 	Date& operator+=(int day);
 	Date operator-(int day);
 	Date& operator-=(int day);
-	Date& operator++(int);
-	Date& operator--(int);
-	Date operator++();
-	Date operator--();
+	Date operator++(int);
+	Date operator--(int);
+	Date& operator++();
+	Date& operator--();
+	int operator-(const Date& d)const;
 private:
 	int _year;
 	int _month;

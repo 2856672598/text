@@ -162,5 +162,7 @@ int main()
 
 	++d3;
 	d3.Print();
+	d2 = d3 + 105646;
+	cout << d3 - d2 << endl;
 	return 0;
 }

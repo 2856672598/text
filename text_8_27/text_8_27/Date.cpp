@@ -41,7 +41,7 @@ bool Date::operator<(const Date& d)const
 	else if (_year == d._year&&_month < d._month)
 		return true;
 	else if (_year == d._year&&_month == d._month&&_day < d._day)
-		return false;
+		return true;
 	return false;
 }
 
@@ -144,28 +144,47 @@ Date& Date::operator-=(int day)
 	return *this;
 }
 
-Date Date::operator++()
+//Ç°ÖÃ++
+Date& Date::operator++()
 {
 	*this += 1;
 	return *this;
 }
-
-Date Date::operator--()
+//Ç°ÖÃ--
+Date& Date::operator--()
 {
 	*this -= 1;
 	return *this;
 }
-
-Date& Date::operator++(int)
+//ºóÖÃ++
+Date Date::operator++(int)
 {
 	Date d(*this);
 	*this += 1;
 	return d;
 }
 
-Date& Date::operator--(int)
+Date Date::operator--(int)
 {
 	Date d(*this);
 	*this -= 1;
 	return d;
+}
+
+int Date::operator-(const Date& d)const
+{
+	Date max(*this);
+	Date min(d);
+	if (max < min)
+	{
+		max = d;
+		min = *this;
+	}
+	int day = 0;
+	while (min < max)
+	{
+		++min;
+		++day;
+	}
+	return day;
 }
