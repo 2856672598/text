@@ -215,42 +215,373 @@
 //}
 
 
-//友元
+////友元
+//#include<iostream>
+//using namespace std;
+//class Date
+//{
+//	friend ostream& operator<<(ostream& _cout, const Date& d);
+//	friend istream& operator>>(istream& _cin, Date& d);
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)
+//		:_year(year)
+//		, _month(month)
+//		, _day(day)
+//	{}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//ostream& operator<<(ostream& _cout, const Date& d)
+//{
+//	_cout << d._year << "/" << d._month << "/" << d._day << endl;
+//	return _cout;
+//}
+//istream& operator>>(istream& _cin, Date& d)
+//{
+//	_cin >> d._year;
+//	_cin >> d._month;
+//	_cin >> d._day;
+//	return _cin;
+//}
+//int main()
+//{
+//	Date d1(2021, 8, 29);
+//	Date d2;
+//	cout << d1 << d2 ;
+//	cin >> d2;
+//	cout << d2;
+//	return 0;
+//}
+
+
+
+////友元类
+//#include<iostream>
+//using namespace std;
+//class Time
+//{
+//	friend class Date;
+//public:
+//	Time(int hour = 0, int minute = 0, int second = 0)
+//		:_hour(hour)
+//		,_minute(minute)
+//		,_second(second)
+//	{}
+//private:
+//	int _hour;
+//	int _minute;
+//	int _second;
+//};
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)
+//		:_year(year)
+//		,_month(month)
+//		,_day(day)
+//	{}
+//	void GetDateTime()
+//	{
+//		cout << _year << "/" << _month << "/" << _day << '-' << _t._hour << '-' << _t._minute
+//			<< '-' << _t._second << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//	Time _t;
+//};
+//int main()
+//{
+//	Date d1;
+//	d1.GetDateTime();
+//	return 0;
+//}
+
+
+////给出年分m和一年中的第n天，算出第n天是几月几号。
+//#include<iostream>
+//#include <iomanip> 
+//using namespace std;
+//class Date
+//{
+//	friend istream& operator>>(istream& _cin, Date& d);
+//	friend ostream& operator<<(ostream& _cou, Date& d);
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)
+//		:_year(year)
+//		, _month(month)
+//		, _day(day)
+//	{};
+//	int GetMonthDay(int year, int month)
+//	{
+//		int day[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+//		if (month == 2 && ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0))
+//			day[month] = 29;
+//		return day[month];
+//	}
+//	//Date MonthAndDay(int year, int day)
+//	//{
+//	//	Date d(year, 1, day);
+//	//	while (d._day > GetMonthDay(d._year, d._month))
+//	//	{
+//	//		d._day -= GetMonthDay(d._year, d._month);
+//	//		d._month++;
+//	//	}
+//	//	return d;
+//	//}
+//
+//	void MonthAndDay()
+//	{
+//		Date d(_year, 1, _day);
+//		while (d._day > GetMonthDay(d._year, d._month))
+//		{
+//			d._day -= GetMonthDay(d._year, d._month);
+//			d._month++;
+//		}
+//		cout << d;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//istream& operator>>(istream& _cin, Date& d)
+//{
+//	_cin >> d._year >> d._day;
+//	return _cin;
+//}
+//ostream& operator<<(ostream& _cout, Date& d)
+//{
+//	_cout << d._year << "-" << setw(2) << setfill('0') << d._month << "-" << setw(2) << setfill('0')<< d._day << endl;
+//	return _cout;
+//}
+//int main()
+//{
+//	Date d;
+//	int year = 0, day = 0;
+//	while (cin >>d)
+//	{
+//		d.MonthAndDay();
+//	}
+//	return 0;
+//}
+
+
+//KY258 日期累加
+//#include <iomanip> 
+//#include<iostream>
+//using namespace std;
+//class Date
+//{
+//	friend ostream& operator<<(ostream& _cout, const Date& d);
+//	friend istream& operator>>(istream& _cin, Date& d);
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)
+//		:_year(year)
+//		, _month(month)
+//		, _day(day)
+//	{}
+//	int GetMonthDay(int year, int month)
+//	{
+//		int day[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+//		if (month == 2 && ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0))
+//			day[month] = 29;
+//		return day[month];
+//	}
+//	Date operator+(const int day)const
+//	{
+//		Date ret(*this);
+//		ret._day += day;
+//		while (ret._day > ret.GetMonthDay(ret._year, ret._month))
+//		{
+//			ret._day -= ret.GetMonthDay(ret._year, ret._month);
+//			++ret._month;
+//			if (ret._month > 12)
+//			{
+//				ret._month -= 12;
+//				ret._year++;
+//			}
+//		}
+//		return ret;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//ostream& operator<<(ostream& _cout, const Date& d)
+//{
+//	_cout << d._year << "-" << setw(2) << setfill('0') << d._month << "-" << setw(2) << setfill('0') << d._day << endl;
+//	return _cout;
+//}
+//
+//istream& operator>>(istream& _cin, Date& d)
+//{
+//	_cin >> d._year >> d._month >> d._day;
+//	return _cin;
+//}
+//int main()
+//{
+//	int n;
+//	cin >> n;
+//	Date d1;
+//	while (n--)
+//	{
+//		Date d2;
+//		cin >> d1;
+//		int day = 0;
+//		cin >> day;
+//		d2 = d1 + day;
+//		cout << d2;
+//	}
+//	return 0;
+//}
+
+
+////KY111 日期差值
+//#include<iostream>
+//using namespace std;
+//class Date
+//{
+//	friend istream& operator>>(istream& _cin, Date& d1);
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)
+//		:_year(year)
+//		,_month(month)
+//		,_day(day)
+//	{}
+//	bool operator==(const Date& d)const
+//	{
+//		return _year == d._year
+//			&&_month == d._month
+//			&&_day == d._day;
+//	}
+//	int GetMonthDay(const int year,const int month)
+//	{
+//		int day[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+//		if (month == 2 && ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0))
+//			day[month] = 29;
+//		return day[month];
+//	}
+//	Date& operator+=(const int day)
+//	{
+//		_day += day;
+//		while (_day > GetMonthDay(_year, _month))
+//		{
+//			_day -= GetMonthDay(_year, _month);
+//			_month++;
+//			if (_month > 12)
+//			{
+//				_month -= 12;
+//				_year++;
+//			}
+//		}
+//		return *this;
+//	}
+//	bool operator<(const Date d)const
+//	{
+//		if (_year < d._year)
+//			return true;
+//		else if (_year == d._year&&_month < d._month)
+//			return true;
+//		else if (_year == d._year&&d._month == _month && _day < d._day)
+//			return true;
+//		return false;
+//	}
+//	int operator-(const Date d)const
+//	{
+//		int day = 1;
+//		Date max(*this);
+//		Date min(d);
+//		if (max < min)
+//		{
+//			max = d;
+//			min = *this;
+//		}
+//		while (!(min == max))
+//		{
+//			day++;
+//			min += 1;
+//		}
+//		return day;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//istream& operator>>(istream& _cin, Date& d1)
+//{
+//	int tmp;
+//	cin >> tmp;
+//	d1._day = tmp % 100;
+//	tmp /= 100;
+//	d1._month = tmp % 100;
+//	tmp /= 100;
+//	d1._year = tmp;
+//	return _cin;
+//}
+//
+//int main()
+//{
+//	Date d1;
+//	Date d2;
+//	while (cin >> d1 >> d2)
+//	{
+//		cout << d2 - d1 << endl;
+//	}
+//	return 0;
+//}
+
+
 #include<iostream>
 using namespace std;
 class Date
 {
-	friend ostream& operator<<(ostream& _cout, const Date& d);
 	friend istream& operator>>(istream& _cin, Date& d);
 public:
 	Date(int year = 0, int month = 1, int day = 1)
 		:_year(year)
-		, _month(month)
-		, _day(day)
+		,_month(month)
+		,_day(day)
 	{}
+	int GetMonthDay(const int year, const int month)
+	{
+		int day[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+		if (month == 2 && ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0))
+			day[month] = 29;
+		return day[month];
+	}
+	int WhatDay()
+	{
+		int day = _day;
+		int month = 1;
+		while (month < _month)
+		{
+			day += GetMonthDay(_year, month);
+			month++;
+		}
+		return day;
+	}
 private:
 	int _year;
 	int _month;
 	int _day;
 };
-ostream& operator<<(ostream& _cout, const Date& d)
-{
-	_cout << d._year << "/" << d._month << "/" << d._day << endl;
-	return _cout;
-}
+
 istream& operator>>(istream& _cin, Date& d)
 {
-	_cin >> d._year;
-	_cin >> d._month;
-	_cin >> d._day;
+	_cin >> d._year >> d._month >> d._day;
 	return _cin;
 }
 int main()
 {
-	Date d1(2021, 8, 29);
-	Date d2;
-	cout << d1 << d2 ;
-	cin >> d2;
-	cout << d2;
+	Date d1;
+	cin >> d1;
+	cout << d1.WhatDay();
 	return 0;
 }
