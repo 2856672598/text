@@ -538,50 +538,221 @@
 //}
 
 
-#include<iostream>
-using namespace std;
-class Date
-{
-	friend istream& operator>>(istream& _cin, Date& d);
-public:
-	Date(int year = 0, int month = 1, int day = 1)
-		:_year(year)
-		,_month(month)
-		,_day(day)
-	{}
-	int GetMonthDay(const int year, const int month)
-	{
-		int day[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
-		if (month == 2 && ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0))
-			day[month] = 29;
-		return day[month];
-	}
-	int WhatDay()
-	{
-		int day = _day;
-		int month = 1;
-		while (month < _month)
-		{
-			day += GetMonthDay(_year, month);
-			month++;
-		}
-		return day;
-	}
-private:
-	int _year;
-	int _month;
-	int _day;
-};
+//#include<iostream>
+//using namespace std;
+//class Date
+//{
+//	friend istream& operator>>(istream& _cin, Date& d);
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)
+//		:_year(year)
+//		,_month(month)
+//		,_day(day)
+//	{}
+//	int GetMonthDay(const int year, const int month)
+//	{
+//		int day[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+//		if (month == 2 && ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0))
+//			day[month] = 29;
+//		return day[month];
+//	}
+//	int WhatDay()
+//	{
+//		int day = _day;
+//		int month = 1;
+//		while (month < _month)
+//		{
+//			day += GetMonthDay(_year, month);
+//			month++;
+//		}
+//		return day;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//istream& operator>>(istream& _cin, Date& d)
+//{
+//	_cin >> d._year >> d._month >> d._day;
+//	return _cin;
+//}
+//int main()
+//{
+//	Date d1;
+//	cin >> d1;
+//	cout << d1.WhatDay();
+//	return 0;
+//}
 
-istream& operator>>(istream& _cin, Date& d)
-{
-	_cin >> d._year >> d._month >> d._day;
-	return _cin;
-}
-int main()
-{
-	Date d1;
-	cin >> d1;
-	cout << d1.WhatDay();
-	return 0;
-}
+
+//#include<iostream>
+//using namespace std;
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 1,int day=1)
+//		:_year(year)
+//		,_month(month)
+//		,_day(day)
+//	{}
+//	void Print()const  //void Print(const Date* this)
+//	{
+//		cout << _year << "/" << _month << "/" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//int main()
+//{
+//	const Date d1;
+//	d1.Print();
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//class A
+//{
+//public:
+//	void F2()
+//	{
+//	}
+//	void F3()const
+//	{
+//		F2();//不可以-->权利可以缩小，但不可以放大。const-->非 const
+//	}
+//};
+//int main()
+//{
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//class Date
+//{
+//public:
+//	Date* operator&()
+//	{
+//		return this;
+//	}
+//	const Date* operator&()const
+//	{
+//		return this;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//int main()
+//{
+//}
+
+//#include<iostream>
+//using namespace std;
+//class Date
+//{
+//	friend ostream& operator<<(ostream& _cout, const Date& d);
+//public:
+//	Date(int year=0,int month=1,int day=1)
+//		:_year(year)
+//		,_month(month)
+//		,_day(day)
+//	{}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//ostream& operator<<(ostream& _cout, const Date& d)
+//{
+//	_cout << d._year << "/" << d._month << "/" << d._day;
+//	return _cout;
+//}
+//int main()
+//{
+//	Date d1(2021, 5, 6);
+//	cout << d1;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//class Time
+//{
+//	friend class Date;
+//public:
+//	Time(int hour = 0, int minute = 0, int second = 0)
+//		:_hour(hour)
+//		,_minute(minute)
+//		,_second(second)
+//	{}
+//private:
+//	int _hour;
+//	int _minute;
+//	int _second;
+//};
+//class Date
+//{
+//public:
+//	Date(int year=0,int month=1,int day=1)
+//		:_year(year)
+//		,_month(month)
+//		,_day(day)
+//	{}
+//	void Print()
+//	{
+//		cout << _year << "/" << _month << "/" << _day << "-" << _t._hour << "-" << _t._minute << "-" << _t._second << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//	Time _t;
+//};
+//int main()
+//{
+//	Date d1;
+//	d1.Print();
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//class A
+//{
+//public:
+//	A(int n = 0)
+//		:_n(n)
+//	{
+//		cout << "A" << endl;
+//	}
+//	~A()
+//	{
+//		cout << "~A" << endl;
+//	}
+//	void Print()
+//	{
+//		cout << _n << endl;
+//	}
+//private:
+//	int _n;
+//};
+//int main()
+//{
+//	A* a1 = (A*)malloc(sizeof(A));
+//	A* a2 = new A;//new的对象为自定义类型时，会调用构造函数
+//	a1->Print();
+//	a2->Print();
+//	free(a1);
+//	delete(a2);//会调用析构函数
+//	return 0;
+//}
+
