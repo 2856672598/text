@@ -307,3 +307,430 @@
 //	text2_string();
 //	return 0;
 //}
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//void text1_string()
+//{
+//	string s1("hello");
+//	cout << s1.size()<< endl;
+//	cout << s1.length() << endl;
+//
+//
+//	cout << s1.capacity() << endl;
+//	cout << s1.empty() << endl;//判断字符串是否为空
+//
+//	string s2;
+//	cout << s2.empty() << endl;
+//	cout << s2.size() << endl;
+//	
+//	s2.reserve(10);
+//	cout << s2.capacity() << endl;
+//	cout << s2.size() << endl;
+//
+//
+//	s2.resize(10, 'a');//预留空间
+//	cout << s2 << endl;
+//	cout << s2.size() << endl;
+//
+//	s2.resize(15, 'b');
+//	cout << s2 << endl;
+//	cout << s2.capacity() << endl;
+//
+//	//当reserve参数小于容量大小时，不会改变容量大小
+//	s2.reserve(10);
+//	cout << s2 << endl;
+//	cout << s2.capacity() << endl;
+//}
+//int main()
+//{
+//	text1_string();
+//	return 0;
+//}
+
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Solution
+//{
+//public:
+//	string reverseOnlyLetters(string s)
+//	{
+//		int left = 0, right = s.size()-1;
+//		while (left < right)
+//		{
+//			while (left < right && !(s[left] >= 'a'&&s[left] <= 'z' || s[left] >= 'A'&&s[left] <= 'Z'))
+//			{
+//				left++;
+//			}
+//			while (left < right && !(s[right] >= 'a'&&s[right] <= 'z' || s[right] >= 'A'&&s[right] <= 'Z'))
+//			{
+//				right--;
+//			}
+//			swap(s[left], s[right]);
+//			left++;
+//			right--;
+//		}
+//		return s;
+//	}
+//};
+//int main()
+//{
+//	string s("Test1ng-Leet=code-Q!");
+//	cout << Solution().reverseOnlyLetters(s) << endl;
+//
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	int firstUniqChar(string s)
+//	{
+//		int arr[26] = { 0 };
+//		for (size_t i = 0; i < s.size(); i++)
+//		{
+//			arr[s[i] - 'a']++;
+//		}
+//		for (size_t i = 0; i < s.size(); i++)
+//		{
+//			if (arr[s[i] - 'a'] == 1)
+//				return i;
+//		}
+//		return -1;
+//	}
+//};
+//
+//int main()
+//{
+//	string s("loveleetcode");
+//	cout << Solution().firstUniqChar(s) << endl;
+//	return 0;
+//}
+
+
+//
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	int firstUniqChar(string s)
+//	{
+//		for (size_t i = 0; i < s.size(); i++)
+//		{
+//			if (s.find(s[i]) == s.rfind(s[i]))
+//				return i;
+//		}
+//		return -1;
+//	}
+//};
+//int main()
+//{
+//	string s("loveleetcode");
+//	cout << Solution().firstUniqChar(s) << endl;
+//	return 0;
+//}
+
+//HJ1 字符串最后一个单词的长度
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//	string s("hello");
+//	getline(cin, s);
+//	string::reverse_iterator it = s.rbegin();
+//	int count = 0;
+//	while (it != s.rend())
+//	{
+//		if (*it == ' ')
+//			break;
+//		count++;
+//		it++;
+//	}
+//	cout << count << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//	string s;
+//	getline(cin, s);
+//	int pos = s.rfind(" ");
+//	cout << s.size() - pos - 1 << endl;
+//	return 0;
+//}
+
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//void text1_string()
+//{
+//	string s1("http://www.cplusplus.com/");
+//	string s2("https://leetcode-cn.com/");
+//	string& url = s2;
+//	int i1 = s1.find(":");
+//	if (i1 != string::npos)
+//	{
+//		cout << s1.substr(0, i1) << endl;
+//	}
+//
+//	int i2 = s1.find('/', i1 + 3);
+//	if (i2 != string::npos)
+//	{
+//		cout << s1.substr(i1 + 3, i2 - (i1 + 3));
+//	}
+//}
+//int main()
+//{
+//	text1_string();
+//	return 0;
+//}
+
+////125. 验证回文串
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Solution
+//{
+//public:
+//	bool isCharOrNumber(char ch)
+//	{
+//		if (ch >= 'a'&&ch <= 'z' || ch >= '0'&&ch <= '9')
+//			return true;
+//		else
+//			return false;
+//	}
+//	bool isPalindrome(string s)
+//	{
+//		for (size_t i = 0; i < s.size(); i++)
+//		{
+//			if (s[i] >= 'A'&&s[i] <= 'Z')
+//				s[i] += 32;
+//		}
+//
+//		int begin = 0, end = s.size() - 1;
+//		while (begin < end)
+//		{
+//			while (begin < end && !isCharOrNumber(s[begin]))
+//			{
+//				begin++;
+//			}
+//			while (begin < end && !isCharOrNumber(s[end]))
+//			{
+//				end--;
+//			}
+//			if (s[begin] != s[end])
+//				return false;
+//			else
+//			{
+//				begin++;
+//				end--;
+//			}
+//		}
+//		return true;
+//	}
+//};
+//int main()
+//{
+//	string s1("0P");
+//	cout << Solution().isPalindrome(s1) << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//class Solution
+//{
+//public:
+//	string addStrings(string num1, string num2)
+//	{
+//		int end1 = num1.size() - 1;
+//		int end2 = num2.size() - 1;
+//		string ret;
+//		int flag = 0;
+//		while (end1 >= 0 || end2 >= 0)
+//		{
+//			int sum = 0;
+//			if (end1 < 0 || end2 < 0)
+//			{
+//				end1 < 0 ? sum = num2[end2] - '0' + flag : sum = num1[end1] + flag - '0';
+//			}
+//			else
+//				sum = num1[end1] + num2[end2] - 2 * '0' + flag;
+//			if (sum > 9)
+//			{
+//				flag = 1;
+//				sum -= 10;
+//			}
+//			else
+//				flag = 0;
+//			ret += sum + '0';
+//			end1--;
+//			end2--;
+//		}
+//		if (flag == 1)
+//			ret += '1';
+//		//int begin = 0, end = ret.size() - 1;
+//		//while (begin < end)
+//		//{
+//		//	char ch = ret[end];
+//		//	ret[end] = ret[begin];
+//		//	ret[begin] = ch;
+//		//	begin++;
+//		//	end--;
+//		//}
+//
+//		reverse(ret.begin(), ret.end());
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	string s1("1");
+//	string s2("9");
+//	cout << Solution().addStrings(s1, s2) << endl;
+//	return 0;
+//}
+
+////541. 反转字符串 II
+//#include<iostream>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//class Solution
+//{
+//public:
+//	string reverseStr(string s, int k)
+//	{
+//		size_t n = s.size();
+//		for (size_t i = 0; i < n; i += 2 * k)
+//		{
+//			reverse(s.begin() + i, s.begin() + min(i + k, n));
+//		}
+//		return s;
+//	}
+//};
+//int main()
+//{
+//	string s("abcdefg");
+//	int k = 2;
+//	cout << Solution().reverseStr(s, k) << endl;
+//	return 0;
+//}
+
+////557. 反转字符串中的单词 III
+//#include<iostream>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	string reverseWords(string s)
+//	{
+//		int end = s.rfind(' ');
+//		int begin = 0;
+//		int prev = 0;
+//		while (1)
+//		{
+//			begin = s.find(' ', prev);
+//			reverse(s.begin() + prev, s.begin() + begin);
+//			prev = begin + 1;
+//			if (begin == end)
+//				break;
+//		}
+//		reverse(s.begin() + prev, s.begin() + s.size());
+//		return s;
+//	}
+//};
+//
+//int main()
+//{
+//	string s("Let's take LeetCode contest");
+//	cout << Solution().reverseWords(s) << endl;
+//	return 0;
+//}
+
+//HJ59 找出字符串中第一个只出现一次的字符
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//	string s1;
+//	while (cin >> s1)
+//	{
+//		int arr[256] = { 0 };
+//		size_t i = 0;
+//		for (i = 0; i < s1.size(); i++)
+//		{
+//			arr[s1[i]]++;
+//		}
+//		int flag = 0;
+//		for (i = 0; i < s1.size(); i++)
+//		{
+//			if (arr[s1[i]] == 1)
+//			{
+//				flag = 1;
+//				break;
+//			}
+//		}
+//		if (flag == 1)
+//			cout << s1[i] << endl;
+//		else
+//			cout << -1 << endl;
+//	}
+//	return 0;
+//}
+
+
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	string s;
+	while (cin >> s)
+	{
+		int flag = 0;
+		size_t i = 0;
+		for (i = 0; i < s.size(); i++)
+		{
+			//当第一次出现的位置和最后一次出现的位置相等是说明只出现一次
+			if (s.find(s[i]) == s.rfind(s[i]))
+			{
+				flag = 1;
+				break;
+			}
+		}
+		if (flag == 1)
+			cout << s[i] << endl;
+		else
+			cout << -1 << endl;
+	}
+	return 0;
+}
