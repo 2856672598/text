@@ -708,29 +708,115 @@
 //}
 
 
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//	string s;
+//	while (cin >> s)
+//	{
+//		int flag = 0;
+//		size_t i = 0;
+//		for (i = 0; i < s.size(); i++)
+//		{
+//			//当第一次出现的位置和最后一次出现的位置相等是说明只出现一次
+//			if (s.find(s[i]) == s.rfind(s[i]))
+//			{
+//				flag = 1;
+//				break;
+//			}
+//		}
+//		if (flag == 1)
+//			cout << s[i] << endl;
+//		else
+//			cout << -1 << endl;
+//	}
+//	return 0;
+//}
+
+//43. 字符串相乘
 #include<iostream>
 #include<string>
+#include<algorithm>
 using namespace std;
-int main()
+class Solution
 {
-	string s;
-	while (cin >> s)
+public:
+	string addStrings(string num1, string num2)
 	{
+		int end1 = num1.size() - 1;
+		int end2 = num2.size() - 1;
+		string ret;
 		int flag = 0;
-		size_t i = 0;
-		for (i = 0; i < s.size(); i++)
+		while (end1 >= 0 || end2 >= 0)
 		{
-			//当第一次出现的位置和最后一次出现的位置相等是说明只出现一次
-			if (s.find(s[i]) == s.rfind(s[i]))
+			int sum = 0;
+			if (end1 < 0 || end2 < 0)
+			{
+				end1 < 0 ? sum = num2[end2] - '0' + flag : sum = num1[end1] + flag - '0';
+			}
+			else
+				sum = num1[end1] + num2[end2] - 2 * '0' + flag;
+			if (sum > 9)
 			{
 				flag = 1;
-				break;
+				sum -= 10;
 			}
+			else
+				flag = 0;
+			ret += sum + '0';
+			end1--;
+			end2--;
 		}
 		if (flag == 1)
-			cout << s[i] << endl;
-		else
-			cout << -1 << endl;
+			ret += '1';
+
+		reverse(ret.begin(), ret.end());
+		return ret;
 	}
+
+	string multiply(string num1, string num2)
+	{
+		string ret;
+		if (num1 == "0" || num2 == "0")
+		{
+			return "0";
+		}
+		int count = 0;
+		for (int i = num2.size() - 1; i >= 0; i--)
+		{
+			string sum;
+			int tmp = 0;
+			int flag = 0;
+			for (int j = num1.size() - 1; j >= 0; j--)
+			{
+				tmp = (num1[j] - '0')*(num2[i] - '0') + flag;
+				if (tmp > 9)
+				{
+					flag = tmp / 10;
+					tmp %= 10;
+				}
+				else
+					flag = 0;
+				sum += tmp + '0';
+			}
+			if (flag > 0)
+				sum += flag + '0';
+			reverse(sum.begin(), sum.end());
+			string s(count, '0');
+			sum += s;
+			ret = addStrings(ret, sum);
+			count++;
+		}
+		return ret;
+	}
+};
+
+int main()
+{
+	string s1("5933017823982");
+	string s2("6133388083");
+	cout << Solution().multiply(s1, s2) << endl;
 	return 0;
 }
