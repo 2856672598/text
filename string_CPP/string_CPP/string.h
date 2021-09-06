@@ -116,8 +116,11 @@ namespace solution
 			delete[] _ret;
 			_ret = new char[s.size() + 1];
 			strcpy(_ret, s._ret);
+			_size = s._size;
+			_capacity = _size;
 			return *this;
 		}
+
 		void reserve(const size_t n)
 		{
 			size_t newcapacity = _size + n;
@@ -167,6 +170,12 @@ namespace solution
 			return *this;
 		}
 
+		string& operator+=(const string& s)
+		{
+			append(s._ret);
+			return *this;
+		}
+
 		size_t find(const char ch, size_t pos = 0)
 		{
 			if (pos < _size)
@@ -178,6 +187,16 @@ namespace solution
 				}
 			}
 			return npos;
+		}
+
+		size_t find(const char* s, size_t pos = 0)
+		{
+			assert(pos < _size);
+			char* p = strstr(_ret + pos, s);
+			if (p == nullptr)
+				return npos;
+			else
+				return p - _ret;
 		}
 
 		size_t size()const
@@ -203,23 +222,34 @@ namespace solution
 
 		bool operator<(const string& s)const
 		{
-			return strcmp(_ret, s._ret);
+			int len = strcmp(_ret, s._ret);
+			return len < 0;
 		}
 
 		bool operator==(const string& s)const
 		{
-			if (strcmp(_ret, s._ret) == 0)
-				return true;
-			else
-				return false;
+			int len = strcmp(_ret, s._ret);
+			return len == 0;
 		}
 
 		bool operator<=(const string& s)const
 		{
-			if (_ret == s._ret || _ret < s._ret)
-				return true;
-			else
-				return false;
+			return *this < s || *this == s;
+		}
+
+		bool operator>(const string& s)const
+		{
+			return !(*this <= s);
+		}
+
+		bool operator>=(const string& s)const
+		{
+			return !(*this < s);
+		}
+
+		bool operator!=(const string& s)const
+		{
+			return !(*this == s);
 		}
 
 		string& insert(size_t pos, const char ch)
@@ -288,6 +318,24 @@ namespace solution
 			}
 		}
 
+		string& erase(const size_t pos, const size_t len = npos)
+		{
+			assert(pos < _size);
+
+			size_t n = _size - pos;
+			if (n <= len)
+			{
+				//pos后面都需要删除
+				_ret[pos] = '\0';
+				_size = pos;
+			}
+			else
+			{
+				strcpy(_ret + pos, _ret + pos + len);
+				_size -= len;
+			}
+			return *this;
+		}
 
 	private:
 		char* _ret;
@@ -306,6 +354,22 @@ namespace solution
 		cout << endl;
 		return _out;
 	}
+
+	istream& operator>>(istream& _cin, string& s)
+	{
+		char ch;
+		while (1)
+		{
+			_cin >> ch;
+			if (ch == ' ' || ch == '\n')
+			{
+				break;
+			}
+			s += ch;
+		}
+		return _cin;
+	}
+
 	void text_string1()
 	{
 		string s1;
@@ -374,6 +438,26 @@ namespace solution
 		cout << s1;
 
 		s1.resize(50, 'X');
+		cout << s1;
+
+		s1.erase(0);
+		cout << s1;
+
+
+		s3 = "hello word hello word";
+		cout << s3;
+		cout << s3.find("hello");
+	}
+
+	void text_string4()
+	{
+		string s1("hello");
+		string s2("world");
+		string s3("haha");
+		s3 += s2 += s1;
+		cout << s3;
+
+		cin >> s1;
 		cout << s1;
 	}
 }

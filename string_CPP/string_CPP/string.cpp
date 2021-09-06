@@ -8,7 +8,9 @@ int main()
 
 	//solution::text_string2();
 
-	solution::text_string3();
+	//solution::text_string3();
+
+	solution::text_string4();
 	return 0;
 }
 
