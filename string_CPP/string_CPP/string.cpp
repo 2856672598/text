@@ -10,7 +10,9 @@ int main()
 
 	//solution::text_string3();
 
-	solution::text_string4();
+	//solution::text_string4();
+
+	solution::text_string1();
 	return 0;
 }
 
