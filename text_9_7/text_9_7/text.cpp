@@ -379,42 +379,218 @@
 //	return 0;
 //}
 
-//JZ30 连续子数组的最大和
-#include<iostream>
-#include<vector>
+////JZ30 连续子数组的最大和
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	int FindGreatestSumOfSubArray(vector<int> array)
+//	{
+//		int max = array[0];
+//		int sum = 0;
+//		for (auto e : array)
+//		{
+//			if (sum <= 0)
+//				sum = e;
+//			else
+//				sum += e;
+//			if (max < sum)
+//				max = sum;
+//		}
+//		return max;
+//	}
+//};
+//int main()
+//{
+//	vector<int> array;
+//	array.push_back(1);
+//	array.push_back(-2);
+//	array.push_back(3);
+//	array.push_back(10);
+//	array.push_back(-4);
+//	array.push_back(7);
+//	array.push_back(2);
+//	array.push_back(-5);
+//
+//	cout << Solution().FindGreatestSumOfSubArray(array) << endl;
+//	return 0;
+//}
+
+
+////118. 杨辉三角
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	vector<vector<int>> generate(int numRows)
+//	{
+//		vector<vector<int>> vv;
+//		vv.resize(numRows);
+//		for (int i = 0; i < numRows; i++)
+//		{
+//			vv[i].resize(i + 1);
+//			vv[i][0] = 1;
+//			vv[i][i] = 1;
+//		}
+//
+//		for (int i = 0; i < numRows; i++)
+//		{
+//			for (size_t j = 0; j < vv[i].size(); j++)
+//			{
+//				if (vv[i][j] != 1)
+//				{
+//					vv[i][j] = vv[i - 1][j - 1] + vv[i - 1][j];
+//				}
+//			}
+//		}
+//		return vv;
+//	}
+//};
+//
+//int main()
+//{
+//	int row;
+//	cin >> row;
+//	vector<vector<int>> ret = Solution().generate(row);
+//
+//	for (size_t i = 0; i < ret.size(); i++)
+//	{
+//		for (size_t j = 0; j < ret[i].size(); j++)
+//		{
+//			cout << ret[i][j] << " ";
+//		}
+//		cout << endl;
+//	}
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+////迭代器失效
+//void text_vector1()
+//{
+//	vector<int> v;
+//	v.push_back(1);
+//	v.push_back(2);
+//	v.push_back(3);
+//	v.push_back(4);
+//	v.push_back(5);
+//	vector<int>::iterator it = v.begin();
+//	//由于扩容的原因，导致it迭代器失效
+//	v.push_back(6);
+//	v.push_back(7);
+//
+//	while (it != v.end())
+//	{
+//		cout << *it << " ";
+//		it++;
+//	}
+//	cout << endl;
+//}
+//
+////删除元素导致迭代器实效
+////由于vs进行了检查运行后直接报错，但是在linux中却不一定报错
+//void text_vector2()
+//{
+//	vector<int> v;
+//	v.push_back(1);
+//	v.push_back(2);
+//	v.push_back(3);
+//	v.push_back(4);
+//	v.push_back(5);
+//	v.push_back(6);
+//	vector<int>::iterator it = v.begin();
+//	while (it != v.end())
+//	{
+//		if (*it % 2 == 0)
+//		{
+//			v.erase(it);//迭代器实效
+//		}
+//		++it;
+//	}
+//
+//	it = v.begin();
+//	while (it != v.end())
+//	{
+//		cout << *it << " ";
+//		it++;
+//	}
+//	cout << endl;
+//}
+//
+////正确写法
+//void text_vector3()
+//{
+//	vector<int> v{ 1,2,2,4,5,6 };
+//	vector<int>::iterator it = v.begin();
+//	while (it != v.end())
+//	{
+//		if (*it % 2 == 0)
+//		{
+//			it = v.erase(it);//erase返回下一个位置的迭代器
+//		}
+//		else
+//			it++;
+//	}
+//	for (auto e : v)
+//	{
+//		cout << e << " ";
+//	}
+//	cout << endl;
+//}
+//int main()
+//{
+//	//text_vector1();
+//
+//	//text_vector2();
+//
+//	text_vector3();
+//	return 0;
+//}
+
+////剑指 Offer 58 - II. 左旋转字符串
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	string reverseLeftWords(string s, int n)
+//	{
+//		size_t sz = s.size();
+//		n %= sz;
+//		reverse(s.begin(), s.begin() + n);
+//		reverse(s.begin() + n, s.end());
+//		reverse(s.begin(), s.end());
+//		return s;
+//	}
+//};
+//
+//int main()
+//{
+//	string s("abcdefg");
+//	int n = 2;
+//	cout << Solution().reverseLeftWords(s, n) << endl;
+//	return 0;
+//}
+
+
+
+#include"vector.h"
 using namespace std;
 
-class Solution
-{
-public:
-	int FindGreatestSumOfSubArray(vector<int> array)
-	{
-		int max = array[0];
-		int sum = 0;
-		for (auto e : array)
-		{
-			if (sum <= 0)
-				sum = e;
-			else
-				sum += e;
-			if (max < sum)
-				max = sum;
-		}
-		return max;
-	}
-};
 int main()
 {
-	vector<int> array;
-	array.push_back(1);
-	array.push_back(-2);
-	array.push_back(3);
-	array.push_back(10);
-	array.push_back(-4);
-	array.push_back(7);
-	array.push_back(2);
-	array.push_back(-5);
-
-	cout << Solution().FindGreatestSumOfSubArray(array) << endl;
+	Solution::text_vector1();
 	return 0;
 }
