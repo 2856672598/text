@@ -389,33 +389,334 @@
 
 
 
-//389. 找不同
+////389. 找不同
+//#include<iostream>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	char findTheDifference(string s, string t)
+//	{
+//		sort(s.begin(), s.end());
+//		sort(t.begin(), t.end());
+//		size_t sz = s.size();
+//		for (size_t i = 0; i < sz; i++)
+//		{
+//			if (s[i] != t[i])
+//				return t[i];
+//		}
+//		return t[sz];
+//	}
+//};
+//
+//int main()
+//{
+//	string s1("abcd");
+//	string s2("abcde");
+//	cout << Solution().findTheDifference(s1, s2) << endl;
+//	return 0;
+//}
+
+
+////709. 转换成小写字母
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	string toLowerCase(string s)
+//	{
+//		size_t size = s.size();
+//		for (size_t i = 0; i < size; i++)
+//		{
+//			if (s[i] >= 'A'&&s[i] <= 'Z')
+//				s[i] += 32;
+//		}
+//		return s;
+//	}
+//};
+//
+//int main()
+//{
+//	string s1("HELLO");
+//	cout << Solution().toLowerCase(s1) << endl;
+//	return 0;
+//}
+
+
+////392. 判断子序列
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	bool isSubsequence(string s, string t)
+//	{
+//		string::iterator it = t.begin();
+//		string::iterator is = s.begin();
+//		while (it != t.end())
+//		{
+//			if (*it == *is)
+//			{
+//				is++;
+//			}
+//			it++;
+//		}
+//		if (is == s.end())
+//			return true;
+//		return false;
+//	}
+//};
+//
+//int main()
+//{
+//	string s1("abc");
+//	string s2("ahbgdc");
+//	cout << Solution().isSubsequence(s1, s2) << endl;
+//	return 0;
+//}
+
+
+////520. 检测大写字母
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	bool detectCapitalUse(string word)
+//	{
+//		size_t sz = word.size();
+//		int count = 0;//大写字母个数
+//		int flag = 0;
+//		for (size_t i = 0; i < sz; i++)
+//		{
+//			if (word[i] >= 'A'&&word[i] <= 'Z')
+//			{
+//				if (i == 0)
+//					flag = 1;
+//				count++;
+//			}
+//		}
+//		if (count == sz || (count == 1 && flag == 1) || count == 0)
+//			return true;
+//		return false;
+//	}
+//};
+//int main()
+//{
+//	string word("ffffffG");
+//	cout << Solution().detectCapitalUse(word) << endl;
+//	return 0;
+//}
+
+
+////796. 旋转字符串
+//#include<iostream>
+//#include<string>
+//#include<cstring>
+//using namespace std;
+//
+////class Solution
+////{
+////public:
+////	bool rotateString(string s, string goal)
+////	{
+////		if (s.size() != goal.size())
+////			return false;
+////		s.append(s);
+////		if (s.find(goal) != string::npos)
+////			return true;
+////		return false;
+////	}
+////};
+//
+//class Solution
+//{
+//public:
+//	bool rotateString(string s, string goal)
+//	{
+//		if (s.size() != goal.size())
+//			return false;
+//		s += s;
+//		string::iterator is = s.begin();
+//		string::iterator ig = goal.begin();
+//		string::iterator p = s.begin();
+//		while (p != s.end())
+//		{
+//			is = p;
+//			while (*is == *ig)
+//			{
+//				is++;
+//				ig++;
+//			}
+//			if (ig == goal.end())
+//				return true;
+//
+//			ig = goal.begin();
+//			p++;
+//		}
+//		return false;
+//	}
+//};
+//
+//int main()
+//{
+//	string s1("abcde");
+//	string s2("abced");
+//	cout << Solution().rotateString(s1, s2) << endl;
+//	return 0;
+//}
+
+
+////453. 最小操作次数使数组元素相等
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+////class Solution
+////{
+////public:
+////	int minMoves(vector<int>& nums)
+////	{
+////		sort(nums.begin(), nums.end());
+////		size_t size = nums.size();
+////		int count = 0;
+////		while (true)
+////		{
+////			int diff = nums[0] - nums[size - 1];
+////			count += diff;
+////			if (diff == 0)
+////				return count;
+////			for (size_t i = 0; i < size; i++)
+////			{
+////				if (i != size - 1)
+////				nums[i] += diff;
+////			}
+////			sort(nums.begin(), nums.end());
+////		}
+////	}
+////};
+//
+//class Solution
+//{
+//public:
+//	int minMoves(vector<int>& nums)
+//	{
+//		sort(nums.begin(), nums.end());
+//		size_t count = 0;
+//		for (int i = nums.size() - 1; i >= 0; i--)
+//		{
+//			count += nums[i] - nums[0];
+//		}
+//		return count;
+//	}
+//};
+//int main()
+//{
+//	vector<int>nums{ 1,2,3 };
+//	cout << Solution().minMoves(nums) << endl;
+//	return  0;
+//}
+
+
+////14. 最长公共前缀
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//
+//
+//class Solution
+//{
+//public:
+//	string longestCommonPrefix(vector<string>& strs)
+//	{
+//		string ret;
+//		size_t sz = strs.size();
+//
+//		size_t min = strs[0].size();
+//		for (size_t i = 0; i < strs.size(); i++)
+//		{
+//			if (min > strs[i].size())
+//			{
+//				min = strs[i].size();
+//			}
+//		}
+//
+//		int count = 0;
+//
+//		for (size_t i = 0; i < min; i++)
+//		{
+//			count = 0;
+//			for (size_t j = 0; j < strs.size() - 1; j++)
+//			{
+//				if (strs[j][i] == strs[j + 1][i])
+//					count++;
+//				else
+//					return ret;
+//			}
+//			if (count == strs.size() - 1)
+//				ret.push_back(strs[0][i]);
+//		}
+//
+//		return ret;
+//	}
+//};
+//int main()
+//{
+//	vector<string> str{ "flower","flow","flight" };
+//	cout << Solution().longestCommonPrefix(str) << endl;
+//	return 0;
+//}
+
+//412. Fizz Buzz
 #include<iostream>
+#include<vector>
 #include<string>
-#include<algorithm>
 using namespace std;
 
 class Solution
 {
 public:
-	char findTheDifference(string s, string t)
+	vector<string> fizzBuzz(int n)
 	{
-		sort(s.begin(), s.end());
-		sort(t.begin(), t.end());
-		size_t sz = s.size();
-		for (size_t i = 0; i < sz; i++)
+		vector<string> ret;
+		for (int i = 1; i <= n; i++)
 		{
-			if (s[i] != t[i])
-				return t[i];
+			if (i % 3 == 0 && i % 5 == 0)
+				ret.push_back("FizzBuzz");
+			else if (i % 3 == 0)
+				ret.push_back("Fizz");
+			else if (i % 5 == 0)
+				ret.push_back("Buzz");
+			else
+				ret.push_back(to_string(i));
 		}
-		return t[sz];
+		return ret;
 	}
 };
 
 int main()
 {
-	string s1("abcd");
-	string s2("abcde");
-	cout << Solution().findTheDifference(s1, s2) << endl;
+	int n = 0;
+	cin >> n;
+	vector <string> ret = Solution().fizzBuzz(n);
+	vector<string>::iterator it = ret.begin();
+	while (it != ret.end())
+	{
+		cout << *it << " ";
+		it++;
+	}
+	cout << endl;
 	return 0;
 }
