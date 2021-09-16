@@ -679,44 +679,259 @@
 //	return 0;
 //}
 
-//412. Fizz Buzz
+////412. Fizz Buzz
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	vector<string> fizzBuzz(int n)
+//	{
+//		vector<string> ret;
+//		for (int i = 1; i <= n; i++)
+//		{
+//			if (i % 3 == 0 && i % 5 == 0)
+//				ret.push_back("FizzBuzz");
+//			else if (i % 3 == 0)
+//				ret.push_back("Fizz");
+//			else if (i % 5 == 0)
+//				ret.push_back("Buzz");
+//			else
+//				ret.push_back(to_string(i));
+//		}
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	int n = 0;
+//	cin >> n;
+//	vector <string> ret = Solution().fizzBuzz(n);
+//	vector<string>::iterator it = ret.begin();
+//	while (it != ret.end())
+//	{
+//		cout << *it << " ";
+//		it++;
+//	}
+//	cout << endl;
+//	return 0;
+//}
+
+
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//////冒泡--->超时
+////class Solution
+////{
+////public:
+////	vector<int> sortArray(vector<int>& nums)
+////	{
+////		size_t size = nums.size();
+////		for (size_t i = 0; i < size; i++)
+////		{
+////			for (size_t j = 0; j < size - 1 - i; j++)
+////			{
+////				if (nums[j] > nums[j + 1])
+////				{
+////					swap(nums[j], nums[j + 1]);
+////				}
+////			}
+////		}
+////		return nums;
+////	}
+////};
+//
+//////插入排序---->超时
+////class Solution
+////{
+////public:
+////	vector<int> sortArray(vector<int>& nums)
+////	{
+////		size_t size = nums.size();
+////		for (size_t i = 0; i < size - 1; i++)
+////		{
+////			int end = i, flag = nums[i + 1];
+////			while (end >= 0)
+////			{
+////				if (nums[end] > flag)
+////				{
+////					nums[end + 1] = nums[end];
+////					end--;
+////				}
+////				else
+////					break;
+////			}
+////			nums[end + 1] = flag;
+////		}
+////		return nums;
+////	}
+////};
+//
+////希尔排序
+//class Solution
+//{
+//public:
+//	vector<int> sortArray(vector<int>& nums)
+//	{
+//		size_t size = nums.size();
+//		int gap = size;
+//		//gap>1为预排序 gap==1为插入排序
+//		while (gap > 1)
+//		{
+//			gap = gap / 3 + 1;//加一保证最后一次为1
+//			for (size_t  i = 0; i < size - gap; i++)
+//			{
+//				int flag = nums[i + gap], mid = i;
+//				while (mid >= 0)
+//				{
+//					if (nums[mid] > flag)
+//					{
+//						nums[mid + gap] = nums[mid];
+//						mid -= gap;
+//					}
+//					else
+//						break;
+//				}
+//				nums[mid + gap] = flag;
+//			}
+//		}
+//		return nums;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int> v{ 1,90,3,7,2,9,35 };
+//	Solution().sortArray(v);
+//	for (auto e : v)
+//	{
+//		cout << e << " ";
+//	}
+//	cout << endl;
+//	return 0;
+//}
+
+
+////219. 存在重复元素 II
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+////超时
+//class Solution
+//{
+//public:
+//	bool containsNearbyDuplicate(vector<int>& nums, int k)
+//	{
+//		size_t size = nums.size();
+//		for (size_t i = 0; i < size; i++)
+//		{
+//			vector<int>::iterator it = find(nums.begin() + i + 1, nums.end(), nums[i]);
+//			if (it != nums.end())
+//			{
+//				if ((it - (nums.begin() + i)) <= k)
+//					return true;
+//			}
+//		}
+//		return false;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int>nums{ 1,2,3,1,2,3 };
+//	int k = 2;
+//	cout << Solution().containsNearbyDuplicate(nums, k) << endl;
+//	return 0;
+//}
+
+
+////4. 寻找两个正序数组的中位数
+//
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
+//	{
+//		vector<int> merge;
+//		size_t size1 = nums1.size(), size2 = nums2.size();
+//
+//		for (size_t i = 0; i < size1; i++)
+//		{
+//			merge.push_back(nums1[i]);
+//		}
+//		for (size_t i = 0; i < size2; i++)
+//		{
+//			merge.push_back(nums2[i]);
+//		}
+//
+//		sort(merge.begin(), merge.end());
+//
+//		size_t size = merge.size();
+//		size_t pos = size / 2;
+//
+//		if (size % 2 == 0)
+//		{
+//			return (merge[pos] + merge[pos - 1]) / 2.0;
+//		}
+//		else
+//			return merge[pos] * 1.0;
+//
+//		return -1;
+//	}
+//};
+//
+//
+//int main()
+//{
+//	vector<int> nums1{ 1 };
+//	vector<int> nums2{ };
+//	cout << Solution().findMedianSortedArrays(nums1, nums2) << endl;
+//	return 0;
+//}
+
+
+//27. 移除元素
 #include<iostream>
 #include<vector>
-#include<string>
 using namespace std;
 
+//双指针
 class Solution
 {
 public:
-	vector<string> fizzBuzz(int n)
+	int removeElement(vector<int>& nums, int val)
 	{
-		vector<string> ret;
-		for (int i = 1; i <= n; i++)
+		size_t slow = 0;
+		for (size_t fast = 0; fast < nums.size(); fast++)
 		{
-			if (i % 3 == 0 && i % 5 == 0)
-				ret.push_back("FizzBuzz");
-			else if (i % 3 == 0)
-				ret.push_back("Fizz");
-			else if (i % 5 == 0)
-				ret.push_back("Buzz");
-			else
-				ret.push_back(to_string(i));
+			if (nums[fast] != val)
+			{
+				nums[slow++] = nums[fast];
+			}
 		}
-		return ret;
+		return slow;
 	}
 };
 
 int main()
 {
-	int n = 0;
-	cin >> n;
-	vector <string> ret = Solution().fizzBuzz(n);
-	vector<string>::iterator it = ret.begin();
-	while (it != ret.end())
-	{
-		cout << *it << " ";
-		it++;
-	}
-	cout << endl;
+	int val = 3;
+	vector<int> nums{ 3, 2, 2, 3 };
+	cout << Solution().removeElement(nums, val) << endl;
 	return 0;
 }
