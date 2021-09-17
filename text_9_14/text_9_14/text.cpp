@@ -905,33 +905,371 @@
 //}
 
 
-//27. 移除元素
+////27. 移除元素
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+////双指针
+//class Solution
+//{
+//public:
+//	int removeElement(vector<int>& nums, int val)
+//	{
+//		size_t slow = 0;
+//		for (size_t fast = 0; fast < nums.size(); fast++)
+//		{
+//			if (nums[fast] != val)
+//			{
+//				nums[slow++] = nums[fast];
+//			}
+//		}
+//		return slow;
+//	}
+//};
+//
+//int main()
+//{
+//	int val = 3;
+//	vector<int> nums{ 3, 2, 2, 3 };
+//	cout << Solution().removeElement(nums, val) << endl;
+//	return 0;
+//}
+
+
+////704. 二分查找
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	int search(vector<int>& nums, int target)
+//	{
+//		int left = 0, right = nums.size() - 1;
+//		while (left <= right)
+//		{
+//			int mid = left + (right - left) / 2;
+//
+//			if (nums[mid] > target)
+//				right = mid - 1;
+//			else if (nums[mid] < target)
+//				left = mid + 1;
+//			else
+//				return mid;
+//		}
+//		return -1;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int>nums{ 9 };
+//	int val = -9;
+//	cout << Solution().search(nums, val) << endl;
+//	return 0;
+//}
+
+
+////283. 移动零
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+////class Solution
+////{
+////public:
+////	void moveZeroes(vector<int>& nums)
+////	{
+////		size_t fast = 0, slow = 0;
+////		size_t size = nums.size();
+////		while (fast < size)
+////		{
+////			if (nums[fast] != 0)
+////			{
+////				nums[slow++] = nums[fast++];
+////			}
+////			else
+////				fast++;
+////		}
+////
+////		while (slow < size)
+////		{
+////			nums[slow++] = 0;
+////		}
+////	}
+////};
+//
+//class Solution
+//{
+//public:
+//	void moveZeroes(vector<int>& nums)
+//	{
+//		int fast = 0, slow = 0;
+//		int size = nums.size();
+//		while (fast < size)
+//		{
+//			if (nums[fast] != 0)
+//			{
+//				swap(nums[fast], nums[slow]);
+//				fast++;
+//				slow++;
+//			}
+//			else
+//				fast++;
+//		}
+//	}
+//};
+//
+//
+//int main()
+//{
+//	vector<int> nums{ 0,1,0,3,12 };
+//	Solution().moveZeroes(nums);
+//
+//	for (auto e : nums)
+//	{
+//		cout << e << " ";
+//	}
+//	cout << endl;
+//	return 0;
+//}
+
+
+////977. 有序数组的平方
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+////class Solution
+////{
+////public:
+////	vector<int> sortedSquares(vector<int>& nums)
+////	{
+////		vector<int> ret;
+////		size_t size = nums.size();
+////		for (size_t i = 0; i < size; i++)
+////		{
+////			ret.push_back(nums[i] * nums[i]);
+////		}
+////		sort(ret.begin(), ret.end());
+////		return ret;
+////	}
+////};
+//
+////class Solution
+////{
+////public:
+////	vector<int> sortedSquares(vector<int>& nums)
+////	{
+////		vector<int>ret;
+////		size_t size = nums.size();
+////		ret.resize(size);
+////
+////		int left = 0, right = size - 1;
+////
+////		int pos = size - 1;
+////		while (left <= right)
+////		{
+////			if (nums[left] * nums[left] > nums[right] * nums[right])
+////			{
+////				ret[pos--] = nums[left] * nums[left];
+////				left++;
+////			}
+////			else
+////			{
+////				ret[pos--] = nums[right] * nums[right];
+////				right--;
+////			}
+////		}
+////		return ret;
+////	}
+////};
+//
+//
+////归并思想
+//class Solution
+//{
+//public:
+//	vector<int> sortedSquares(vector<int>& nums)
+//	{
+//		size_t size = nums.size();
+//		int flag = 0;
+//		for (size_t i = 0; i < size; i++)
+//		{
+//			if (nums[i] <= 0)
+//				flag = i;
+//			else
+//				break;
+//		}
+//
+//		vector<int>ret;
+//
+//		int i = flag, j = flag + 1;
+//
+//		while (i >= 0 || j < (int)size)
+//		{
+//			if (i < 0)
+//			{
+//				ret.push_back(nums[j] * nums[j]);
+//				j++;
+//			}
+//			else if (j >= (int)size)
+//			{
+//				ret.push_back(nums[i] * nums[i]);
+//				i--;
+//			}
+//			else if (nums[i] * nums[i] < nums[j] * nums[j])
+//			{
+//				ret.push_back(nums[i] * nums[i]);
+//				i--;
+//			}
+//			else
+//			{
+//				ret.push_back(nums[j] * nums[j]);
+//				j++;
+//			}
+//		}
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int> nums{ 4 };
+//	vector<int> ret = Solution().sortedSquares(nums);
+//
+//	for (auto tmp : ret)
+//	{
+//		cout << tmp << " ";
+//	}
+//	cout << endl;
+//	return 0;
+//}
+
+
+
+////209. 长度最小的子数组
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	int minSubArrayLen(int target, vector<int>& nums)
+//	{
+//		size_t left = 0, right = 0;
+//
+//		size_t size = nums.size();
+//		int sum = 0, count = 0;
+//		int min = INT_MAX;
+//		while (right < size)
+//		{
+//			sum += nums[right];
+//
+//			while (sum >= target)
+//			{
+//				sum -= nums[left];
+//				count = right - left + 1;
+//
+//				if (count < min)
+//				{
+//					min = count;
+//				}
+//				left++;
+//			}
+//
+//			right++;
+//		}
+//		if (min == INT_MAX)
+//			min = 0;
+//		return min;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int>nums{ 2,3,1,2,4,3 };
+//	int target = 7;
+//	cout << Solution().minSubArrayLen(target, nums) << endl;
+//	return 0;
+//}
+
+
+//59. 螺旋矩阵 II
 #include<iostream>
 #include<vector>
 using namespace std;
 
-//双指针
 class Solution
 {
 public:
-	int removeElement(vector<int>& nums, int val)
+	vector<vector<int>> generateMatrix(int n)
 	{
-		size_t slow = 0;
-		for (size_t fast = 0; fast < nums.size(); fast++)
+		vector<vector<int>> ret(n, vector<int>(n));
+
+		int startX = 0, startY = 0;
+		int loop = n / 2;//圈数
+		int offert = 1;
+		int count = 1;
+		while (loop--)
 		{
-			if (nums[fast] != val)
+			int i = startX;
+			int j = startY;
+			//上面
+			for (j; j < startY + n - offert; j++)
 			{
-				nums[slow++] = nums[fast];
+				ret[startX][j] = count++;
+
 			}
+			//右面
+
+			for (i; i < startX + n - offert; i++)
+			{
+				ret[i][j] = count++;
+			}
+
+			//下面
+
+			for (j; j > startY; j--)
+			{
+				ret[i][j] = count++;
+			}
+
+			//左边
+			for (i; i > startX; i--)
+			{
+				ret[i][j] = count++;
+			}
+
+			startX++;
+			startY++;
+			offert += 2;
 		}
-		return slow;
+
+		if (n % 2 != 0)
+		{
+			ret[n / 2][n / 2] = count;
+		}
+		return ret;
 	}
 };
 
+
 int main()
 {
-	int val = 3;
-	vector<int> nums{ 3, 2, 2, 3 };
-	cout << Solution().removeElement(nums, val) << endl;
+	size_t n = 3;
+	vector<vector<int>> ret = Solution().generateMatrix(n);
+	for (size_t i = 0; i < n; i++)
+	{
+		for (size_t j = 0; j < n; j++)
+		{
+			cout << ret[i][j] << " ";
+		}
+		cout << endl;
+	}
 	return 0;
 }
