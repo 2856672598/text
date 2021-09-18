@@ -137,18 +137,18 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-int main()
-{
-	int a = 3, b = 4, c = 5, t = 99;
-
-	if (b < a && a < c) t = a; a = c; c = t;
-
-	if (a < c && b < c) t = b; b = a; a = t;
-
-	printf("%d %d %d\n", a, b, c);//4 5 99
-	return 0;
-}
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 3, b = 4, c = 5, t = 99;
+//
+//	if (b < a && a < c) t = a; a = c; c = t;
+//
+//	if (a < c && b < c) t = b; b = a; a = t;
+//
+//	printf("%d %d %d\n", a, b, c);//4 5 99
+//	return 0;
+//}
 //void Test(void)
 //{
 //	char *str = (char *)malloc(100);
@@ -160,3 +160,157 @@ int main()
 //		printf(str);
 //	}
 //}
+
+
+
+#include<stdio.h>
+#include<assert.h>
+void* my_memcpy(void*des, const void* sour, size_t n)
+{
+	assert(des&&sour);
+	void* ret = des;
+	while (n--)
+	{
+		*((char*)des)++ = *((char*)sour)++;
+	}
+	return ret;
+}
+
+char* my_strstr(char* str1, const char* str2)
+{
+	assert(str1&& str2);
+	char* p1 = NULL;
+	const char* p2 = NULL;
+	char* p = str1;
+
+	while (p)
+	{
+		p1 = p;
+		p2 = str2;
+
+		while (*p1 != '\0'&&*p2 != '\0'&&*p1 == *p2)
+		{
+			p1++;
+			p2++;
+		}
+		if (*p2 == '\0')
+			return p;
+		p++;
+	}
+	return NULL;
+}
+
+char * my_strcat(char * destination, const char * source)
+{
+	assert(destination);
+	char* ret = destination;
+	//×ßµ½\0
+	while (*destination++);
+
+	while (*destination++ = *source++);
+	return ret;
+}
+
+int my_strcmp(const char* str1, const char*str2)
+{
+	assert(str1&& str2);
+	while (*str1 == *str2)
+	{
+		if (*str1 == '\0')
+			return 0;
+		str1++;
+		str2++;
+	}
+	return *str1 - *str2;
+}
+
+char* my_strcpy(char* des, const char* sour)
+{
+	char* ret = des;
+	assert(des&&sour);
+	while (*des++ = *sour++);
+	return ret;
+}
+
+size_t my_strlen(const char* str)
+{
+	assert(str);
+	size_t count = 0;
+	while (*str++)
+	{
+		count++;
+	}
+	return count;
+}
+
+void* my_memmove(void *dest, const void *src, size_t count)
+{
+	assert(dest&&src);
+	if (dest <= src)
+	{
+		while (count--)
+		{
+			*((char*)dest)++ = *((char*)src)++;
+		}
+	}
+	else
+	{
+		//µ¹×Å¿½±´
+		(char*)dest += count - 1;
+		(char*)src += count - 1;
+
+		while (count--)
+		{
+			*((char*)dest)-- = *((char*)src)--;
+		}
+	}
+}
+
+void text1()
+{
+	char nums1[] = "hello word";
+	char nums2[] = "word";
+	printf("%s ", my_strstr(nums1, nums2));
+}
+
+void text2()
+{
+	char nums1[] = "abcdef";
+	char nums2[] = "abcdef";
+
+	printf("%d ", my_strcmp(nums1, nums2));
+}
+
+void text3()
+{
+	char nums1[] ={ "hello" };
+	char nums2[20] = "\0";
+	my_strcpy(nums2, nums1);
+	printf("%s ", nums2);
+}
+
+void text4()
+{
+	char nums[] = "hello";
+	printf("%d ", my_strlen(nums));
+}
+int main()
+{
+	//int nums1[] = { 1,2,3,4,5 };
+	//int nums2[5];
+	//int sz = sizeof(nums1) / sizeof(nums1[0]);
+	//my_memcpy(nums2, nums1, sizeof(int) * sz);
+	//for (int i = 0; i < sz; i++)
+	//{
+	//	printf("%d ", nums2[i]);
+	//}
+
+	//text1();
+
+	//text2();
+
+	//text3();
+
+	text4();
+	return 0;
+}
