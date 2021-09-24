@@ -246,6 +246,7 @@ size_t my_strlen(const char* str)
 void* my_memmove(void *dest, const void *src, size_t count)
 {
 	assert(dest&&src);
+	void* tmp = dest;
 	if (dest <= src)
 	{
 		while (count--)
@@ -264,8 +265,32 @@ void* my_memmove(void *dest, const void *src, size_t count)
 			*((char*)dest)-- = *((char*)src)--;
 		}
 	}
+	return tmp;
 }
 
+char * strncat(char * destination, const char * source, size_t num)
+{
+	char* tmp = destination;
+	while (*destination != '\0')
+		destination++;
+	for (int i = 0; i < (int)num && source[i]; i++)
+	{
+		*destination++ = source[i];
+	}
+	return tmp;
+}
+
+char * strncpy(char * destination, const char * source, size_t num)
+{
+	int i = 0;
+	for (i = 0; i < (int)num&&source[i]; i++)
+	{
+		destination[i] = source[i];
+	}
+	if (i < (int)num)
+		destination[i] = '\0';
+	return destination;
+}
 void text1()
 {
 	char nums1[] = "hello word";
@@ -294,6 +319,19 @@ void text4()
 	char nums[] = "hello";
 	printf("%d ", my_strlen(nums));
 }
+
+void text5()
+{
+	char nums[10] = "hello";
+	printf("%s", strncat(nums, "wor", 4));
+}
+
+void text6()
+{
+	char nums[10] = "hello";
+	printf("%s", strncpy(nums, "word", 2));
+}
+
 int main()
 {
 	//int nums1[] = { 1,2,3,4,5 };
@@ -311,6 +349,10 @@ int main()
 
 	//text3();
 
-	text4();
+	//text4();
+
+	//text5();
+
+	text6();
 	return 0;
 }
