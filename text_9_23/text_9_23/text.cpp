@@ -358,42 +358,96 @@
 //	return 0;
 //}
 
-//剑指 Offer II 004. 只出现一次的数字 
-#include<iostream>
-#include<vector>
-using namespace std;
+////剑指 Offer II 004. 只出现一次的数字 
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	int singleNumber(vector<int>& nums)
+//	{
+//		int arr[32] = { 0 };
+//		for (int i = 0; i < (int)nums.size(); i++)
+//		{
+//			unsigned int tmp = nums[i];
+//			int j = 0;
+//			while (tmp)
+//			{
+//				if (tmp & 1)
+//					arr[j]++;
+//				tmp >>= 1;
+//				j++;
+//			}
+//		}
+//		int ret = 0;
+//		for (int i = 0; i < 32; i++)
+//		{
+//			if (arr[i] % 3 != 0)
+//				ret += 1<< i;
+//		}
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int>nums{ 0,1,0,1,0,1,100,100,100,98 };
+//	cout << Solution().singleNumber(nums) << endl;
+//	return 0;
+//}
 
-class Solution
-{
-public:
-	int singleNumber(vector<int>& nums)
-	{
-		int arr[32] = { 0 };
-		for (int i = 0; i < (int)nums.size(); i++)
-		{
-			unsigned int tmp = nums[i];
-			int j = 0;
-			while (tmp)
-			{
-				if (tmp & 1)
-					arr[j]++;
-				tmp >>= 1;
-				j++;
-			}
-		}
-		int ret = 0;
-		for (int i = 0; i < 32; i++)
-		{
-			if (arr[i] % 3 != 0)
-				ret += 1<< i;
-		}
-		return ret;
-	}
-};
 
-int main()
-{
-	vector<int>nums{ 0,1,0,1,0,1,100,100,100,98 };
-	cout << Solution().singleNumber(nums) << endl;
-	return 0;
-}
+////102. 二叉树的层序遍历
+//#include<iostream>
+//#include<vector>
+//#include<queue>
+//using namespace std;
+//struct TreeNode
+//{
+//	int val;
+//	TreeNode *left;
+//	TreeNode *right;
+//	TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//	TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//	TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+//};
+//
+//class Solution
+//{
+//public:
+//	vector<vector<int>> levelOrder(TreeNode* root)
+//	{
+//		vector<vector<int>>vv;
+//
+//		queue<TreeNode*> q;
+//		int size = 0;
+//		if (root)
+//		{
+//			q.push(root);
+//			size = 1;
+//		}
+//		while (!q.empty())
+//		{
+//			vector<int>v;
+//			for (int i = 0; i < size; i++)
+//			{
+//				TreeNode* cur = q.front();
+//				v.push_back(cur->val);
+//				q.pop();
+//
+//				if (cur->left)
+//					q.push(cur->left);
+//				if (cur->right)
+//					q.push(cur->right);
+//			}
+//			//当上一层的数据全部出队列后，队列中的数据就是下一层的数据个数
+//			size = q.size();
+//			vv.push_back(v);
+//		}
+//		return vv;
+//	}
+//};
+
+
