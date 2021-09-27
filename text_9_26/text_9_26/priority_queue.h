@@ -2,18 +2,39 @@
 #include<algorithm>
 namespace Solution
 {
-	template<class T, class Container = std::vector<T>>
+	//仿函数
+	template<class T>
+	struct less
+	{
+		bool operator()(const T& x, const T& y)
+		{
+			return x < y;
+		}
+	};
+
+	template<class T>
+	struct greater
+	{
+		bool operator()(const T& x, const T&y)
+		{
+			return x > y;
+		}
+	};
+
+	template<class T, class Container = std::vector<T>, class Compare = greater<T>>
 	class priority_queue
 	{
 	public:
-		//小锥
+		//小堆
 		void AdjustUp(int size)
 		{
 			int parent = (size - 1) / 2;
 			int child = size;
 			while (child > 0)
 			{
-				if (_con[parent] > _con[child])
+				//if (_con[parent] > _con[child])
+				Compare com;
+				if (com(_con[child], _con[parent]))
 				{
 					std::swap(_con[parent], _con[child]);
 					child = parent;
@@ -27,14 +48,16 @@ namespace Solution
 		void AdjustDown(const int pos)
 		{
 			int parent = pos;
-			int child = pos * 2 + 1;//默认为左孩子
-			while (parent < (int)_con.size())
+			int child = parent * 2 + 1;//默认为左孩子
+			Compare com;
+			while (child < (int)_con.size())
 			{
-				if (child < (int)_con.size() && child + 1 < (int)_con.size()
-					&& _con[child] > _con[child + 1])
+				//if (child + 1 < (int)_con.size() && _con[child] > _con[child + 1])
+				if (child + 1 < (int)_con.size() && com(_con[child + 1], _con[child]))
 					child++;
 
-				if (child < (int)_con.size() && _con[child] < _con[parent])
+				//if (child < (int)_con.size() && _con[child] < _con[parent])
+				if (child < (int)_con.size() && com(_con[child], _con[parent]))
 				{
 					std::swap(_con[child], _con[parent]);
 					parent = child;
