@@ -234,4 +234,285 @@
 //	return 0;
 //}
 
+////1984. 学生分数的最小差值
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//	int minimumDifference(vector<int>& nums, int k) {
+//		sort(nums.begin(), nums.end());
+//
+//		int min = 0;
+//		for (int i = 0; i <= (int)nums.size() - k; i++)
+//		{
+//			int diff = nums[i + k - 1] - nums[i];
+//			if (i == 0)
+//				min = diff;
+//			else if (diff < min)
+//				min = diff;
+//		}
+//		return min;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int> nums{ 9,4,1,7 };
+//	int k = 2;
+//	cout << Solution().minimumDifference(nums, k) << endl;
+//	return 0;
+//}
 
+
+////1991. 找到数组的中间位置
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	int findMiddleIndex(vector<int>& nums) {
+//		int sum = 0;
+//		for (int i = 0; i < (int)nums.size(); i++)
+//		{
+//			sum += nums[i];
+//		}
+//		int leftsum = 0;
+//		for (int i = 0; i < (int)nums.size(); i++)
+//		{
+//			if (leftsum * 2 + nums[i] == sum)
+//				return i;
+//			else
+//				leftsum += nums[i];
+//		}
+//		return -1;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int>nums{ 0,0,0,0 };
+//	cout << Solution().findMiddleIndex(nums) << endl;
+//}
+
+
+//#include<iostream>
+//#include"add.h"
+//using namespace std;
+//int main()
+//{
+//	cout << Add(10, 10) << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class A
+//{
+//public:
+//
+//protected:
+//	string _name = "张三";
+//	int _id = 111;
+//};
+//
+//class B :public A
+//{
+//public:
+//	void print()
+//	{
+//		cout << _name << endl;
+//		cout << _id << endl;
+//	}
+//protected:
+//	int _id = 666;
+//};
+//
+//int main()
+//{
+//	B b;
+//	b.print();
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class A
+//{
+//public:
+//	string _name;
+//		int _age;
+//};
+//
+//class B :public A
+//{
+//private:
+//	int _id;
+//};
+//
+//int main()
+//{
+//	B b;
+//	//子对象可以直接赋值给父类对象/指针/引用
+//	A a = b;
+//	A* c = &b;
+//	A& d = b;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//struct Person
+//{
+//protected:
+//	string _name = "张三";
+//	int _age = 19;
+//	string _id = "12345";//身份证号
+//};
+//
+//struct Student :public Person
+//{
+//public:
+//	void print()
+//	{
+//		cout << _name << endl;
+//		cout << _age << endl;
+//		cout << _id << endl;
+//		cout << "身份证号" << Person::_id << endl;
+//	}
+//protected:
+//	string _id = "200108";//学号
+//};
+//
+//int main()
+//{
+//	Student s;
+//	s.print();
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class A
+//{
+//public:
+//	void Fun()
+//	{
+//		cout << "Fun()" << endl;
+//	}
+//};
+//
+//class B :public A
+//{
+//public:
+//	void Fun()
+//	{
+//		//和基类中构成隐藏，成员函数满足同名就构成隐藏
+//		cout << "Fun1()" << endl;
+//	}
+//};
+//
+//int main()
+//{
+//	B b;
+//	b.Fun();//构成隐藏时 默认调用当前类中的函数
+//	b.A::Fun();//调用基类
+//	return 0;
+//}
+
+////乐鑫01. 录取分数线
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	double getAdmissionLine(int k, vector<double>& scores) {
+//		sort(scores.rbegin(), scores.rend());
+//		return scores[k - 1];
+//	}
+//};
+//
+//int main()
+//{
+//	vector<double> nums{ 162.5,321.0,448.0,543.0,499.0,99.0,641.5,442.5,618.5,678.0,675.0,650.5,646.5,518.0,703.5,62.0,13.0,94.0,40.5,422.5 };
+//	int k = 6;
+//	cout << Solution().getAdmissionLine(k, nums) << endl;
+//	return 0;
+//}
+
+////1979. 找出数组的最大公约数
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	int findGCD(vector<int>& nums) {
+//		sort(nums.begin(), nums.end());
+//
+//		int max = nums[nums.size() - 1];
+//		int min = nums[0];
+//
+//		while (min)
+//		{
+//			int tmp = min;
+//			min = max % min;
+//			max = tmp;
+//		}
+//		return max;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int> nums{ 2,5,6,9,10 };
+//	cout << Solution().findGCD(nums) << endl;
+//	return 0;
+//}
+
+//剑指 Offer 39. 数组中出现次数超过一半的数字
+#include<iostream>
+#include<vector>
+using namespace std;
+
+//一个数出现的次数超过数组长度的一半 也就是说 它出现的次数比其他数出现的次数和还要多
+class Solution {
+public:
+	int majorityElement(vector<int>& nums) {
+		int count = 1, flag = nums[0];
+		for (int i = 1; i < (int)nums.size(); i++)
+		{
+			if (flag == nums[i])
+				count++;
+			else
+				count--;
+			if (count == 0)
+			{
+				flag = nums[i];
+				count = 1;
+			}
+		}
+		return flag;
+	}
+};
+
+int main()
+{
+	vector<int> nums{ 1, 2, 3, 2, 2, 2, 5, 4, 2 };
+	cout << Solution().majorityElement(nums) << endl;
+}

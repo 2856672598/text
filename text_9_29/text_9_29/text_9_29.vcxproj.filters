@@ -18,5 +18,13 @@
     <ClCompile Include="text.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="add.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="add.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
