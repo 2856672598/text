@@ -485,34 +485,380 @@
 //	return 0;
 //}
 
-//剑指 Offer 39. 数组中出现次数超过一半的数字
+////剑指 Offer 39. 数组中出现次数超过一半的数字
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+////一个数出现的次数超过数组长度的一半 也就是说 它出现的次数比其他数出现的次数和还要多
+//class Solution {
+//public:
+//	int majorityElement(vector<int>& nums) {
+//		int count = 1, flag = nums[0];
+//		for (int i = 1; i < (int)nums.size(); i++)
+//		{
+//			if (flag == nums[i])
+//				count++;
+//			else
+//				count--;
+//			if (count == 0)
+//			{
+//				flag = nums[i];
+//				count = 1;
+//			}
+//		}
+//		return flag;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int> nums{ 1, 2, 3, 2, 2, 2, 5, 4, 2 };
+//	cout << Solution().majorityElement(nums) << endl;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	Person(const string& name = "张三", const string& sex = "男")
+//		:_name(name)
+//		,_sex(sex)
+//	{
+//		cout << "Person()" << endl;
+//	}
+//
+//	Person(const Person& person)
+//	{
+//		_name = person._name;
+//		_sex = person._sex;
+//		cout << "Person()拷贝构造" << endl;
+//	}
+//
+//	Person operator=(const Person& p)
+//	{
+//		_name = p._name;
+//		_sex = p._sex;
+//		cout << "Person operator" << endl;
+//		return *this;
+//	}
+//
+//	~Person()
+//	{
+//		cout << "~Person" << endl;
+//	}
+//protected:
+//	string _name;
+//	string _sex;
+//};
+//
+//class Student :public Person
+//{
+//public:
+//	Student(const string& name = "张三", const string& sex = "男", const int age = 18)
+//		: Person(name, sex)
+//		, _age(age)
+//	{
+//		cout << "Student()" << endl;
+//	}
+//
+//	void Print()
+//	{
+//		cout << _name << " " << _sex << " " << _age << endl;
+//	}
+//
+//	Student(const Student& student)
+//		:Person(student)
+//		, _age(student._age)
+//	{
+//		cout << "Student()拷贝构造" << endl;
+//	}
+//
+//	Student operator=(const Student& student)
+//	{
+//		Person::operator=(student);
+//		_age = student._age;
+//		return *this;
+//		cout << " Strudent operator=()" << endl;
+//	}
+//
+//	~Student()
+//	{
+//		cout << "~Student" << endl;
+//	}
+//protected:
+//	int _age;
+//};
+//
+//int main()
+//{
+//	Student s("张三", "女", 78);
+//	s.Print();
+//	Student a(s);
+//	a.Print();
+//
+//	Student b;
+//	b = s;
+//	b.Print();
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Person
+//{
+//public:
+//	string _name;
+//	static int _age;
+//};
+//
+//int Person::_age = 0;
+//
+//class Student : public Person
+//{
+//public:
+//	string _sex;
+//};
+//
+//class Graduate : public Student
+//{
+//public:
+//	string _major;//科目
+//};
+//
+//int main()
+//{
+//	Person a;
+//	Student b;
+//	Graduate c;
+//	a._age += 1;
+//	a._age++;
+//	cout << a._age << endl;
+//	cout << b._age << endl;
+//	cout << c._age << endl;
+//
+//	cout << &a._age << " " << &b._age << " " << &c._age << endl;
+//	return 0;
+//}
+
+
+////虚继承
+//#include<iostream>
+//using namespace std;
+//class A
+//{
+//public:
+//	int _a;
+//};
+//
+//class B :virtual public A
+//{
+//public:
+//	int _b;
+//};
+//
+//class C : virtual public A
+//{
+//public:
+//	int _c;
+//};
+//
+//class D :public B, public C
+//{
+//public:
+//	int _d;
+//};
+//int main()
+//{
+//	D d;
+//	cout << sizeof(d) << endl;
+//	d.B::_a = 1;
+//	d.C::_a = 2;
+//	d._b = 3;
+//	d._c = 4;
+//	d._d = 5;
+//	return 0;
+//}
+
+////剑指 Offer 03. 数组中重复的数字
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+////class Solution {
+////public:
+////	int findRepeatNumber(vector<int>& nums) {
+////		for (int i = 0; i < (int)nums.size(); i++)
+////		{
+////			while (nums[i] != i)
+////			{
+////				if (nums[i] == nums[nums[i]])
+////					return nums[i];
+////				swap(nums[i], nums[nums[i]]);
+////			}
+////		}
+////		return nums[0];
+////	}
+////};
+//
+////class Solution {
+////public:
+////	int findRepeatNumber(vector<int>& nums) {
+////		vector<int> flag;
+////		flag.resize(nums.size(), 0);
+////
+////		int i = 0;
+////		for (i = 0; i < (int)nums.size(); i++)
+////		{
+////			if (flag[nums[i]] == 0)
+////				flag[nums[i]]++;
+////			else
+////				break;
+////		}
+////		return nums[i];
+////	}
+////};
+//
+//
+//class Solution {
+//public:
+//	int findRepeatNumber(vector<int>& nums) {
+//		sort(nums.begin(), nums.end());
+//
+//		int prev = nums[0];
+//		int i = 1;
+//		for (i = 1; i < (int)nums.size(); i++)
+//		{
+//			if (prev == nums[i])
+//				break;
+//			else
+//			{
+//				prev = nums[i];
+//			}
+//		}
+//		return nums[i];
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int> nums{ 2, 3, 1, 0, 2, 5, 3 };
+//	cout << Solution().findRepeatNumber(nums) << endl;
+//	return 0;
+//}
+
+
+////剑指 Offer 05. 替换空格
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	string replaceSpace(string s) {
+//		int count = 0;
+//		for (int i = 0; i < (int)s.size(); i++)
+//		{
+//			if (s[i] == ' ')
+//				count++;
+//		}
+//		string ret;
+//		ret.resize(s.size() + count * 3 + 1);
+//
+//		int insert = 0;
+//		for (int i = 0; i <= (int)s.size(); i++)
+//		{
+//			if (s[i] == ' ')
+//			{
+//				ret[insert++] = '%';
+//				ret[insert++] = '2';
+//				ret[insert++] = '0';
+//			}
+//			else
+//				ret[insert++] = s[i];
+//		}
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	string s{ "" };
+//	cout << Solution().replaceSpace(s) << endl;
+//	return 0;
+//}
+
+////两个栈实现一个队列
+//#include<iostream>
+//#include<stack>
+//using namespace std;
+//class CQueue {
+//public:
+//	CQueue() {
+//
+//	}
+//
+//	void appendTail(int value) {
+//		st1.push(value);
+//	}
+//
+//	int deleteHead()
+//	{
+//		if (st1.empty() && st2.empty())
+//			return -1;
+//		if (st2.empty())
+//		{
+//			while (!st1.empty())
+//			{
+//				st2.push(st1.top());
+//				st1.pop();
+//			}
+//		}
+//		int tmp = st2.top();
+//		st2.pop();
+//		return tmp;
+//	}
+//private:
+//	stack<int> st1;
+//	stack<int> st2;
+//};
+
+//405. 数字转换为十六进制数
 #include<iostream>
+#include<string>
 #include<vector>
+#include<algorithm>
 using namespace std;
 
-//一个数出现的次数超过数组长度的一半 也就是说 它出现的次数比其他数出现的次数和还要多
 class Solution {
 public:
-	int majorityElement(vector<int>& nums) {
-		int count = 1, flag = nums[0];
-		for (int i = 1; i < (int)nums.size(); i++)
+	string toHex(int num) {
+		string ret, nums = "0123456789abcdef";
+		unsigned tmp = num;
+
+		if (num == 0)
+			ret.push_back('0');
+		while (tmp)
 		{
-			if (flag == nums[i])
-				count++;
-			else
-				count--;
-			if (count == 0)
-			{
-				flag = nums[i];
-				count = 1;
-			}
+			ret = ret + nums[tmp & 0xf];
+			tmp >>= 4;
 		}
-		return flag;
+		reverse(ret.begin(), ret.end());
+		return ret;
 	}
 };
-
 int main()
 {
-	vector<int> nums{ 1, 2, 3, 2, 2, 2, 5, 4, 2 };
-	cout << Solution().majorityElement(nums) << endl;
+	int num = 0;
+	cout << Solution().toHex(num) << endl;
+	return 0;
 }
