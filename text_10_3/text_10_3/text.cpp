@@ -462,49 +462,297 @@
 //} 
 
 
-//20. 有效的括号
+////20. 有效的括号
+//#include<iostream>
+//#include<vector>
+//#include<stack>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	char pairs(char a)
+//	{
+//		if (a == '{')
+//			return '}';
+//		else if (a == '(')
+//			return ')';
+//		else
+//			return']';
+//	}
+//
+//	bool isValid(string s) {
+//		stack<char> st;
+//		for (int i = 0; i < (int)s.size(); i++)
+//		{
+//			if (s[i] == '{' || s[i] == '(' || s[i] == '[')
+//				st.push(s[i]);
+//			else if (s[i] == ')' || s[i] == '}' || s[i] == ']')
+//			{
+//				if (st.empty())
+//					return false;
+//				else if (s[i] != pairs(st.top()))
+//					return false;
+//				st.pop();
+//			}
+//		}
+//		if (st.empty())
+//			return true;
+//		else
+//			return false;
+//	}
+//};
+//
+//int main()
+//{
+//	string s{ "()" };
+//	cout << Solution().isValid(s) << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	//二进制角度
+//	double myPow(double x, int n) {
+//		double base = x;
+//		int exp = n;
+//		double ret = 1;
+//		while (exp)
+//		{
+//			if (exp & 1)
+//				ret *= base;
+//			base *= base;
+//			exp /= 2;
+//		}
+//		if (n < 0)
+//			ret = 1.0 / ret;
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	double base = 2;
+//	int exp = 10;
+//	cout << Solution().myPow(base, exp) << endl;
+//	return 0;
+//}
+
+
+////482. 密钥格式化
+//#include<iostream>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	string licenseKeyFormatting(string s, int k)
+//	{
+//		string ret;
+//		int count = 0;
+//		for (int i = s.size()-1; i >= 0; i--)
+//		{
+//			if (s[i] != '-')
+//			{
+//				ret.push_back(toupper(s[i]));
+//				count++;
+//			}
+//			
+//			if (count%k == 0 && count != 0)
+//			{
+//				ret.push_back('-');
+//				count = 0;
+//			}
+//		}
+//		//判断最后一个是否为‘-’
+//		if (ret.back() == '-')
+//			ret.pop_back();
+//		reverse(ret.begin(), ret.end());
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	string s{ "5F3Z-2e-9-w" };
+//	int k = 4;
+//	string ret = Solution().licenseKeyFormatting(s, k);
+//	for (auto e : ret)
+//		cout << e;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+////超时
+////class Solution {
+////public:
+////	vector<int> dailyTemperatures(vector<int>& temperatures) {
+////		vector<int> ret;
+////		ret.resize(temperatures.size());
+////		int count = 0;
+////		for (int i = 0; i < (int)temperatures.size() - 1; i++)
+////		{
+////			count = 0;
+////			int flag = 0;
+////			for (int j = i + 1; j < (int)temperatures.size(); j++)
+////			{
+////				if (temperatures[j] > temperatures[i])
+////				{
+////					count++;
+////					flag = 1;
+////					break;
+////				}
+////				else
+////					count++;
+////			}
+////			if (flag == 1)
+////				ret[i] = count;
+////			else
+////				ret[i] = 0;
+////		}
+////		return ret;
+////	}
+////};
+//
+//class Solution {
+//public:
+//	vector<int> dailyTemperatures(vector<int>& temperatures) {
+//		vector<int> flag(101, INT_MAX);//存放当前温度下 的下标
+//		vector<int> ret;
+//		ret.resize(temperatures.size());
+//
+//		for (int i = temperatures.size() - 1; i >= 0; i--)
+//		{
+//			int pos = INT_MAX;
+//			for (int j = temperatures[i] + 1; j <= 100; j++)
+//			{
+//				if (flag[j] < pos)
+//				{
+//					//找到一个后不应该退出，而应该找那个下标最小的那个
+//					// 45  73  46
+//					pos = flag[j];
+//				}
+//			}
+//			//说明找到了
+//			if (pos < INT_MAX)
+//			{
+//				ret[i] = pos - i;
+//			}
+//			//更新温度的下标
+//			flag[temperatures[i]] = i;
+//		}
+//		return ret;
+//	}
+//};
+//int main()
+//{
+//	vector<int> temperatures{ 73,74,75,71,69,72,76,73 };
+//	vector<int> ret = Solution().dailyTemperatures(temperatures);
+//	for (auto e : ret)
+//		cout << e << " ";
+//	return 0;
+//}
+
+
+////70. 爬楼梯
+//#include<iostream>
+//using namespace std;
+////前两个数相加等于第三个数
+//class Solution {
+//public:
+//	int climbStairs(int n) {
+//		unsigned count = 1;
+//		int prev = 1;
+//		for (int i = 2; i <= n; i++)
+//		{
+//			int tmp = count;
+//			count += prev;
+//			prev = tmp;
+//		}
+//		return count;
+//	}
+//};
+//
+//int main()
+//{
+//	int n = 7;
+//	cout << Solution().climbStairs(n) << endl;
+//	return 0;
+//}
+
+
+//151. 翻转字符串里的单词
 #include<iostream>
-#include<vector>
-#include<stack>
+#include<string>
 using namespace std;
 
 class Solution {
 public:
-	char pairs(char a)
+	void removeExtraSpaces(string& s)
 	{
-		if (a == '{')
-			return '}';
-		else if (a == '(')
-			return ')';
-		else
-			return']';
-	}
-
-	bool isValid(string s) {
-		stack<char> st;
-		for (int i = 0; i < (int)s.size(); i++)
+		//删除前面的空格
+		int i = 0;
+		for (i = 0; i < (int)s.size(); i++)
 		{
-			if (s[i] == '{' || s[i] == '(' || s[i] == '[')
-				st.push(s[i]);
-			else if (s[i] == ')' || s[i] == '}' || s[i] == ']')
+			if (s[i] != ' ')
+				break;
+		}
+		s.erase(s.begin(), s.begin() + i);
+
+		//删除中间的空格
+		int fast = 1, slow = 0;
+		while (fast < (int)s.size())
+		{
+			if (s[fast] == s[slow] && s[slow] == ' ')
 			{
-				if (st.empty())
-					return false;
-				else if (s[i] != pairs(st.top()))
-					return false;
-				st.pop();
+				s.erase(s.begin() + fast);
+			}
+			else
+			{
+				fast++;
+				slow++;
 			}
 		}
-		if (st.empty())
-			return true;
+
+		if (s[slow] == ' ')
+			s.resize(slow);
 		else
-			return false;
+			s.resize(slow + 1);
+	}
+
+	string reverseWords(string s) {
+		removeExtraSpaces(s);
+		int fast = 1, slow = 0;
+
+		while (fast < (int)s.size())
+		{
+			if (s[fast] == ' ')
+			{
+				reverse(s.begin() + slow, s.begin() + fast);
+				fast++;
+				slow = fast;
+			}
+			else
+				fast++;
+		}
+		//翻转最后一个单词
+		reverse(s.begin() + slow, s.begin() + fast);
+		//翻转整体
+		reverse(s.begin(), s.end());
+		return s;
 	}
 };
 
 int main()
 {
-	string s{ "()" };
-	cout << Solution().isValid(s) << endl;
+	string s{ "  the   sky is blue      " };
+	cout << Solution().reverseWords(s) << endl;
 	return 0;
 }
