@@ -688,71 +688,295 @@
 //}
 
 
-//151. 翻转字符串里的单词
+////151. 翻转字符串里的单词
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	void removeExtraSpaces(string& s)
+//	{
+//		//删除前面的空格
+//		int i = 0;
+//		for (i = 0; i < (int)s.size(); i++)
+//		{
+//			if (s[i] != ' ')
+//				break;
+//		}
+//		s.erase(s.begin(), s.begin() + i);
+//
+//		//删除中间的空格
+//		int fast = 1, slow = 0;
+//		while (fast < (int)s.size())
+//		{
+//			if (s[fast] == s[slow] && s[slow] == ' ')
+//			{
+//				s.erase(s.begin() + fast);
+//			}
+//			else
+//			{
+//				fast++;
+//				slow++;
+//			}
+//		}
+//
+//		if (s[slow] == ' ')
+//			s.resize(slow);
+//		else
+//			s.resize(slow + 1);
+//	}
+//
+//	string reverseWords(string s) {
+//		removeExtraSpaces(s);
+//		int fast = 1, slow = 0;
+//
+//		while (fast < (int)s.size())
+//		{
+//			if (s[fast] == ' ')
+//			{
+//				reverse(s.begin() + slow, s.begin() + fast);
+//				fast++;
+//				slow = fast;
+//			}
+//			else
+//				fast++;
+//		}
+//		//翻转最后一个单词
+//		reverse(s.begin() + slow, s.begin() + fast);
+//		//翻转整体
+//		reverse(s.begin(), s.end());
+//		return s;
+//	}
+//};
+//
+//int main()
+//{
+//	string s{ "  the   sky is blue      " };
+//	cout << Solution().reverseWords(s) << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+////前后指针
+////class Solution {
+////public:
+////	vector<int> exchange(vector<int>& nums) {
+////		int left = 0, right = nums.size() - 1;
+////
+////		while (left < right)
+////		{
+////			//左面找偶数
+////
+////			while (left < right)
+////			{
+////				if ((nums[left] & 1) == 0)
+////					break;
+////				left++;
+////			}
+////
+////			//右面找 奇数
+////
+////			while (left < right)
+////			{
+////				if ((nums[right] & 1) == 1)
+////					break;
+////				right--;
+////			}
+////			//不符合条件 不进行交换
+////			if (left < right)
+////			{
+////				swap(nums[left], nums[right]);
+////				left++;
+////				right--;
+////			}
+////		}
+////		return nums;
+////	}
+////};
+//
+//
+////快慢指针
+//class Solution {
+//public:
+//	vector<int> exchange(vector<int>& nums) {
+//		int fast = 0, slow = 0;
+//
+//		while (fast < (int)nums.size())
+//		{
+//			//快指针找奇数
+//			if ((nums[fast] & 1) == 1)
+//			{
+//				swap(nums[fast], nums[slow]);
+//				slow++;
+//			}
+//			fast++;
+//		}
+//		return nums;
+//	}
+//};
+//int main()
+//{
+//	vector<int> nums{ 1,2,3,4};
+//	vector<int> ret = Solution().exchange(nums);
+//
+//	for (auto e : ret)
+//		cout << e << " ";
+//	return 0;
+//}
+
+
+////剑指 Offer II 002. 二进制加法
+//#include<iostream>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	string addBinary(string a, string b)
+//	{
+//		string ret;
+//		reverse(a.begin(), a.end());
+//		reverse(b.begin(), b.end());
+//		int n = max(a.size(), b.size());
+//		int sum = 0;
+//		for (int i = 0; i < n; i++)
+//		{
+//			sum += i < (int)a.size() ? a[i] - '0' : 0;
+//			sum += i < (int)b.size() ? b[i] - '0' : 0;
+//			ret.push_back((sum % 2) + '0');
+//
+//			sum /= 2;
+//		}
+//		//判断最后是否有进位
+//		if (sum == 1)
+//			ret.push_back(1 + '0');
+//		reverse(ret.begin(), ret.end());
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	string a{ "1010" };
+//	string b{ "1011" };
+//	string ret = Solution().addBinary(a, b);
+//	for (auto e : ret)
+//		cout << e << " ";
+//	return 0;
+//}
+
+////剑指 Offer II 019. 最多删除一个字符得到回文
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	bool validPalindrome(string s) {
+//		int left = 0, right = s.size() - 1;
+//		for (; left < right; left++, right--)
+//		{
+//			if (s[left] != s[right])
+//				break;
+//		}
+//		//当不相等时，分为两种情况是删除左边还是删除右面
+//		return isPalindrome(s, left + 1, right) || isPalindrome(s, left, right - 1);
+//	}
+//	bool isPalindrome(const string& s, int left, int right)
+//	{
+//		while (left < right)
+//		{
+//			if (s[left] != s[right])
+//				return false;
+//			left++;
+//			right--;
+//		}
+//		return true;
+//	}
+//};
+//int main()
+//{
+//	string s{ "abca" };
+//	cout << Solution().validPalindrome(s) << endl;
+//	return 0;
+//}
+
+//剑指 Offer II 018. 有效的回文
 #include<iostream>
 #include<string>
 using namespace std;
 
+//class Solution {
+//public:
+//	bool isPalindrome(string s) {
+//		int left = 0, right = s.size() - 1;
+//
+//		while (left < right)
+//		{
+//			while (left < right && !isLegal(s[left]))
+//			{
+//				left++;
+//			}
+//
+//			while (left < right && !isLegal(s[right]))
+//			{
+//				right--;
+//			}
+//			if (left < right)
+//			{
+//				if (s[left] >= 'a'&&s[left] <= 'z')
+//					s[left] -= 32;
+//				if (s[right] >= 'a'&&s[right] <= 'z')
+//					s[right] -= 32;
+//
+//				if (s[left] != s[right])
+//					return false;
+//				left++;
+//				right--;
+//			}
+//		}
+//		return true;
+//	}
+//
+//	bool isLegal(int x)
+//	{
+//		if (x >= 'a' && x <= 'z' || x >= 'A'&&x <= 'Z' || x >= '0'&&x <= '9')
+//			return true;
+//		return false;
+//	}
+//};
+
 class Solution {
 public:
-	void removeExtraSpaces(string& s)
-	{
-		//删除前面的空格
-		int i = 0;
-		for (i = 0; i < (int)s.size(); i++)
+	bool isPalindrome(string s) {
+		int left = 0, right = s.size() - 1;
+		while (left < right)
 		{
-			if (s[i] != ' ')
-				break;
-		}
-		s.erase(s.begin(), s.begin() + i);
-
-		//删除中间的空格
-		int fast = 1, slow = 0;
-		while (fast < (int)s.size())
-		{
-			if (s[fast] == s[slow] && s[slow] == ' ')
-			{
-				s.erase(s.begin() + fast);
-			}
+			if (!isalnum(s[left]))
+				left++;
+			else if (!isalnum(s[right]))
+				right--;
 			else
 			{
-				fast++;
-				slow++;
+				//当为字母时转化为大写字母，不为字母时返回原来的值
+				if (toupper(s[left]) != toupper(s[right]))
+					return false;
+				left++;
+				right--;
 			}
 		}
-
-		if (s[slow] == ' ')
-			s.resize(slow);
-		else
-			s.resize(slow + 1);
-	}
-
-	string reverseWords(string s) {
-		removeExtraSpaces(s);
-		int fast = 1, slow = 0;
-
-		while (fast < (int)s.size())
-		{
-			if (s[fast] == ' ')
-			{
-				reverse(s.begin() + slow, s.begin() + fast);
-				fast++;
-				slow = fast;
-			}
-			else
-				fast++;
-		}
-		//翻转最后一个单词
-		reverse(s.begin() + slow, s.begin() + fast);
-		//翻转整体
-		reverse(s.begin(), s.end());
-		return s;
+		return true;
 	}
 };
 
 int main()
 {
-	string s{ "  the   sky is blue      " };
-	cout << Solution().reverseWords(s) << endl;
+	string s("A man, a plan, a canal: Panama");
+	cout << Solution().isPalindrome(s) << endl;
 	return 0;
 }
