@@ -329,31 +329,76 @@
 //};
 
 
+//#include<iostream>
+//using namespace std;
+//
+////纯虚类
+//class A
+//{
+//public:
+//	//纯虚函数
+//	virtual void Print() = 0;
+//};
+//
+//class B :public A
+//{
+//public:
+//	//必须重写纯虚函数
+//	virtual void Print()
+//	{
+//		cout << "B" << endl;
+//	}
+//};
+//
+//int main()
+//{
+//	A a;//纯虚类不能被实例化
+//	B b;
+//	b.Print();
+//	return 0;
+//}
+
+//剑指 Offer II 034. 外星语言是否排序
 #include<iostream>
+#include<vector>
+#include<string>
 using namespace std;
 
-//纯虚类
-class A
-{
+class Solution {
 public:
-	//纯虚函数
-	virtual void Print() = 0;
-};
+	bool isAlienSorted(vector<string>& words, string order) {
+		vector<int> flag(26, 0);
 
-class B :public A
-{
-public:
-	//必须重写纯虚函数
-	virtual void Print()
-	{
-		cout << "B" << endl;
+		for (int i = 0; i < (int)order.size(); i++)
+		{
+			flag[order[i] - 'a'] = i;
+		}
+
+		for (int i = 0; i < (int)words.size() - 1; i++)
+		{
+			int j = i + 1;
+			int size = words[i].size() > words[j].size()
+				? words[j].size() : words[i].size();
+			int z = 0;
+			while (z < size)
+			{
+				if (flag[words[i][z] - 'a'] > flag[words[j][z] - 'a'])
+					return false;
+				else if (flag[words[i][z] - 'a'] < flag[words[j][z] - 'a'])
+					break;
+				z++;
+			}
+			if (z == size && words[i].size() > size)
+				return false;
+		}
+		return true;
 	}
 };
 
 int main()
 {
-	A a;//纯虚类不能被实例化
-	B b;
-	b.Print();
+	vector<string> words{ "hello","leetcode" };
+	string order{ "hlabcdefgijkmnopqrstuvwxyz" };
+	cout << Solution().isAlienSorted(words, order) << endl;
 	return 0;
 }
