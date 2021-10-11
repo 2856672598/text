@@ -263,50 +263,121 @@
 //}
 
 
-//5894. 至少在两个数组中出现的值
+////5894. 至少在两个数组中出现的值
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	void Traverse(vector<vector<int>>& nums, int pos, vector<int>& arr)
+//	{
+//		for (int i = 0; i < (int)arr.size(); i++)
+//		{
+//			nums[pos][arr[i]] = 1;
+//		}
+//	}
+//	vector<int> twoOutOfThree(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3) {
+//		vector<vector<int>> flag(3);
+//		flag[0].resize(101);
+//		flag[1].resize(101);
+//		flag[2].resize(101);
+//
+//		Traverse(flag, 0, nums1);
+//		Traverse(flag, 1, nums2);
+//		Traverse(flag, 2, nums3);
+//
+//		vector<int> ret;
+//		for (int i = 0; i <= 100; i++)
+//		{
+//			if (flag[0][i] + flag[1][i] + flag[2][i] >= 2)
+//				ret.push_back(i);
+//		}
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int>nums1{ 2,3 };
+//	vector<int>nums2{ 3,1 };
+//	vector<int>nums3{ 1,2 };
+//
+//	vector<int> ret = Solution().twoOutOfThree(nums1, nums2, nums3);
+//	for (auto e : ret)
+//	{
+//		cout << e << " ";
+//	}
+//	return 0;
+//}
+
+////5895. 获取单值网格的最小操作数
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	int minOperations(vector<vector<int>>& grid, int x) {
+//		vector<int> flag;
+//		flag.resize(grid.size()*grid[0].size());
+//
+//		int n = grid[0].size();
+//		for (int i = 0; i < grid.size(); i++)
+//		{
+//			for (int j = 0; j < grid[i].size(); j++)
+//			{
+//				flag[i*n + j] = grid[i][j];
+//			}
+//		}
+//		sort(flag.begin(), flag.end());
+//		int mid = flag[flag.size() / 2];
+//		
+//		int count = abs(mid - flag[0]) / x;
+//		for (int i = 1; i < flag.size(); i++)
+//		{
+//			if ((flag[i] - flag[i - 1]) % x == 0)
+//			{
+//				count += (abs(mid - flag[i]) / x);
+//			}
+//			else
+//				return -1;//不可能出现相等
+//		}
+//		return count;
+//	}
+//};
+//
+//int main()
+//{
+//	return 0;
+//}
+
+
 #include<iostream>
-#include<vector>
 using namespace std;
 
-class Solution {
+class A
+{
 public:
-	void Traverse(vector<vector<int>>& nums, int pos, vector<int>& arr)
+	virtual void Fun()
 	{
-		for (int i = 0; i < (int)arr.size(); i++)
-		{
-			nums[pos][arr[i]] = 1;
-		}
-	}
-	vector<int> twoOutOfThree(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3) {
-		vector<vector<int>> flag(3);
-		flag[0].resize(101);
-		flag[1].resize(101);
-		flag[2].resize(101);
-
-		Traverse(flag, 0, nums1);
-		Traverse(flag, 1, nums2);
-		Traverse(flag, 2, nums3);
-
-		vector<int> ret;
-		for (int i = 0; i <= 100; i++)
-		{
-			if (flag[0][i] + flag[1][i] + flag[2][i] >= 2)
-				ret.push_back(i);
-		}
-		return ret;
+		cout << "Fun()" << endl;
 	}
 };
 
+void text1()
+{
+	A a;
+}
+void text2()
+{
+	A b;
+}
+
 int main()
 {
-	vector<int>nums1{ 2,3 };
-	vector<int>nums2{ 3,1 };
-	vector<int>nums3{ 1,2 };
-
-	vector<int> ret = Solution().twoOutOfThree(nums1, nums2, nums3);
-	for (auto e : ret)
-	{
-		cout << e << " ";
-	}
+	text1();
+	text2();
 	return 0;
 }
