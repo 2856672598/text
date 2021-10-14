@@ -314,42 +314,137 @@
 //	return 0;
 //}
 
-//643. 子数组最大平均数 I
+////643. 子数组最大平均数 I
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	double findMaxAverage(vector<int>& nums, int k) {
+//		int i = 0;
+//		int sum = 0, max = INT_MIN, prev = 0;
+//		while (i < (int)nums.size())
+//		{
+//			if (i < k)
+//			{
+//				while (i < k&&i < (int)nums.size())
+//				{
+//					sum += nums[i++];
+//				}
+//			}
+//			else
+//			{
+//				sum += nums[i];
+//				sum -= nums[prev];
+//				prev++;
+//				i++;
+//			}
+//			if (sum > max)
+//				max = sum;
+//		}
+//		return 1.0*max / k;
+//	}
+//};
+//int main()
+//{
+//	vector<int>nums{ -1 };
+//	int k = 1;
+//	cout << Solution().findMaxAverage(nums, k) << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	int removeDuplicates(vector<int>& nums) {
+//		if (nums.size() == 0)
+//			return 0;
+//		int left = 0, right = 0, cur = 0;
+//		while (right < (int)nums.size())
+//		{
+//			if (nums[right] == nums[left])
+//			{
+//				right++;
+//			}
+//			else
+//			{
+//				nums[cur++] = nums[left];
+//				left = right;
+//				right++;
+//			}
+//		}
+//		nums[cur++] = nums[left];
+//		return  cur;
+//	}
+//};
+//int main()
+//{
+//	vector<int>nums{ 0,0,1,1,1,2,2,3,3,4 };
+//	cout << Solution().removeDuplicates(nums) << endl;
+//	return 0;
+//}
+
+////剑指 Offer II 069. 山峰数组的顶部
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	int peakIndexInMountainArray(vector<int>& arr) {
+//		int prev = 0, cur = 1;
+//		while (cur < (int)arr.size())
+//		{
+//			if (arr[cur] < arr[prev])
+//				break;
+//			cur++;
+//			prev++;
+//		}
+//		return prev;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int> arr{ 1,2,3,4,5 };
+//	cout << Solution().peakIndexInMountainArray(arr) << endl;
+//	return 0;
+//}
+
+
+//412. Fizz Buzz
 #include<iostream>
 #include<vector>
+#include<string>
 using namespace std;
 
 class Solution {
 public:
-	double findMaxAverage(vector<int>& nums, int k) {
-		int i = 0;
-		int sum = 0, max = INT_MIN, prev = 0;
-		while (i < (int)nums.size())
+	vector<string> fizzBuzz(int n) {
+		vector<string>ret;
+		for (int i = 1; i <= n; i++)
 		{
-			if (i < k)
+			if (i % 3 == 0 && i % 5 == 0)
 			{
-				while (i < k&&i < (int)nums.size())
-				{
-					sum += nums[i++];
-				}
+				ret.push_back("FizzBuzz");
 			}
+			else if (i % 3 == 0)
+				ret.push_back("Fizz");
+			else if (i % 5 == 0)
+				ret.push_back("Buzz");
 			else
-			{
-				sum += nums[i];
-				sum -= nums[prev];
-				prev++;
-				i++;
-			}
-			if (sum > max)
-				max = sum;
+				ret.push_back(to_string(i));
 		}
-		return 1.0*max / k;
+		return ret;
 	}
 };
+
 int main()
 {
-	vector<int>nums{ -1 };
-	int k = 1;
-	cout << Solution().findMaxAverage(nums, k) << endl;
 	return 0;
 }
