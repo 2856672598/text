@@ -59,10 +59,33 @@ void text3()
 
 	SeqListDestory(&s);
 }
+
+void text4()
+{
+	SeqList s;
+	SeqListInit(&s);
+	SeqListInsert(&s, 0, 1);
+	SeqListInsert(&s, 0, 2);
+	SeqListInsert(&s, 0, 3);
+	SeqListInsert(&s, 0, 4);
+	SeqListInsert(&s, 0, 5);
+
+	SeqListErase(&s, 0);
+	SeqListErase(&s, 0);
+	SeqListErase(&s, 0);
+
+	SeqListPrint(&s);
+
+	int pos = SeqListFind(&s, 2);
+	printf("%d", pos);
+	SeqListDestory(&s);
+}
 int main()
 {
 	//text1();
 	//text2();
-	text3();
+	//text3();
+
+	text4();
 	return 0;
 }
