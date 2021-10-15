@@ -417,34 +417,131 @@
 //}
 
 
-//412. Fizz Buzz
+////412. Fizz Buzz
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	vector<string> fizzBuzz(int n) {
+//		vector<string>ret;
+//		for (int i = 1; i <= n; i++)
+//		{
+//			if (i % 3 == 0 && i % 5 == 0)
+//			{
+//				ret.push_back("FizzBuzz");
+//			}
+//			else if (i % 3 == 0)
+//				ret.push_back("Fizz");
+//			else if (i % 5 == 0)
+//				ret.push_back("Buzz");
+//			else
+//				ret.push_back(to_string(i));
+//		}
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	return 0;
+//}
+
+////1779. 找到最近的有相同 X 或 Y 坐标的点
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//	int nearestValidPoint(int x, int y, vector<vector<int>>& points) {
+//		int pos = -1;
+//		int flag = INT_MAX;
+//		for (int i = 0; i < (int)points.size(); i++)
+//		{
+//			if (points[i][0] == x || points[i][1] == y)
+//			{
+//				int tmp = abs(x - points[i][0]) + abs(y - points[i][1]);
+//				if (flag > tmp)
+//				{
+//					flag = tmp;
+//					pos = i;
+//				}
+//			}
+//		}
+//		return pos;
+//	}
+//};
+//
+//int main()
+//{
+//	int x = 3, y = 4;
+//	vector<vector<int>>nums{ {1,2},{3,1},{2,4},{2,3},{4,4} };
+//	cout << Solution().nearestValidPoint(x, y, nums) << endl;
+//	return 0;
+//}
+
+
+////1780. 判断一个数字是否可以表示成三的幂的和
+//#include<iostream>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	bool checkPowersOfThree(int n) {
+//		while (n)
+//		{
+//			if (n % 3 >= 2)
+//				return false;
+//			n /= 3;
+//			if (n == 1)
+//				break;
+//		}
+//		if (n == 1 || n == 0)
+//			return true;
+//		else
+//			return false;
+//	}
+//};
+//
+//int main()
+//{
+//	int n = 10;
+//	cout << Solution().checkPowersOfThree(n) << endl;
+//	return 0;
+//}
+
+//1897. 重新分配字符使所有字符串都相等
 #include<iostream>
 #include<vector>
-#include<string>
 using namespace std;
 
 class Solution {
 public:
-	vector<string> fizzBuzz(int n) {
-		vector<string>ret;
-		for (int i = 1; i <= n; i++)
+	bool makeEqual(vector<string>& words) {
+		vector<int>flag(26, 0);
+		for (int i = 0; i < (int)words.size(); i++)
 		{
-			if (i % 3 == 0 && i % 5 == 0)
+			for (int j = 0; j < (int)words[i].size(); j++)
 			{
-				ret.push_back("FizzBuzz");
+				flag[words[i][j] - 'a'] += 1;
 			}
-			else if (i % 3 == 0)
-				ret.push_back("Fizz");
-			else if (i % 5 == 0)
-				ret.push_back("Buzz");
-			else
-				ret.push_back(to_string(i));
 		}
-		return ret;
+
+		for (int i = 0; i < (int)flag.size(); i++)
+		{
+			if (flag[i] % words.size() != 0)
+				return false;
+		}
+		return true;
 	}
 };
 
 int main()
 {
+	vector<string>nums{ "abc","aabc","bc" };
+	cout << Solution().makeEqual(nums) << endl;
 	return 0;
 }
+
