@@ -233,32 +233,79 @@
 //}
 
 
-#include<iostream>
-using namespace std;
+//#include<iostream>
+//using namespace std;
+//
+//class A
+//{
+//public:
+//	virtual void fun(int a = 1)
+//	{
+//		cout << "A a = " << a << endl;
+//	}
+//};
+//
+//class B:public virtual A
+//{
+//public:
+//	virtual void fun(int a = 2)
+//	{
+//		cout << "B a = " << a << endl;
+//	}
+//};
+//
+//int main()
+//{
+//	A a;
+//	a.fun();
+//	A* c = new B;
+//	c->fun();
+//	return 0;
+//}
 
-class A
-{
-public:
-	virtual void fun(int a = 1)
-	{
-		cout << "A a = " << a << endl;
-	}
-};
 
-class B:public virtual A
-{
-public:
-	virtual void fun(int a = 2)
-	{
-		cout << "B a = " << a << endl;
-	}
-};
-
-int main()
-{
-	A a;
-	a.fun();
-	A* c = new B;
-	c->fun();
-	return 0;
-}
+////5902. 检查句子中的数字是否递增
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//class Solution {
+//public:
+//	bool areNumbersAscending(string s) {
+//		vector<int> arr;
+//		int sum = 0, flag = 0;
+//		for (int i = 0; i < (int)s.size(); i++)
+//		{
+//			if (s[i] >= '0' && s[i] <= '9')
+//			{
+//				sum = sum * 10 + s[i] - '0';
+//				flag = 1;
+//			}
+//			else
+//			{
+//				if (flag == 1)
+//				{
+//					arr.push_back(sum);
+//					sum = 0;
+//					flag = 0;
+//				}
+//			}
+//		}
+//		if (flag == 1)
+//			arr.push_back(sum);
+//
+//		for (int i = 0; i < (int)arr.size() - 1; i++)
+//		{
+//			if (arr[i] >= arr[i + 1])
+//				return false;
+//		}
+//		return true;
+//	}
+//};
+//
+//int main()
+//{
+//	string s("hello world 5 x 5");
+//	cout << Solution().areNumbersAscending(s) << endl;
+//	return 0;
+//}
