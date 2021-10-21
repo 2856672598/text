@@ -390,24 +390,245 @@
 //}
 
 
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//int main()
+//{
+//	vector<string> nums;
+//	for (int i = 0; i < 3; i++)
+//	{
+//		string tmp;
+//		cin >> tmp;
+//		nums.push_back(tmp);
+//	}
+//	sort(nums.begin(), nums.end());
+//	for (auto e : nums)
+//	{
+//		cout << e << endl;
+//	}
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//	int removeDuplicates(vector<int>& nums) {
+//		int fast = 1, slow = 0;
+//		if (nums.size() == 0)
+//			return 0;
+//		while (fast < (int)nums.size())
+//		{
+//			if (nums[fast] != nums[slow])
+//			{
+//				nums[++slow] = nums[fast++];
+//			}
+//			else
+//				fast++;
+//		}
+//		slow++;
+//		return slow;
+//	}
+//};
+//int main()
+//{
+//	vector<int> nums{ 1,2,2,3,3,4,5,6 };
+//	cout << Solution().removeDuplicates(nums) << endl;
+//	return 0;
+//}
+
+//埃氏筛
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//	int n = 0;
+//	cin >> n;
+//	vector<bool> flag(n, 1);
+//	flag[0] = 0;
+//	flag[1] = 0;
+//	for (int i = 2; i < n; i++)
+//	{
+//		for (int j = 2*i; j < n; j += i)
+//		{
+//			flag[j] = 0;
+//		}
+//	}
+//
+//	for (int i = 2; i < n; i++)
+//	{
+//		if (flag[i] == 1)
+//			cout << i << endl;
+//	}
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<math.h>
+//#include<algorithm>
+//using namespace std;
+//
+//bool isprime(int x)
+//{
+//	if (x < 2)
+//		return false;
+//	for (int i = 2; i <= sqrt(x); i++)
+//	{
+//		if (x%i == 0)
+//			return false;
+//	}
+//	return true;
+//}
+//
+//int main()
+//{
+//	int m, n;
+//	cin >> m >> n;
+//	int sum = 0;
+//	for (int i = m; i <= n; i++)
+//	{
+//		if (isprime(i))
+//		{
+//			sum += i;
+//		}
+//	}
+//	cout << sum << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//	int n;
+//	cin >> n;
+//	vector<bool> flag(n, true);
+//	flag[0] = false;
+//	flag[1] = false;
+//
+//	for (int i = 2; i < n; i++)
+//	{
+//		for (int j = 2 * i; j < n; j += i)
+//		{
+//			flag[j] = false;
+//		}
+//	}
+//	for (int i = 0; i < n; i++)
+//	{
+//		if (flag[i] == 1)
+//			cout << i << endl;
+//	}
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<math.h>
+//using namespace std;
+//
+//int main()
+//{
+//	int n;
+//	cin >> n;
+//	for (int i = 2; i <= sqrt(n); i++)
+//	{
+//		if (n%i == 0)
+//		{
+//			printf("%d", 0);
+//			return 0;
+//		}
+//	}
+//	printf("%d", 1);
+//	return 0;
+//}
+
+//
+////题目 1250: 素数回文
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//vector<bool>& isPrime(vector<bool>& flag, int k)
+//{
+//	for (int i = 2; i < k; i++)
+//	{
+//		for (int j = 2 * i; j < k; j += i)
+//		{
+//			flag[j] = false;
+//		}
+//	}
+//	return flag;
+//}
+//bool isPalindrome(int target)
+//{
+//	vector<int> flag;
+//	while (target)
+//	{
+//		flag.push_back(target % 10);
+//		target /= 10;
+//	}
+//	if (flag.size() == 1)
+//		return true;
+//	int left = 0, right = flag.size() - 1;
+//	while (left < right)
+//	{
+//		if (flag[left] != flag[right])
+//			return false;
+//		left++;
+//		right--;
+//	}
+//	return true;
+//}
+//int main()
+//{
+//	int a = 0, b = 0;
+//	cin >> a >> b;
+//	vector<bool> flag(b, true);
+//	flag[0] = flag[1] = false;
+//	isPrime(flag, b);
+//
+//	for (int i = a; i < b; i++)
+//	{
+//		if (flag[i] && isPalindrome(i))
+//			cout << i << endl;
+//	}
+//	return 0;
+//}
+
+
 #include<iostream>
-#include<string>
 #include<vector>
-#include<algorithm>
 using namespace std;
+
 int main()
 {
-	vector<string> nums;
-	for (int i = 0; i < 3; i++)
+	int left = 0, right = 0;
+	cin >> left >> right;
+	vector<bool>flag(right + 1, true);
+	flag[0] = flag[1] = false;
+	for (int i = 2; i <= sqrt(right); i++)
 	{
-		string tmp;
-		cin >> tmp;
-		nums.push_back(tmp);
+		for (int j = 2 * i; j <= right; j += i)
+		{
+			flag[j] = false;
+		}
 	}
-	sort(nums.begin(), nums.end());
-	for (auto e : nums)
+	int count = 0;
+	for (int i = left; i <= right; i++)
 	{
-		cout << e << endl;
+		if (flag[i])
+			count++;
 	}
+	cout << count << endl;
 	return 0;
 }
