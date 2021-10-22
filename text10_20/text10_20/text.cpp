@@ -606,29 +606,296 @@
 //}
 
 
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//	int left = 0, right = 0;
+//	cin >> left >> right;
+//	vector<bool>flag(right + 1, true);
+//	flag[0] = flag[1] = false;
+//	for (int i = 2; i <= sqrt(right); i++)
+//	{
+//		for (int j = 2 * i; j <= right; j += i)
+//		{
+//			flag[j] = false;
+//		}
+//	}
+//	int count = 0;
+//	for (int i = left; i <= right; i++)
+//	{
+//		if (flag[i])
+//			count++;
+//	}
+//	cout << count << endl;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	int m, n;
+//	cin >> m >> n;
+//	int divisor = n, dividend = m;
+//	while (divisor)
+//	{
+//		int tmp = dividend % divisor;
+//		dividend = divisor;
+//		divisor = tmp;
+//	}
+//	int multiple = m * n / dividend;
+//	cout << dividend << " " << multiple << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	double f;
+//	cin >> f;
+//	printf("%.2lf", 5*(f - 32) / 9.0);
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//int main()
+//{
+//	int n;
+//	vector<int> ret;
+//	cin >> n;
+//	while (n)
+//	{
+//		int tmp = n % 8;
+//		ret.push_back(tmp);
+//		n /= 8;
+//	}
+//	reverse(ret.begin(), ret.end());
+//	for (auto e : ret)
+//		cout << e;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	int n;
+//	cin >> n;
+//	int tmp = n;
+//	int sum = 0;
+//	while (tmp)
+//	{
+//		sum += (int)pow(tmp % 10, 3);
+//		tmp /= 10;
+//	}
+//	if (sum == n)
+//		printf("1");
+//	else
+//		printf("0");
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//	vector<int> nums(10, 0);
+//	for (int i = 0; i < 10; i++)
+//	{
+//		cin >> nums[i];
+//	}
+//	int height = 0;
+//	cin >> height;
+//	height += 30;
+//	int count = 0;
+//	for (auto e : nums)
+//	{
+//		if (e <= height)
+//			count++;
+//	}
+//	cout << count;
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//	int l, m;
+//	cin >> l >> m;
+//	vector<bool>flag(l + 1, true);
+//	int x, y;//移除的区域
+//	while (m)
+//	{
+//		cin >> x >> y;
+//		for (int i = x; i <= y; i++)
+//		{
+//			flag[i] = false;
+//		}
+//		m--;
+//	}
+//	int count = 0;
+//	for (int i = 0; i <= l; i++)
+//	{
+//		if (flag[i])
+//			count++;
+//	}
+//	cout << count;
+//	return 0;
+//}
+
+#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//int main()
+//{
+//	int nums[100][100];
+//	int n;
+//	scanf("%d", &n);
+//	int flag = 1;
+//	int row = 0, col = 0;
+//	for (int i = 0; i < n; i++)
+//	{
+//		row = i;
+//		col = 0;
+//		while (row >= 0)
+//		{
+//			nums[row--][col++] = flag;
+//			flag++;
+//		}
+//	}
+//	for (int i = 0; i < n; i++)
+//	{
+//		for (int j = 0; j < n - i; j++)
+//		{
+//			printf("%d ", nums[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//	int n = 0;
+//	cin >> n;
+//	vector<int> ret;
+//	for (int i = 1; i < n; i++)
+//	{
+//		int sum = 0;
+//		for (int j = 1; j < i; j++)
+//		{
+//			if (i%j == 0)
+//			{
+//				sum += j;
+//				if (sum > i)
+//					break;
+//			}
+//		}
+//		if (sum == i)
+//			ret.push_back(i);
+//	}
+//
+//	for (int i = 0; i < (int)ret.size(); i++)
+//	{
+//		printf("%d its factors are ", ret[i]);
+//		for (int j = 1; j < ret[i]; j++)
+//		{
+//			if (ret[i] % j == 0)
+//				printf("%d ", j);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+
 #include<iostream>
 #include<vector>
+#include<cstdlib>
+#include<string>
+#include<algorithm>
 using namespace std;
+
+bool IslegaL(string tmp)
+{
+	if (tmp.size() > '1' && tmp[0] == '0')
+		return false;
+	for (int i = 0; i < (int)tmp.size(); i++)
+	{
+		if (tmp[i]<'0' || tmp[i]>'9')
+			return false;
+	}
+	int flag = atoi(tmp.c_str());
+	if (flag > 255)
+		return false;
+	return true;
+}
+
+bool IslegaLIp(string ip)
+{
+	ip.append(".");
+	//判断是否由四组组成
+	if (count(ip.begin(), ip.end(), '.') != 4)
+		return false;
+	string tmp;//临时数组
+
+	for (int i = 0; i < (int)ip.size(); i++)
+	{
+		if (ip[i] == '.')
+		{
+			if (!IslegaL(tmp))
+			{
+				//如果不可法返回
+				return false;
+			}
+			else
+			{
+				//合法清空临时字符串
+				tmp.clear();
+			}
+		}
+		else
+			tmp += ip[i];
+	}
+	return true;
+}
 
 int main()
 {
-	int left = 0, right = 0;
-	cin >> left >> right;
-	vector<bool>flag(right + 1, true);
-	flag[0] = flag[1] = false;
-	for (int i = 2; i <= sqrt(right); i++)
+	vector<string> str;
+	string flag;
+	while (cin >> flag)
 	{
-		for (int j = 2 * i; j <= right; j += i)
-		{
-			flag[j] = false;
-		}
+		str.push_back(flag);
 	}
-	int count = 0;
-	for (int i = left; i <= right; i++)
+	for (int i = 0; i < (int)str.size(); i++)
 	{
-		if (flag[i])
-			count++;
+		if (IslegaLIp(str[i]))
+			printf("Y\n");
+		else
+			printf("N\n");
 	}
-	cout << count << endl;
 	return 0;
 }
