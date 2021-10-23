@@ -309,3 +309,420 @@
 //	cout << Solution().areNumbersAscending(s) << endl;
 //	return 0;
 //}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	int sumOfBeauties(vector<int>& nums) {
+//		int size = nums.size();
+//		vector<int> max(nums);
+//		vector<int>min(nums);
+//		for (int i = 1; i < (int)nums.size(); i++)
+//		{
+//			if (max[i] < max[i - 1])
+//				max[i] = max[i - 1];
+//		}
+//
+//		for (int i = nums.size() - 2; i >= 0; i--)
+//		{
+//			if (min[i] > min[i + 1])
+//				min[i] = min[i + 1];
+//		}
+//
+//		int sum = 0;
+//		for (int i = 1; i < (int)nums.size() - 1; i++)
+//		{
+//			if (nums[i] > max[i - 1] && nums[i] < min[i + 1])
+//				sum += 2;
+//			else if (nums[i] > nums[i - 1] && nums[i + 1] > nums[i])
+//				sum += 1;
+//		}
+//		return sum;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int> nums{ 6,7,7,9,3,9,3,4,4,1 };
+//	cout << Solution().sumOfBeauties(nums) << endl;
+//	return 0;
+//}
+
+
+////453. 最小操作次数使数组元素相等
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	int minMoves(vector<int>& nums)
+//	{
+//		sort(nums.begin(), nums.end());
+//		int count = 0;
+//		for (int i = 1; i < (int)nums.size(); i++)
+//		{
+//			count += nums[i] - nums[0];
+//		}
+//		return count;
+//	}
+//};
+//int main()
+//{
+//	vector<int> nums{ 1,2,3 };
+//	cout << Solution().minMoves(nums) << endl;
+//	return 0;
+//}
+
+////剑指 Offer 64. 求1+2+…+n
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Count
+//{
+//public:
+//	Count()
+//	{
+//		_n += 1;
+//		_sum += _n;
+//	}
+//	int GetSum()
+//	{
+//		return _sum;
+//	}
+//	void SumInit()
+//	{
+//		_sum = 0;
+//		_n = 0;
+//	}
+//private:
+//	static unsigned _sum;
+//	static unsigned _n;
+//};
+//
+//unsigned Count::_n = 0;
+//unsigned Count::_sum = 0;
+//
+//
+//class Solution {
+//public:
+//	int sumNums(int n) {
+//
+//		Count* p = new Count[n];
+//		int sum = p->GetSum();
+//		p->SumInit();
+//		return sum;
+//	}
+//};
+//
+//int main()
+//{
+//	int n = 2;
+//	cout << Solution().sumNums(n) << endl;
+//}
+
+
+////面试题 17.01. 不用加号的加法
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	int add(int a, int b)
+//	{
+//		int sum = 0, carry = 0;
+//		do
+//		{
+//			//相加不进位
+//			sum = a ^ b;
+//			//求进位
+//			carry = (unsigned)(a & b) << 1;
+//			//相加--》也就是继续循环
+//			a = sum;
+//			b = carry;
+//		} while (b);
+//		return sum;
+//	}
+//};
+//
+//int main()
+//{
+//	int a = -10, b = 20;
+//	cout << Solution().add(a, b) << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	int maxSubArray(vector<int>& nums)
+//	{
+//		int sum = 0;
+//		int max = nums[0];
+//		for (int i = 0; i < (int)nums.size(); i++)
+//		{
+//			sum += nums[i];
+//			if (sum > max)
+//				max = sum;
+//			if (sum < 0)
+//				sum = 0;
+//		}
+//		return max;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int> nums{ -2,1,-3,4,-1,2,1,-5,4 };
+//	cout << Solution().maxSubArray(nums) << endl;
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//
+//int  main()
+//{
+//	int n = -1;
+//	int count = 0;
+//	while (n)
+//	{
+//		n &= (n - 1);
+//		count++;
+//	}
+//	cout << count << endl;
+//	return 0;
+//}
+
+
+//#include <iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//	string nums;
+//	cin >> nums;
+//	vector<int>flag(26, 0);
+//	int i = 0;
+//	for (i = 0; i < (int)nums.size(); i++)
+//	{
+//		flag[nums[i] - 'a']++;
+//	}
+//
+//	int maxi = 0;
+//	for (i = 0; i < (int)flag.size(); i++)
+//	{
+//		if (flag[maxi] < flag[i])
+//		{
+//			maxi = i;
+//		}
+//	}
+//	printf("%c\n%d", 'a' + maxi, flag[maxi]);
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//
+//int main()
+//{
+//	string nums("abcdefghijklmno");
+//	reverse(nums.begin(), nums.end());
+//	for (int i = 0; i < nums.size(); i++)
+//	{
+//		for (int j = 0; j < nums.size() - i - 1; j++)
+//		{
+//			if (nums[j] > nums[j + 1])
+//			{
+//				char tmp = nums[j];
+//				nums[j] = nums[j + 1];
+//				nums[j + 1] = tmp;
+//			}
+//		}
+//	}
+//	cout << nums << endl;
+//	return 0;
+//}
+
+//
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//int main()
+//{
+//	string nums;
+//	cin >> nums;
+//	int count = 0;
+//	for (int i = 0; i < (int)nums.size() - 1; i++)
+//	{
+//		for (int j = 0; j < (int)nums.size() - 1 - i; j++)
+//		{
+//			if (nums[j] > nums[j + 1])
+//			{
+//				char tmp = nums[j + 1];
+//				nums[j + 1] = nums[j];
+//				nums[j] = tmp;
+//				count++;
+//			}
+//		}
+//	}
+//	cout << count << endl;
+//	cout << nums << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<algorithm>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	vector<int> majorityElement(vector<int>& nums)
+//	{
+//		vector<int> ret;
+//		sort(nums.begin(), nums.end());
+//		int left = 0, right = 0;
+//		while (right < (int)nums.size())
+//		{
+//			if (nums[left] == nums[right])
+//				right++;
+//			else
+//			{
+//				if ((right - left) > (int)nums.size() / 3)
+//					ret.push_back(nums[left]);
+//				left = right;
+//				right++;
+//			}
+//		}
+//		if ((right - left) > (int)nums.size() / 3)
+//			ret.push_back(nums[left]);
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int> nums{ 3,2,3 };
+//	vector<int> ret = Solution().majorityElement(nums);
+//	for (auto e : ret)
+//		cout << e << " ";
+//	return 0;
+//}
+
+
+////66. 加一
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+////class Solution {
+////public:
+////	vector<int> plusOne(vector<int>& digits)
+////	{
+////		int sum = 0;
+////		for (int i = 0; i < (int)digits.size(); i++)
+////		{
+////			sum = sum * 10 + digits[i];
+////		}
+////		sum += 1;
+////		vector<int> ret;
+////		while (sum)
+////		{
+////			ret.push_back(sum % 10);
+////			sum /= 10;
+////		}
+////		reverse(ret.begin(), ret.end());
+////		return ret;
+////	}
+////};
+//
+//
+//class Solution {
+//public:
+//	vector<int> plusOne(vector<int>& digits)
+//	{
+//		vector<int> ret;
+//		int cur = digits.size() - 1;
+//		int flag = 0;//进位
+//		digits[cur] += 1;
+//		while (cur >= 0)
+//		{
+//			int sum = digits[cur] + flag;
+//			if (sum > 9)
+//			{
+//				ret.push_back(sum - 10);
+//				flag = 1;
+//			}
+//			else
+//			{
+//				ret.push_back(sum);
+//				flag = 0;
+//			}
+//			cur--;
+//		}
+//		if (flag == 1)
+//			ret.push_back(1);
+//		reverse(ret.begin(), ret.end());
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int> nums{ 1,2,3 };
+//	vector<int> ret = Solution().plusOne(nums);
+//	for (auto e : ret)
+//		cout << e << " ";
+//	return 0;
+//}
+
+
+//476. 数字的补数
+#include<iostream>
+
+using namespace std;
+
+class Solution {
+public:
+	int findComplement(int num)
+	{
+		int count = 0;
+		int tmp = num;
+		while (tmp)
+		{
+			count++;
+			tmp >>= 1;
+		}
+		int flag = 0;
+		for (int i = 0; i < count; i++)
+		{
+			flag <<= 1;
+			flag += 1;
+		}
+		return (~num)&flag;
+	}
+};
+int main()
+{
+	int nums = 20;
+	cout << Solution().findComplement(nums) << endl;
+	return 0;
+}
