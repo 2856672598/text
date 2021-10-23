@@ -75,6 +75,7 @@ void SListPopBack(SListNode** plist)
 
 void SListPushFront(SListNode** plist, DateType date)
 {
+	assert(plist);
 	SListNode* newnode = CreateSListNode(date);
 	newnode->_next = *plist;
 	*plist = newnode;
@@ -88,4 +89,63 @@ void SListPopFront(SListNode**plist)
 	SListNode* next = (*plist)->_next;
 	free(*plist);
 	*plist = next;
+}
+
+SListNode* SListFind(SListNode* plist, DateType x)
+{
+	while (plist != NULL)
+	{
+		if (plist->_date == x)
+			return plist;
+		plist = plist->_next;
+	}
+	return  NULL;
+}
+
+void SListInsertAfter(SListNode* pos, DateType x)
+{
+	assert(pos);
+	SListNode* next = CreateSListNode(x);
+	next->_next = pos->_next;
+	pos->_next = next;
+}
+
+void SListEraseAfter(SListNode* pos)
+{
+	assert(pos);
+	SListNode* next = pos->_next;
+	pos->_next = next->_next;
+	free(next);
+}
+
+void SListDestory(SListNode* plist)
+{
+	SListNode* next = NULL;
+	while (plist)
+	{
+		next = plist->_next;
+		free(plist);
+		plist = next;
+	}
+}
+
+//删除pos位置
+void SListErasePos(SListNode** plist, SListNode* pos)
+{
+	assert(plist);
+	assert(pos != NULL);
+	//如果删除的是头结点
+	if (pos == *plist)
+	{
+		SListNode* next = (*plist)->_next;
+		free(*plist);
+		*plist = next;
+	}
+	SListNode* cur = (*plist);
+	while (cur->_next != pos)
+	{
+		cur = cur->_next;
+	}
+	cur->_next = pos->_next;
+	free(pos);
 }
