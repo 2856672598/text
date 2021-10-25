@@ -109,6 +109,92 @@ public:
 		return false;
 	}
 
+	bool Erase(const K& date)
+	{
+		Node* cur = _root;
+		Node* parent = NULL;
+		while (cur)
+		{
+			if (cur->_val > date)
+			{
+				parent = cur;
+				cur = cur->_left;
+			}
+			else if (cur->_val < date)
+			{
+				parent = cur;
+				cur = cur->_right;
+			}
+			else
+			{
+				//找到了删除
+				if (cur->_left == NULL)
+				{
+					if (cur == _root)
+					{
+						//删除的是头
+						_root = cur->_right;
+					}
+					else if (parent->_left == cur)
+					{
+						parent->_left = cur->_right;
+					}
+					else if (parent->_right == cur)
+					{
+						parent->_right = cur->_right;
+					}
+					free(cur);
+					return true;
+				}
+				else if (cur->_right == NULL)
+				{
+					//右边为空
+					if (cur == _root)
+					{
+						_root = cur->_left;
+					}
+					else if (parent->_left == cur)
+					{
+
+						//判断cur是parent的左节点还是右节点
+						parent->_left = cur->_left;
+					}
+					else
+					{
+						parent->_right = cur->_left;
+					}
+					free(cur);
+					return true;
+
+				}
+				else
+				{
+					//左右都不为空，需要进行替换删除
+					//找cur右子树的最小 节点
+					Node* leftMin = cur->_right;
+					Node* leftMinParent = cur;
+					while (leftMin->_left != NULL)
+					{
+						leftMinParent = leftMin;
+						leftMin = leftMin->_left;
+					}
+
+					//找到了
+					cur->_val = leftMin->_val;
+					if (leftMinParent->_left == leftMin)
+					{
+						leftMinParent->_left = leftMin->_right;
+					}
+					else
+						leftMinParent->_right = leftMin->_right;
+					free(leftMin);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 private:
 	Node* _root = nullptr;
 };
@@ -124,4 +210,10 @@ void TextBSTree()
 	root.InOrder();
 
 	root.Find(10);
+
+	for (auto e : arr)
+	{
+		root.Erase(e);
+		root.InOrder();
+	}
 }
