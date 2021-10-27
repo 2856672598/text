@@ -16,12 +16,23 @@ void text()
 	ListPrint(phead);
 	ListPopFront(phead);
 	ListPopFront(phead);
-
 	ListPrint(phead);
 
 }
+void text1()
+{
+	ListNode* phead = ListNodeInit();
+	ListPushFront(phead, 1);
+	ListPushFront(phead, 2);
+	ListPushFront(phead, 3);
+	ListPushFront(phead, 4);
+	ListPrint(phead);
+
+	printf("%d", Find(phead, 4)->val);
+}
 int main()
 {
-	text();
+	//text();
+	text1();
 	return 0;
 }

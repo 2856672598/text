@@ -18,3 +18,7 @@ void ListPrint(ListNode* phead);
 
 void ListPushFront(ListNode* phead, ListDateType val);
 void ListPopFront(ListNode* phead);
+
+void Erase(ListNode* pos);
+void ListNodeInsert(ListNode* pos, ListDateType val);
+ListNode* Find(ListNode* phead, ListDateType val);
