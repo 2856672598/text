@@ -14,7 +14,7 @@ void QueueDestory(Queue* pq)
 	{
 		QueueNode* next = cur->next;
 		free(cur);
-		cur = cur->next;
+		cur = next;
 	}
 	pq->head = pq->tail = NULL;
 }

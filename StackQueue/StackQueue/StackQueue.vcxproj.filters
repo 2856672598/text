@@ -32,5 +32,8 @@
     <ClCompile Include="queue.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="code.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
