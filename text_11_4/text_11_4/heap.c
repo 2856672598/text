@@ -190,3 +190,27 @@ void textTopK(HpDateType* arr, int size, int k)
 	}
 	Print(&h);
 }
+
+void HeapSort(HpDateType*arr, int n)
+{
+	assert(arr);
+	////方法一：向上进行调整建堆
+	//for (int i = 1; i < n; i++)
+	//{
+	//	AdjustUp(arr, i);
+	//}
+
+	//方法二：向下调整建堆
+	for (int i = (n - 2) / 2; i >= 0; i--)
+	{
+		AdjustDown(arr, n, i);
+	}
+
+	int end = n - 1;
+	while (end > 0)
+	{
+		Swap(&arr[0], &arr[end]);
+		AdjustDown(arr, end, 0);
+		end--;
+	}
+}

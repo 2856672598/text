@@ -24,3 +24,4 @@ bool HeapEmpty(Heap* hp);
 void Swap(HpDateType* x, HpDateType* y);
 void Print(Heap* hp);
 void textTopK(HpDateType* arr, int size, int k);
+void HeapSort(HpDateType*arr, int n);
