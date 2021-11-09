@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include<algorithm>
 using namespace std;
 
 
@@ -80,7 +81,7 @@ public:
 				pPNode->_pLeft = subL;
 			}
 			else
-				pPNode->_pLeft = subL;
+				pPNode->_pRight = subL;
 			subL->_pParent = pPNode;
 		}
 		parent->_bf = subL->_bf = 0;
@@ -90,11 +91,10 @@ public:
 	{
 		Node*subR = parent->_pRight;
 		Node* subRL = subR->_pLeft;
-		RotateR(parent->_pRight);
-		RotateL(parent);//左旋
-
 		//判断是插入在左面还是右面
 		int bf = subRL->_bf;
+		RotateR(parent->_pRight);
+		RotateL(parent);//左旋
 
 		if (bf == -1)
 		{
@@ -123,11 +123,11 @@ public:
 	{
 		Node* subL = parent->_pLeft;
 		Node* subLR = subL->_pRight;
+		int bf = subLR->_bf;
 
 		RotateL(subL);
 		RotateR(parent);
 
-		int bf = subLR->_bf;
 		if (bf == -1)
 		{
 			//在左面
@@ -149,6 +149,30 @@ public:
 			subL->_bf = 0;
 			subLR->_bf = 0;
 		}
+	}
+
+	int Height(Node* root)
+	{
+		if (root == nullptr)
+			return 0;
+		return 1 + max(Height(root->_pLeft), Height(root->_pRight));
+	}
+
+	bool _IsBalance(Node* root)
+	{
+		if (root == nullptr)
+			return true;
+		int leftHeight = Height(root->_pLeft);
+		int rightHeight = Height(root->_pRight);
+
+		if (abs(leftHeight - rightHeight) > 1 || root->_bf != rightHeight - leftHeight)
+			return false;
+		return _IsBalance(root->_pLeft) && _IsBalance(root->_pRight);
+	}
+
+	bool IsBalance()
+	{
+		return _IsBalance(_root);
 	}
 
 	bool Insert(const pair<K, V>& kv)
@@ -221,12 +245,14 @@ public:
 				//不满足条件，需要进行旋转
 				if (parent->_bf == 2)
 				{
+					//右子树高
 					if (cur->_bf == 1)
 					{
 						RotateL(parent);
 					}
 					else if (cur->_bf == -1)
 					{
+						//左子树高
 						RotateRL(parent);
 					}
 				}
@@ -246,6 +272,20 @@ public:
 		}
 		return true;
 	}
+	void _InOrder(Node* root)
+	{
+		if (root == nullptr)
+			return;
+		_InOrder(root->_pLeft);
+		cout << root->_kv.first << ":" << root->_kv.second << endl;
+		_InOrder(root->_pRight);
+	}
+
+	void InOrder()
+	{
+		_InOrder(_root);
+	}
+
 private:
 	Node* _root = nullptr;
 };

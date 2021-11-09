@@ -3,14 +3,13 @@
 void text()
 {
 	VALTree<int, int> root;
-	root.Insert(make_pair(1, 1));
-	root.Insert(make_pair(2, 1));
-	root.Insert(make_pair(3, 1));
-	root.Insert(make_pair(4, 1));
-	root.Insert(make_pair(5, 1));
-	root.Insert(make_pair(6, 1));
-
-
+	int arr[] = { 4, 2, 6, 1, 3, 5, 15, 7, 16, 14 };
+	for (auto e : arr)
+	{
+		root.Insert(make_pair(e, e));
+	}
+	root.InOrder();
+	cout << root.IsBalance();
 }
 int main()
 {

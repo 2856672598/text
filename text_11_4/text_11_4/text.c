@@ -115,6 +115,37 @@ void PostOrder(BTNode* root){	if (root == NULL)	{		printf("NULL ");		return
 	return root == NULL ? 0 : BinaryTreeSize(root->_left) + BinaryTreeSize(root->_right) + 1;
 }
 
+int BinaryTreeLeafSize(BTNode* root)
+{
+	if (root == NULL)
+		return 0;
+	if (root->_left == NULL && root->_right == NULL)
+		return 1;
+	return BinaryTreeLeafSize(root->_left) + BinaryTreeLeafSize(root->_right);
+}
+
+BTNode* BinaryTreeFind(BTNode* root, BTDataType x)
+{
+	if (root == NULL)
+		return NULL;
+	if (root->_data == x)
+		return root;
+	BTNode* left = BinaryTreeFind(root->_left, x);
+	if (left)
+		return left;
+	BTNode* right = BinaryTreeFind(root->_right, x);
+	if (right)
+		return right;
+	return NULL;
+}
+
+int BinaryTreeLevelKSize(BTNode* root, int k)
+{
+	if (root == NULL)
+		return 0;
+	return BinaryTreeLevelKSize(root->_left, k - 1) + BinaryTreeLevelKSize(root->right, k - 1);
+}
+
 void text4()
 {
 	BTNode* root = CreatBinaryTree();
@@ -124,8 +155,14 @@ void text4()
 	printf("\n");
 	PostOrder(root);
 
-	printf("节点个数：%d", BinaryTreeSize(root));
+	printf("节点个数：%d\n", BinaryTreeSize(root));
+	printf("叶子节点个数：%d\n", BinaryTreeLeafSize(root));
 
+	BTNode*ret = BinaryTreeFind(root, 'A');
+	if (ret == NULL)
+		printf("没找到\n");
+	else
+		printf("%c", ret->_data);
 }
 int main()
 {
