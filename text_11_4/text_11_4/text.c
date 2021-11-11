@@ -143,7 +143,42 @@ int BinaryTreeLevelKSize(BTNode* root, int k)
 {
 	if (root == NULL)
 		return 0;
-	return BinaryTreeLevelKSize(root->_left, k - 1) + BinaryTreeLevelKSize(root->right, k - 1);
+	return BinaryTreeLevelKSize(root->_left, k - 1) + BinaryTreeLevelKSize(root->_right, k - 1);
+}
+
+
+
+bool BinaryTreeComplete(BTNode* root)
+{
+	if (root == NULL)
+		return;
+	Queue q;
+	QueueInit(&q);
+	QueuePush(&q, root);
+
+	while (!QueueEmpty(&q))
+	{
+		BTNode* front = QueueFront(&q);
+		QueuePop(&q);
+		if (front == NULL)
+		{
+			while (!QueueEmpty(&q))
+			{
+				BTNode* cur = QueueFront(&q);
+				QueuePop(&q);
+				if (cur != NULL)
+				{
+					QueueDestroy(&q);
+					return false;
+				}
+			}
+		}
+		// 孩子带进队列
+		QueuePush(&q, front->_left);
+		QueuePush(&q, front->_right);
+	}
+	QueueDestroy(&q);
+	return true;
 }
 
 void text4()
@@ -164,6 +199,7 @@ void text4()
 	else
 		printf("%c", ret->_data);
 }
+
 int main()
 {
 	//text();
