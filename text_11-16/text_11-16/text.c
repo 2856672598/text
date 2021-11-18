@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 
 void InsertSort(int* number, int size)
@@ -104,63 +105,160 @@ void SelectSort(int * number, int size)
 	}
 }
 
-void AdjustUp(int * nums, int size)
+void AdjustDown(int* nums, int pos, int size)
 {
-	int parent, child;
-	//从第一个非叶子节点开始
-	for (int i = parent; i >= 0; i--)
+	int parent = pos;
+	int child = pos * 2 + 1;//默认为左子树
+	while (child <= size)
 	{
-		parent = i;
-		child = parent * 2 + 1;
-		//判断右孩子是否大于左孩子
-		if (child + 1 < size && nums[child] < nums[child + 1])
-		{
-			child = child + 1;
-		}
-		else
-			break;
-		//和父亲比较 比父亲大进行交换
+		//判断右子树是否大于左子树
+		if (child + 1 <= size&&nums[child] < nums[child + 1])
+			child++;
+		//和parent作比较
 		if (nums[child] > nums[parent])
 		{
 			swap(&nums[child], &nums[parent]);
 		}
+		else
+			break;
+		parent = child;
+		child = parent * 2 + 1;
 	}
 }
 
-void AdjustDown(int* nums, int size)
+void AdjustUp(int* nums, int pos)
 {
-	int parent = 0;
-	int child = parent * 2 + 1;//默认为左子树
-	while (parent <= size)
+	int child = pos;
+	int parent = (child - 1) / 2;
+	while (parent >= 0)
 	{
-		if (child + 1 < size&&nums[child] < nums[child + 1])
+		if (nums[parent] < nums[child])
 		{
-			child++;
+			swap(&nums[parent], &nums[child]);
 		}
 		else
 			break;
-		if (nums[child] > nums[parent])
-		{
-			swap(&nums[child], &nums[parent]);
-		}
-		parent++;
+		child = parent;
+		parent = (child - 1) / 2;
 	}
 }
 
 void HeapSort(int* nums, int size)
 {
 	//大堆 -->升序
+	//建堆
+	for (int i = (size - 2) / 2; i >= 0; i--)
+	{
+		AdjustDown(nums, i, size-1);
+	}
+
+	int end = size - 1;
+	while (end > 0)
+	{
+		swap(&nums[end], &nums[0]);
+		end--;
+		AdjustDown(nums, 0, end);
+	}
 }
 
-int main()
+void BubbleSort(int* nums, int size)
 {
-	int nums[] = { 1,6,3,9,10,3,7,2 };
-	int size = sizeof(nums) / sizeof(nums[0]);
-	//InsertSort(nums, size);
-
-	//ShellSort(nums, size);
-
-	SelectSort(nums, size);
-	Print(nums, size);
-	return 0;
+	for (int i = 0; i < size - 1; i++)
+	{
+		int flag = 0;
+		for (int j = 0; j < size - 1 - i; j++)
+		{
+			if (nums[j] > nums[j + 1])
+			{
+				flag = 1;
+				swap(&nums[j], &nums[j + 1]);
+			}
+		}
+		if (flag == 0)
+			break;
+	}
 }
+
+void PartSort(int * nums, int left, int right)
+{
+	if (left >= right)
+		return;
+	int keyi = left;
+	int end = right;
+	int key = nums[left];
+	while (left < right)
+	{
+		//右面先走，在右面找小于key的值
+		while (left < right)
+		{
+			if (nums[right] < key)
+				break;
+			right--;
+		}
+
+		//左面找大于key的值
+		while (left < right)
+		{
+			if (nums[left] > key)
+				break;
+			left++;
+		}
+
+		//交换left和right
+		if (left < right)
+		{
+			swap(&nums[left], &nums[right]);
+		}
+	}
+	if (left == right)
+	{
+		swap(&nums[keyi], &nums[left]);
+		PartSort(nums, keyi, left - 1);
+		PartSort(nums, left + 1, end);
+	}
+}
+
+void partion1(int* nums, int left, int right)
+{
+	if (left >= right)
+		return;
+	int key = nums[left];
+	int prev = left - 1, cur = left;
+	while (cur <= right)
+	{
+		if (nums[cur] < key)
+		{
+			prev++;
+			swap(&nums[cur], &nums[prev]);
+		}
+		cur++;
+	}
+	nums[++prev] = key;
+	partion1(nums, left, prev - 1);
+	partion1(nums, prev + 1, right);
+}
+
+void QuickSort(int * nums, int left, int right)
+{
+	//PartSort(nums, left, right - 1);
+	partion1(nums, left, right - 1);
+}
+
+//int main()
+//{
+//	int nums[] = { 10,6,3,9,1,3,7,2 };
+//	//int nums[] = { 10,10,10,10 };
+//	int size = sizeof(nums) / sizeof(nums[0]);
+//	//InsertSort(nums, size);
+//
+//	//ShellSort(nums, size);
+//
+//	//SelectSort(nums, size);
+//
+//	//HeapSort(nums, size);
+//	//BubbleSort(nums, size);
+//
+//	QuickSort(nums, 0, size);
+//	Print(nums, size);
+//	return 0;
+//}
