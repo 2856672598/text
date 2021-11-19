@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
-
+#include<stdlib.h>
+#include<time.h>
 void InsertSort(int* number, int size)
 {
 	for (int i = 0; i < size - 1; i++)
@@ -179,6 +180,30 @@ void BubbleSort(int* nums, int size)
 	}
 }
 
+//三数取中
+int getMid(int* nums, int left, int right)
+{
+	int mid = left + (right - left) / 2;
+	if (nums[left] < nums[mid])
+	{
+		if (nums[mid] < nums[right])
+			return mid;
+		else if (nums[left] > nums[right])
+			return left;
+		else
+			return right;
+	}
+	else
+	{
+		if (nums[mid] > nums[right])
+			return mid;
+		else if (nums[left] < nums[right])
+			return left;
+		else
+			return right;
+	}
+}
+
 void PartSort(int * nums, int left, int right)
 {
 	if (left >= right)
@@ -238,27 +263,155 @@ void partion1(int* nums, int left, int right)
 	partion1(nums, prev + 1, right);
 }
 
+//挖坑法
+int partion2(int * nums, int left, int right)
+{
+	int hole = left;
+	int key = nums[left];
+	while (left < right)
+	{
+		//从右面找比key小的值
+		while (left < right&&nums[right] >= key)
+		{
+			right--;
+		}
+		//将找到的值放到坑里面
+		nums[hole] = nums[right];
+		//将left的位置变成新的坑
+		hole = right;
+
+		//在左边找大于key 的值，放进坑中
+		while (left < right && nums[left] <= key)
+		{
+			left++;
+		}
+		nums[hole] = nums[left];
+		hole = left;
+	}
+	//将key放进坑中
+	nums[hole] = key;
+	return hole;
+}
+
 void QuickSort(int * nums, int left, int right)
 {
 	//PartSort(nums, left, right - 1);
-	partion1(nums, left, right - 1);
+	//partion1(nums, left, right - 1);
+
+	if (left >= right)
+		return;
+	//小区间优化
+	if (right - left + 1 < 10)
+	{
+		InsertSort(nums + left, right - left + 1);
+	}
+	else
+	{
+		int mid = getMid(nums, left, right);
+		swap(&nums[left], &nums[mid]);
+		int pos = partion2(nums, left, right);
+		QuickSort(nums, left, pos - 1);
+		QuickSort(nums, pos + 1, right);
+	}
 }
 
-//int main()
-//{
-//	int nums[] = { 10,6,3,9,1,3,7,2 };
-//	//int nums[] = { 10,10,10,10 };
-//	int size = sizeof(nums) / sizeof(nums[0]);
-//	//InsertSort(nums, size);
-//
-//	//ShellSort(nums, size);
-//
-//	//SelectSort(nums, size);
-//
-//	//HeapSort(nums, size);
-//	//BubbleSort(nums, size);
-//
-//	QuickSort(nums, 0, size);
-//	Print(nums, size);
-//	return 0;
-//}
+void _mergeSort(int*nums, int* tmp, int left, int right)
+{
+	if (left >= right)
+		return;
+	int mid = left + (right - left) / 2;
+	_mergeSort(nums, tmp, left, mid);
+	_mergeSort(nums, tmp, mid + 1, right);
+
+	//左右已经有序进行归并
+	int i = left;
+	int begin1 = left, begin2 = mid + 1;
+	while (begin1 <= mid && begin2 <= right)
+	{
+		if (nums[begin1] > nums[begin2])
+			tmp[i++] = nums[begin2++];
+		else
+			tmp[i++] = nums[begin1++];
+	}
+
+	while (begin1 <= mid)
+	{
+		tmp[i++] = nums[begin1++];
+	}
+
+	while (begin2 <= right)
+		tmp[i++] = nums[begin2++];
+
+	//将归并好的数据拷贝会原来数组
+	for (i = left; i <= right; i++)
+	{
+		nums[i] = tmp[i];
+	}
+}
+
+void mergeSort(int* nums, int size)
+{
+	int* tmp = (int*)malloc(sizeof(int)*size);
+	_mergeSort(nums, tmp, 0, size - 1);
+}
+
+void text()
+{
+	srand((unsigned)time(NULL));
+	int n = 10000000;
+	int * flag1 = malloc(sizeof(int)*n);
+	int* flag2 = malloc(sizeof(int)*n);
+	int* flag3 = malloc(sizeof(int)*n);
+
+	for (int i = 0; i < n; i++)
+	{
+		flag1[i] = rand();
+		flag2[i] = flag1[i];
+		flag3[i] = flag1[i];
+	}
+
+	int begin1 = clock();
+	QuickSort(flag1, 0, n - 1);
+	int end1 = clock();
+	printf("快速排序:%d\n", end1 - begin1);
+
+	//int begin2 = clock();
+	//BubbleSort(flag2, n);
+	//int end2 = clock();
+	//printf("冒泡排序：%d\n", end2 - begin2);
+
+	int begin3 = clock();
+	ShellSort(flag3, n);
+	int end3 = clock();
+	printf("希尔排序:%d\n", end3 - begin3);
+
+	int begin4 = clock();
+	mergeSort(flag2, n);
+	int end4 = clock();
+	printf("归并排序：%d\n", end4 - begin4);
+	//Print(flag2, n);
+
+}
+
+
+
+int main()
+{
+	int nums[] = { 10,6,3,9,1,3,7,2 };
+	//int nums[] = { 10,10,10,10 };
+	int size = sizeof(nums) / sizeof(nums[0]);
+	//InsertSort(nums, size);
+
+	//ShellSort(nums, size);
+
+	//SelectSort(nums, size);
+
+	//HeapSort(nums, size);
+	//BubbleSort(nums, size);
+
+	//QuickSort(nums, 0, size - 1);
+	//Print(nums, size);
+
+	text();
+	return 0;
+}
