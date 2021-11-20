@@ -204,10 +204,8 @@ int getMid(int* nums, int left, int right)
 	}
 }
 
-void PartSort(int * nums, int left, int right)
+int PartSort1(int * nums, int left, int right)
 {
-	if (left >= right)
-		return;
 	int keyi = left;
 	int end = right;
 	int key = nums[left];
@@ -235,20 +233,14 @@ void PartSort(int * nums, int left, int right)
 			swap(&nums[left], &nums[right]);
 		}
 	}
-	if (left == right)
-	{
-		swap(&nums[keyi], &nums[left]);
-		PartSort(nums, keyi, left - 1);
-		PartSort(nums, left + 1, end);
-	}
+	swap(&nums[keyi], &nums[left]);
+	return left;
 }
 
-void partion1(int* nums, int left, int right)
+int PartSort3(int* nums, int left, int right)
 {
-	if (left >= right)
-		return;
 	int key = nums[left];
-	int prev = left - 1, cur = left;
+	int prev = left, cur = left + 1;
 	while (cur <= right)
 	{
 		if (nums[cur] < key)
@@ -258,13 +250,12 @@ void partion1(int* nums, int left, int right)
 		}
 		cur++;
 	}
-	nums[++prev] = key;
-	partion1(nums, left, prev - 1);
-	partion1(nums, prev + 1, right);
+	swap(&nums[prev], &nums[left]);
+	return prev;
 }
 
 //ÍÚ¿Ó·¨
-int partion2(int * nums, int left, int right)
+int PartSort2(int * nums, int left, int right)
 {
 	int hole = left;
 	int key = nums[left];
@@ -295,8 +286,6 @@ int partion2(int * nums, int left, int right)
 
 void QuickSort(int * nums, int left, int right)
 {
-	//PartSort(nums, left, right - 1);
-	//partion1(nums, left, right - 1);
 
 	if (left >= right)
 		return;
@@ -309,11 +298,17 @@ void QuickSort(int * nums, int left, int right)
 	{
 		int mid = getMid(nums, left, right);
 		swap(&nums[left], &nums[mid]);
-		int pos = partion2(nums, left, right);
+		//int pos = partion2(nums, left, right);
+
+		//int pos = PartSort1(nums, left, right);
+		//int pos = PartSort3(nums, left, right);
+		int pos = PartSort2(nums, left, right);
+
 		QuickSort(nums, left, pos - 1);
 		QuickSort(nums, pos + 1, right);
 	}
 }
+
 
 void _mergeSort(int*nums, int* tmp, int left, int right)
 {
@@ -358,16 +353,18 @@ void mergeSort(int* nums, int size)
 void text()
 {
 	srand((unsigned)time(NULL));
-	int n = 10000000;
-	int * flag1 = malloc(sizeof(int)*n);
+	int n = 10000;
+	int* flag1 = malloc(sizeof(int)*n * 10);
 	int* flag2 = malloc(sizeof(int)*n);
 	int* flag3 = malloc(sizeof(int)*n);
+	int* flag4 = malloc(sizeof(int)*n);
 
 	for (int i = 0; i < n; i++)
 	{
 		flag1[i] = rand();
 		flag2[i] = flag1[i];
 		flag3[i] = flag1[i];
+		flag4[i] = flag1[i];
 	}
 
 	int begin1 = clock();
@@ -388,9 +385,13 @@ void text()
 	int begin4 = clock();
 	mergeSort(flag2, n);
 	int end4 = clock();
-	printf("¹é²¢ÅÅÐò£º%d\n", end4 - begin4);
-	//Print(flag2, n);
+	printf("¹é²¢ÅÅÐò:%d\n", end4 - begin4);
 
+	int begin5 = clock();
+	HeapSort(flag4, n);
+	int end5 = clock();
+	printf("¶ÑÅÅÐò:%d\n", end5 - begin5);
+	Print(flag1, n);
 }
 
 
@@ -412,6 +413,7 @@ int main()
 	//QuickSort(nums, 0, size - 1);
 	//Print(nums, size);
 
-	text();
+	//text();
+
 	return 0;
 }

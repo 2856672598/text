@@ -1,23 +1,23 @@
 //#include<iostream>
 //#include<stack>
 //#include<vector>
+//#include<ctime>
 //using namespace std;
 //void QuickSort(vector<int>& nums)
 //{
-//	stack<int> s;
-//	s.push(0);
-//	s.push(nums.size() - 1);
+//	stack<pair<int,int>> s;
+//	s.push(make_pair(0, nums.size() - 1));
 //	int left, right;
 //	while (!s.empty())
 //	{
-//		right = s.top();
+//		left = s.top().first;
+//		right = s.top().second;
 //		s.pop();
-//		left = s.top();
-//		s.pop();
+//
 //		int prev = left - 1;
 //		int cur = left;
 //		int key = nums[left];
-//		while (cur<=right)
+//		while (cur <= right)
 //		{
 //			if (key > nums[cur])
 //			{
@@ -29,21 +29,25 @@
 //		nums[++prev] = key;
 //		if (left < prev - 1)
 //		{
-//			s.push(left);
-//			s.push(prev - 1);
+//			s.push(make_pair(left, prev - 1));
 //		}
 //
 //		if (prev + 1 < right)
 //		{
-//			s.push(prev + 1);
-//			s.push(right);
+//			s.push(make_pair(prev + 1, right));
 //		}
 //	}
 //}
 //
 //int main()
 //{
+//	srand((unsigned)time(NULL));
 //	vector<int> nums{ 10,6,3,9,1,3,7,2 };
+//	int n = 100000;
+//	for (int i = 0; i < n; i++)
+//	{
+//		nums.push_back(rand());
+//	}
 //	QuickSort(nums);
 //	for (auto e : nums)
 //		cout << e << " ";
