@@ -350,6 +350,60 @@ void mergeSort(int* nums, int size)
 	_mergeSort(nums, tmp, 0, size - 1);
 }
 
+//归并排序非递归
+void nReMergeSort(int* nums, int size)
+{
+	int left = 0, right = size - 1;
+	int* tmp = malloc(sizeof(int)*size);
+	int gap = 1;
+	while (gap < size)
+	{
+		for (int i = 0; i < size; i += 2 * gap)
+		{
+			int begin1 = i, end1 = i + gap - 1;
+			int begin2 = i + gap, end2 = i + 2 * gap - 1;
+
+			//如果end1越界或end2越界直接跳出，不用进行归并
+			if (end1 >= size || begin2 >= size)
+				break;
+			//判断右区间是否有越界
+			if (end2 >= size)
+			{
+				//修正end2的值
+				end2 = size - 1;
+			}
+
+			int indext = i;
+			//开始归并
+			while (begin1 <= end1 && begin2 <= end2)
+			{
+				if (nums[begin1] < nums[begin2])
+					tmp[indext++] = nums[begin1++];
+				else
+					tmp[indext++] = nums[begin2++];
+			}
+
+			while (begin1 <= end1)
+			{
+				tmp[indext++] = nums[begin1++];
+			}
+
+			while (begin2 <= end2)
+			{
+				tmp[indext++] = nums[begin2++];
+			}
+
+			//拷贝回原数组
+			for (int j = i; j <= end2; j++)
+			{
+				nums[j] = tmp[j];
+			}
+		}
+		gap *= 2;
+	}
+	free(tmp);
+}
+
 void text()
 {
 	srand((unsigned)time(NULL));
@@ -398,7 +452,7 @@ void text()
 
 int main()
 {
-	int nums[] = { 10,6,3,9,1,3,7,2 };
+	int nums[] = { 10,6,3,9,1,3,7,2,5 };
 	//int nums[] = { 10,10,10,10 };
 	int size = sizeof(nums) / sizeof(nums[0]);
 	//InsertSort(nums, size);
@@ -414,6 +468,7 @@ int main()
 	//Print(nums, size);
 
 	//text();
-
+	nReMergeSort(nums, size);
+	Print(nums, size);
 	return 0;
 }
