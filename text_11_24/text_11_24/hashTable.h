@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include<vector>
+#include<string>
 using namespace std;
 enum state
 {
@@ -91,7 +92,7 @@ namespace openTable
 	{
 	public:
 		typedef hashNode<T> Node;
-
+		KeyofT kot;
 		bool insert(const T& val)
 		{
 			if (_size == _table.size())
@@ -108,22 +109,70 @@ namespace openTable
 					while (cur)
 					{
 						Node* next = cur->next;
-						index = cur->_val%newtable.size();
+						index = kot(cur->_val) % newtable.size();
 						cur->next = newtable[index];
 						newtable[index] = cur;
 						cur = next;
 					}
-					_table[i] = nullptr;
 				}
 				swap(_table, newtable);
 			}
 
-			int index = val % _table.size();
+			int index = kot(val) % _table.size();
 			Node* newnode = new Node(val);
+			Node* cur = _table[index];
+			//查看val是否已经存在
+			while (cur)
+			{
+				if (kot(cur->_val) == kot(val))
+				{
+					return false;
+				}
+				cur = cur->next;
+			}
 			newnode->next = _table[index];
 			_table[index] = newnode;
 			_size++;
 			return true;
+		}
+
+		Node* find(const K& val)
+		{
+			size_t index = kot(val) % _table.size();
+			Node* cur = _table[index];
+			while (cur)
+			{
+				if (kot(cur->_val) == kot(val))
+					return cur;
+				cur = cur->next;
+			}
+			return nullptr;
+		}
+
+		bool erase(const K& val)
+		{
+			size_t index = kot(val) % _table.size();
+			Node* prev = nullptr;
+			Node* cur = _table[index];
+			while (cur)
+			{
+				if (kot(cur->_val) == kot(val))
+				{
+					if (prev == nullptr)
+					{
+						_table[index] = cur->next;
+					}
+					else
+					{
+						prev->next = cur->next;
+					}
+					delete cur;
+					return true;
+				}
+				prev = cur;
+				cur = cur->next;
+			}
+			return false;
 		}
 	private:
 		size_t _size;

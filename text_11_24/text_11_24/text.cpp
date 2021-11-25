@@ -12,6 +12,8 @@ void text1()
 	h.Insert(234);
 	h.Insert(90);
 	h.Insert(12);
+	h.Insert(12);
+
 }
 
 template<class T>
@@ -30,14 +32,35 @@ void text2()
 	table.insert(19);
 	table.insert(46);
 	table.insert(569);
-	table.insert(569);
-	table.insert(569);
-	table.insert(569);
+	table.insert(599);
+	table.insert(59);
+	table.insert(589);
+
+	cout << table.find(589)->_val << endl;
+	table.erase(569);
+
+}
+
+template<class T, class V>
+struct MapKeyoft
+{
+	const T& operator()(const pair<T, V>& val)
+	{
+		return val.first;
+	}
+};
+
+void text3()
+{
+	openTable::HashTable<int, pair<int, string>, MapKeyoft<int, string>> table;
+	table.insert(make_pair(1, "hello"));
+	table.insert(make_pair(2, "wordle"));
 
 }
 int main()
 {
-	text1();
-	text2();
+	//text1();
+	//text2();
+	text3();
 	return 0;
 }
