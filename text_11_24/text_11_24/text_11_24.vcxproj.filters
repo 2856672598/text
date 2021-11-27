@@ -18,6 +18,12 @@
     <ClInclude Include="hashTable.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="unordered_map.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="unordered_set.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="text.cpp">

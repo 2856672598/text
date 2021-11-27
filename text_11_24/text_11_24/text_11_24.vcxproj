@@ -124,6 +124,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="hashTable.h" />
+    <ClInclude Include="unordered_map.h" />
+    <ClInclude Include="unordered_set.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="text.cpp" />

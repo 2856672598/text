@@ -1,2 +1,4 @@
 ﻿  text.cpp
+d:\githup\text\text_11_24\text_11_24\hashtable.h(178): warning C4348: “openTable::HashTable”: 重定义默认参数 : 参数 4
+  d:\githup\text\text_11_24\text_11_24\hashtable.h(180): note: 参见“openTable::HashTable”的声明
   text_11_24.vcxproj -> D:\Githup\text\text_11_24\Debug\text_11_24.exe
