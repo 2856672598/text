@@ -24,10 +24,11 @@ void text()
 	table.insert("right");
 	table.insert("apple");
 
-	for (size_t i = 0; i < table.size(); i++)
-	{
-		printf("[%d] = %d\n", i, table.test(i));
-	}
+	//for (size_t i = 0; i < table.size(); i++)
+	//{
+	//	printf("[%d] = %d\n", i, table.test(i));
+	//}
+	cout << table.test("people") << endl;
 }
 
 int main()

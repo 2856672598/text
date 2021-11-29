@@ -71,12 +71,15 @@ namespace Solution
 			return _bmp.size();
 		}
 
-		bool test(const size_t pos)
+		bool test(const K& key)
 		{
-			return _bmp.test(pos);
+			size_t index1 = KtoInt1()(key) % _bmp.size();
+			size_t index2 = KtoInt2()(key) % _bmp.size();
+			size_t index3 = KtoInt3()(key) % _bmp.size();
+			return _bmp.test(index1) && _bmp.test(index2) && _bmp.test(index3);
 		}
 	private:
 		wkn::bitset _bmp;
-		size_t _size;
+		size_t _size;//存在的个数
 	};
 }
