@@ -411,36 +411,67 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//#include<vector>
+//#include<unordered_set>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	bool containsNearbyDuplicate(vector<int>& nums, int k)
+//	{
+//		unordered_set<int> s;
+//		for (int i = 0; i < (int)nums.size(); i++)
+//		{
+//			if (s.find(nums[i]) != s.end())
+//				return true;
+//			s.insert(nums[i]);
+//			if ((int)s.size() > k)
+//			{
+//				//删除最早的一个
+//				s.erase(nums[i - k]);
+//			}
+//		}
+//		return false;
+//	}
+//};
+//int main()
+//{
+//	vector<int>nums = { 1,0,1,1 };
+//	int k = 1;
+//	cout << Solution().containsNearbyDuplicate(nums, k) << endl;
+//	return 0;
+//}
+
 
 #include<iostream>
 #include<vector>
-#include<unordered_set>
+#include<algorithm>
 using namespace std;
 
-class Solution
-{
+class Solution {
 public:
-	bool containsNearbyDuplicate(vector<int>& nums, int k)
+	vector<int> targetIndices(vector<int>& nums, int target)
 	{
-		unordered_set<int> s;
-		for (int i = 0; i < (int)nums.size(); i++)
+		sort(nums.begin(), nums.end());
+		auto it = find(nums.begin(), nums.end(), target);
+		vector<int>ret;
+		while (it != nums.end() && *it == target)
 		{
-			if (s.find(nums[i]) != s.end())
-				return true;
-			s.insert(nums[i]);
-			if ((int)s.size() > k)
-			{
-				//删除最早的一个
-				s.erase(nums[i - k]);
-			}
+			ret.push_back(it - nums.begin());
+			++it;
 		}
-		return false;
+		return ret;
 	}
 };
+
 int main()
 {
-	vector<int>nums = { 1,0,1,1 };
-	int k = 1;
-	cout << Solution().containsNearbyDuplicate(nums, k) << endl;
+	vector<int>nums{ 1,2,5,2,3 };
+	int target = 2;
+	auto ret = Solution().targetIndices(nums, target);
+	for (auto e : ret)
+		cout << e << " ";
 	return 0;
 }
