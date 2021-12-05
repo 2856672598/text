@@ -971,12 +971,95 @@
 //}
 
 
-#include<iostream>
-using namespace std;
-#include <string>
-// 获取英文文段中单词的数量，重复单词出现几次算几次，单词中只会出现'a'-'z'和'A'-'Z'
+//#include<iostream>
+//using namespace std;
+//#include <string>
+//// 获取英文文段中单词的数量，重复单词出现几次算几次，单词中只会出现'a'-'z'和'A'-'Z'
+//
+//int Words_Num(std::string str)
+//{
+//	int left = 0, right = 0;
+//	//去掉前导空格
+//	while (str[right] == ' ')
+//	{
+//		left++;
+//		right++;
+//	}
+//	int count = 0;
+//	while (right < (int)str.size())
+//	{
+//		//判断是否为字符
+//		if (isalpha(str[right]) == false)
+//		{
+//			right = ++left;
+//			continue;
+//		}
+//		while (right < (int)str.size() && str[right] != ' ')
+//			right++;
+//		count++;
+//		right++;
+//		left = right;
+//	}
+//	//判断最后一个是否为单词
+//	if (left != right)
+//		count++;
+//	return count;
+//}
+//
+//int main()
+//{
+//	std::string strText = "In developing driver support systems, it is important to prevent the system from intervening with the driver in the middle of corrective action because the driver support system requires a cooperative operation between controllers and drivers.";
+//	std::cout << Words_Num(strText) << std::endl;
+//}
 
-int Words_Num(std::string str)
+
+
+//#include<stdio.h>
+//
+//void addArr(int* arr1, int* arr2, int* arr3, int size)
+//{
+//	for (int i = 0; i < size; i++)
+//	{
+//		arr3[i] = arr1[i] + arr2[i];
+//	}
+//}
+//int main()
+//{
+//	int arr1[] = { 1,2,3,4,5 };
+//	int arr2[] = { 5,4,3,2,1 };
+//	int arr3[5] = { 0 };
+//	addArr(arr1, arr2, arr3, 5);
+//	for (int i = 0; i < 5; i++)
+//		printf("%d ", arr3[i]);
+//	return 0;
+//}
+
+#include<stdio.h>
+#include<string.h>
+// 获取英文文段中单词的数量，重复单词出现几次算几次，单词中只会出现'a'-'z'和'A'-'Z'
+size_t myStrlen(char* str)
+{
+	size_t count = 0;
+	while (*str != '\0')
+	{
+		str++;
+		count++;
+	}
+	return count;
+}
+
+void myGets(char* arr)
+{
+	char ch;
+	int index = 0;
+	while ((ch = getchar()) != '\n')
+	{
+		arr[index++] = ch;
+	}
+	arr[index] = '\0';
+}
+
+int Words_Num(char* str)
 {
 	int left = 0, right = 0;
 	//去掉前导空格
@@ -986,15 +1069,15 @@ int Words_Num(std::string str)
 		right++;
 	}
 	int count = 0;
-	while (right < (int)str.size())
+	while (right < (int)myStrlen(str))
 	{
 		//判断是否为字符
-		if (isalpha(str[right]) == false)
+		if (str[right] < 'A' || str[right] >= 'Z'&&str[right]<'a' || str[right]>'z')
 		{
 			right = ++left;
 			continue;
 		}
-		while (right < (int)str.size() && str[right] != ' ')
+		while (right < (int)myStrlen(str) && str[right] != ' ')
 			right++;
 		count++;
 		right++;
@@ -1008,6 +1091,19 @@ int Words_Num(std::string str)
 
 int main()
 {
-	std::string strText = "In developing driver support systems, it is important to prevent the system from intervening with the driver in the middle of corrective action because the driver support system requires a cooperative operation between controllers and drivers.";
-	std::cout << Words_Num(strText) << std::endl;
+	char arr[80] = " t hello word is ha  ";
+	myGets(arr);
+	int count = Words_Num(arr);
+	printf("%d\n", count);
+	int flag[255] = { 0 };
+	for (int i = 0; i < (int)myStrlen(arr); i++)
+	{
+		flag[arr[i]] ++;
+	}
+	for (int i = 0; i < 255; i++)
+	{
+		if (flag[i])
+			printf("%c:%d\n", i, flag[i]);
+	}
+	return 0;
 }
