@@ -174,30 +174,294 @@
 //}
 
 
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	int kthSmallest(vector<vector<int>>& matrix, int k)
+//	{
+//		vector<int>flag;
+//		for (int i = 0; i < matrix.size(); i++)
+//		{
+//			for (int j = 0; j < matrix[0].size(); j++)
+//			{
+//				flag.push_back(matrix[i][j]);
+//			}
+//		}
+//		sort(flag.begin(), flag.end());
+//		return flag[k - 1];
+//	}
+//};
+//
+//int main()
+//{
+//	return 0;
+//}
+
+//#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//int main()
+//{
+//	int arr1[100], arr2[100];
+//	int n;
+//	scanf("%d", &n);
+//	for (int i = 0; i < n; i++)
+//	{
+//		scanf("%d", &arr1[i]);
+//	}
+//	for (int i = 0; i < n; i++)
+//	{
+//		arr2[i] = arr1[i];
+//		if (i % 2)
+//			printf("%d ", arr2[i]);
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int n;
+//	int arr[100][100];
+//	scanf("%d", &n);
+//	for (int i = 0; i < n; i++)
+//	{
+//		for (int j = 0; j < n; j++)
+//		{
+//			scanf("%d", &arr[i][j]);
+//		}
+//	}
+//
+//	for (int i = 0; i < n; i++)
+//	{
+//		for (int j =0; j <n-i; j++)
+//		{
+//			printf("%d ", arr[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int n;
+//	int arr[100][100];
+//	scanf("%d", &n);
+//	for (int i = 0; i < n; i++)
+//	{
+//		for (int j = 0; j < n; j++)
+//		{
+//			scanf("%d", &arr[i][j]);
+//		}
+//	}
+//
+//	for (int i = 0; i < n; i++)
+//	{
+//		for (int j = 0; j <= i; j++)
+//		{
+//			printf("%d ", arr[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//double avg(int A[], int s, int e)
+//{
+//	double sum = 0;
+//	for (int i = s; i <= e; i++)
+//	{
+//		sum += A[i];
+//	}
+//	return sum / (e - s + 1);
+//}
+//int main()
+//{
+//	int n;
+//	int arr[100];
+//	scanf("%d", &n);
+//	int s, e;
+//	for (int i = 0; i < n; i++)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	scanf("%d %d", &s, &e);
+//	double ret = avg(arr, s, e);
+//	printf("%lf", ret);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr[100];
+//	int n;
+//	scanf("%d", &n);
+//	for (int i = 0; i < n; i++)
+//	{
+//		scanf("%d", &arr[i]);
+//	}
+//	int m;
+//	scanf("%d", &m);
+//
+//	int left = 0, right = n - 1;
+//	int mid = 0;
+//	while (left < right)
+//	{
+//		mid = left + (right - left) / 2;
+//		if (arr[mid] > m)
+//			right = mid - 1;
+//		else if (arr[mid] < m)
+//			left = mid + 1;
+//		else
+//			break;
+//	}
+//	if (left != right)
+//		printf("%d", mid);
+//	else
+//		printf("null\n");
+//	return 0;
+//}
+
+//#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//struct Date
+//{
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//void datePrint(struct Date date)
+//{
+//	printf("%d/%d/%d\n", date._day, date._month, date._year);
+//}
+//int main()
+//{
+//	struct Date date;
+//	printf("输入年月日，中间用空格隔开\n");
+//	scanf("%d %d %d", &date._year, &date._month, &date._day);
+//	datePrint(date);
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//
+////class Solution
+////{
+////public:
+////	int maxPower(string s)
+////	{
+////		int maxLength = 1;
+////		for (int i = 0; i < (int)s.size(); i++)
+////		{
+////			int count = 1;
+////			for (int j = i + 1; j < (int)s.size(); j++)
+////			{
+////				if (s[i] != s[j])
+////					break;
+////				count++;
+////			}maxLength = max(maxLength, count);
+////		}
+////		return maxLength;
+////	}
+////};
+//
+////前后指针
+//class Solution
+//{
+//public:
+//	int maxPower(string s)
+//	{
+//		int cur = 1, prev = 0;
+//		int maxlength = 1, count = 1;
+//		while (cur < (int)s.size())
+//		{
+//			if (s[cur] == s[prev])
+//			{
+//				count++;
+//				cur++;
+//			}
+//			else
+//			{
+//				prev = cur;
+//				cur++;
+//				maxlength = max(maxlength, count);
+//				count = 1;
+//			}
+//		}
+//		if (cur - 1 != prev)
+//			maxlength = max(maxlength, count);
+//		return maxlength;
+//	}
+//};
+//int main()
+//{
+//	string num("cc");
+//	cout << Solution().maxPower(num) << endl;
+//	return 0;
+//}
+
+
 #include<iostream>
+#include<string>
 #include<vector>
-#include<algorithm>
+#include<map>
 using namespace std;
 
-class Solution
-{
+class Solution {
 public:
-	int kthSmallest(vector<vector<int>>& matrix, int k)
+	int countWords(vector<string>& words1, vector<string>& words2)
 	{
-		vector<int>flag;
-		for (int i = 0; i < matrix.size(); i++)
+		map<string, int>m1, m2;
+		for (auto e : words1)
 		{
-			for (int j = 0; j < matrix[0].size(); j++)
-			{
-				flag.push_back(matrix[i][j]);
-			}
+			m1[e]++;
 		}
-		sort(flag.begin(), flag.end());
-		return flag[k - 1];
+
+		for (auto e : words2)
+		{
+			m2[e]++;
+		}
+
+		map<string, int>flag;
+		for (auto e : words1)
+		{
+			if (m1[e] == 1)
+				flag[e]++;
+		}
+
+		for (auto e : words2)
+		{
+			if (m1[e] == 1)
+				flag[e]++;
+		}
+		int count = 0;
+		for (auto e : flag)
+		{
+			if (e.second == 2)
+				count++;
+		}
+		return count;
 	}
 };
 
 int main()
 {
-	return 0;
+	vector<string>work1{ "leetcode","is","amazing","as","is" };
+	vector<string>work2{ "amazing","leetcode","is" };
+	cout << Solution().countWords(work1, work2) << endl;
 }
