@@ -416,52 +416,153 @@
 //}
 
 
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//#include<map>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	int countWords(vector<string>& words1, vector<string>& words2)
+//	{
+//		map<string, int>m1, m2;
+//		for (auto e : words1)
+//		{
+//			m1[e]++;
+//		}
+//
+//		for (auto e : words2)
+//		{
+//			m2[e]++;
+//		}
+//
+//		map<string, int>flag;
+//		for (auto e : words1)
+//		{
+//			if (m1[e] == 1)
+//				flag[e]++;
+//		}
+//
+//		for (auto e : words2)
+//		{
+//			if (m1[e] == 1)
+//				flag[e]++;
+//		}
+//		int count = 0;
+//		for (auto e : flag)
+//		{
+//			if (e.second == 2)
+//				count++;
+//		}
+//		return count;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<string>work1{ "leetcode","is","amazing","as","is" };
+//	vector<string>work2{ "amazing","leetcode","is" };
+//	cout << Solution().countWords(work1, work2) << endl;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//#include<map>
+//using namespace std;
+//
+////class Solution
+////{
+////public:
+////	bool isAnagram(string s, string t)
+////	{
+////		if (s.size() != t.size())
+////			return false;
+////		map<char, int>m1;
+////		for (auto e : s)
+////			m1[e]++;
+////		map<char, int>m2;
+////		for (auto e : t)
+////			m2[e]++;
+////		for (auto e : s)
+////		{
+////			if (m1[e] != m2[e])
+////				return false;
+////		}
+////		return true;
+////	}
+////};
+//
+//class Solution
+//{
+//public:
+//	bool isAnagram(string s, string t)
+//	{
+//		if (s.size() != t.size())
+//			return false;
+//		int arr[26] = { 0 };
+//		for (auto e : s)
+//		{
+//			arr[e - 'a']++;
+//		}
+//
+//		for (auto e : t)
+//		{
+//			arr[e - 'a']--;
+//		}
+//
+//		for (auto e : arr)
+//		{
+//			if (e != 0)
+//				return false;
+//		}
+//		return true;
+//	}
+//};
+//int main()
+//{
+//	string s{ "anagram" }, t{ "nagaram" };
+//	cout << Solution().isAnagram(s, t) << endl;
+//	return 0;
+//}
+
+
 #include<iostream>
-#include<string>
-#include<vector>
-#include<map>
+#include<unordered_set>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-	int countWords(vector<string>& words1, vector<string>& words2)
+	bool isHappy(int n)
 	{
-		map<string, int>m1, m2;
-		for (auto e : words1)
+		unordered_set<int>flag;
+		while (n != 1)
 		{
-			m1[e]++;
-		}
+			int tmp = n;
+			n = 0;
+			while (tmp)
+			{
+				n += (int)pow(tmp % 10, 2);
+				tmp /= 10;
+			}
 
-		for (auto e : words2)
-		{
-			m2[e]++;
-		}
+			if (flag.find(n) != flag.end())
+			{
+				//说明产生了循环
+				return false;
+			}
 
-		map<string, int>flag;
-		for (auto e : words1)
-		{
-			if (m1[e] == 1)
-				flag[e]++;
+			flag.insert(n);
 		}
-
-		for (auto e : words2)
-		{
-			if (m1[e] == 1)
-				flag[e]++;
-		}
-		int count = 0;
-		for (auto e : flag)
-		{
-			if (e.second == 2)
-				count++;
-		}
-		return count;
+		return true;
 	}
 };
 
 int main()
 {
-	vector<string>work1{ "leetcode","is","amazing","as","is" };
-	vector<string>work2{ "amazing","leetcode","is" };
-	cout << Solution().countWords(work1, work2) << endl;
+	int n = 2;
+	cout << Solution().isHappy(n) << endl;
+	return 0;
 }
