@@ -110,39 +110,135 @@
 //}
 
 
+//#include<iostream>
+//#include<unordered_map>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	bool canConstruct(string ransomNote, string magazine)
+//	{
+//		unordered_map<char, int> flag;
+//		for (auto e : magazine)
+//		{
+//			flag[e]++;
+//		}
+//
+//		for (auto e : ransomNote)
+//		{
+//			flag[e]--;
+//		}
+//
+//		for (auto e : flag)
+//		{
+//			if (e.second < 0)
+//				return false;
+//		}
+//		return true;
+//	}
+//};
+//
+//int main()
+//{
+//	string ransomNote("a");
+//	string ransomNote("b");
+//	cout << Solution().canConstruct(ransomNote, ransomNote) << endl;
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<math.h>
+//int main()
+//{
+//	unsigned int sum = 0;
+//	for (int i = 1; i <= 2019; i++)
+//	{
+//		int tmp = i;
+//		int flag = 0;//用于标记数位中是否出现2,0,1,9
+//		while (tmp)
+//		{
+//			if (tmp % 10 == 2 || tmp % 10 == 0 || tmp % 10 == 1 || tmp % 10 == 9)
+//			{
+//				flag = 1;
+//				break;
+//			}
+//			tmp /= 10;
+//		}
+//		if (flag == 1)
+//			sum += i * i;
+//	}
+//
+//	printf("%u", sum);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int n = 123;
+//	int ret = 0;
+//	while (n)
+//	{
+//		ret *= 10;
+//		ret += n % 10;
+//		n /= 10;
+//	}
+//	printf("%d", ret);
+//	return 0;
+//}
+
 #include<iostream>
-#include<unordered_map>
+#include<vector>
+#include<algorithm>
 using namespace std;
 
 class Solution
 {
 public:
-	bool canConstruct(string ransomNote, string magazine)
+	vector<vector<int>> threeSum(vector<int>& nums)
 	{
-		unordered_map<char, int> flag;
-		for (auto e : magazine)
+		if (nums.size() < 3)
+			return {};
+		vector<vector<int>> ret;
+		sort(nums.begin(), nums.end());
+		for (int i = 0; i < nums.size() - 2; i++)
 		{
-			flag[e]++;
-		}
+			int left = i + 1, right = nums.size() - 1;
 
-		for (auto e : ransomNote)
-		{
-			flag[e]--;
-		}
+			//需要去重
+			if (i > 0 && nums[i] == nums[i - 1])
+				continue;
 
-		for (auto e : flag)
-		{
-			if (e.second < 0)
-				return false;
+			while (left < right)
+			{
+				if (nums[left] + nums[i] + nums[right] > 0)
+					right--;
+				else if (nums[left] + nums[i] + nums[right] < 0)
+					left++;
+				else
+				{
+					vector<int>tmp;
+					tmp.push_back(nums[left]);
+					tmp.push_back(nums[right]);
+					tmp.push_back(nums[i]);
+					ret.push_back(tmp);
+					//需要去重
+					while (left + 1 < right&&nums[left] == nums[left + 1])
+						left++;
+
+					left++;
+					right--;
+
+				}
+			}
 		}
-		return true;
+		return ret;
 	}
 };
-
 int main()
 {
-	string ransomNote("a");
-	string ransomNote("b");
-	cout << Solution().canConstruct(ransomNote, ransomNote) << endl;
 	return 0;
 }
