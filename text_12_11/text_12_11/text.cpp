@@ -190,48 +190,209 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	vector<vector<int>> threeSum(vector<int>& nums)
+//	{
+//		if (nums.size() < 3)
+//			return {};
+//		vector<vector<int>> ret;
+//		sort(nums.begin(), nums.end());
+//		for (int i = 0; i < nums.size() - 2; i++)
+//		{
+//			int left = i + 1, right = nums.size() - 1;
+//
+//			//需要去重
+//			if (i > 0 && nums[i] == nums[i - 1])
+//				continue;
+//
+//			while (left < right)
+//			{
+//				if (nums[left] + nums[i] + nums[right] > 0)
+//					right--;
+//				else if (nums[left] + nums[i] + nums[right] < 0)
+//					left++;
+//				else
+//				{
+//					vector<int>tmp;
+//					tmp.push_back(nums[left]);
+//					tmp.push_back(nums[right]);
+//					tmp.push_back(nums[i]);
+//					ret.push_back(tmp);
+//					//需要去重
+//					while (left + 1 < right&&nums[left] == nums[left + 1])
+//						left++;
+//
+//					left++;
+//					right--;
+//
+//				}
+//			}
+//		}
+//		return ret;
+//	}
+//};
+//int main()
+//{
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//
+//int missingNumber(int* nums, int numsSize)
+//{
+//	int sum = (1 + numsSize)*numsSize / 2;//等差数列
+//	for (int i = 0; i < numsSize; i++)
+//	{
+//		sum -= nums[i];
+//	}
+//	return sum;
+//}
+//int main()
+//{
+//	int nums[] = { 1,0,3 };
+//	missingNumber(nums, sizeof(nums) / sizeof(nums[0]));
+//	return 0;
+//}
+
+//#include<iostream>
+//int* sortArrayByParity(int* nums, int numsSize, int* returnSize)
+//{
+//	int left = 0, right = numsSize - 1;
+//
+//	while (left < right)
+//	{
+//		//左边找奇数
+//		while (left < right)
+//		{
+//			if (nums[left] % 2 != 0)
+//				break;
+//			left++;
+//		}
+//
+//		//右面找偶数
+//		while (left < right)
+//		{
+//			if (nums[right] % 2 == 0)
+//				break;
+//			right--;
+//		}
+//
+//		//判断是否满足交换条件
+//		if (left < right)
+//		{
+//			int tmp = nums[left];
+//			nums[left] = nums[right];
+//			nums[right] = tmp;
+//		}
+//	}
+//	*returnSize = numsSize;
+//	return nums;
+//}
+//
+//int main()
+//{
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<string.h>
+////int findRepeatNumber(int* nums, int numsSize)
+////{
+////	for (int i = 0; i < numsSize - 1; i++)
+////	{
+////		for (int j = 0; j < numsSize - i - 1; j++)
+////		{
+////			if (nums[j] > nums[j + 1])
+////			{
+////				int tmp = nums[j];
+////				nums[j] = nums[j + 1];
+////				nums[j + 1] = tmp;
+////			}
+////		}
+////	}
+////
+////	int cur = 1, prev = 0;
+////	while (cur < numsSize - 1)
+////	{
+////		if (nums[cur] == nums[prev])
+////			break;
+////		cur++;
+////		prev++;
+////	}
+////	return nums[cur];
+////}
+//
+//int findRepeatNumber(int* nums, int numsSize)
+//{
+//	int* flag = (int*)malloc(sizeof(int)*numsSize);
+//	memset(flag, 1, sizeof(int)*numsSize);
+//	int i = 0;
+//	for (i = 0; i < numsSize; i++)
+//	{
+//		flag[nums[i]]++;
+//		if (flag[nums[i]] > 1)
+//			break;
+//	}
+//	return nums[i];
+//}
+//
+//int main()
+//{
+//	int nums[] = { 2, 3, 1, 0, 2, 5, 3 };
+//	printf("%d", findRepeatNumber(nums, sizeof(nums) / sizeof(nums[0])));
+//	return 0;
+//}
+
+
+
 #include<iostream>
 #include<vector>
 #include<algorithm>
 using namespace std;
 
-class Solution
-{
+class Solution {
 public:
-	vector<vector<int>> threeSum(vector<int>& nums)
+	vector<vector<int>> fourSum(vector<int>& nums, int target)
 	{
-		if (nums.size() < 3)
-			return {};
-		vector<vector<int>> ret;
 		sort(nums.begin(), nums.end());
-		for (int i = 0; i < nums.size() - 2; i++)
+		vector<vector<int>>ret;
+		for (int i = 0; i < nums.size(); i++)
 		{
-			int left = i + 1, right = nums.size() - 1;
-
-			//需要去重
 			if (i > 0 && nums[i] == nums[i - 1])
 				continue;
-
-			while (left < right)
+			for (int j = i + 1; j < nums.size(); j++)
 			{
-				if (nums[left] + nums[i] + nums[right] > 0)
-					right--;
-				else if (nums[left] + nums[i] + nums[right] < 0)
-					left++;
-				else
+				if (j > i + 1 && nums[j] == nums[j - 1])
+					continue;
+				int left = j + 1, right = nums.size() - 1;
+				while (left < right)
 				{
-					vector<int>tmp;
-					tmp.push_back(nums[left]);
-					tmp.push_back(nums[right]);
-					tmp.push_back(nums[i]);
-					ret.push_back(tmp);
-					//需要去重
-					while (left + 1 < right&&nums[left] == nums[left + 1])
+					//会溢出
+					//if (nums[left] + nums[right] + nums[i] + nums[j] > target)
+					if (target - nums[left] - nums[right] < nums[i] + nums[j])
+						right--;
+					else if (target - nums[left] - nums[right] > nums[i] + nums[j])
 						left++;
-
-					left++;
-					right--;
-
+					else
+					{
+						vector<int>tmp{ nums[left],nums[right],nums[i],nums[j] };
+						ret.push_back(tmp);
+						while (left + 1 < right&&nums[left] == nums[left + 1])
+							left++;
+						left++;
+						right--;
+					}
 				}
 			}
 		}
@@ -240,5 +401,14 @@ public:
 };
 int main()
 {
+	vector<int>nums{ 2,2,2,2 };
+	int target = 8;
+	vector<vector<int>> ret = Solution().fourSum(nums, target);
+	for(int i = 0; i < ret.size(); i++)
+	{
+		for (int j = 0; j < ret[i].size(); j++)
+			cout << ret[i][j] << " ";
+		cout << endl;
+	}
 	return 0;
 }
