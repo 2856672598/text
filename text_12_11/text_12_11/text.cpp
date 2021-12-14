@@ -356,59 +356,187 @@
 
 
 
-#include<iostream>
-#include<vector>
-#include<algorithm>
-using namespace std;
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	vector<vector<int>> fourSum(vector<int>& nums, int target)
+//	{
+//		sort(nums.begin(), nums.end());
+//		vector<vector<int>>ret;
+//		for (int i = 0; i < nums.size(); i++)
+//		{
+//			if (i > 0 && nums[i] == nums[i - 1])
+//				continue;
+//			for (int j = i + 1; j < nums.size(); j++)
+//			{
+//				if (j > i + 1 && nums[j] == nums[j - 1])
+//					continue;
+//				int left = j + 1, right = nums.size() - 1;
+//				while (left < right)
+//				{
+//					//会溢出
+//					//if (nums[left] + nums[right] + nums[i] + nums[j] > target)
+//					if (target - nums[left] - nums[right] < nums[i] + nums[j])
+//						right--;
+//					else if (target - nums[left] - nums[right] > nums[i] + nums[j])
+//						left++;
+//					else
+//					{
+//						vector<int>tmp{ nums[left],nums[right],nums[i],nums[j] };
+//						ret.push_back(tmp);
+//						while (left + 1 < right&&nums[left] == nums[left + 1])
+//							left++;
+//						left++;
+//						right--;
+//					}
+//				}
+//			}
+//		}
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int>nums{ 2,2,2,2 };
+//	int target = 8;
+//	vector<vector<int>> ret = Solution().fourSum(nums, target);
+//	for(int i = 0; i < ret.size(); i++)
+//	{
+//		for (int j = 0; j < ret[i].size(); j++)
+//			cout << ret[i][j] << " ";
+//		cout << endl;
+//	}
+//	return 0;
+//}
 
-class Solution {
-public:
-	vector<vector<int>> fourSum(vector<int>& nums, int target)
-	{
-		sort(nums.begin(), nums.end());
-		vector<vector<int>>ret;
-		for (int i = 0; i < nums.size(); i++)
-		{
-			if (i > 0 && nums[i] == nums[i - 1])
-				continue;
-			for (int j = i + 1; j < nums.size(); j++)
-			{
-				if (j > i + 1 && nums[j] == nums[j - 1])
-					continue;
-				int left = j + 1, right = nums.size() - 1;
-				while (left < right)
-				{
-					//会溢出
-					//if (nums[left] + nums[right] + nums[i] + nums[j] > target)
-					if (target - nums[left] - nums[right] < nums[i] + nums[j])
-						right--;
-					else if (target - nums[left] - nums[right] > nums[i] + nums[j])
-						left++;
-					else
-					{
-						vector<int>tmp{ nums[left],nums[right],nums[i],nums[j] };
-						ret.push_back(tmp);
-						while (left + 1 < right&&nums[left] == nums[left + 1])
-							left++;
-						left++;
-						right--;
-					}
-				}
-			}
-		}
-		return ret;
-	}
-};
-int main()
-{
-	vector<int>nums{ 2,2,2,2 };
-	int target = 8;
-	vector<vector<int>> ret = Solution().fourSum(nums, target);
-	for(int i = 0; i < ret.size(); i++)
-	{
-		for (int j = 0; j < ret[i].size(); j++)
-			cout << ret[i][j] << " ";
-		cout << endl;
-	}
-	return 0;
-}
+
+//#include<iostream>
+//#include<map>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//	int distributeCandies(vector<int>& candyType)
+//	{
+//		map<int, int>flag;
+//		for (auto e:candyType)
+//		{
+//			flag[e]++;
+//		}
+//
+//		int mid = candyType.size() / 2;
+//		return flag.size() > mid ? mid : flag.size();
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int>candyType{ 1,1,2,2,3,3 };
+//	cout << Solution().distributeCandies(candyType) << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//#include<unordered_map>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	int longestPalindrome(string s)
+//	{
+//		unordered_map<int, int> nums;
+//		for (auto e : s)
+//		{
+//			nums[e]++;
+//		}
+//		int count = 0;
+//		int flag = 0;
+//		for (auto e : nums)
+//		{
+//			if (e.second % 2 == 0)
+//				count += e.second;
+//			else
+//			{
+//				count += e.second - 1;
+//				flag = 1;
+//			}
+//		}
+//		
+//		return count + flag;
+//	}
+//};
+//int main()
+//{
+//	string s = "abccccdd";
+//	cout << Solution().longestPalindrome(s) << endl;
+//	return 0;
+//}
+
+
+////819. 最常见的单词
+//#include<iostream>
+//#include<vector>
+//#include<unordered_map>
+//#include<unordered_set>
+//#include<map>
+//#include<string>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	string mostCommonWord(string paragraph, vector<string>& banned)
+//	{
+//		unordered_map<string, int>flag;
+//		//先将paragraph转成小写字母
+//		for (int i = 0; i < paragraph.size(); i++)
+//		{
+//			paragraph[i] = towlower(paragraph[i]);
+//		}
+//		string tmp;
+//		for (int i = 0; i < paragraph.size(); i++)
+//		{
+//			tmp.resize(0);
+//			while (paragraph[i] >= 'a'&&paragraph[i] <= 'z'&&i < paragraph.size())
+//			{
+//				tmp += paragraph[i++];
+//			}
+//			if (tmp != "")
+//			flag[tmp] ++;
+//		}
+//		unordered_set<string>ban;
+//		for (auto e : banned)
+//		{
+//			ban.insert(e);
+//		}
+//		multimap<int, string> sortList;
+//		for (auto e : flag)
+//		{
+//			sortList.insert(make_pair(e.second, e.first));
+//		}
+//		auto it = sortList.rbegin();
+//		while (it != sortList.rend())
+//		{
+//			if (ban.find((*it).second) == ban.end())
+//			{
+//				return { (*it).second };
+//			}
+//			it++;
+//		}
+//		return {};
+//	}
+//};
+//int main()
+//{
+//	string paragraph = "Bob hit a ball, the hit BALL flew far after it was hit.";
+//	vector<string> banned = { "hit" };
+//	cout << Solution().mostCommonWord(paragraph, banned) << endl;
+//	return 0;
+//}
