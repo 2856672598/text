@@ -540,3 +540,145 @@
 //	cout << Solution().mostCommonWord(paragraph, banned) << endl;
 //	return 0;
 //}
+
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//vector<int> getNext(const string& s)
+//{
+//	vector<int> next;
+//	next.resize(s.size());
+//
+//	int j = 0;
+//	for (int i = 1; i < s.size(); i++)
+//	{
+//		//如果前后缀不相同则需要回退
+//		while (s[i] != s[j] && j > 0)
+//		{
+//			j = next[j - 1];
+//		}
+//
+//		//相等都进行+1
+//		if (s[i] == s[j])
+//		{
+//			j++;
+//		}
+//		//更新next
+//		next[i] = j;
+//	}
+//	return next;
+//}
+//int main()
+//{
+//	string s = "aabaaf";
+//	vector<int>next = getNext(s);
+//	for (auto e : next)
+//		cout << e << " ";
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//
+//
+//class Solution
+//{
+//public:
+//
+//	vector<int>getNext(const string& s)
+//	{
+//		vector<int>next;
+//		next.resize(s.size());
+//		int j = 0;
+//		for (int i = 1; i < (int)s.size(); i++)
+//		{
+//			//如果未匹配成功需要回退
+//			while (s[i] != s[j] && j > 0)
+//				j = next[j - 1];
+//
+//			if (s[i] == s[j])
+//				j++;
+//			next[i] = j;
+//		}
+//		return next;
+//	}
+//
+//	bool repeatedSubstringPattern(string s)
+//	{
+//		vector<int>next = getNext(s);
+//		if (s.size() == 0)
+//			return false;
+//		if (next[s.size() - 1] == 0)
+//			return false;
+//
+//		if (s.size() % (s.size() - next[s.size() - 1]) == 0)
+//			return true;
+//		return false;
+//	}
+//};
+//int main()
+//{
+//	return 0;
+//}
+
+
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+
+class Solution
+{
+public:
+	vector<int> getNext(const string& needle)
+	{
+		vector<int>next;
+		next.resize(needle.size());
+		int j = 0;
+		for (int i = 1; i < needle.size(); i++)
+		{
+			while (j > 0 && needle[i] != needle[j])
+			{
+				j = next[j - 1];
+			}
+
+			if (needle[i] == needle[j])
+				j++;
+			next[i] = j;
+		}
+		return next;
+	}
+
+	int strStr(string haystack, string needle)
+	{
+		if (needle.size() == 0)
+			return 0;
+		vector<int>next = getNext(needle);
+		int j = 0;
+		for (int i = 0; i < (int)haystack.size(); i++)
+		{
+			while (haystack[i] != needle[j] && j > 0)
+			{
+				j = next[j - 1];
+			}
+			if (haystack[i] == needle[j])
+				j++;
+			if (j == needle.size())
+				return i - next.size() + 1;
+		}
+		return -1;
+	}
+};
+
+int main()
+{
+	string haystack = "a";
+	string needle = "";
+	cout << Solution().strStr(haystack, needle);
+	return 0;
+}

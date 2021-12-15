@@ -1,6 +1,3 @@
 ﻿  text.cpp
-d:\githup\text\text_12_11\text_12_11\text.cpp(499): warning C4018: “<”: 有符号/无符号不匹配
-d:\githup\text\text_12_11\text_12_11\text.cpp(501): warning C4244: “=”: 从“wint_t”转换到“char”，可能丢失数据
-d:\githup\text\text_12_11\text_12_11\text.cpp(504): warning C4018: “<”: 有符号/无符号不匹配
-d:\githup\text\text_12_11\text_12_11\text.cpp(507): warning C4018: “<”: 有符号/无符号不匹配
+d:\githup\text\text_12_11\text_12_11\text.cpp(643): warning C4018: “<”: 有符号/无符号不匹配
   text_12_11.vcxproj -> D:\Githup\text\text_12_11\Debug\text_12_11.exe
