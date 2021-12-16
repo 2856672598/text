@@ -627,58 +627,308 @@
 //}
 
 
-#include<iostream>
-#include<vector>
-#include<string>
-using namespace std;
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	vector<int> getNext(const string& needle)
+//	{
+//		vector<int>next;
+//		next.resize(needle.size());
+//		int j = 0;
+//		for (int i = 1; i < needle.size(); i++)
+//		{
+//			while (j > 0 && needle[i] != needle[j])
+//			{
+//				j = next[j - 1];
+//			}
+//
+//			if (needle[i] == needle[j])
+//				j++;
+//			next[i] = j;
+//		}
+//		return next;
+//	}
+//
+//	int strStr(string haystack, string needle)
+//	{
+//		if (needle.size() == 0)
+//			return 0;
+//		vector<int>next = getNext(needle);
+//		int j = 0;
+//		for (int i = 0; i < (int)haystack.size(); i++)
+//		{
+//			while (haystack[i] != needle[j] && j > 0)
+//			{
+//				j = next[j - 1];
+//			}
+//			if (haystack[i] == needle[j])
+//				j++;
+//			if (j == needle.size())
+//				return i - next.size() + 1;
+//		}
+//		return -1;
+//	}
+//};
+//
+//int main()
+//{
+//	string haystack = "a";
+//	string needle = "";
+//	cout << Solution().strStr(haystack, needle);
+//	return 0;
+//}
 
-class Solution
-{
-public:
-	vector<int> getNext(const string& needle)
-	{
-		vector<int>next;
-		next.resize(needle.size());
-		int j = 0;
-		for (int i = 1; i < needle.size(); i++)
-		{
-			while (j > 0 && needle[i] != needle[j])
-			{
-				j = next[j - 1];
-			}
 
-			if (needle[i] == needle[j])
-				j++;
-			next[i] = j;
-		}
-		return next;
-	}
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int Inversenumber(vector<int>& nums)
+//{
+//	int count = 0;
+//	for (int i = 0; i < (int)nums.size() - 1; i++)
+//	{
+//		for (int j = 0; j < (int)nums.size() - i - 1; j++)
+//		{
+//			if (nums[j] > nums[j + 1])
+//			{
+//				swap(nums[j], nums[j + 1]);
+//				count++;
+//			}
+//		}
+//	}
+//	return count;
+//}
+//
+//int main()
+//{
+//	int n;
+//	while (cin >> n)
+//	{
+//		vector<int>nums;
+//		nums.resize(n);
+//		for (int i = 0; i < n; i++)
+//		{
+//			cin >> nums[i];
+//		}
+//		int count = Inversenumber(nums);
+//		if (count % 2 == 0)
+//			cout << "even" << endl;
+//		else
+//			cout << "odd" << endl;
+//
+//	}
+//	return 0;
+//}
 
-	int strStr(string haystack, string needle)
-	{
-		if (needle.size() == 0)
-			return 0;
-		vector<int>next = getNext(needle);
-		int j = 0;
-		for (int i = 0; i < (int)haystack.size(); i++)
-		{
-			while (haystack[i] != needle[j] && j > 0)
-			{
-				j = next[j - 1];
-			}
-			if (haystack[i] == needle[j])
-				j++;
-			if (j == needle.size())
-				return i - next.size() + 1;
-		}
-		return -1;
-	}
-};
+//#define _CRT_SECURE_NO_WARNINGS
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//void _Mergesort(vector<int>&nums, int left, int right, int& count)
+//{
+//	//一个数默认就有序了
+//	if (left >= right)
+//		return;
+//	int mid = left + (right - left) / 2;
+//	_Mergesort(nums, left, mid, count);
+//	_Mergesort(nums, mid + 1, right, count);
+//
+//	//开始归并
+//	vector<int>flag;
+//	flag.resize(nums.size());
+//	int left1 = left, right1 = mid;
+//	int left2 = mid + 1, right2 = right;
+//	int index = left1;
+//	while (left1 <= right1 && left2 <= right2)
+//	{
+//		if (nums[left1] > nums[left2])
+//		{
+//			flag[index++] = nums[left2++];
+//			count += mid - left1 + 1;
+//		}
+//		else
+//		{
+//			flag[index++] = nums[left1++];
+//		}
+//	}
+//
+//	while (left1 <= right1)
+//	{
+//		flag[index++] = nums[left1++];
+//	}
+//	while (left2 <= right2)
+//	{
+//		flag[index++] = nums[left2++];
+//	}
+//
+//	//拷贝回原来的数组
+//	for (int i = left; i <= right; i++)
+//	{
+//		nums[i] = flag[i];
+//	}
+//}
+//
+//void Mergesort(vector<int>&nums)
+//{
+//	int count = 0;
+//	_Mergesort(nums, 0, nums.size() - 1, count);
+//	if (count % 2 == 0)
+//		cout << "even" << endl;
+//	else
+//		cout << "odd" << endl;
+//}
+//
+//int main()
+//{
+//	int n = 0;
+//	while (~scanf("%d", &n))
+//	{
+//		vector<int>nums;
+//		nums.resize(n);
+//		for (int i = 0; i < n; i++)
+//		{
+//			scanf("%d", &nums[i]);
+//		}
+//		Mergesort(nums);
+//	}
+//	return 0;
+//}
 
-int main()
-{
-	string haystack = "a";
-	string needle = "";
-	cout << Solution().strStr(haystack, needle);
-	return 0;
-}
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	void setZeroes(vector<vector<int>>& matrix)
+//	{
+//		int rowSize = matrix.size();
+//		int colSize = matrix[0].size();
+//		vector<int>row(rowSize), col(colSize);
+//		for (int i = 0; i < rowSize; i++)
+//		{
+//			for (int j = 0; j < colSize; j++)
+//			{
+//				if (matrix[i][j] == 0)
+//				{
+//					row[i] = col[j] = 1;
+//				}
+//			}
+//		}
+//		
+//		for (int i = 0; i < rowSize; i++)
+//		{
+//			for (int j = 0; j < colSize; j++)
+//			{
+//				if (row[i] || col[j])
+//				{
+//					matrix[i][j] = 0;
+//				}
+//			}
+//		}
+//	}
+//};
+//int main()
+//{
+//	vector<vector<int>>matrix{ {0,1,2,0},{3,4,5,2},{1,3,1,5} };
+//	Solution().setZeroes(matrix);
+//	int rowSize = matrix.size();
+//	int colSize = matrix[0].size();
+//	for (int i = 0; i < rowSize; i++)
+//	{
+//		for (int j = 0; j < colSize; j++)
+//		{
+//			cout << matrix[i][j] << " ";
+//		}
+//		cout << endl;
+//	}
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//#include<unordered_map>
+//using namespace std;
+//
+//class WordsFrequency {
+//public:
+//	WordsFrequency(vector<string>& book)
+//	{
+//		for (auto e : book)
+//		{
+//			nums[e]++;
+//		}
+//	}
+//
+//	int get(string word)
+//	{
+//		auto it = nums.find(word);
+//		if (it == nums.end())
+//			return 0;
+//		else
+//			return (*it).second;
+//	}
+//private:
+//	unordered_map<string, int>nums;
+//};
+//
+//int main()
+//{
+//	vector<string>book{ "i", "have", "an"};
+//	WordsFrequency tmp(book);
+//
+//	cout << tmp.get("i") << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	vector<int> partitionLabels(string s)
+//	{
+//		int hash[26] = { 0 };
+//		//找到每个字符最后一个所在的位置
+//		for (int i = 0; i < (int)s.size(); i++)
+//		{
+//			hash[s[i] - 'a'] = i;
+//		}
+//		vector<int>ret;
+//		int left = 0, right = 0;
+//		for (int i = 0; i < (int)s.size(); i++)
+//		{
+//			right = max(right, hash[s[i] - 'a']);
+//			if (i == right)
+//			{
+//				ret.push_back(right - left + 1);
+//				left = right + 1;
+//			}
+//		}
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	string s{ "ababcbacadefegdehijhklij" };
+//	vector<int>ret = Solution().partitionLabels(s);
+//	for (auto e : ret)
+//		cout << e << " ";
+//	return 0;
+//}
+
+
