@@ -126,54 +126,178 @@
 //	return 0;
 //}
 
-//39. 组合总和
+////39. 组合总和
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	vector<int>tmp;
+//	void _combinationSum(vector<int>& candidates, int target, int index, vector<vector<int>>& ret, int sum)
+//	{
+//		if (sum == target)
+//		{
+//			ret.push_back(tmp);
+//			return;
+//		}
+//		else if (sum > target)
+//			return;
+//
+//		for (int i = index; i < (int)candidates.size(); i++)
+//		{
+//			tmp.push_back(candidates[i]);
+//			sum += candidates[i];
+//			_combinationSum(candidates, target, i, ret, sum);
+//			sum -= candidates[i];
+//			tmp.pop_back();
+//		}
+//	}
+//
+//	vector<vector<int>> combinationSum(vector<int>& candidates, int target)
+//	{
+//		vector<vector<int>>ret;
+//		int sum = 0;
+//		_combinationSum(candidates, target, 0, ret, sum);
+//		return ret;
+//	}
+//};
+//int main()
+//{
+//	vector<int> candidates{ 2, 3, 6, 7 };
+//	int target = 7;
+//	vector<vector<int>>ret = Solution().combinationSum(candidates, target);
+//	for (int i = 0; i < (int)ret.size(); i++)
+//	{
+//		for (int j = 0; j < (int)ret[i].size(); j++)
+//			cout << ret[i][j] << " ";
+//		cout << endl;
+//	}
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	vector<int>tmp;
+//	vector<int>flag;
+//	void backtracking(vector<int>& candidates, int target, int index, int& sum, vector<vector<int>>&ret)
+//	{
+//		if (sum == target)
+//		{
+//			ret.push_back(tmp);
+//			return;
+//		}
+//		for (int i = index; i < (int)candidates.size() && sum + candidates[i] <= target; i++)
+//		{
+//			//去重，去掉的是同一层重复的数
+//			if (i > 0 && candidates[i] == candidates[i - 1] && flag[i - 1] == false)
+//				continue;
+//			tmp.push_back(candidates[i]);
+//			sum += candidates[i];
+//			flag[i] = true;
+//			backtracking(candidates, target, i + 1, sum, ret);
+//			sum -= candidates[i];
+//			flag[i] = false;
+//			tmp.pop_back();
+//		}
+//	}
+//
+//	vector<vector<int>> combinationSum2(vector<int>& candidates, int target)
+//	{
+//		vector<vector<int>>ret;
+//		int sum = 0;
+//		flag.resize(candidates.size());
+//
+//		sort(candidates.begin(), candidates.end());
+//		backtracking(candidates, target, 0, sum, ret);
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int>candidates{ 10,1,2,7,6,1,5 };
+//	int target = 8;
+//	vector<vector<int>>ret = Solution().combinationSum2(candidates, target);
+//	for (int i = 0; i < ret.size(); i++)
+//	{
+//		for (int j = 0; j < ret[i].size(); j++)
+//			cout << ret[i][j] << " ";
+//		cout << endl;
+//	}
+//	return 0;
+//}
+
+//131. 分割回文串
 #include<iostream>
 #include<vector>
-#include<algorithm>
+#include<string>
 using namespace std;
-
 class Solution
 {
 public:
-	vector<int>tmp;
-	void _combinationSum(vector<int>& candidates, int target, int index, vector<vector<int>>& ret, int sum)
+	bool isPalindrome(string s, int left, int right)
 	{
-		if (sum == target)
+		while (left < right)
+		{
+			if (s[left++] != s[right--])
+				return false;
+		}
+		return true;
+	}
+
+	vector<string>tmp;
+	void backtracking(string s, int index, vector<vector<string>>& ret)
+	{
+		if (s.size() == index)
 		{
 			ret.push_back(tmp);
 			return;
 		}
-		else if (sum > target)
-			return;
 
-		for (int i = index; i < (int)candidates.size(); i++)
+		for (int i = index; i < (int)s.size(); i++)
 		{
-			tmp.push_back(candidates[i]);
-			sum += candidates[i];
-			_combinationSum(candidates, target, i, ret, sum);
-			sum -= candidates[i];
+			if (isPalindrome(s, index, i))
+			{
+				//是回文
+				string str = s.substr(index, i - index + 1);
+				tmp.push_back(str);
+			}
+			else
+				continue;
+			backtracking(s, i + 1, ret);
 			tmp.pop_back();
 		}
 	}
 
-	vector<vector<int>> combinationSum(vector<int>& candidates, int target)
+	vector<vector<string>> partition(string s)
 	{
-		vector<vector<int>>ret;
-		int sum = 0;
-		_combinationSum(candidates, target, 0, ret, sum);
+		vector<vector<string>>ret;
+		backtracking(s, 0, ret);
 		return ret;
 	}
 };
 int main()
 {
-	vector<int> candidates{ 2, 3, 6, 7 };
-	int target = 7;
-	vector<vector<int>>ret = Solution().combinationSum(candidates, target);
-	for (int i = 0; i < (int)ret.size(); i++)
+	string s{ "aabc" };
+	vector<vector<string>>ret = Solution().partition(s);
+
+	for (int i = 0; i < ret.size(); i++)
 	{
-		for (int j = 0; j < (int)ret[i].size(); j++)
+		for (int j = 0; j < ret[i].size(); j++)
+		{
 			cout << ret[i][j] << " ";
+		}
 		cout << endl;
+
 	}
 	return 0;
 }
