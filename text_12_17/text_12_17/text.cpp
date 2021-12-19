@@ -236,68 +236,539 @@
 //	return 0;
 //}
 
-//131. 分割回文串
-#include<iostream>
-#include<vector>
-#include<string>
-using namespace std;
-class Solution
-{
-public:
-	bool isPalindrome(string s, int left, int right)
-	{
-		while (left < right)
-		{
-			if (s[left++] != s[right--])
-				return false;
-		}
-		return true;
-	}
+////131. 分割回文串
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//class Solution
+//{
+//public:
+//	bool isPalindrome(string s, int left, int right)
+//	{
+//		while (left < right)
+//		{
+//			if (s[left++] != s[right--])
+//				return false;
+//		}
+//		return true;
+//	}
+//
+//	vector<string>tmp;
+//	void backtracking(string s, int index, vector<vector<string>>& ret)
+//	{
+//		if (s.size() == index)
+//		{
+//			ret.push_back(tmp);
+//			return;
+//		}
+//
+//		for (int i = index; i < (int)s.size(); i++)
+//		{
+//			if (isPalindrome(s, index, i))
+//			{
+//				//是回文
+//				string str = s.substr(index, i - index + 1);
+//				tmp.push_back(str);
+//			}
+//			else
+//				continue;
+//			backtracking(s, i + 1, ret);
+//			tmp.pop_back();
+//		}
+//	}
+//
+//	vector<vector<string>> partition(string s)
+//	{
+//		vector<vector<string>>ret;
+//		backtracking(s, 0, ret);
+//		return ret;
+//	}
+//};
+//int main()
+//{
+//	string s{ "aabc" };
+//	vector<vector<string>>ret = Solution().partition(s);
+//
+//	for (int i = 0; i < ret.size(); i++)
+//	{
+//		for (int j = 0; j < ret[i].size(); j++)
+//		{
+//			cout << ret[i][j] << " ";
+//		}
+//		cout << endl;
+//
+//	}
+//	return 0;
+//}
 
-	vector<string>tmp;
-	void backtracking(string s, int index, vector<vector<string>>& ret)
-	{
-		if (s.size() == index)
-		{
-			ret.push_back(tmp);
-			return;
-		}
+//#include<stdio.h>
+////int minSubArrayLen(int target, int* nums, int numsSize)
+////{
+////	int begin = 0, end = 0;
+////	int sum = 0;
+////	int minLeng = 0;
+////	while (end <= numsSize)
+////	{
+////		if (sum >= target)
+////		{
+////			if (end - begin < minLeng || minLeng == 0)
+////			{
+////				minLeng = end - begin;
+////			}
+////			sum -= nums[begin++];
+////		}
+////		else
+////		{
+////			if (end == numsSize)
+////				break;
+////			sum += nums[end++];
+////		}
+////	}
+////	return minLeng;
+////}
+//
+//
+//int minSubArrayLen(int target, int* nums, int numsSize)
+//{
+//	int begin = 0, end = 0;
+//	int sum = 0;
+//	int minlength = 0;
+//	while (end < numsSize)
+//	{
+//		sum += nums[end];
+//		while (sum >= target)
+//		{
+//			if (end - begin + 1 < minlength || minlength == 0)
+//				minlength = end - begin + 1;
+//			sum -= nums[begin++];
+//		}
+//		end++;
+//	}
+//	return minlength;
+//}
+//int main()
+//{
+//	int nums[] = { 2,3,1,2,4,3 };
+//	int target = 7;
+//	minSubArrayLen(target, nums, sizeof(nums) / sizeof(nums[0]));
+//	return 0;
+//}
 
-		for (int i = index; i < (int)s.size(); i++)
-		{
-			if (isPalindrome(s, index, i))
-			{
-				//是回文
-				string str = s.substr(index, i - index + 1);
-				tmp.push_back(str);
-			}
-			else
-				continue;
-			backtracking(s, i + 1, ret);
-			tmp.pop_back();
-		}
-	}
 
-	vector<vector<string>> partition(string s)
-	{
-		vector<vector<string>>ret;
-		backtracking(s, 0, ret);
-		return ret;
-	}
-};
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	bool isPalindrome(const string& s)
+//	{
+//		int left = 0, right = s.size() - 1;
+//		while (left < right)
+//		{
+//			if (s[left] != s[right])
+//				return false;
+//			left++;
+//			right--;
+//		}
+//		return true;
+//	}
+//
+//	string firstPalindrome(vector<string>& words)
+//	{
+//		for (int i = 0; i < words.size(); i++)
+//		{
+//			if (isPalindrome(words[i]))
+//				return words[i];
+//		}
+//		return {};
+//	}
+//};
+//int main()
+//{
+//	vector<string>words{ {"abc"}, {"car"}, {"ada"}, {"racecar"}, {"cool"} };
+//	cout << Solution().firstPalindrome(words) << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//class Solution
+//{
+//public:
+//	string addSpaces(string s, vector<int>& spaces)
+//	{
+//		int index = 1;
+//		int flag = spaces[0];
+//		string ret;
+//		for (int i = 0; i < (int)s.size(); i++)
+//		{
+//			if (i == flag)
+//			{
+//				ret.push_back(' ');
+//				if (index < spaces.size())
+//					flag = spaces[index++];
+//			}
+//			ret.push_back(s[i]);
+//		}
+//		return ret;
+//	}
+//};
+//int main()
+//{
+//	string s{ "icodeinpython" };
+//	vector<int>spaces{ 1,5,7,9 };
+//	cout << Solution().addSpaces(s, spaces) << endl;
+//	return  0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	string tmp;
+//	vector<string> ret;
+//	void Backtracking(const string& s, int index, int& count)
+//	{
+//		if (count == 3)
+//		{
+//			//需要判断当前组合是否满足条件
+//			if (isValid(s, index, s.size() - 1))
+//			{
+//				for (int j = index; j <= s.size() - 1; j++)
+//				{
+//					tmp.push_back(s[j]);
+//				}
+//				ret.push_back(tmp);
+//				for (int i = index; i < s.size(); i++)
+//					tmp.pop_back();
+//			}
+//			return;
+//		}
+//
+//		for (int i = index; i < s.size(); i++)
+//		{
+//			if (isValid(s, index, i))
+//			{
+//				for (int j = index; j <= i; j++)
+//				{
+//					tmp.push_back(s[j]);
+//				}
+//				tmp.push_back('.');
+//				count++;
+//			}
+//			else
+//			{
+//				break;
+//			}
+//			Backtracking(s, i + 1, count);
+//			for (int j = index; j <= i + 1; j++)
+//			{
+//				tmp.pop_back();
+//			}
+//			count--;
+//		}
+//
+//	}
+//
+//	bool isValid(const string& s, int left, int right)
+//	{
+//		if (left > right)
+//			return false;
+//		if (right - left + 1 > 3)
+//			return false;
+//		if (s[left] == '0'&&left != right)
+//			return false;
+//
+//		int sum = 0;
+//		for (int i = left; i <= right; i++)
+//		{
+//			if (s[i]<'0' || s[i]>'9')
+//				return false;
+//			sum = sum * 10 + s[i] - '0';
+//			if (sum > 255)
+//				return false;
+//		}
+//		return true;
+//	}
+//	vector<string> restoreIpAddresses(string s)
+//	{
+//		if (s.size() > 12)
+//			return{};
+//		int count = 0;
+//		Backtracking(s, 0, count);
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	string s{ "25525511135" };
+//	Solution().restoreIpAddresses(s);
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//	vector<int>tmp;
+//	void Backtracking(const vector<int>&nums, int index, vector<vector<int>>& ret)
+//	{
+//		ret.push_back(tmp);
+//
+//		for (int i = index; i < (int)nums.size(); i++)
+//		{
+//			tmp.push_back(nums[i]);
+//			Backtracking(nums, i + 1, ret);
+//			tmp.pop_back();
+//		}
+//	}
+//
+//	vector<vector<int>> subsets(vector<int>& nums)
+//	{
+//		vector<vector<int>>ret;
+//		Backtracking(nums, 0, ret);
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int> nums{ 1,2,3 };
+//	vector<vector<int>>ret = Solution().subsets(nums);
+//	for (int i = 0; i < ret.size(); i++)
+//	{
+//		for (int j = 0; j < ret[i].size(); j++)
+//		{
+//			cout << ret[i][j] << " ";
+//		}
+//		cout << endl;
+//	}
+//	return 0;
+//}
+
+#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//#include<string.h>
+//using namespace std;
+//
+//int main()
+//{
+//	char s[200];
+//	while (~scanf("%s", s))
+//	{
+//		int size = strlen(s);
+//		for (int i = 0; i < size; i++)
+//		{
+//			if (s[i] == 'T')
+//				s[i] = 'U';
+//		}
+//		printf("%s\n", s);
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//
+//int main()
+//{
+//	int n = 0;
+//	while (~scanf("%d", &n))
+//	{
+//		int prev = 1, cur = 2;
+//		if (n == prev)
+//		{
+//			printf("%d\n", 1);
+//			continue;
+//		}
+//		if (n == cur)
+//		{
+//			printf("%d\n", 2);
+//			continue;
+//
+//		}
+//
+//		int tmp = 0;
+//		int i = 2;
+//		while (tmp < n)
+//		{
+//			tmp = cur + prev;
+//			prev = cur;
+//			cur = tmp;
+//			i++;
+//		}
+//		if (tmp == n)
+//			printf("%d\n", i);
+//		else
+//			printf("%d\n", 0);
+//	}
+//
+//	return 0;
+//}
+
+//#include<stdio.h>
+//
+//int main()
+//{
+//	int n;
+//	while (~scanf("%d", &n))
+//	{
+//		int tmp = n;
+//		int sum = 0;
+//		while (tmp)
+//		{
+//			sum = sum * 10 + tmp % 10;
+//			tmp /= 10;
+//		}
+//		sum += n;
+//		printf("%d\n", sum);
+//	}
+//	return 0;
+//}
+
+
+#include<stdio.h>
 int main()
 {
-	string s{ "aabc" };
-	vector<vector<string>>ret = Solution().partition(s);
-
-	for (int i = 0; i < ret.size(); i++)
+	int x;
+	while (~scanf("%d", &x))
 	{
-		for (int j = 0; j < ret[i].size(); j++)
+		int count = x / 8;
+		for (int i = 0; i <= x / 38; i++)
 		{
-			cout << ret[i][j] << " ";
+			for (int j = 0; j <= x / 18; j++)
+			{
+				for (int z = 0; z <= x / 8; z++)
+				{
+					int sum = i * 38 + j * 18 + z * 8;
+					int tmp = i + j + z;
+					if (sum > 68)
+						tmp += 1;
+					if (sum < x&&x - sum < 8)
+					{
+						if (count > tmp)
+							count = tmp;
+					}
+				}
+			}
 		}
-		cout << endl;
-
+		printf("%d\n", count);
 	}
 	return 0;
 }
+
+//#define _CRT_SECURE_NO_WARNINGS
+//#include <stdio.h>
+//void getPrimenumber(int n, long long * arr)
+//{
+//	int flag[10000];
+//	for (int i = 2; i < 10000; i++)
+//	{
+//		if (flag[i])
+//		{
+//			for (long long j = i * i; j < 10000; j += i)
+//			{
+//				flag[j] = false;
+//			}
+//		}
+//	}
+//	long long insert = 0;
+//	int i = 0;
+//	while (i < 10000)
+//	{
+//		if (flag[i])
+//			arr[insert++] = i;
+//		if (insert == n)
+//			break;
+//		i++;
+//	}
+//}
+//int main()
+//{
+//	int n;
+//	while (~scanf("%d", &n))
+//	{
+//		int a[30][30];
+//		for (int i = 0; i < n; i++)
+//		{
+//			a[i][0] = 1;
+//			a[i][i] = 1;
+//		}
+//
+//		for (int i = 2; i < n; i++)
+//		{
+//			for (int j = 1; j < i; j++)
+//			{
+//				a[i][j] = a[i - 1][j - 1] + a[i - 1][j];
+//			}
+//		}
+//		long long arr[500];
+//		getPrimenumber(500, arr);
+//		int index = 2;
+//		for (int i = 0; i < n - 1; i++)
+//		{
+//			for (int j = i + 1; j < n; j++)
+//			{
+//				a[i][j] = arr[index++];
+//			}
+//		}
+//
+//		for (int i = 0; i < n; i++)
+//		{
+//			for (int j = 0; j < n; j++)
+//			{
+//				printf("%d ", a[i][j]);
+//			}
+//			printf("\n");
+//		}
+//	}
+//}
+
+
+//#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//using namespace std;
+//int main()
+//{
+//	char flag[] = { 'N','E','S','W' };
+//	int n;
+//	char s[100];
+//	while (~scanf("%d", &n))
+//	{
+//		scanf("%s", s);
+//		int cur = 0;
+//		for (int i = 0; i < n; i++)
+//		{
+//			if (s[i] == 'L')
+//			{
+//				if (cur == 0)
+//					cur = 3;
+//				else
+//					cur -= 1;
+//			}
+//			else
+//			{
+//				if (cur == 3)
+//					cur = 0;
+//				else
+//					cur += 1;
+//			}
+//		}
+//		printf("%c\n", flag[cur]);
+//	}
+//	return 0;
+//}
