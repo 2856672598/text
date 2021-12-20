@@ -561,7 +561,7 @@
 //	return 0;
 //}
 
-#define _CRT_SECURE_NO_WARNINGS
+//#define _CRT_SECURE_NO_WARNINGS
 //#include<stdio.h>
 //#include<string.h>
 //using namespace std;
@@ -641,35 +641,37 @@
 //}
 
 
-#include<stdio.h>
-int main()
-{
-	int x;
-	while (~scanf("%d", &x))
-	{
-		int count = x / 8;
-		for (int i = 0; i <= x / 38; i++)
-		{
-			for (int j = 0; j <= x / 18; j++)
-			{
-				for (int z = 0; z <= x / 8; z++)
-				{
-					int sum = i * 38 + j * 18 + z * 8;
-					int tmp = i + j + z;
-					if (sum > 68)
-						tmp += 1;
-					if (sum < x&&x - sum < 8)
-					{
-						if (count > tmp)
-							count = tmp;
-					}
-				}
-			}
-		}
-		printf("%d\n", count);
-	}
-	return 0;
-}
+//#include<stdio.h>
+//int main()
+//{
+//	int x;
+//	while (~scanf("%d", &x))
+//	{
+//		int count = x / 8;
+//		for (int i = 0; i <= x / 38; i++)
+//		{
+//			for (int j = 0; j <= x / 18; j++)
+//			{
+//				for (int z = 0; z <= x / 8; z++)
+//				{
+//					int sum = i * 38 + j * 18 + z * 8;
+//					int tmp = i + j + z;
+//					if (sum > 68)
+//						tmp += 1;
+//					if (sum <= x && x - sum < 8)
+//					{
+//						if (count > tmp)
+//							count = tmp;
+//					}
+//				}
+//			}
+//		}
+//		printf("%d\n", count);
+//	}
+//	return 0;
+//}
+
+
 
 //#define _CRT_SECURE_NO_WARNINGS
 //#include <stdio.h>
@@ -772,3 +774,83 @@ int main()
 //	}
 //	return 0;
 //}
+
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<unordered_set>
+using namespace std;
+//class Solution
+//{
+//public:
+//	vector<int>tmp;
+//	void Backtracking(const vector<int>& num, int index, vector<bool>& used, vector<vector<int>>&ret)
+//	{
+//		ret.push_back(tmp);
+//		for (int i = index; i < (int)num.size(); i++)
+//		{
+//			//同一层不可以重复，同一树枝可以重复
+//			if (i > 0 && num[i] == num[i - 1] && used[i - 1] == false)
+//				continue;
+//			tmp.push_back(num[i]);
+//			used[i] = true;
+//			Backtracking(num, i + 1, used, ret);
+//			tmp.pop_back();
+//			used[i] = false;
+//		}
+//	}
+//
+//	vector<vector<int>> subsetsWithDup(vector<int>& nums)
+//	{
+//		sort(nums.begin(), nums.end());
+//		vector<bool>used(nums.size());
+//		vector<vector<int>>ret;
+//		Backtracking(nums, 0, used,ret);
+//		return ret;
+//	}
+//};
+
+class Solution
+{
+public:
+	vector<int>tmp;
+	void Backtracking(const vector<int>&nums, int index, vector<vector<int>>&ret)
+	{
+		ret.push_back(tmp);
+		unordered_set<int>flag;
+		for (int i = index; i < nums.size(); i++)
+		{
+			if (flag.find(nums[i]) != flag.end())
+			{
+				continue;
+			}
+			flag.insert(nums[i]);
+			tmp.push_back(nums[i]);
+			Backtracking(nums, i + 1, ret);
+			tmp.pop_back();
+		}
+	}
+
+	vector<vector<int>> subsetsWithDup(vector<int>& nums)
+	{
+		vector<vector<int>>ret;
+		Backtracking(nums, 0, ret);
+		return ret;
+	}
+};
+int main()
+{
+	vector<int>nums{ 1,2,2 };
+	vector<vector<int>>ret = Solution().subsetsWithDup(nums);
+
+	for (int i = 0; i < (int)ret.size(); i++)
+	{
+		for (int j = 0; j < (int)ret[i].size(); j++)
+		{
+			cout << ret[i][j] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
