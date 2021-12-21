@@ -776,74 +776,182 @@
 //}
 
 
-#include<iostream>
-#include<vector>
-#include<algorithm>
-#include<unordered_set>
-using namespace std;
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//#include<unordered_set>
+//using namespace std;
+////class Solution
+////{
+////public:
+////	vector<int>tmp;
+////	void Backtracking(const vector<int>& num, int index, vector<bool>& used, vector<vector<int>>&ret)
+////	{
+////		ret.push_back(tmp);
+////		for (int i = index; i < (int)num.size(); i++)
+////		{
+////			//同一层不可以重复，同一树枝可以重复
+////			if (i > 0 && num[i] == num[i - 1] && used[i - 1] == false)
+////				continue;
+////			tmp.push_back(num[i]);
+////			used[i] = true;
+////			Backtracking(num, i + 1, used, ret);
+////			tmp.pop_back();
+////			used[i] = false;
+////		}
+////	}
+////
+////	vector<vector<int>> subsetsWithDup(vector<int>& nums)
+////	{
+////		sort(nums.begin(), nums.end());
+////		vector<bool>used(nums.size());
+////		vector<vector<int>>ret;
+////		Backtracking(nums, 0, used,ret);
+////		return ret;
+////	}
+////};
+//
 //class Solution
 //{
 //public:
 //	vector<int>tmp;
-//	void Backtracking(const vector<int>& num, int index, vector<bool>& used, vector<vector<int>>&ret)
+//	void Backtracking(const vector<int>&nums, int index, vector<vector<int>>&ret)
 //	{
 //		ret.push_back(tmp);
-//		for (int i = index; i < (int)num.size(); i++)
+//		unordered_set<int>flag;
+//		for (int i = index; i < nums.size(); i++)
 //		{
-//			//同一层不可以重复，同一树枝可以重复
-//			if (i > 0 && num[i] == num[i - 1] && used[i - 1] == false)
+//			if (flag.find(nums[i]) != flag.end())
+//			{
 //				continue;
-//			tmp.push_back(num[i]);
-//			used[i] = true;
-//			Backtracking(num, i + 1, used, ret);
+//			}
+//			flag.insert(nums[i]);
+//			tmp.push_back(nums[i]);
+//			Backtracking(nums, i + 1, ret);
 //			tmp.pop_back();
-//			used[i] = false;
 //		}
 //	}
 //
 //	vector<vector<int>> subsetsWithDup(vector<int>& nums)
 //	{
-//		sort(nums.begin(), nums.end());
-//		vector<bool>used(nums.size());
 //		vector<vector<int>>ret;
-//		Backtracking(nums, 0, used,ret);
+//		Backtracking(nums, 0, ret);
 //		return ret;
 //	}
 //};
+//int main()
+//{
+//	vector<int>nums{ 1,2,2 };
+//	vector<vector<int>>ret = Solution().subsetsWithDup(nums);
+//
+//	for (int i = 0; i < (int)ret.size(); i++)
+//	{
+//		for (int j = 0; j < (int)ret[i].size(); j++)
+//		{
+//			cout << ret[i][j] << " ";
+//		}
+//		cout << endl;
+//	}
+//	return 0;
+//}
 
-class Solution
-{
+
+//#include<iostream>
+//#include<vector>
+//#include<unordered_set>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	vector<int>tmp;
+//	void Backtracking(const vector<int>& nums, int index, vector<vector<int>>&ret)
+//	{
+//		if (tmp.size() > 1)
+//		{
+//			ret.push_back(tmp);
+//		}
+//		unordered_set<int>used;
+//		for (int i = index; i < nums.size(); i++)
+//		{
+//			if (!tmp.empty() && tmp.back() > nums[i]
+//				|| used.find(nums[i]) != used.end())
+//			{
+//				continue;
+//			}
+//			tmp.push_back(nums[i]);
+//			used.insert(nums[i]);
+//			Backtracking(nums, i + 1, ret);
+//			tmp.pop_back();
+//		}
+//	}
+//
+//	vector<vector<int>> findSubsequences(vector<int>& nums)
+//	{
+//		vector<vector<int>>ret;
+//		Backtracking(nums, 0, ret);
+//		return ret;
+//	}
+//};
+//int main()
+//{
+//	vector<int>nums{ 1,2,3,4,5,6,7,8,9,10,1,1,1,1,1 };
+//	vector<vector<int>>ret = Solution().findSubsequences(nums);
+//	for (int i = 0; i < (int)ret.size(); i++)
+//	{
+//		for (int j = 0; j < (int)ret[i].size(); j++)
+//		{
+//			cout << ret[i][j] << " ";
+//		}
+//		cout << endl;
+//	}
+//	return 0;
+//}
+
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+class Solution {
 public:
-	vector<int>tmp;
-	void Backtracking(const vector<int>&nums, int index, vector<vector<int>>&ret)
+	vector<int>path;
+	void Backtracking(const vector<int>&nums, vector<vector<int>>&ret, vector<bool>& used)
 	{
-		ret.push_back(tmp);
-		unordered_set<int>flag;
-		for (int i = index; i < nums.size(); i++)
+		if (path.size() == nums.size())
 		{
-			if (flag.find(nums[i]) != flag.end())
-			{
+			ret.push_back(path);
+			return;
+		}
+
+		for (int i = 0; i < nums.size(); i++)
+		{
+			if (i > 0 && nums[i] == nums[i - 1] && used[i - 1] == false)
 				continue;
+			if (used[i] == false)
+			{
+				path.push_back(nums[i]);
+				used[i] = true;
+				Backtracking(nums, ret, used);
+				used[i] = false;
+				path.pop_back();
 			}
-			flag.insert(nums[i]);
-			tmp.push_back(nums[i]);
-			Backtracking(nums, i + 1, ret);
-			tmp.pop_back();
 		}
 	}
 
-	vector<vector<int>> subsetsWithDup(vector<int>& nums)
+	vector<vector<int>> permuteUnique(vector<int>& nums)
 	{
-		vector<vector<int>>ret;
-		Backtracking(nums, 0, ret);
+		vector<vector<int>> ret;
+		vector<bool>used(nums.size(), false);
+		sort(nums.begin(), nums.end());
+		Backtracking(nums,ret, used);
 		return ret;
 	}
 };
 int main()
 {
-	vector<int>nums{ 1,2,2 };
-	vector<vector<int>>ret = Solution().subsetsWithDup(nums);
-
+	vector<int>nums{ 1,1,2 };
+	vector<vector<int>>ret = Solution().permuteUnique(nums);
 	for (int i = 0; i < (int)ret.size(); i++)
 	{
 		for (int j = 0; j < (int)ret[i].size(); j++)
