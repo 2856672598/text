@@ -148,53 +148,142 @@
 //}
 
 
+//#include<iostream>
+//#include<vector>
+//#include<unordered_set>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	vector<int>path;
+//	void Backtracking(const vector<int>&nums, vector<vector<int>>&ret, unordered_set<int>&flag)
+//	{
+//		if (path.size() == nums.size())
+//		{
+//			ret.push_back(path);
+//			return;
+//		}
+//		for (int i = 0; i < (int)nums.size(); i++)
+//		{
+//			if (flag.find(nums[i]) != flag.end())
+//				continue;
+//			flag.insert(nums[i]);
+//			path.push_back(nums[i]);
+//			Backtracking(nums, ret, flag);
+//			path.pop_back();
+//			flag.erase(nums[i]);
+//		}
+//	}
+//
+//	vector<vector<int>> permute(vector<int>& nums)
+//	{
+//		vector<vector<int>>ret;
+//		unordered_set<int>flag;
+//		Backtracking(nums, ret, flag);
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int>nums{ 1,2,3 };
+//	vector<vector<int>>ret = Solution().permute(nums);
+//	for (int i = 0; i < ret.size(); i++)
+//	{
+//		for (int j = 0; j < ret[i].size(); j++)
+//		{
+//			cout << ret[i][j] << " ";
+//		}
+//		cout << endl;
+//	}
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	vector<int>path;
+//	void Backtracking(const vector<int>&nums, vector<vector<int>>&ret, vector<bool>&used)
+//	{
+//		if (nums.size() == path.size())
+//		{
+//			ret.push_back(path);
+//			return;
+//		}
+//
+//		for (int i = 0; i < nums.size(); i++)
+//		{
+//			if (used[i] == true)
+//				continue;
+//			path.push_back(nums[i]);
+//			used[i] = true;
+//			Backtracking(nums, ret, used);
+//			used[i] = false;
+//			path.pop_back();
+//		}
+//	}
+//
+//	vector<vector<int>> permute(vector<int>& nums)
+//	{
+//		vector<vector<int>>ret;
+//		vector<bool>used(nums.size(), false);
+//		Backtracking(nums, ret, used);
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	return 0;
+//}
+
+//22. À¨ºÅÉú³É
 #include<iostream>
 #include<vector>
-#include<unordered_set>
+#include<string>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-	vector<int>path;
-	void Backtracking(const vector<int>&nums, vector<vector<int>>&ret, unordered_set<int>&flag)
+	string path;
+	void Backtracking(int n, vector<string>& ret, int left, int right)
 	{
-		if (path.size() == nums.size())
+		if (left < right || left > n)
+			return;
+		if (path.size() == 2 * n)
 		{
-			ret.push_back(path);
+			if (left == right)
+				ret.push_back(path);
 			return;
 		}
-		for (int i = 0; i < (int)nums.size(); i++)
-		{
-			if (flag.find(nums[i]) != flag.end())
-				continue;
-			flag.insert(nums[i]);
-			path.push_back(nums[i]);
-			Backtracking(nums, ret, flag);
-			path.pop_back();
-			flag.erase(nums[i]);
-		}
+		//×óÀ¨ºÅ++
+		path.push_back('(');
+		Backtracking(n, ret, left + 1, right);
+		path.pop_back();
+		path.push_back(')');
+		Backtracking(n, ret, left, right + 1);
+		path.pop_back();
 	}
 
-	vector<vector<int>> permute(vector<int>& nums)
+	vector<string> generateParenthesis(int n)
 	{
-		vector<vector<int>>ret;
-		unordered_set<int>flag;
-		Backtracking(nums, ret, flag);
+		vector<string>ret;
+		Backtracking(n, ret, 0, 0);
 		return ret;
 	}
 };
-
 int main()
 {
-	vector<int>nums{ 1,2,3 };
-	vector<vector<int>>ret = Solution().permute(nums);
+	int n = 2;
+	vector<string>ret = Solution().generateParenthesis(n);
 	for (int i = 0; i < ret.size(); i++)
 	{
-		for (int j = 0; j < ret[i].size(); j++)
-		{
-			cout << ret[i][j] << " ";
-		}
-		cout << endl;
+		cout << ret[i] << endl;
 	}
 	return 0;
 }
