@@ -499,57 +499,177 @@
 //}
 
 
-#include<iostream>
-#include<vector>
-using namespace std;
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	vector<int>path;
+//	void Backtracking(int n, int& count, vector<bool>&used)
+//	{
+//		if (path.size() == n)
+//		{
+//			//判断是否合法
+//			if (isLegal(path))
+//				count++;
+//			return;
+//		}
+//		//先生成它的全部排列
+//		for (int i = 1; i <= n; i++)
+//		{
+//			if (used[i] == true)
+//				continue;
+//			path.push_back(i);
+//			used[i] = true;
+//			Backtracking(n, count, used);
+//			path.pop_back();
+//			used[i] = false;
+//		}
+//	}
+//
+//	bool isLegal(const vector<int>& nums)
+//	{
+//		for (int i = 0; i < nums.size(); i++)
+//		{
+//			if (nums[i] % (i + 1) && (i + 1) % nums[i])
+//				return false;
+//		}
+//		return true;
+//	}
+//
+//	int countArrangement(int n)
+//	{
+//		int count = 0;
+//		vector<bool>used(n + 1, false);
+//		Backtracking(n, count, used);
+//		return count;
+//	}
+//};
+//int main()
+//{
+//	int n = 3;
+//	cout << Solution().countArrangement(n) << endl;
+//	return 0;
+//}
 
-class Solution
-{
-public:
-	vector<int>path;
-	void Backtracking(int n, int& count, vector<bool>&used)
-	{
-		if (path.size() == n)
-		{
-			//判断是否合法
-			if (isLegal(path))
-				count++;
-			return;
-		}
-		//先生成它的全部排列
-		for (int i = 1; i <= n; i++)
-		{
-			if (used[i] == true)
-				continue;
-			path.push_back(i);
-			used[i] = true;
-			Backtracking(n, count, used);
-			path.pop_back();
-			used[i] = false;
-		}
-	}
 
-	bool isLegal(const vector<int>& nums)
-	{
-		for (int i = 0; i < nums.size(); i++)
-		{
-			if (nums[i] % (i + 1) && (i + 1) % nums[i])
-				return false;
-		}
-		return true;
-	}
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	int count = 0;
+//	void Backtracking(const vector<int>&nums, int index, int sum, int target)
+//	{
+//		if (sum > target)
+//			return;
+//		if (sum == target)
+//		{
+//			count++;
+//		}
+//		for (int i = index; i < (int)nums.size(); i++)
+//		{
+//			Backtracking(nums, i + 1, sum | nums[i], target);
+//		}
+//	}
+//
+//	int countMaxOrSubsets(vector<int>& nums)
+//	{
+//		int target = 0;
+//		for (int i = 0; i < nums.size(); i++)
+//		{
+//			target |= nums[i];
+//		}
+//		sort(nums.begin(), nums.end());
+//		Backtracking(nums, 0, 0, target);
+//		return count;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int>nums{ 2,2,2 };
+//	cout << Solution().countMaxOrSubsets(nums);
+//	return 0;
+//}
 
-	int countArrangement(int n)
-	{
-		int count = 0;
-		vector<bool>used(n + 1, false);
-		Backtracking(n, count, used);
-		return count;
-	}
-};
-int main()
-{
-	int n = 3;
-	cout << Solution().countArrangement(n) << endl;
-	return 0;
-}
+
+//
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//	string path;
+//	vector<string>ret;
+//	void Backtracking(const string& s, vector<bool> used)
+//	{
+//		if (path.size() == s.size())
+//		{
+//			ret.push_back(path);
+//			return;
+//		}
+//		for (int i = 0; i < (int)s.size(); i++)
+//		{
+//			if (i > 0 && s[i] == s[i - 1] && used[i - 1] == false)
+//				continue;
+//			if (used[i] == false)
+//			{
+//				used[i] = true;
+//				path.push_back(s[i]);
+//				Backtracking(s, used);
+//				used[i] = false;
+//				path.pop_back();
+//			}
+//		}
+//	}
+//
+//	vector<string> permutation(string s)
+//	{
+//		vector<bool>used(s.size(), false);
+//		sort(s.begin(), s.end());
+//		Backtracking(s, used);
+//		return ret;
+//	}
+//};
+//int main()
+//{
+//	string s{ "aab" };
+//	Solution().permutation(s);
+//	return 0;
+//}
+
+////89. 格雷编码
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	vector<int> grayCode(int n)
+//	{
+//		vector<int>ret;
+//		for (int i = 0; i < 1 << n; i++)
+//		{
+//			ret.push_back(i^i >> 1);
+//		}
+//		return ret;
+//	}
+//};
+//int main()
+//{
+//	int n = 3;
+//	vector<int>ret = Solution().grayCode(n);
+//	for (auto e : ret)
+//		cout << e << " ";
+//	return 0;
+//}
+
