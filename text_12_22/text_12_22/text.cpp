@@ -673,3 +673,218 @@
 //	return 0;
 //}
 
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	int mostWordsFound(vector<string>& sentences)
+//	{
+//		int maxLength = 0;
+//		for (int i = 0; i < (int)sentences.size(); i++)
+//		{
+//			int tmp = count(sentences[i].begin(), sentences[i].end(), ' ');
+//			maxLength = max(maxLength, tmp);
+//		}
+//		return maxLength + 1;
+//	}
+//};
+//int main()
+//{
+//	vector<string>sentences{ "alice and bob love leetcode",
+//		"i think so too", "this is great thanks very much" };
+//	cout << Solution().mostWordsFound(sentences) << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	string path;
+//	vector<string>ret;
+//	void Backtracking(int n, int left, int right)
+//	{
+//		if (left < right || left>n)
+//			return;
+//		if (left == right && left == n)
+//		{
+//			ret.push_back(path);
+//			return;
+//		}
+//
+//		path.push_back('(');
+//		Backtracking(n, left + 1, right);
+//		path.pop_back();
+//		path.push_back(')');
+//		Backtracking(n, left, right + 1);
+//		path.pop_back();
+//
+//	}
+//	vector<string> generateParenthesis(int n)
+//	{
+//		Backtracking(n, 0, 0);
+//		return ret;
+//	}
+//};
+//
+//int main()
+//{
+//	Solution().generateParenthesis(2);
+//	return 0;
+//}
+
+////剑指 Offer II 084. 含有重复元素集合的全排列 
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	vector<vector<int>>ret;
+//	vector<int>path;
+//	void Backtracking(const vector<int>&nums, vector<bool>&used)
+//	{
+//		if (path.size() >= nums.size())
+//		{
+//			if (path.size() == nums.size())
+//				ret.push_back(path);
+//			return;
+//		}
+//		for (int i = 0; i < nums.size(); i++)
+//		{
+//			//同一层不能有重复
+//			if (i > 0 && nums[i] == nums[i - 1] && used[i-1] == false)
+//				continue;
+//			if (used[i] == false)
+//			{
+//				used[i] = true;
+//				path.push_back(nums[i]);
+//				Backtracking(nums, used);
+//				path.pop_back();
+//				used[i] = false;
+//			}
+//		}
+//	}
+//	vector<vector<int>> permuteUnique(vector<int>& nums)
+//	{
+//		vector<bool>used(nums.size(), false);
+//		sort(nums.begin(), nums.end());
+//		Backtracking(nums, used);
+//		return ret;
+//	}
+//};
+
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	string path;
+//	vector<string>ret;
+//	void Backtracking(int n, int k)
+//	{
+//		if (path.size() == n)
+//		{
+//			ret.push_back(path);
+//			return;
+//		}
+//
+//		for (int i = 0; i < 3; i++)
+//		{
+//			int size = path.size();
+//			if (size > 0 && path[size - 1] == 'a' + i)
+//				continue;
+//			path.push_back('a' + i);
+//			Backtracking(n, k);
+//			path.pop_back();
+//		}
+//	}
+//	string getHappyString(int n, int k)
+//	{
+//		Backtracking(n, k);
+//		return ret.size() < k ? " " : ret[k - 1];
+//	}
+//};
+//int main()
+//{
+//	Solution().getHappyString(3, 9);
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//class Solution {
+//public:
+//	bool isSameAfterReversals(int num)
+//	{
+//		int tmp = 0;
+//		int num1 = num;
+//		while (num1)
+//		{
+//			tmp = tmp * 10 + num1 % 10;
+//			num1 /= 10;
+//		}
+//		int tmp1 = 0; 
+//		while (tmp)
+//		{
+//			tmp1 = tmp1 * 10 + tmp % 10;
+//			tmp /= 10;
+//		}
+//		if (tmp1 == num)
+//			return true;
+//		return false;
+//	}
+//};
+//
+//int main()
+//{
+//	cout << Solution().isSameAfterReversals(526) << endl;
+//	return 0;
+//}
+
+//5964. 执行所有后缀指令
+#include<iostream>
+#include<vector>
+using namespace std;
+class Solution {
+public:
+	vector<int> executeInstructions(int n, vector<int>& startPos, string s)
+	{
+		vector<int>ret;
+		for (int i = 0; i < s.size(); i++)
+		{
+			vector<int>cur = startPos;
+			int count = 0;
+			for (int j = i; j < s.size(); j++)
+			{
+				if (s[j] == 'L')
+					cur[1] -= 1;
+				else if (s[j] == 'R')
+					cur[1] += 1;
+				else if (s[j] == 'U')
+					cur[0] -= 1;
+				else
+					cur[0] += 1;
+
+				if (cur[0] >= n || cur[0]<0 || cur[1]>=n || cur[1] < 0)
+					break;
+				count++;
+			}
+			ret.push_back(count);
+		}
+		return ret;
+	}
+};
