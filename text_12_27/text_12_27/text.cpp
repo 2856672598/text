@@ -208,51 +208,169 @@
 //}
 
 
-//1286. 字母组合迭代器
-#include<iostream>
-#include<vector>
-#include<string>
-using namespace std;
+////1286. 字母组合迭代器
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//
+//class CombinationIterator {
+//public:
+//	vector<string> ret;
+//	string path;
+//	void BackTracking(const string& characters, int n, int index)
+//	{
+//		if (path.size() == n)
+//		{
+//			ret.push_back(path);
+//			return;
+//		}
+//
+//		for (int i = index; i < (int)characters.size(); i++)
+//		{
+//			path.push_back(characters[i]);
+//			BackTracking(characters, n, i + 1);
+//			path.pop_back();
+//		}
+//	}
+//
+//	CombinationIterator(string characters, int combinationLength)
+//	{
+//		BackTracking(characters, combinationLength, 0);
+//	}
+//
+//	string next()
+//	{
+//		string tmp = ret[0];
+//		ret.erase(ret.begin(), ret.begin() + 1);
+//		return tmp;
+//	}
+//
+//	bool hasNext()
+//	{
+//		return ret.size() == 0 ? false : true;
+//	}
+//};
+//
+//int main()
+//{
+//	return 0;
+//}
 
-class CombinationIterator {
-public:
-	vector<string> ret;
-	string path;
-	void BackTracking(const string& characters, int n, int index)
-	{
-		if (path.size() == n)
-		{
-			ret.push_back(path);
-			return;
-		}
 
-		for (int i = index; i < (int)characters.size(); i++)
-		{
-			path.push_back(characters[i]);
-			BackTracking(characters, n, i + 1);
-			path.pop_back();
-		}
-	}
+//#include<stdio.h>
+//int wanshu(int n)
+//{
+//	int sum = 0;
+//	int i = 0;
+//	for (i = 1; i < n; i++)
+//	{
+//		if (n%i == 0)
+//			sum += i;
+//	}
+//	return sum == n ? 1 : 0;
+//}
+//int main()
+//{
+//	int n;
+//	scanf("%d", &n);
+//	if (wanshu(n))
+//		printf("yes");
+//	else
+//		printf("no");
+//	return 0;
+//}
 
-	CombinationIterator(string characters, int combinationLength)
-	{
-		BackTracking(characters, combinationLength, 0);
-	}
+#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//int CountDown(int year, int month, int day)
+//{
+//	int arr[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+//	int count = 0;
+//	if (month == 7)
+//	{
+//		count = 27 - day;
+//	}
+//	else
+//	{
+//		int i = month + 1;
+//		count = arr[month] - day + 27 + 1;
+//		for (i; i < 7; i++)
+//		{
+//			count += arr[i];
+//		}
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	int year, month, day;
+//	scanf("%d %d %d", &year, &month, &day);
+//	if (year != 2012 || month < 0 || month>7 || day >= 27)
+//		printf("ERROR!");
+//	else
+//		printf("%d", CountDown(year, month, day));
+//	return 0;
+//}
 
-	string next()
-	{
-		string tmp = ret[0];
-		ret.erase(ret.begin(), ret.begin() + 1);
-		return tmp;
-	}
 
-	bool hasNext()
-	{
-		return ret.size() == 0 ? false : true;
-	}
-};
+//#include<stdio.h>
+//#include<string.h>
+//int  huiwen(char *p, int size)
+//{
+//	int left = 0, right = size - 1;
+//	while (left < right)
+//	{
+//		if (p[left] != p[right])
+//			return 0;
+//		left++;
+//		right--;
+//	}
+//	return 1;
+//}
+//int main()
+//{
+//	char arr[100];
+//	scanf("%s", arr);
+//	if (huiwen(arr, strlen(arr)))
+//		printf("yes");
+//	else
+//		printf("no");
+//	return 0;
+//}
 
+//#include<stdio.h>
+//void mystr(char c, int n, char *p)
+//{
+//	int i = 0;
+//	for (; i < n; i++)
+//	{
+//		p[i] = c;
+//	}
+//}
+//
+//int main()
+//{
+//	char ch;
+//	char arr[50] = "\0";
+//	int n;
+//	scanf("%c %d", &ch, &n);
+//	mystr(ch, n, arr);
+//	printf("%s", arr);
+//	return 0;
+//}
+
+#include<stdio.h>
+int fib(int n)
+{
+	if (n < 3)
+		return 1;
+	return fib(n - 1) + fib(n - 2);
+}
 int main()
 {
+	int n;
+	scanf("%d", &n);
+	printf("%d", fib(n));
 	return 0;
 }
