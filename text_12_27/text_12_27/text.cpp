@@ -360,17 +360,126 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-int fib(int n)
+//#include<stdio.h>
+//int fib(int n)
+//{
+//	if (n < 3)
+//		return 1;
+//	return fib(n - 1) + fib(n - 2);
+//}
+//int main()
+//{
+//	int n;
+//	scanf("%d", &n);
+//	printf("%d", fib(n));
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//
+//struct TreeNode
+//{
+//	int val;
+//	TreeNode *left;
+//	TreeNode *right;
+//	TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//	TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//	TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+//};
+// 
+//class Solution
+//{
+//public:
+//	vector<vector<int>>ret;
+//	vector<int>path;
+//	void Backtracking(TreeNode*root, int target, int sum)
+//	{
+//		if (root == NULL)
+//			return;
+//		sum += root->val;
+//		path.push_back(root->val);
+//		if (sum == target && root->left == root->right&&root->left == NULL)
+//		{
+//			ret.push_back(path);
+//		}
+//		Backtracking(root->left, target, sum);
+//		Backtracking(root->right, target, sum);
+//		path.pop_back();
+//	}
+//
+//	vector<vector<int>> pathSum(TreeNode* root, int target)
+//	{
+//		Backtracking(root, target, 0);
+//		return ret;
+//	}
+//};
+//int main()
+//{
+//	return 0;
+//}
+
+////455. 分发饼干
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//
+//class Solution {
+//public:
+//	int findContentChildren(vector<int>& g, vector<int>& s)
+//	{
+//		sort(g.begin(), g.end());
+//		sort(s.begin(), s.end());
+//		int index = 0;
+//		for (int i = 0; i < (int)s.size(); i++)
+//		{
+//			if (index < g.size() && g[index] <= s[i])
+//				index++;
+//		}
+//		return index;
+//	}
+//};
+//
+//int main()
+//{
+//	vector<int>g{ 1,2,3 }, s{ 1,1 };
+//	cout << Solution().findContentChildren(g, s) << endl;
+//	return 0;
+//}
+
+
+//376. 摆动序列
+#include<iostream>
+#include<vector>
+using namespace std;
+
+class Solution
 {
-	if (n < 3)
-		return 1;
-	return fib(n - 1) + fib(n - 2);
-}
+public:
+	int wiggleMaxLength(vector<int>& nums)
+	{
+		int prevDiff = 0, curDiff;
+		int result = 1;
+		for (int i = 0; i < (int)nums.size() - 1; i++)
+		{
+			curDiff = nums[i] - nums[i + 1];
+			if (curDiff > 0 && prevDiff <= 0 || curDiff < 0 && prevDiff >= 0)
+			{
+				result++;
+				prevDiff = curDiff;
+			}
+		}
+		return result;
+	}
+};
+
 int main()
 {
-	int n;
-	scanf("%d", &n);
-	printf("%d", fib(n));
+	vector<int>nums{ 1,7,4,9,2,5 };
+	cout << Solution().wiggleMaxLength(nums) << endl;
 	return 0;
 }
